@@ -1,0 +1,18 @@
+{
+    "editor.snippetSuggestions": "top", // Emmetのスニペット候補を優先表示
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 53306,
+            "driver": "MySQL",
+            "name": "portfolio_db",
+            "database": "laravel",
+            "username": "root",
+            "password": "root"
+        }
+    ]
+}
