@@ -2,7 +2,7 @@ version: '3'
 
 services:
   php:
-    container_name: php
+    container_name: php_lvs
     build: ./docker/php
     volumes:
     - ./project:/var/www/html
@@ -10,12 +10,12 @@ services:
     extra_hosts:
     - "host.docker.internal:host-gateway"
     networks:
-      - network
+      - lvs
     restart: always
 
   nginx:
     image: nginx:1.21.5
-    container_name: nginx
+    container_name: nginx_lvs
     ports:
     - 80:80
     volumes:
@@ -24,12 +24,12 @@ services:
     depends_on:
     - php
     networks:
-      - network
+      - lvs
     restart: always
 
   db:
     image: mysql:5.7
-    container_name: db
+    container_name: db_lvs
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: laravel
@@ -44,17 +44,17 @@ services:
     ports:
     - 53306:3306
     networks:
-      - network
+      - lvs
     restart: always
 
   selenium:
-    container_name: selenium_chrome
+    container_name: selenium_chrome_lvs
     image: selenium/standalone-chrome
     ports:
       - 4444:4444
     networks:
-      - network
+      - lvs
     restart: always
 
 networks:
-  network:
+  lvs:

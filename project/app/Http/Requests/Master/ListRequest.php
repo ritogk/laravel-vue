@@ -13,7 +13,8 @@ class ListRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -22,7 +23,8 @@ class ListRequest extends FormRequest
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'filter' => ['required', 'string'],
             'fields' => ['required', 'string'],
@@ -34,7 +36,8 @@ class ListRequest extends FormRequest
      *
      * @return array
      */
-    public function attributes() {
+    public function attributes()
+    {
         return [
             'filter' => '「抽出値 例:[["カラム", "判定記号", "値"]]) なし:[]」',
             'fields' => '「フィールド値 例:["name", "image"] 全取得[*]」',
@@ -46,7 +49,8 @@ class ListRequest extends FormRequest
      *
      * @return array
      */
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator)
+    {
         $response = response()->json([
             'status' => 422,
             'errors' => $validator->errors(),
