@@ -6,6 +6,46 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use DateTimeInterface;
 
+/**
+ * App\Models\Job
+ *
+ * @property int $id
+ * @property string $title タイトル
+ * @property string $content 内容
+ * @property int $attention 注目の求人
+ * @property int $job_category_id 仕事カテゴリID
+ * @property int $price 金額
+ * @property string|null $welfare 福利厚生
+ * @property string|null $holiday 休日
+ * @property string $image 画像パス
+ * @property int $sort_no 並び順
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Entry[] $entries
+ * @property-read int|null $entries_count
+ * @property-read \App\Models\JobCategory $jobCategory
+ * @method static \Illuminate\Database\Eloquent\Builder|Job newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Job onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereAttention($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereHoliday($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereJobCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereSortNo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereWelfare($value)
+ * @method static \Illuminate\Database\Query\Builder|Job withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Job withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Job extends Model
 {
     use SoftDeletes;
