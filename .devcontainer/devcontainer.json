@@ -33,7 +33,8 @@
 		"amiralizadeh9480.laravel-extra-intellisense",
 		"codingyu.laravel-goto-view",
 		"stef-k.laravel-goto-controller",
-		"octref.vetur"
+		"octref.vetur",
+		"arjun.swagger-viewer"
 	]
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
