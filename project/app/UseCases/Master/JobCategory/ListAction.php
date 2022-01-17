@@ -10,14 +10,12 @@ class ListAction
     /**
      * __invoke
      *
-     * @param string $filter
-     * @param string $fileds
+     * @param string $name
      * @return array
      */
-    public function __invoke(string $filter, string $fileds): array
+    public function __invoke(string $name): array
     {
-        $items = JobCategory::where(json_decode($filter, true))
-            ->select(json_decode($fileds, true))
+        $items = JobCategory::where('name', 'like', "%$name%")
             ->orderBy('sort_no')
             ->get()
             ->toArray();

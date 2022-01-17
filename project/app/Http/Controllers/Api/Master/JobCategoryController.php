@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Master;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Master\ListRequest;
+use App\Http\Requests\Master\JobCategoryListRequest;
 use App\Http\Requests\Master\JobCategoryRequest;
 
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -21,13 +21,16 @@ class JobCategoryController extends Controller
     /**
      * 職種 一覧取得
      *
-     * @param  ListRequest $request
+     * @param  JobCategoryListRequest $request
      * @param  ListAction $action
      * @return array
      */
-    public function index(ListRequest $request, ListAction $action): array
+    public function index(JobCategoryListRequest $request, ListAction $action): array
     {
-        return $action($request->filter, $request->fields);
+        // ここでopenapi定義モデルにリクエストクラスの内容をいれこむ
+        // usecasesの方には、openapi定義モデルのget系で値を抜き取る。
+        // openapi定義とリクエストクラスの差異は九州できるかな？
+        return $action($request->name);
     }
 
     /**
@@ -85,7 +88,8 @@ class JobCategoryController extends Controller
      * @param ExportAction $action
      * @return BinaryFileResponse
      */
-    public function excel(ExportAction $action): BinaryFileResponse{
+    public function excel(ExportAction $action): BinaryFileResponse
+    {
         return $action();
     }
 }
