@@ -26,7 +26,10 @@ class JobCategoryListRequest extends FormRequest
     public function rules()
     {
         return [
-            'namea' => ['nullable', 'string', 'max:255'],
+            'name' => ['nullable', 'string', 'max:255'],
+            'content' => ['nullable', 'string', 'max:500'],
+
+
         ];
     }
 
@@ -38,7 +41,8 @@ class JobCategoryListRequest extends FormRequest
     public function attributes()
     {
         return [
-            'namea' => '名称',
+            'name' => '名称',
+            'content' => '内容',
         ];
     }
 

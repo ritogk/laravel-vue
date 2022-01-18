@@ -27,7 +27,7 @@
  */
 
 namespace App\OpenAPI\Model;
-use App\OpenAPI\ObjectSerializer;
+use \App\OpenAPI\ObjectSerializer;
 
 /**
  * Sex Class Doc Comment

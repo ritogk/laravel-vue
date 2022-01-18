@@ -16,21 +16,24 @@ use App\UseCases\Master\JobCategory\DeleteAction;
 use App\UseCases\Master\JobCategory\FindAction;
 use App\UseCases\Master\JobCategory\ExportAction;
 
-class JobCategoryController extends Controller
+// openapi
+use App\OpenAPI;
+use App\Libs\OpenAPIUtility;
+
+class JobCategoryController  extends Controller
 {
     /**
      * 職種 一覧取得
      *
      * @param  JobCategoryListRequest $request
      * @param  ListAction $action
-     * @return array
+     * @return OpenAPI\Model\JobCategory[]
      */
     public function index(JobCategoryListRequest $request, ListAction $action): array
     {
-        // ここでopenapi定義モデルにリクエストクラスの内容をいれこむ
-        // usecasesの方には、openapi定義モデルのget系で値を抜き取る。
-        // openapi定義とリクエストクラスの差異は九州できるかな？
-        return $action($request->name);
+        $queryParameters = new OpenAPI\Model\QueryJobCategoryList($request->all());
+        $result = $action($queryParameters->getName(), $queryParameters->getContent());
+        return OpenAPIUtility::dicstonariesToModelContainers(OpenAPI\Model\JobCategory::class, $result);
     }
 
     /**

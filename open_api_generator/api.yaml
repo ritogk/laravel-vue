@@ -4,89 +4,72 @@ info:
   description: OpenAPI Tutorial by halhorn
   version: 0.0.0
 servers:
-  - url: https://example.com/api/v0
-    description: プロダクション API
-  - url: http://{host}:{port}/api/v0
+  - url: http://localhost:80/api
     description: 開発用
-    variables:
-      host:
-        default: localhost
-      port:
-        default: '10080'
 paths:
-  /health:
+  /job_categories:
     get:
-      operationId: openapitutorial.controller.health.call
-      summary: サーバーの状態を返します
-      description: サーバーの状態を返します。
+      tags:
+        - "職種"
+      summary: 職種一覧の取得
+      description: 詳細内容
+      parameters:
+        - in: query
+          name: values
+          schema:
+            type: object
+            $ref: "#/components/schemas/queryJobCategoryList"
+          style: form
+          explode: true
       responses:
-        '200':
-          description: サーバーは正常に動作しています
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/get_health_response'
-  /sex:
-    get:
-      operationId: sex
-      summary: sex
-      description: サーバーの状態を返します。
-      responses:
-        '200':
-          description: サーバーは正常に動作しています
+        "200":
+          description: 職種一覧
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    memerId:
-                      type: integer
-                      description: 会員id
-                    sex:
-                      $ref: '#/components/schemas/sex'
-  /hoge:
-    post:
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/hoge'
-      responses:
-        "200":
-          description: ok
+                  $ref: "#/components/schemas/jobCategory"
 
 components:
   schemas:
-    get_health_response:
-      description: サーバーの状態のレスポンス
+    queryJobCategoryList:
+      description: レスポンス 職種一覧
       type: object
       properties:
-        status:
+        name:
           type: string
-          enum:
-            - ok
-        memerId:
-          type: integer
-          description: 会員id
-        hospitalId:
-          type: integer
-          description: 病院id
-      required:
-        - status
-    hoge:
-      description: サーバーの状態のレスポンス
+          description: 名称
+        content:
+          type: string
+          description: 内容
+    jobCategory:
+      description: 職種
       type: object
       properties:
-        foo:
+        name:
           type: string
-        bar:
+          description: 名称
+        content:
+          type: string
+          description: 内容
+        image:
+          type: string
+          description: 画像URL
+        sortNo:
           type: integer
+          description: 並び順
+        createdAt:
+          type: string
+          format: date
+          description: 作成日時
+        updatedAt:
+          type: string
+          format: date
+          description: 更新日時
     sex:
       description: |
         man: 男
         woman: 女
       enum: [1, 2]
       x-enum-varnames: [MAN, WOMAN]
-      

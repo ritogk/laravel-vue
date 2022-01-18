@@ -1,6 +1,6 @@
 <?php
 /**
- * InlineResponse200
+ * QueryJobCategoryList
  *
  * PHP version 7.3
  *
@@ -29,12 +29,13 @@
 namespace App\OpenAPI\Model;
 
 use \ArrayAccess;
-use App\OpenAPI\ObjectSerializer;
+use \App\OpenAPI\ObjectSerializer;
 
 /**
- * InlineResponse200 Class Doc Comment
+ * QueryJobCategoryList Class Doc Comment
  *
  * @category Class
+ * @description レスポンス 職種一覧
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -42,7 +43,7 @@ use App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class InlineResponse200 implements ModelInterface, ArrayAccess, \JsonSerializable
+class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +52,7 @@ class InlineResponse200 implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'inline_response_200';
+    protected static $openAPIModelName = 'queryJobCategoryList';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +60,8 @@ class InlineResponse200 implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'memer_id' => 'int',
-        'sex' => 'App\OpenAPI\Model\Sex'
+        'name' => 'string',
+        'content' => 'string'
     ];
 
     /**
@@ -71,8 +72,8 @@ class InlineResponse200 implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'memer_id' => null,
-        'sex' => null
+        'name' => null,
+        'content' => null
     ];
 
     /**
@@ -102,8 +103,8 @@ class InlineResponse200 implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'memer_id' => 'memerId',
-        'sex' => 'sex'
+        'name' => 'name',
+        'content' => 'content'
     ];
 
     /**
@@ -112,8 +113,8 @@ class InlineResponse200 implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'memer_id' => 'setMemerId',
-        'sex' => 'setSex'
+        'name' => 'setName',
+        'content' => 'setContent'
     ];
 
     /**
@@ -122,8 +123,8 @@ class InlineResponse200 implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'memer_id' => 'getMemerId',
-        'sex' => 'getSex'
+        'name' => 'getName',
+        'content' => 'getContent'
     ];
 
     /**
@@ -183,8 +184,8 @@ class InlineResponse200 implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->container['memer_id'] = $data['memer_id'] ?? null;
-        $this->container['sex'] = $data['sex'] ?? null;
+        $this->container['name'] = $data['name'] ?? null;
+        $this->container['content'] = $data['content'] ?? null;
     }
 
     /**
@@ -212,49 +213,49 @@ class InlineResponse200 implements ModelInterface, ArrayAccess, \JsonSerializabl
 
 
     /**
-     * Gets memer_id
+     * Gets name
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getMemerId()
+    public function getName()
     {
-        return $this->container['memer_id'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets memer_id
+     * Sets name
      *
-     * @param int|null $memer_id 会員id
+     * @param string|null $name 名称
      *
      * @return self
      */
-    public function setMemerId($memer_id)
+    public function setName($name)
     {
-        $this->container['memer_id'] = $memer_id;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets sex
+     * Gets content
      *
-     * @return App\OpenAPI\Model\Sex|null
+     * @return string|null
      */
-    public function getSex()
+    public function getContent()
     {
-        return $this->container['sex'];
+        return $this->container['content'];
     }
 
     /**
-     * Sets sex
+     * Sets content
      *
-     * @param App\OpenAPI\Model\Sex|null $sex sex
+     * @param string|null $content 内容
      *
      * @return self
      */
-    public function setSex($sex)
+    public function setContent($content)
     {
-        $this->container['sex'] = $sex;
+        $this->container['content'] = $content;
 
         return $this;
     }
