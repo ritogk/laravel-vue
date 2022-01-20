@@ -37,7 +37,7 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * 認証していない場合にガードを見てそれぞれのログインページへ飛ばず
+     * 認証エラー時
      *
      * @param \Illuminate\Http\Request $request
      * @param AuthenticationException $exception
@@ -45,20 +45,17 @@ class Handler extends ExceptionHandler
      */
     public function unauthenticated($request, AuthenticationException $exception)
     {
-        if($request->expectsJson()){
-            return response()->json(['message' => $exception->getMessage()], 401);
-        }
+        return response()->json(['message' => $exception->getMessage()], 401);
 
-        // 管理画面
-        if (in_array('admin', $exception->guards())) {
-            return redirect()->guest(route('login.admin'));
-        }
+        // ガードを見て処理を切り替える事も可能
+        // // 管理画面
+        // if (in_array('admin', $exception->guards())) {
+        //     return response()->json(['error' => 'Unauthorized'], 401);
+        // }
 
-        // 一般画面
-        if (in_array('user', $exception->guards())) {
-            return redirect()->guest(route('login.front'));
-        }
-
-        return redirect()->guest(route('login.front'));
+        // // 一般画面
+        // if (in_array('user', $exception->guards())) {
+        //     return response()->json(['error' => 'Unauthorized'], 401);
+        // }
     }
 }

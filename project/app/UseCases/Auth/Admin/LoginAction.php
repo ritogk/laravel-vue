@@ -1,38 +1,41 @@
 <?php
+
 namespace App\UseCases\Auth\Admin;
 
 use Illuminate\Http\Request;
 use App\Libs\Base\AdminAuth;
 use Illuminate\Http\JsonResponse;
 
-class LoginAction{
-    use AdminAuth;
-
+class LoginAction
+{
     /**
      * __invoke
      *
      * @param Request $request
      * @return JsonResponse
      */
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(Request $request)
     {
-        if ($this->attemptLogin($request)) {
-            $request->session()->regenerate();
-            $this->clearLoginAttempts($request);
-            return response()->json(['message' => '成功'], 200);
+        if (!$token = auth('admin')->attempt($request->all())) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return response()->json(['message' => 'ログイン失敗'], 400);
+        return $this->respondWithToken($token);
     }
 
     /**
-     * attemptLogin
+     * トークン返却
+     * トークンに関する情報を配列化してからJSON形式で返却する
      *
-     * @param  Request  $request
-     * @return bool
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    private function attemptLogin(Request $request):bool
+    protected function respondWithToken($token)
     {
-        return $this->guard()->attempt($this->credentials($request)
-                                        , $request->remember);
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
     }
 }

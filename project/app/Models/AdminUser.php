@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * App\Models\AdminUser
@@ -31,7 +32,7 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|AdminUser whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class AdminUser extends Authenticatable
+class AdminUser extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -64,4 +65,24 @@ class AdminUser extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * JWT の sub に含める値。主キーを使う
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * /JWT のクレームに追加する値。今回は特になし
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
