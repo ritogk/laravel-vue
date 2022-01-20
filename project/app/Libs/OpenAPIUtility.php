@@ -12,13 +12,13 @@ class OpenAPIUtility
      * @param array $items 変換元の一覧
      * @return array
      */
-    static function dicstonariesToModelContainers(string $model_path, array $dicstonaries): array
+    static function dicstionariesToModelContainers(string $model_path, array $dicstonaries): array
     {
         $converted = [];
-        foreach ($dicstonaries as $key => $dicstonary) {
+        foreach ($dicstonaries as $key => $dictionary) {
             $model_container = [];
             $model = new $model_path(
-                $dicstonary
+                $dictionary
             );
             $converted[] = json_decode(json_encode($model));
         }

@@ -33,7 +33,7 @@ class JobCategoryController  extends Controller
     {
         $queryParameters = new OpenAPI\Model\QueryJobCategoryList($request->all());
         $result = $action($queryParameters->getName(), $queryParameters->getContent());
-        return OpenAPIUtility::dicstonariesToModelContainers(OpenAPI\Model\JobCategory::class, $result);
+        return OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\JobCategory::class, $result);
     }
 
     /**
