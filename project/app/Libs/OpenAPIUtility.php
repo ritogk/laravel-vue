@@ -20,11 +20,7 @@ class OpenAPIUtility
             $model = new $model_path(
                 $dicstonary
             );
-            $getters = $model->getters();
-            foreach ($getters as $key => $getter) {
-                $model_container[$key] = $model->offsetGet($key);
-            }
-            $converted[] = $model_container;
+            $converted[] = json_decode(json_encode($model));
         }
         return $converted;
     }
