@@ -16,7 +16,6 @@ class OpenAPIUtility
     {
         $converted = [];
         foreach ($dicstonaries as $key => $dictionary) {
-            $model_container = [];
             $model = new $model_path(
                 $dictionary
             );
