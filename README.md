@@ -132,13 +132,16 @@ vscodeからRemoteContainer経由でコンテナを起動
 ```
 chmod +x setup.sh
 ./setup.sh
+.vim .env
+# 「LOG_SLACK_WEBHOOK_URL」にwebhook urlを書き込む
 ```
 
-
-#### 開発 便利コマンド～
+#### 開発 便利コマンド
 ```
 ■モデル系を変更したら実行。コード補完してくれるファイルを自動生成してくれる。
 php artisan ide-helper:model
+■キャッシュ等をクリア
+./clear.sh
 ```
 
 
