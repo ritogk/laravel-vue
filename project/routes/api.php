@@ -14,17 +14,17 @@ use App\Http\Controllers;
 Route::group(['prefix' => 'auth'], function () {
     // 管理者
     Route::group(['prefix' => 'admin'], function () {
-        Route::get('/me', [Controllers\Api\AdminAuthController::class, 'me'])->middleware(['auth:admin']);
-        Route::post('/login', [Controllers\Api\AdminAuthController::class, 'login']);
-        Route::post('/refresh', [Controllers\Api\AdminAuthController::class, 'refresh']);
-        Route::post('/logout', [Controllers\Api\AdminAuthController::class, 'logout'])->middleware(['auth:admin']);
+        Route::get('/me', [Controllers\Api\AuthAdminController::class, 'me'])->middleware(['auth:admin']);
+        Route::post('/login', [Controllers\Api\AuthAdminController::class, 'login']);
+        Route::post('/refresh', [Controllers\Api\AuthAdminController::class, 'refresh']);
+        Route::post('/logout', [Controllers\Api\AuthAdminController::class, 'logout'])->middleware(['auth:admin']);
     });
     // 一般
     Route::group(['prefix' => 'front'], function () {
-        Route::get('/user', [Controllers\Api\FrontAuthController::class, 'user'])->middleware(['auth:user']);
-        Route::post('/register', [Controllers\Api\FrontAuthController::class, 'register'])->middleware(['guest:user']);
-        Route::post('/login', [Controllers\Api\FrontAuthController::class, 'login']);
-        Route::post('/logout', [Controllers\Api\FrontAuthController::class, 'logout']);
+        Route::get('/user', [Controllers\Api\AuthFrontController::class, 'user'])->middleware(['auth:user']);
+        Route::post('/register', [Controllers\Api\AuthFrontController::class, 'register'])->middleware(['guest:user']);
+        Route::post('/login', [Controllers\Api\AuthFrontController::class, 'login']);
+        Route::post('/logout', [Controllers\Api\AuthFrontController::class, 'logout']);
     });
 });
 

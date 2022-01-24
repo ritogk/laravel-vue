@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\Auth\Admin\LoginRequest;
 
-class AdminAuthController extends Controller
+class AuthAdminController extends Controller
 {
     /**
      * login
