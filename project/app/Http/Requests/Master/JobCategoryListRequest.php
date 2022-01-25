@@ -28,8 +28,6 @@ class JobCategoryListRequest extends FormRequest
         return [
             'name' => ['nullable', 'string', 'max:255'],
             'content' => ['nullable', 'string', 'max:500'],
-
-
         ];
     }
 
