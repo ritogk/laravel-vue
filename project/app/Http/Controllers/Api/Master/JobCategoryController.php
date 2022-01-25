@@ -29,7 +29,7 @@ class JobCategoryController  extends Controller
      * @param  ListAction $action
      * @return OpenAPI\Model\JobCategory[]
      */
-    public function index(JobCategoryListRequest $request, ListAction $action): array
+    public function list(JobCategoryListRequest $request, ListAction $action): array
     {
         $queryParameters = new OpenAPI\Model\QueryJobCategoryList($request->all());
         $result = $action($queryParameters->getName(), $queryParameters->getContent());
