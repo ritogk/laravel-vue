@@ -26,7 +26,7 @@ class JobController extends Controller
      * @param  ListAction $action
      * @return array
      */
-    public function index(ListRequest $request, ListAction $action): array
+    public function list(ListRequest $request, ListAction $action): array
     {
         return $action($request->filter, $request->fields);
     }
@@ -86,7 +86,8 @@ class JobController extends Controller
      * @param ExportAction $action
      * @return BinaryFileResponse
      */
-    public function excel(ExportAction $action): BinaryFileResponse{
+    public function excel(ExportAction $action): BinaryFileResponse
+    {
         return $action();
     }
 }

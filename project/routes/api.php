@@ -30,7 +30,7 @@ Route::group(['prefix' => 'auth'], function () {
 
 // 仕事マスタ
 Route::group(['prefix' => 'jobs'], function () {
-    Route::get('/', [Controllers\Api\Master\JobController::class, 'index']);
+    Route::get('/', [Controllers\Api\Master\JobController::class, 'list']);
     Route::get('/{id}', [Controllers\Api\Master\JobController::class, 'find']);
     Route::post('/', [Controllers\Api\Master\JobController::class, 'create'])->middleware(['auth:admin']);
     Route::put('/{id}', [Controllers\Api\Master\JobController::class, 'update'])->middleware(['auth:admin']);
@@ -40,7 +40,7 @@ Route::group(['prefix' => 'jobs'], function () {
 
 // 仕事カテゴリ マスタ
 Route::group(['prefix' => 'job_categories'], function () {
-    Route::get('/', [Controllers\Api\Master\JobCategoryController::class, 'index']);
+    Route::get('/', [Controllers\Api\Master\JobCategoryController::class, 'list']);
     Route::get('/{id}', [Controllers\Api\Master\JobCategoryController::class, 'find']);
     Route::post('/', [Controllers\Api\Master\JobCategoryController::class, 'create'])->middleware(['auth:admin']);
     Route::put('/{id}', [Controllers\Api\Master\JobCategoryController::class, 'update'])->middleware(['auth:admin']);
@@ -50,18 +50,18 @@ Route::group(['prefix' => 'job_categories'], function () {
 
 // エントリー マスタ
 Route::group(['prefix' => 'entries'], function () {
-    Route::get('/', [Controllers\Api\Master\EntryController::class, 'index']);
+    Route::get('/', [Controllers\Api\Master\EntryController::class, 'list']);
     Route::post('/', [Controllers\Api\Master\EntryController::class, 'create'])->middleware(['auth:user']);
 });
 
 // 会員マスタ
 Route::group(['prefix' => 'users'], function () {
-    Route::get('/', [Controllers\Api\Master\UserController::class, 'index'])->middleware(['auth:admin']);
+    Route::get('/', [Controllers\Api\Master\UserController::class, 'list'])->middleware(['auth:admin']);
 });
 
 // メルマガマスタ
 Route::group(['prefix' => 'news_letters'], function () {
-    Route::get('/', [Controllers\Api\Master\NewsLetterController::class, 'index']);
+    Route::get('/', [Controllers\Api\Master\NewsLetterController::class, 'list']);
     Route::get('/{id}', [Controllers\Api\Master\NewsLetterController::class, 'find']);
     Route::post('/', [Controllers\Api\Master\NewsLetterController::class, 'create'])->middleware(['auth:admin']);
     Route::put('/{id}', [Controllers\Api\Master\NewsLetterController::class, 'update'])->middleware(['auth:admin']);

@@ -19,7 +19,7 @@ class EntryController extends Controller
      * @param  ListAction $action
      * @return array
      */
-    public function index(ListRequest $request, ListAction $action): array
+    public function list(ListRequest $request, ListAction $action): array
     {
         return $action($request->filter, $request->fields);
     }
