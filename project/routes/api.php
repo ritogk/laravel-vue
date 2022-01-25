@@ -21,10 +21,11 @@ Route::group(['prefix' => 'auth'], function () {
     });
     // 一般
     Route::group(['prefix' => 'front'], function () {
-        Route::get('/user', [Controllers\Api\AuthFrontController::class, 'user'])->middleware(['auth:user']);
-        Route::post('/register', [Controllers\Api\AuthFrontController::class, 'register'])->middleware(['guest:user']);
+        Route::get('/me', [Controllers\Api\AuthFrontController::class, 'me'])->middleware(['auth:user']);
         Route::post('/login', [Controllers\Api\AuthFrontController::class, 'login']);
-        Route::post('/logout', [Controllers\Api\AuthFrontController::class, 'logout']);
+        Route::post('/logout', [Controllers\Api\AuthFrontController::class, 'logout'])->middleware(['auth:user']);
+        Route::post('/refresh', [Controllers\Api\AuthFrontController::class, 'refresh']);
+        Route::post('/register', [Controllers\Api\AuthFrontController::class, 'register'])->middleware(['guest:user']);
     });
 });
 

@@ -4,27 +4,75 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use App\Http\Requests\Auth\Front\LoginRequest;
 use App\Http\Requests\Auth\Front\RegisterRequest;
 
 // usecase
-use App\UseCases\Auth\Front\LoginAction;
-use App\UseCases\Auth\Front\LogoutAction;
-use App\UseCases\Auth\Front\UserAction;
 use App\UseCases\Auth\Front\RegisterAction;
 
 class AuthFrontController extends Controller
 {
     /**
-     * 会員 取得
+     * login
      *
-     * @param  UserAction $action
-     * @return \App\Models\User|null
+     * @param  LoginRequest $request
+     * @return JsonResponse
      */
-    public function user(UserAction $action)
+    public function login(LoginRequest $request): JsonResponse
     {
-        return $action();
+        if (!$token = auth('user')->attempt($request->all())) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        return $this->respondWithToken($token);
+    }
+
+    /**
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function me()
+    {
+        return response()->json(auth('user')->user());
+    }
+
+    /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        auth('user')->logout();
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh()
+    {
+        return $this->respondWithToken(auth('user')->refresh());
+    }
+
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('user')->factory()->getTTL() * 60
+        ]);
     }
 
     /**
@@ -35,30 +83,6 @@ class AuthFrontController extends Controller
      * @return JsonResponse
      */
     public function register(RegisterRequest $request, RegisterAction $action)
-    {
-        return $action($request);
-    }
-
-    /**
-     * 会員 ログイン
-     *
-     * @param  LoginRequest $request
-     * @param  LoginAction $action
-     * @return JsonResponse
-     */
-    public function login(LoginRequest $request, LoginAction $action): JsonResponse
-    {
-        return $action($request);
-    }
-
-    /**
-     * 会員 ログアウト
-     *
-     * @param  Request $request
-     * @param  LogoutAction $action
-     * @return JsonResponse
-     */
-    public function logout(Request $request, LogoutAction $action): JsonResponse
     {
         return $action($request);
     }
