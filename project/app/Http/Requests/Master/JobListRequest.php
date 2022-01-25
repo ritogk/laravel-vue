@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class JobCategoryListRequest extends FormRequest
+class JobListRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,13 @@ class JobCategoryListRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['nullable', 'numeric'],
-            'name' => ['nullable', 'string', 'max:255'],
-            'content' => ['nullable', 'string', 'max:500'],
+            'title' => ['nullable', 'max:50'],
+            'content' => ['nullable', 'max:1000'],
+            'attention' => ['nullable', 'integer', 'min:0|max:1'],
+            'job_category_id' => ['nullable', 'numeric', 'min:0|max:1'],
+            'price' => ['nullable', 'numeric'],
+            'welfare' => ['nullable', 'max:1000'],
+            'holiday' => ['nullable', 'max:1000'],
         ];
     }
 
@@ -41,8 +45,13 @@ class JobCategoryListRequest extends FormRequest
     {
         return [
             'id' => 'id',
-            'name' => '名称',
+            'title' => 'タイトル',
             'content' => '内容',
+            'attention' => '注目',
+            'job_category_id' => 'カテゴリ',
+            'price' => '金額',
+            'welfare' => '福利厚生',
+            'holiday' => '休日',
         ];
     }
 

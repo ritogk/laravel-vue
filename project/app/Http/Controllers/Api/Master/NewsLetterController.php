@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Master;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Master\ListRequest;
+use App\Http\Requests\Master\NewsLetterListRequest;
 use App\Http\Requests\Master\NewsLetterRequest;
 use Illuminate\Http\Request;
 
@@ -20,11 +20,11 @@ class NewsLetterController extends Controller
     /**
      * メルマガ 一覧取得
      *
-     * @param  ListRequest $request
+     * @param  NewsLetterListRequest $request
      * @param  ListAction $action
      * @return array
      */
-    public function list(ListRequest $request, ListAction $action): array
+    public function list(NewsLetterListRequest $request, ListAction $action): array
     {
         return $action($request->filter, $request->fields);
     }

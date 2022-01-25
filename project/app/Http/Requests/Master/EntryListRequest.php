@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ListRequest extends FormRequest
+class EntryListRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,9 @@ class ListRequest extends FormRequest
     public function rules()
     {
         return [
-            'filter' => ['required', 'string'],
-            'fields' => ['required', 'string'],
+            'id' => ['nullable', 'numeric'],
+            'job_id' => ['nullable', 'numeric'],
+            'user_id' => ['nullable', 'numeric'],
         ];
     }
 
@@ -39,8 +40,9 @@ class ListRequest extends FormRequest
     public function attributes()
     {
         return [
-            'filter' => '「抽出値 例:[["カラム", "判定記号", "値"]]) なし:[]」',
-            'fields' => '「フィールド値 例:["name", "image"] 全取得[*]」',
+            'id' => 'id',
+            'job_id' => '仕事id',
+            'user_id' => 'ユーザーid',
         ];
     }
 

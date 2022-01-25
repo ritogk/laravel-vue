@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Master;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Master\ListRequest;
+use App\Http\Requests\Master\EntryListRequest;
 use App\Http\Requests\Master\EntryRequest;
 
 // usecase
@@ -15,11 +15,11 @@ class EntryController extends Controller
     /**
      * 求人申込 一覧取得
      *
-     * @param  ListRequest $request
+     * @param  EntryListRequest $request
      * @param  ListAction $action
      * @return array
      */
-    public function list(ListRequest $request, ListAction $action): array
+    public function list(EntryListRequest $request, ListAction $action): array
     {
         return $action($request->filter, $request->fields);
     }
