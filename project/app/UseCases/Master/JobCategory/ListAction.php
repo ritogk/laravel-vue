@@ -10,13 +10,16 @@ class ListAction
     /**
      * __invoke
      *
-     * @param string $name
+     * @param string|null $name
+     * @param string|null $content
      * @return array
      */
-    public function __invoke(string $name = null): array
+    public function __invoke(string $name = null, string $content = null): array
     {
         $items = JobCategory::when(isset($name), function ($query) use ($name) {
             return $query->where('name', 'like', "%$name%");
+        })->when(isset($content), function ($query) use ($content) {
+            return $query->where('content', 'like', "%$content%");
         })->orderBy('sort_no')->get()->toArray();
 
         // storageパス変換
