@@ -14,7 +14,8 @@ class NewsLetterRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -23,12 +24,13 @@ class NewsLetterRequest extends FormRequest
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'id' => 'nullable',
             'subject' => 'required|max:50',
             'message' => 'required|max:1000',
-            'updated_at' => 'date|nullable',
+            'updatedAt' => 'date|nullable',
         ];
     }
 
@@ -37,12 +39,13 @@ class NewsLetterRequest extends FormRequest
      *
      * @return array
      */
-    public function attributes() {
+    public function attributes()
+    {
         return [
             'id' => 'id',
             'subject' => '件名',
             'message' => 'メッセージ',
-            'updated_at' => '更新日時',
+            'updatedAt' => '更新日時',
         ];
     }
 
@@ -51,11 +54,14 @@ class NewsLetterRequest extends FormRequest
      *
      * @return void
      */
-    public function withValidator($validator) {
+    public function withValidator($validator)
+    {
         /* ここにバリデーションを書く */
         $validator->after(function ($validator) {
-            if(!empty($this->input('id'))
-                    && Job::find($this->input('id'))->updated_at > $this->input('updated_at')){
+            if (
+                !empty($this->input('id'))
+                && Job::find($this->input('id'))->updated_at > $this->input('updatedAt')
+            ) {
                 $validator->errors()->add('updated_at', 'すでに変更されたデータの可能性があります。最新の状態で再度実行してください。');
             }
         });
@@ -67,7 +73,8 @@ class NewsLetterRequest extends FormRequest
      *
      * @return array
      */
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator)
+    {
         $response = response()->json([
             'status' => 422,
             'errors' => $validator->errors(),

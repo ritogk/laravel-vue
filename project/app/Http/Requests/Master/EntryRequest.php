@@ -13,7 +13,8 @@ class EntryRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -22,10 +23,11 @@ class EntryRequest extends FormRequest
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            'job_id' => 'required',
-            'user_id' => ['required', 'max:100'],
+            'jobId' => 'required',
+            'userId' => ['required', 'max:100'],
         ];
     }
 
@@ -34,10 +36,11 @@ class EntryRequest extends FormRequest
      *
      * @return array
      */
-    public function attributes() {
+    public function attributes()
+    {
         return [
-            'job_id' => '仕事id',
-            'user_id' => '会員id',
+            'jobId' => '仕事id',
+            'userId' => '会員id',
         ];
     }
 
@@ -47,7 +50,8 @@ class EntryRequest extends FormRequest
      *
      * @return array
      */
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator)
+    {
         $response = response()->json([
             'status' => 422,
             'errors' => $validator->errors(),

@@ -14,7 +14,8 @@ class JobRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -23,19 +24,20 @@ class JobRequest extends FormRequest
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'id' => 'nullable',
             'title' => 'required|max:50',
             'content' => 'required|max:1000',
             'attention' => 'required|integer|min:0|max:1',
-            'job_category_id' => 'required|numeric',
+            'jobCategoryId' => 'required|numeric',
             'price' => 'required|numeric',
             'welfare' => 'nullable|max:1000',
             'holiday' => 'nullable|max:1000',
             'image' => 'required',
-            'sort_no' => 'required|numeric|digits_between:1,9',
-            'updated_at' => 'date|nullable',
+            'sortNo' => 'required|numeric|digits_between:1,9',
+            'updatedAt' => 'date|nullable',
         ];
     }
 
@@ -44,19 +46,20 @@ class JobRequest extends FormRequest
      *
      * @return array
      */
-    public function attributes() {
+    public function attributes()
+    {
         return [
             'id' => 'id',
             'title' => 'タイトル',
             'content' => '内容',
             'attention' => '注目',
-            'job_category_id' => 'カテゴリ',
+            'jobCategoryId' => 'カテゴリ',
             'price' => '金額',
             'welfare' => '福利厚生',
             'holiday' => '休日',
             'image' => '画像',
-            'sort_no' => '並び順',
-            'updated_at' => '更新日時',
+            'sortNo' => '並び順',
+            'updatedAt' => '更新日時',
         ];
     }
 
@@ -65,11 +68,14 @@ class JobRequest extends FormRequest
      *
      * @return void
      */
-    public function withValidator($validator) {
+    public function withValidator($validator)
+    {
         /* ここにバリデーションを書く */
         $validator->after(function ($validator) {
-            if(!empty($this->input('id'))
-                    && Job::find($this->input('id'))->updated_at > $this->input('updated_at')){
+            if (
+                !empty($this->input('id'))
+                && Job::find($this->input('id'))->updated_at > $this->input('updated_at')
+            ) {
                 $validator->errors()->add('updated_at', 'すでに変更されたデータの可能性があります。最新の状態で再度実行してください。');
             }
         });
@@ -81,7 +87,8 @@ class JobRequest extends FormRequest
      *
      * @return array
      */
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator)
+    {
         $response = response()->json([
             'status' => 422,
             'errors' => $validator->errors(),

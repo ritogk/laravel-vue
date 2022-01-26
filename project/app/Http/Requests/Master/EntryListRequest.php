@@ -27,8 +27,8 @@ class EntryListRequest extends FormRequest
     {
         return [
             'id' => ['nullable', 'numeric'],
-            'job_id' => ['nullable', 'numeric'],
-            'user_id' => ['nullable', 'numeric'],
+            'jobId' => ['nullable', 'numeric'],
+            'userId' => ['nullable', 'numeric'],
         ];
     }
 
@@ -41,22 +41,8 @@ class EntryListRequest extends FormRequest
     {
         return [
             'id' => 'id',
-            'job_id' => '仕事id',
-            'user_id' => 'ユーザーid',
+            'jobId' => '仕事id',
+            'userId' => 'ユーザーid',
         ];
-    }
-
-    /**
-     * バリデーションエラー後の処理を変える場合はここに処理を記述する
-     *
-     * @return array
-     */
-    protected function failedValidation(Validator $validator)
-    {
-        $response = response()->json([
-            'status' => 422,
-            'errors' => $validator->errors(),
-        ], 422);
-        throw new HttpResponseException($response);
     }
 }

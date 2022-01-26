@@ -30,7 +30,7 @@ class UserListRequest extends FormRequest
             'id' => ['nullable', 'numeric'],
             'name' => ['nullable', 'max:50'],
             'email' => ['nullable', 'max:256'],
-            'self_pr' => ['nullable', 'max:1000'],
+            'selfPr' => ['nullable', 'max:1000'],
             'tel' => ['nullable', 'max:50'],
         ];
     }
@@ -44,42 +44,10 @@ class UserListRequest extends FormRequest
     {
         return [
             'id' => 'id',
-            'subject' => '件名',
-            'message' => 'メッセージ',
-            'send' => '送信済',
+            'name' => '名前',
+            'email' => 'メールアドレス',
+            'selfPr' => '自己PR',
+            'tel' => '電話番号',
         ];
-    }
-
-    /**
-     * 特殊なバリデーションを行う場合はここに処理を記述する
-     *
-     * @return void
-     */
-    public function withValidator($validator)
-    {
-        /* ここにバリデーションを書く */
-        $validator->after(function ($validator) {
-            if (
-                !empty($this->input('id'))
-                && Job::find($this->input('id'))->updated_at > $this->input('updated_at')
-            ) {
-                $validator->errors()->add('updated_at', 'すでに変更されたデータの可能性があります。最新の状態で再度実行してください。');
-            }
-        });
-    }
-
-    /**
-     * バリデーションエラー後の処理を変える場合はここに処理を記述する
-     * デフォルトはリダイレクト
-     *
-     * @return array
-     */
-    protected function failedValidation(Validator $validator)
-    {
-        $response = response()->json([
-            'status' => 422,
-            'errors' => $validator->errors(),
-        ], 422);
-        throw new HttpResponseException($response);
     }
 }

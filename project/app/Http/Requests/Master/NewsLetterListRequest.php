@@ -48,37 +48,4 @@ class NewsLetterListRequest extends FormRequest
             'send' => '送信済',
         ];
     }
-
-    /**
-     * 特殊なバリデーションを行う場合はここに処理を記述する
-     *
-     * @return void
-     */
-    public function withValidator($validator)
-    {
-        /* ここにバリデーションを書く */
-        $validator->after(function ($validator) {
-            if (
-                !empty($this->input('id'))
-                && Job::find($this->input('id'))->updated_at > $this->input('updated_at')
-            ) {
-                $validator->errors()->add('updated_at', 'すでに変更されたデータの可能性があります。最新の状態で再度実行してください。');
-            }
-        });
-    }
-
-    /**
-     * バリデーションエラー後の処理を変える場合はここに処理を記述する
-     * デフォルトはリダイレクト
-     *
-     * @return array
-     */
-    protected function failedValidation(Validator $validator)
-    {
-        $response = response()->json([
-            'status' => 422,
-            'errors' => $validator->errors(),
-        ], 422);
-        throw new HttpResponseException($response);
-    }
 }

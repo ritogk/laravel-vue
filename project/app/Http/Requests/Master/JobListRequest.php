@@ -29,7 +29,7 @@ class JobListRequest extends FormRequest
             'title' => ['nullable', 'max:50'],
             'content' => ['nullable', 'max:1000'],
             'attention' => ['nullable', 'integer', 'min:0|max:1'],
-            'job_category_id' => ['nullable', 'numeric', 'min:0|max:1'],
+            'jobCategoryId' => ['nullable', 'numeric', 'min:0|max:1'],
             'price' => ['nullable', 'numeric'],
             'welfare' => ['nullable', 'max:1000'],
             'holiday' => ['nullable', 'max:1000'],
@@ -48,24 +48,10 @@ class JobListRequest extends FormRequest
             'title' => 'タイトル',
             'content' => '内容',
             'attention' => '注目',
-            'job_category_id' => 'カテゴリ',
+            'jobCategoryId' => 'カテゴリ',
             'price' => '金額',
             'welfare' => '福利厚生',
             'holiday' => '休日',
         ];
-    }
-
-    /**
-     * バリデーションエラー後の処理を変える場合はここに処理を記述する
-     *
-     * @return array
-     */
-    protected function failedValidation(Validator $validator)
-    {
-        $response = response()->json([
-            'status' => 422,
-            'errors' => $validator->errors(),
-        ], 422);
-        throw new HttpResponseException($response);
     }
 }
