@@ -90,11 +90,10 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/responseJobCategory"
-  /job_category:
     post:
       tags:
         - "職種"
-      summary: 追加
+      summary: 職種 追加
       description: 詳細内容
       requestBody:
         content:
@@ -102,16 +101,119 @@ paths:
             schema:
               $ref: "#/components/schemas/requestJobCategory"
       responses:
-        "200":
+        "201":
           description: 職種
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/responseJobCategory"
+  
+
+  /jobs/{id}:
+    get:
+      tags:
+        - "仕事"
+      summary: 1件取得
+      description: 詳細内容
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: 仕事
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseJob"
+    put:
+      tags:
+        - "仕事"
+      summary: 更新
+      description: 詳細内容
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestJobCategory"
+      responses:
+        "200":
+          description: 仕事
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseJob"
+    delete:
+      tags:
+        - "仕事"
+      summary: 削除
+      description: 詳細内容
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: 仕事
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseJob"
+  /jobs:
+    get:
+      tags:
+        - "仕事"
+      summary: 一覧取得
+      description: 詳細内容
+      parameters:
+        - in: query
+          name: values
+          schema:
+            type: object
+            $ref: "#/components/schemas/queryJobList"
+          style: form
+          explode: true
+      responses:
+        "200":
+          description: 仕事一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/responseJob"
+    post:
+      tags:
+        - "仕事"
+      summary: 仕事 追加
+      description: 詳細内容
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestJob"
+      responses:
+        "201":
+          description: 仕事
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseJob"
+
 components:
   schemas:
     queryJobCategoryList:
-      description: レスポンス 職種一覧
+      description: クエリパラメータ 職種一覧
       type: object
       properties:
         name:
@@ -120,6 +222,100 @@ components:
         content:
           type: string
           description: 内容
+    queryJobList:
+      description: クエリパラメータ 仕事一覧
+      type: object
+      properties:
+        title:
+          type: string
+          description: タイトル
+        content:
+          type: string
+          description: 内容
+        attention:
+          type: boolean
+          description: 注目の求人
+        jobCategoryId:
+          type: integer
+          description: 職種id
+        price:
+          type: integer
+          description: 金額
+        welfare:
+          type: string
+          description: 福利厚生
+        holiday:
+          type: string
+          description: 休日
+    requestJobCategory:
+      description: リクエスト 職種登録
+      type: object
+      properties:
+        name:
+          type: string
+          description: 名称
+        content:
+          type: string
+          description: 内容
+        image:
+          type: string
+          description: 画像URL
+        sortNo:
+          type: integer
+          description: 並び順
+        updatedAt:
+          type: string
+          format: date
+          description: 更新日時
+      required:
+        - name
+        - content
+        - image
+        - sortNo
+        - updatedAt
+    requestJob:
+      description: リクエスト 仕事登録
+      type: object
+      properties:
+        title:
+          type: string
+          description: タイトル
+        content:
+          type: string
+          description: 内容
+        attention:
+          type: boolean
+          description: 注目の求人
+        jobCategoryId:
+          type: integer
+          description: 職種id
+        price:
+          type: integer
+          description: 金額
+        welfare:
+          type: string
+          description: 福利厚生
+        holiday:
+          type: string
+          description: 休日
+        image:
+          type: string
+          description: 画像URL
+        sortNo:
+          type: integer
+          description: 並び順
+        updatedAt:
+          type: string
+          format: date
+          description: 更新日時
+      required:
+        - title
+        - content
+        - attention
+        - jobCategoryId
+        - price
+        - image
+        - sortNo
     responseJobCategory:
       description: 職種
       type: object
@@ -147,32 +343,48 @@ components:
           type: string
           format: date
           description: 更新日時
-    requestJobCategory:
-      description: 職種登録リクエスト
+    responseJob:
+      description: 仕事
       type: object
       properties:
-        name:
+        id:
+          type: integer
+          description: id
+        title:
           type: string
-          description: 名称
+          description: タイトル
         content:
           type: string
           description: 内容
+        attention:
+          type: boolean
+          description: 注目の求人
+        jobCategoryId:
+          type: integer
+          description: 職種id
+        price:
+          type: integer
+          description: 金額
+        welfare:
+          type: string
+          description: 福利厚生
+        holiday:
+          type: string
+          description: 休日
         image:
           type: string
           description: 画像URL
         sortNo:
           type: integer
           description: 並び順
+        createdAt:
+          type: string
+          format: date
+          description: 作成日時
         updatedAt:
           type: string
           format: date
           description: 更新日時
-      required:
-        - name
-        - content
-        - image
-        - sortNo
-        - updatedAt
     sex:
       description: |
         man: 男
