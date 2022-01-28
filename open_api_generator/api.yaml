@@ -272,6 +272,24 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/responseUser"
+  /files:
+    post:
+      tags:
+        - "ファイル"
+      summary: ファイル 追加
+      description: 詳細内容
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestFile"
+      responses:
+        "201":
+          description: ファイルパス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseFile"
 
 components:
   schemas:
@@ -418,6 +436,16 @@ components:
       required:
         - jobId
         - jobCategoryId
+    requestFile:
+      description: リクエスト ファイル
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+          description: ファイル
+      required:
+        - file
     responseJobCategory:
       description: 職種
       type: object
@@ -527,6 +555,16 @@ components:
           type: string
           format: date
           description: 作成日時
+    responseFile:
+      description: ファイルパス
+      type: object
+      properties:
+        storagePath:
+          type: string
+          description: ストレージパス 
+        url:
+          type: string
+          description: フルパス
     sex:
       description: |
         man: 男
