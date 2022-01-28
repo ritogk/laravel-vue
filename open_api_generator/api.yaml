@@ -74,6 +74,75 @@ paths:
       responses:
         "204":
           description: jwt
+  
+  /auth/front/me:
+    get:
+      tags:
+        - "認証 会員"
+      summary: 自身の詳細
+      description: 詳細内容
+      security:
+        - bearerAdmin: []
+      responses:
+        "200":
+          description: 会員
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseUser"
+  /auth/front/login:
+    post:
+      tags:
+        - "認証 会員"
+      summary: ログイン
+      description: 詳細内容
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestLogin"
+      responses:
+        "201":
+          description: jwt
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseAccessToken"
+  /auth/front/refresh:
+    post:
+      tags:
+        - "認証 会員"
+      summary: リフレッシュトークン認証
+      description: 詳細内容
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestLogin"
+      responses:
+        "201":
+          description: jwt
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseAccessToken"
+  /auth/front/logout:
+    post:
+      tags:
+        - "認証 会員"
+      summary: ログアウト
+      description: 会員
+      security:
+        - bearerAdmin: []
+      responses:
+        "204":
+          description: jwt
+
   /job_categories/{id}:
     get:
       tags:
