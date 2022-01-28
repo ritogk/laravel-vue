@@ -27,7 +27,6 @@ class NewsLetterListRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['nullable', 'numeric'],
             'subject' => ['nullable', 'max:50'],
             'message' => ['nullable', 'max:1000'],
             'send' => ['nullable', 'boolean'],
@@ -42,7 +41,6 @@ class NewsLetterListRequest extends FormRequest
     public function attributes()
     {
         return [
-            'id' => 'id',
             'subject' => '件名',
             'message' => 'メッセージ',
             'send' => '送信済',

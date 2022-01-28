@@ -44,7 +44,6 @@ class JobListRequest extends FormRequest
     public function attributes()
     {
         return [
-            'id' => 'id',
             'title' => 'タイトル',
             'content' => '内容',
             'attention' => '注目',

@@ -27,7 +27,6 @@ class UserListRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['nullable', 'numeric'],
             'name' => ['nullable', 'max:50'],
             'email' => ['nullable', 'max:256'],
             'selfPr' => ['nullable', 'max:1000'],
@@ -43,7 +42,6 @@ class UserListRequest extends FormRequest
     public function attributes()
     {
         return [
-            'id' => 'id',
             'name' => '名前',
             'email' => 'メールアドレス',
             'selfPr' => '自己PR',

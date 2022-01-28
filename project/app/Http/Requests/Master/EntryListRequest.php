@@ -26,7 +26,6 @@ class EntryListRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['nullable', 'numeric'],
             'jobId' => ['nullable', 'numeric'],
             'userId' => ['nullable', 'numeric'],
         ];
@@ -40,7 +39,6 @@ class EntryListRequest extends FormRequest
     public function attributes()
     {
         return [
-            'id' => 'id',
             'jobId' => '仕事id',
             'userId' => 'ユーザーid',
         ];
