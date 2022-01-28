@@ -7,18 +7,21 @@ use Illuminate\Http\Request;
 
 class CreateAction{
     /**
-     * __invoke
+     * Undocumented function
      *
-     * @param Request $request
+     * @param string $name
+     * @param string $content
+     * @param string $image
+     * @param integer $sort_no
      * @return array
      */
-    public function __invoke(Request $request): array
+    public function __invoke(string $name, string $content, string $image, int $sort_no): array
     {
         $create = [
-            'name' => $request->name,
-            'content' => $request->content,
-            'image' => $request->image,
-            'sort_no' => $request->sort_no,
+            'name' => $name,
+            'content' => $content,
+            'image' => $image,
+            'sort_no' => $sort_no,
         ];
         return JobCategory::create($create)->toArray();
     }

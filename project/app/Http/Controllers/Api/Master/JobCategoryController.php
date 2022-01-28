@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api\Master;
 
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+// request
 use App\Http\Requests\Master\JobCategoryListRequest;
 use App\Http\Requests\Master\JobCategoryRequest;
-
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-
 // usecase
 use App\UseCases\Master\JobCategory\ListAction;
 use App\UseCases\Master\JobCategory\CreateAction;
@@ -15,7 +16,6 @@ use App\UseCases\Master\JobCategory\UpdateAction;
 use App\UseCases\Master\JobCategory\DeleteAction;
 use App\UseCases\Master\JobCategory\FindAction;
 use App\UseCases\Master\JobCategory\ExportAction;
-
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
@@ -27,13 +27,16 @@ class JobCategoryController  extends Controller
      *
      * @param  JobCategoryListRequest $request
      * @param  ListAction $action
-     * @return OpenAPI\Model\JobCategory[]
+     * @return JsonResponse
      */
-    public function list(JobCategoryListRequest $request, ListAction $action): array
+    public function list(JobCategoryListRequest $request, ListAction $action): JsonResponse
     {
         $queryParameters = new OpenAPI\Model\QueryJobCategoryList($request->all());
         $result = $action($queryParameters->getName(), $queryParameters->getContent());
-        return OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\JobCategory::class, $result);
+        return response()->json(
+            OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\JobCategory::class, $result),
+            Response::HTTP_OK
+        );
     }
 
     /**
@@ -41,11 +44,16 @@ class JobCategoryController  extends Controller
      *
      * @param JobCategoryRequest $request
      * @param CreateAction $action
-     * @return array
+     * @return JsonResponse
      */
-    public function create(JobCategoryRequest $request, CreateAction $action): array
+    public function create(JobCategoryRequest $request, CreateAction $action): JsonResponse
     {
-        return $action($request);
+        $parameters = new OpenAPI\Model\RequestJobCategory($request->all());
+        $result = $action($parameters->getName(), $parameters->getContent(), $parameters->getImage(), $parameters->getSortNo());
+        return response()->json(
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\JobCategory::class, $result),
+            Response::HTTP_CREATED
+        );
     }
 
     /**
