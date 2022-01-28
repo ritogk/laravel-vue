@@ -35,7 +35,7 @@ use \App\OpenAPI\ObjectSerializer;
  * QueryJobCategoryList Class Doc Comment
  *
  * @category Class
- * @description レスポンス 職種一覧
+ * @description クエリパラメータ 職種一覧
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech

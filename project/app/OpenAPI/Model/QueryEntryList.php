@@ -1,6 +1,6 @@
 <?php
 /**
- * JobCategory
+ * QueryEntryList
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * JobCategory Class Doc Comment
+ * QueryEntryList Class Doc Comment
  *
  * @category Class
- * @description 職種
+ * @description クエリパラメータ 応募一覧
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
+class QueryEntryList implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'jobCategory';
+    protected static $openAPIModelName = 'queryEntryList';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,13 +60,8 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'int',
-        'name' => 'string',
-        'content' => 'string',
-        'image' => 'string',
-        'sort_no' => 'int',
-        'created_at' => '\DateTime',
-        'updated_at' => '\DateTime'
+        'job_id' => 'int',
+        'job_category_id' => 'int'
     ];
 
     /**
@@ -77,13 +72,8 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'name' => null,
-        'content' => null,
-        'image' => null,
-        'sort_no' => null,
-        'created_at' => 'date',
-        'updated_at' => 'date'
+        'job_id' => null,
+        'job_category_id' => null
     ];
 
     /**
@@ -113,13 +103,8 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'name' => 'name',
-        'content' => 'content',
-        'image' => 'image',
-        'sort_no' => 'sortNo',
-        'created_at' => 'createdAt',
-        'updated_at' => 'updatedAt'
+        'job_id' => 'jobId',
+        'job_category_id' => 'jobCategoryId'
     ];
 
     /**
@@ -128,13 +113,8 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'name' => 'setName',
-        'content' => 'setContent',
-        'image' => 'setImage',
-        'sort_no' => 'setSortNo',
-        'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'job_id' => 'setJobId',
+        'job_category_id' => 'setJobCategoryId'
     ];
 
     /**
@@ -143,13 +123,8 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'name' => 'getName',
-        'content' => 'getContent',
-        'image' => 'getImage',
-        'sort_no' => 'getSortNo',
-        'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'job_id' => 'getJobId',
+        'job_category_id' => 'getJobCategoryId'
     ];
 
     /**
@@ -209,13 +184,8 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = $data['id'] ?? null;
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['content'] = $data['content'] ?? null;
-        $this->container['image'] = $data['image'] ?? null;
-        $this->container['sort_no'] = $data['sort_no'] ?? null;
-        $this->container['created_at'] = $data['created_at'] ?? null;
-        $this->container['updated_at'] = $data['updated_at'] ?? null;
+        $this->container['job_id'] = $data['job_id'] ?? null;
+        $this->container['job_category_id'] = $data['job_category_id'] ?? null;
     }
 
     /**
@@ -243,169 +213,49 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets id
+     * Gets job_id
      *
      * @return int|null
      */
-    public function getId()
+    public function getJobId()
     {
-        return $this->container['id'];
+        return $this->container['job_id'];
     }
 
     /**
-     * Sets id
+     * Sets job_id
      *
-     * @param int|null $id id
+     * @param int|null $job_id 仕事id
      *
      * @return self
      */
-    public function setId($id)
+    public function setJobId($job_id)
     {
-        $this->container['id'] = $id;
+        $this->container['job_id'] = $job_id;
 
         return $this;
     }
 
     /**
-     * Gets name
-     *
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string|null $name 名称
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets content
-     *
-     * @return string|null
-     */
-    public function getContent()
-    {
-        return $this->container['content'];
-    }
-
-    /**
-     * Sets content
-     *
-     * @param string|null $content 内容
-     *
-     * @return self
-     */
-    public function setContent($content)
-    {
-        $this->container['content'] = $content;
-
-        return $this;
-    }
-
-    /**
-     * Gets image
-     *
-     * @return string|null
-     */
-    public function getImage()
-    {
-        return $this->container['image'];
-    }
-
-    /**
-     * Sets image
-     *
-     * @param string|null $image 画像URL
-     *
-     * @return self
-     */
-    public function setImage($image)
-    {
-        $this->container['image'] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Gets sort_no
+     * Gets job_category_id
      *
      * @return int|null
      */
-    public function getSortNo()
+    public function getJobCategoryId()
     {
-        return $this->container['sort_no'];
+        return $this->container['job_category_id'];
     }
 
     /**
-     * Sets sort_no
+     * Sets job_category_id
      *
-     * @param int|null $sort_no 並び順
+     * @param int|null $job_category_id 仕事カテゴリid
      *
      * @return self
      */
-    public function setSortNo($sort_no)
+    public function setJobCategoryId($job_category_id)
     {
-        $this->container['sort_no'] = $sort_no;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at 作成日時
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at 更新日時
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        $this->container['updated_at'] = $updated_at;
+        $this->container['job_category_id'] = $job_category_id;
 
         return $this;
     }

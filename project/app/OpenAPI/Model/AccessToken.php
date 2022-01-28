@@ -1,6 +1,6 @@
 <?php
 /**
- * JobCategory
+ * AccessToken
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * JobCategory Class Doc Comment
+ * AccessToken Class Doc Comment
  *
  * @category Class
- * @description 職種
+ * @description アクセストークン
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
+class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'jobCategory';
+    protected static $openAPIModelName = 'accessToken';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,13 +60,9 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'int',
-        'name' => 'string',
-        'content' => 'string',
-        'image' => 'string',
-        'sort_no' => 'int',
-        'created_at' => '\DateTime',
-        'updated_at' => '\DateTime'
+        'access_token' => 'string',
+        'token_type' => 'string',
+        'expires_in' => 'int'
     ];
 
     /**
@@ -77,13 +73,9 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'name' => null,
-        'content' => null,
-        'image' => null,
-        'sort_no' => null,
-        'created_at' => 'date',
-        'updated_at' => 'date'
+        'access_token' => null,
+        'token_type' => null,
+        'expires_in' => null
     ];
 
     /**
@@ -113,13 +105,9 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'name' => 'name',
-        'content' => 'content',
-        'image' => 'image',
-        'sort_no' => 'sortNo',
-        'created_at' => 'createdAt',
-        'updated_at' => 'updatedAt'
+        'access_token' => 'accessToken',
+        'token_type' => 'tokenType',
+        'expires_in' => 'expiresIn'
     ];
 
     /**
@@ -128,13 +116,9 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'name' => 'setName',
-        'content' => 'setContent',
-        'image' => 'setImage',
-        'sort_no' => 'setSortNo',
-        'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'access_token' => 'setAccessToken',
+        'token_type' => 'setTokenType',
+        'expires_in' => 'setExpiresIn'
     ];
 
     /**
@@ -143,13 +127,9 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'name' => 'getName',
-        'content' => 'getContent',
-        'image' => 'getImage',
-        'sort_no' => 'getSortNo',
-        'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'access_token' => 'getAccessToken',
+        'token_type' => 'getTokenType',
+        'expires_in' => 'getExpiresIn'
     ];
 
     /**
@@ -209,13 +189,9 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = $data['id'] ?? null;
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['content'] = $data['content'] ?? null;
-        $this->container['image'] = $data['image'] ?? null;
-        $this->container['sort_no'] = $data['sort_no'] ?? null;
-        $this->container['created_at'] = $data['created_at'] ?? null;
-        $this->container['updated_at'] = $data['updated_at'] ?? null;
+        $this->container['access_token'] = $data['access_token'] ?? null;
+        $this->container['token_type'] = $data['token_type'] ?? null;
+        $this->container['expires_in'] = $data['expires_in'] ?? null;
     }
 
     /**
@@ -243,169 +219,73 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets id
+     * Gets access_token
+     *
+     * @return string|null
+     */
+    public function getAccessToken()
+    {
+        return $this->container['access_token'];
+    }
+
+    /**
+     * Sets access_token
+     *
+     * @param string|null $access_token jwt
+     *
+     * @return self
+     */
+    public function setAccessToken($access_token)
+    {
+        $this->container['access_token'] = $access_token;
+
+        return $this;
+    }
+
+    /**
+     * Gets token_type
+     *
+     * @return string|null
+     */
+    public function getTokenType()
+    {
+        return $this->container['token_type'];
+    }
+
+    /**
+     * Sets token_type
+     *
+     * @param string|null $token_type トークンタイプ
+     *
+     * @return self
+     */
+    public function setTokenType($token_type)
+    {
+        $this->container['token_type'] = $token_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets expires_in
      *
      * @return int|null
      */
-    public function getId()
+    public function getExpiresIn()
     {
-        return $this->container['id'];
+        return $this->container['expires_in'];
     }
 
     /**
-     * Sets id
+     * Sets expires_in
      *
-     * @param int|null $id id
+     * @param int|null $expires_in 有効期限(秒)
      *
      * @return self
      */
-    public function setId($id)
+    public function setExpiresIn($expires_in)
     {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string|null $name 名称
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets content
-     *
-     * @return string|null
-     */
-    public function getContent()
-    {
-        return $this->container['content'];
-    }
-
-    /**
-     * Sets content
-     *
-     * @param string|null $content 内容
-     *
-     * @return self
-     */
-    public function setContent($content)
-    {
-        $this->container['content'] = $content;
-
-        return $this;
-    }
-
-    /**
-     * Gets image
-     *
-     * @return string|null
-     */
-    public function getImage()
-    {
-        return $this->container['image'];
-    }
-
-    /**
-     * Sets image
-     *
-     * @param string|null $image 画像URL
-     *
-     * @return self
-     */
-    public function setImage($image)
-    {
-        $this->container['image'] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Gets sort_no
-     *
-     * @return int|null
-     */
-    public function getSortNo()
-    {
-        return $this->container['sort_no'];
-    }
-
-    /**
-     * Sets sort_no
-     *
-     * @param int|null $sort_no 並び順
-     *
-     * @return self
-     */
-    public function setSortNo($sort_no)
-    {
-        $this->container['sort_no'] = $sort_no;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at 作成日時
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at 更新日時
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        $this->container['updated_at'] = $updated_at;
+        $this->container['expires_in'] = $expires_in;
 
         return $this;
     }

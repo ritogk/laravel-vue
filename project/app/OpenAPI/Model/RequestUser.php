@@ -1,6 +1,6 @@
 <?php
 /**
- * JobCategory
+ * RequestUser
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * JobCategory Class Doc Comment
+ * RequestUser Class Doc Comment
  *
  * @category Class
- * @description 職種
+ * @description リクエスト 会員登録
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
+class RequestUser implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'jobCategory';
+    protected static $openAPIModelName = 'requestUser';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,13 +60,12 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'int',
         'name' => 'string',
-        'content' => 'string',
-        'image' => 'string',
-        'sort_no' => 'int',
-        'created_at' => '\DateTime',
-        'updated_at' => '\DateTime'
+        'email' => 'string',
+        'password' => 'string',
+        'password_confirmation' => 'string',
+        'self_pr' => 'string',
+        'tel' => 'string'
     ];
 
     /**
@@ -77,13 +76,12 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
         'name' => null,
-        'content' => null,
-        'image' => null,
-        'sort_no' => null,
-        'created_at' => 'date',
-        'updated_at' => 'date'
+        'email' => null,
+        'password' => null,
+        'password_confirmation' => null,
+        'self_pr' => null,
+        'tel' => null
     ];
 
     /**
@@ -113,13 +111,12 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
         'name' => 'name',
-        'content' => 'content',
-        'image' => 'image',
-        'sort_no' => 'sortNo',
-        'created_at' => 'createdAt',
-        'updated_at' => 'updatedAt'
+        'email' => 'email',
+        'password' => 'password',
+        'password_confirmation' => 'passwordConfirmation',
+        'self_pr' => 'selfPr',
+        'tel' => 'tel'
     ];
 
     /**
@@ -128,13 +125,12 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
         'name' => 'setName',
-        'content' => 'setContent',
-        'image' => 'setImage',
-        'sort_no' => 'setSortNo',
-        'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'email' => 'setEmail',
+        'password' => 'setPassword',
+        'password_confirmation' => 'setPasswordConfirmation',
+        'self_pr' => 'setSelfPr',
+        'tel' => 'setTel'
     ];
 
     /**
@@ -143,13 +139,12 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
         'name' => 'getName',
-        'content' => 'getContent',
-        'image' => 'getImage',
-        'sort_no' => 'getSortNo',
-        'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'email' => 'getEmail',
+        'password' => 'getPassword',
+        'password_confirmation' => 'getPasswordConfirmation',
+        'self_pr' => 'getSelfPr',
+        'tel' => 'getTel'
     ];
 
     /**
@@ -209,13 +204,12 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = $data['id'] ?? null;
         $this->container['name'] = $data['name'] ?? null;
-        $this->container['content'] = $data['content'] ?? null;
-        $this->container['image'] = $data['image'] ?? null;
-        $this->container['sort_no'] = $data['sort_no'] ?? null;
-        $this->container['created_at'] = $data['created_at'] ?? null;
-        $this->container['updated_at'] = $data['updated_at'] ?? null;
+        $this->container['email'] = $data['email'] ?? null;
+        $this->container['password'] = $data['password'] ?? null;
+        $this->container['password_confirmation'] = $data['password_confirmation'] ?? null;
+        $this->container['self_pr'] = $data['self_pr'] ?? null;
+        $this->container['tel'] = $data['tel'] ?? null;
     }
 
     /**
@@ -227,6 +221,24 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['email'] === null) {
+            $invalidProperties[] = "'email' can't be null";
+        }
+        if ($this->container['password'] === null) {
+            $invalidProperties[] = "'password' can't be null";
+        }
+        if ($this->container['password_confirmation'] === null) {
+            $invalidProperties[] = "'password_confirmation' can't be null";
+        }
+        if ($this->container['self_pr'] === null) {
+            $invalidProperties[] = "'self_pr' can't be null";
+        }
+        if ($this->container['tel'] === null) {
+            $invalidProperties[] = "'tel' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -243,33 +255,9 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets id
-     *
-     * @return int|null
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int|null $id id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
      * Gets name
      *
-     * @return string|null
+     * @return string
      */
     public function getName()
     {
@@ -279,7 +267,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name 名称
+     * @param string $name 氏名
      *
      * @return self
      */
@@ -291,121 +279,121 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets content
+     * Gets email
      *
-     * @return string|null
+     * @return string
      */
-    public function getContent()
+    public function getEmail()
     {
-        return $this->container['content'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets content
+     * Sets email
      *
-     * @param string|null $content 内容
+     * @param string $email メールアドレス
      *
      * @return self
      */
-    public function setContent($content)
+    public function setEmail($email)
     {
-        $this->container['content'] = $content;
+        $this->container['email'] = $email;
 
         return $this;
     }
 
     /**
-     * Gets image
+     * Gets password
      *
-     * @return string|null
+     * @return string
      */
-    public function getImage()
+    public function getPassword()
     {
-        return $this->container['image'];
+        return $this->container['password'];
     }
 
     /**
-     * Sets image
+     * Sets password
      *
-     * @param string|null $image 画像URL
+     * @param string $password パスワード
      *
      * @return self
      */
-    public function setImage($image)
+    public function setPassword($password)
     {
-        $this->container['image'] = $image;
+        $this->container['password'] = $password;
 
         return $this;
     }
 
     /**
-     * Gets sort_no
+     * Gets password_confirmation
      *
-     * @return int|null
+     * @return string
      */
-    public function getSortNo()
+    public function getPasswordConfirmation()
     {
-        return $this->container['sort_no'];
+        return $this->container['password_confirmation'];
     }
 
     /**
-     * Sets sort_no
+     * Sets password_confirmation
      *
-     * @param int|null $sort_no 並び順
+     * @param string $password_confirmation パスワード(確認)
      *
      * @return self
      */
-    public function setSortNo($sort_no)
+    public function setPasswordConfirmation($password_confirmation)
     {
-        $this->container['sort_no'] = $sort_no;
+        $this->container['password_confirmation'] = $password_confirmation;
 
         return $this;
     }
 
     /**
-     * Gets created_at
+     * Gets self_pr
      *
-     * @return \DateTime|null
+     * @return string
      */
-    public function getCreatedAt()
+    public function getSelfPr()
     {
-        return $this->container['created_at'];
+        return $this->container['self_pr'];
     }
 
     /**
-     * Sets created_at
+     * Sets self_pr
      *
-     * @param \DateTime|null $created_at 作成日時
+     * @param string $self_pr 自己PR
      *
      * @return self
      */
-    public function setCreatedAt($created_at)
+    public function setSelfPr($self_pr)
     {
-        $this->container['created_at'] = $created_at;
+        $this->container['self_pr'] = $self_pr;
 
         return $this;
     }
 
     /**
-     * Gets updated_at
+     * Gets tel
      *
-     * @return \DateTime|null
+     * @return string
      */
-    public function getUpdatedAt()
+    public function getTel()
     {
-        return $this->container['updated_at'];
+        return $this->container['tel'];
     }
 
     /**
-     * Sets updated_at
+     * Sets tel
      *
-     * @param \DateTime|null $updated_at 更新日時
+     * @param string $tel 電話番号
      *
      * @return self
      */
-    public function setUpdatedAt($updated_at)
+    public function setTel($tel)
     {
-        $this->container['updated_at'] = $updated_at;
+        $this->container['tel'] = $tel;
 
         return $this;
     }
