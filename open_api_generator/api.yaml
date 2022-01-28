@@ -606,9 +606,9 @@ components:
         jobId:
           type: integer
           description: 仕事id
-        jobCategoryId:
+        userId:
           type: integer
-          description: 仕事カテゴリid
+          description: 会員id
       required:
         - jobId
         - jobCategoryId
@@ -737,6 +737,9 @@ components:
       description: 応募
       type: object
       properties:
+        id:
+          type: integer
+          description: id
         userId:
           type: integer
           description: 会員id

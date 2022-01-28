@@ -61,7 +61,7 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'jobId' => 'int',
-        'jobCategoryId' => 'int'
+        'userId' => 'int'
     ];
 
     /**
@@ -73,7 +73,7 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'jobId' => null,
-        'jobCategoryId' => null
+        'userId' => null
     ];
 
     /**
@@ -104,7 +104,7 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'jobId' => 'jobId',
-        'jobCategoryId' => 'jobCategoryId'
+        'userId' => 'userId'
     ];
 
     /**
@@ -114,7 +114,7 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'jobId' => 'setJobId',
-        'jobCategoryId' => 'setJobCategoryId'
+        'userId' => 'setUserId'
     ];
 
     /**
@@ -124,7 +124,7 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'jobId' => 'getJobId',
-        'jobCategoryId' => 'getJobCategoryId'
+        'userId' => 'getUserId'
     ];
 
     /**
@@ -185,7 +185,7 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->container['jobId'] = $data['jobId'] ?? null;
-        $this->container['jobCategoryId'] = $data['jobCategoryId'] ?? null;
+        $this->container['userId'] = $data['userId'] ?? null;
     }
 
     /**
@@ -199,9 +199,6 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if ($this->container['jobId'] === null) {
             $invalidProperties[] = "'jobId' can't be null";
-        }
-        if ($this->container['jobCategoryId'] === null) {
-            $invalidProperties[] = "'jobCategoryId' can't be null";
         }
         return $invalidProperties;
     }
@@ -243,25 +240,25 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets jobCategoryId
+     * Gets userId
      *
-     * @return int
+     * @return int|null
      */
-    public function getJobCategoryId()
+    public function getUserId()
     {
-        return $this->container['jobCategoryId'];
+        return $this->container['userId'];
     }
 
     /**
-     * Sets jobCategoryId
+     * Sets userId
      *
-     * @param int $jobCategoryId 仕事カテゴリid
+     * @param int|null $userId 会員id
      *
      * @return self
      */
-    public function setJobCategoryId($jobCategoryId)
+    public function setUserId($userId)
     {
-        $this->container['jobCategoryId'] = $jobCategoryId;
+        $this->container['userId'] = $userId;
 
         return $this;
     }
