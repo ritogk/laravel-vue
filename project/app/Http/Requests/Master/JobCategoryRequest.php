@@ -27,7 +27,6 @@ class JobCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'nullable',
             'name' => 'required|max:25',
             'content' => 'required|max:1000',
             'image' => 'required',
