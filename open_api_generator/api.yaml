@@ -7,6 +7,73 @@ servers:
   - url: http://localhost:80/api
     description: 開発用
 paths:
+  /auth/admin/me:
+    get:
+      tags:
+        - "認証 管理者"
+      summary: 自身の詳細
+      description: 詳細内容
+      security:
+        - bearerAdmin: []
+      responses:
+        "200":
+          description: 管理者
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseAdmin"
+  /auth/admin/login:
+    post:
+      tags:
+        - "認証 管理者"
+      summary: ログイン
+      description: 詳細内容
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestLogin"
+      responses:
+        "201":
+          description: jwt
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseAccessToken"
+  /auth/admin/refresh:
+    post:
+      tags:
+        - "認証 管理者"
+      summary: リフレッシュトークン認証
+      description: 詳細内容
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestLogin"
+      responses:
+        "201":
+          description: jwt
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseAccessToken"
+  /auth/admin/logout:
+    post:
+      tags:
+        - "認証 管理者"
+      summary: ログアウト
+      description: 詳細内容
+      security:
+        - bearerAdmin: []
+      responses:
+        "204":
+          description: jwt
   /job_categories/{id}:
     get:
       tags:
@@ -251,6 +318,8 @@ paths:
                 $ref: "#/components/schemas/responseEntry"
   /users:
     get:
+      security:
+        - bearerAdmin: []
       tags:
         - "会員"
       summary: 一覧取得
@@ -309,6 +378,11 @@ paths:
                 $ref: "#/components/schemas/responseFile"
 
 components:
+  securitySchemes:
+    bearerAdmin:
+      type: http
+      scheme: bearer
+      description: アクセストークン
   schemas:
     queryJobCategoryList:
       description: クエリパラメータ 職種一覧
@@ -492,6 +566,19 @@ components:
           description: ファイル
       required:
         - file
+    requestLogin:
+      description: リクエスト ログイン
+      type: object
+      properties:
+        email:
+          type: string
+          description: メールアドレス
+        password:
+          type: string
+          description: パスワード
+      required:
+        - email
+        - password
     responseJobCategory:
       description: 職種
       type: object
@@ -611,6 +698,40 @@ components:
         url:
           type: string
           description: フルパス
+    responseAdmin:
+      description: 管理者
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id
+        name:
+          type: string
+          description: 名前
+        email:
+          type: string
+          description: メールアドレス
+        updatedAt:
+          type: string
+          format: date
+          description: 更新日時
+        createdAt:
+          type: string
+          format: date
+          description: 作成日時
+    responseAccessToken:
+      description: アクセストークン
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: jwt
+        tokenType:
+          type: string
+          description: トークンタイプ
+        expiresIn:
+          type: integer
+          description: 有効期限(秒)
     sex:
       description: |
         man: 男
