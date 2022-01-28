@@ -249,6 +249,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/responseEntry"
+  /users:
+    get:
+      tags:
+        - "会員"
+      summary: 一覧取得
+      description: 詳細内容
+      parameters:
+        - in: query
+          name: values
+          schema:
+            type: object
+            $ref: "#/components/schemas/queryUserList"
+          style: form
+          explode: true
+      responses:
+        "200":
+          description: 会員一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/responseUser"
 
 components:
   schemas:
@@ -297,6 +320,22 @@ components:
         jobCategoryId:
           type: integer
           description: 仕事カテゴリid
+    queryUserList:
+      description: クエリパラメータ 会員一覧
+      type: object
+      properties:
+        name:
+          type: string
+          description: 氏名
+        email:
+          type: string
+          description: メールアドレス
+        selfPr:
+          type: string
+          description: 自己PR
+        tel:
+          type: string
+          description: 電話番号
     requestJobCategory:
       description: リクエスト 職種登録
       type: object
@@ -454,10 +493,40 @@ components:
       properties:
         userId:
           type: integer
-          description: ユーザーid
+          description: 会員id
         jobId:
           type: integer
           description: 仕事id
+    responseUser:
+      description: 会員
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id
+        name:
+          type: string
+          description: 氏名
+        email:
+          type: string
+          description: メールアドレス
+        password:
+          type: string
+          description: パスワード
+        selfPr:
+          type: string
+          description: 自己PR
+        tel:
+          type: string
+          description: 電話番号
+        updatedAt:
+          type: string
+          format: date
+          description: 更新日時
+        createdAt:
+          type: string
+          format: date
+          description: 作成日時
     sex:
       description: |
         man: 男
