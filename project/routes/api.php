@@ -36,7 +36,6 @@ Route::group(['prefix' => 'jobs'], function () {
     Route::post('/', [Controllers\Api\Master\JobController::class, 'create'])->middleware(['auth:admin']);
     Route::put('/{id}', [Controllers\Api\Master\JobController::class, 'update'])->middleware(['auth:admin']);
     Route::delete('/{id}', [Controllers\Api\Master\JobController::class, 'destroy'])->middleware(['auth:admin']);
-    Route::get('/files/excel', [Controllers\Api\Master\JobController::class, 'excel'])->middleware(['auth:admin']);
 });
 
 // 仕事カテゴリ マスタ
@@ -46,7 +45,6 @@ Route::group(['prefix' => 'job_categories'], function () {
     Route::post('/', [Controllers\Api\Master\JobCategoryController::class, 'create'])->middleware(['auth:admin']);
     Route::put('/{id}', [Controllers\Api\Master\JobCategoryController::class, 'update'])->middleware(['auth:admin']);
     Route::delete('/{id}', [Controllers\Api\Master\JobCategoryController::class, 'destroy'])->middleware(['auth:admin']);
-    Route::get('/files/excel', [Controllers\Api\Master\JobCategoryController::class, 'excel'])->middleware(['auth:admin']);
 });
 
 // エントリー マスタ
@@ -59,16 +57,6 @@ Route::group(['prefix' => 'entries'], function () {
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', [Controllers\Api\Master\UserController::class, 'list'])->middleware(['auth:admin']);
 });
-
-// // メルマガマスタ
-// Route::group(['prefix' => 'news_letters'], function () {
-//     Route::get('/', [Controllers\Api\Master\NewsLetterController::class, 'list']);
-//     Route::get('/{id}', [Controllers\Api\Master\NewsLetterController::class, 'find']);
-//     Route::post('/', [Controllers\Api\Master\NewsLetterController::class, 'create'])->middleware(['auth:admin']);
-//     Route::put('/{id}', [Controllers\Api\Master\NewsLetterController::class, 'update'])->middleware(['auth:admin']);
-//     Route::delete('/{id}', [Controllers\Api\Master\NewsLetterController::class, 'destroy'])->middleware(['auth:admin']);
-//     Route::post('/{id}/send', [Controllers\Api\Master\NewsLetterController::class, 'send'])->middleware(['auth:admin']);
-// });
 
 // ファイル操作系
 Route::group(['prefix' => 'files'], function () {
