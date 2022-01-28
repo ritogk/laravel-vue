@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api\Master;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+// request
 use App\Http\Requests\Master\JobListRequest;
 use App\Http\Requests\Master\JobRequest;
-
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-
 // usecase
 use App\UseCases\Master\Job\ListAction;
 use App\UseCases\Master\Job\CreateAction;
@@ -15,6 +16,9 @@ use App\UseCases\Master\Job\UpdateAction;
 use App\UseCases\Master\Job\DeleteAction;
 use App\UseCases\Master\Job\FindAction;
 use App\UseCases\Master\Job\ExportAction;
+// openapi
+use App\OpenAPI;
+use App\Libs\OpenAPIUtility;
 
 
 class JobController extends Controller
@@ -24,11 +28,24 @@ class JobController extends Controller
      *
      * @param  JobListRequest $request
      * @param  ListAction $action
-     * @return array
+     * @return JsonResponse
      */
-    public function list(JobListRequest $request, ListAction $action): array
+    public function list(JobListRequest $request, ListAction $action): JsonResponse
     {
-        return $action($request->filter, $request->fields);
+        $parameters = new OpenAPI\Model\QueryJobList($request->all());
+        $result = $action(
+            $parameters->getTitle(),
+            $parameters->getContent(),
+            $parameters->getAttention(),
+            $parameters->getJobCategoryId(),
+            $parameters->getPrice(),
+            $parameters->getWelfare(),
+            $parameters->getHoliday()
+        );
+        return response()->json(
+            OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\Job::class, $result),
+            Response::HTTP_OK
+        );
     }
 
     /**

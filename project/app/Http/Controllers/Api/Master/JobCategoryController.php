@@ -31,8 +31,8 @@ class JobCategoryController  extends Controller
      */
     public function list(JobCategoryListRequest $request, ListAction $action): JsonResponse
     {
-        $queryParameters = new OpenAPI\Model\QueryJobCategoryList($request->all());
-        $result = $action($queryParameters->getName(), $queryParameters->getContent());
+        $parameters = new OpenAPI\Model\QueryJobCategoryList($request->all());
+        $result = $action($parameters->getName(), $parameters->getContent());
         return response()->json(
             OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\JobCategory::class, $result),
             Response::HTTP_OK
