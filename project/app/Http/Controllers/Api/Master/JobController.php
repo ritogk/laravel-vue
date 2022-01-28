@@ -53,10 +53,26 @@ class JobController extends Controller
      *
      * @param JobRequest $request
      * @param CreateAction $action
-     * @return array
+     * @return JsonResponse
      */
-    public function create(JobRequest $request, CreateAction $action): array
+    public function create(JobRequest $request, CreateAction $action): JsonResponse
     {
+        $parameters = new OpenAPI\Model\RequestJob($request->all());
+        $result = $action(
+            $parameters->getTitle(),
+            $parameters->getContent(),
+            $parameters->getAttention(),
+            $parameters->getJobCategoryId(),
+            $parameters->getPrice(),
+            $parameters->getWelfare(),
+            $parameters->getHoliday(),
+            $parameters->getImage(),
+            $parameters->getSortNo()
+        );
+        return response()->json(
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\Job::class, $result),
+            Response::HTTP_CREATED
+        );
         return $action($request);
     }
 
