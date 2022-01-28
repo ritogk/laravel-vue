@@ -63,8 +63,8 @@ class RequestUser implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'email' => 'string',
         'password' => 'string',
-        'password_confirmation' => 'string',
-        'self_pr' => 'string',
+        'passwordConfirmation' => 'string',
+        'selfPr' => 'string',
         'tel' => 'string'
     ];
 
@@ -79,8 +79,8 @@ class RequestUser implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => null,
         'email' => null,
         'password' => null,
-        'password_confirmation' => null,
-        'self_pr' => null,
+        'passwordConfirmation' => null,
+        'selfPr' => null,
         'tel' => null
     ];
 
@@ -114,8 +114,8 @@ class RequestUser implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'name',
         'email' => 'email',
         'password' => 'password',
-        'password_confirmation' => 'passwordConfirmation',
-        'self_pr' => 'selfPr',
+        'passwordConfirmation' => 'passwordConfirmation',
+        'selfPr' => 'selfPr',
         'tel' => 'tel'
     ];
 
@@ -128,8 +128,8 @@ class RequestUser implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'setName',
         'email' => 'setEmail',
         'password' => 'setPassword',
-        'password_confirmation' => 'setPasswordConfirmation',
-        'self_pr' => 'setSelfPr',
+        'passwordConfirmation' => 'setPasswordConfirmation',
+        'selfPr' => 'setSelfPr',
         'tel' => 'setTel'
     ];
 
@@ -142,8 +142,8 @@ class RequestUser implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'getName',
         'email' => 'getEmail',
         'password' => 'getPassword',
-        'password_confirmation' => 'getPasswordConfirmation',
-        'self_pr' => 'getSelfPr',
+        'passwordConfirmation' => 'getPasswordConfirmation',
+        'selfPr' => 'getSelfPr',
         'tel' => 'getTel'
     ];
 
@@ -207,8 +207,8 @@ class RequestUser implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['name'] = $data['name'] ?? null;
         $this->container['email'] = $data['email'] ?? null;
         $this->container['password'] = $data['password'] ?? null;
-        $this->container['password_confirmation'] = $data['password_confirmation'] ?? null;
-        $this->container['self_pr'] = $data['self_pr'] ?? null;
+        $this->container['passwordConfirmation'] = $data['passwordConfirmation'] ?? null;
+        $this->container['selfPr'] = $data['selfPr'] ?? null;
         $this->container['tel'] = $data['tel'] ?? null;
     }
 
@@ -230,11 +230,11 @@ class RequestUser implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['password'] === null) {
             $invalidProperties[] = "'password' can't be null";
         }
-        if ($this->container['password_confirmation'] === null) {
-            $invalidProperties[] = "'password_confirmation' can't be null";
+        if ($this->container['passwordConfirmation'] === null) {
+            $invalidProperties[] = "'passwordConfirmation' can't be null";
         }
-        if ($this->container['self_pr'] === null) {
-            $invalidProperties[] = "'self_pr' can't be null";
+        if ($this->container['selfPr'] === null) {
+            $invalidProperties[] = "'selfPr' can't be null";
         }
         if ($this->container['tel'] === null) {
             $invalidProperties[] = "'tel' can't be null";
@@ -327,49 +327,49 @@ class RequestUser implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets password_confirmation
+     * Gets passwordConfirmation
      *
      * @return string
      */
     public function getPasswordConfirmation()
     {
-        return $this->container['password_confirmation'];
+        return $this->container['passwordConfirmation'];
     }
 
     /**
-     * Sets password_confirmation
+     * Sets passwordConfirmation
      *
-     * @param string $password_confirmation パスワード(確認)
+     * @param string $passwordConfirmation パスワード(確認)
      *
      * @return self
      */
-    public function setPasswordConfirmation($password_confirmation)
+    public function setPasswordConfirmation($passwordConfirmation)
     {
-        $this->container['password_confirmation'] = $password_confirmation;
+        $this->container['passwordConfirmation'] = $passwordConfirmation;
 
         return $this;
     }
 
     /**
-     * Gets self_pr
+     * Gets selfPr
      *
      * @return string
      */
     public function getSelfPr()
     {
-        return $this->container['self_pr'];
+        return $this->container['selfPr'];
     }
 
     /**
-     * Sets self_pr
+     * Sets selfPr
      *
-     * @param string $self_pr 自己PR
+     * @param string $selfPr 自己PR
      *
      * @return self
      */
-    public function setSelfPr($self_pr)
+    public function setSelfPr($selfPr)
     {
-        $this->container['self_pr'] = $self_pr;
+        $this->container['selfPr'] = $selfPr;
 
         return $this;
     }

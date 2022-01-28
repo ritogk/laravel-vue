@@ -60,8 +60,8 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'job_id' => 'int',
-        'job_category_id' => 'int'
+        'jobId' => 'int',
+        'jobCategoryId' => 'int'
     ];
 
     /**
@@ -72,8 +72,8 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'job_id' => null,
-        'job_category_id' => null
+        'jobId' => null,
+        'jobCategoryId' => null
     ];
 
     /**
@@ -103,8 +103,8 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'job_id' => 'jobId',
-        'job_category_id' => 'jobCategoryId'
+        'jobId' => 'jobId',
+        'jobCategoryId' => 'jobCategoryId'
     ];
 
     /**
@@ -113,8 +113,8 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'job_id' => 'setJobId',
-        'job_category_id' => 'setJobCategoryId'
+        'jobId' => 'setJobId',
+        'jobCategoryId' => 'setJobCategoryId'
     ];
 
     /**
@@ -123,8 +123,8 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'job_id' => 'getJobId',
-        'job_category_id' => 'getJobCategoryId'
+        'jobId' => 'getJobId',
+        'jobCategoryId' => 'getJobCategoryId'
     ];
 
     /**
@@ -184,8 +184,8 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['job_id'] = $data['job_id'] ?? null;
-        $this->container['job_category_id'] = $data['job_category_id'] ?? null;
+        $this->container['jobId'] = $data['jobId'] ?? null;
+        $this->container['jobCategoryId'] = $data['jobCategoryId'] ?? null;
     }
 
     /**
@@ -197,11 +197,11 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['job_id'] === null) {
-            $invalidProperties[] = "'job_id' can't be null";
+        if ($this->container['jobId'] === null) {
+            $invalidProperties[] = "'jobId' can't be null";
         }
-        if ($this->container['job_category_id'] === null) {
-            $invalidProperties[] = "'job_category_id' can't be null";
+        if ($this->container['jobCategoryId'] === null) {
+            $invalidProperties[] = "'jobCategoryId' can't be null";
         }
         return $invalidProperties;
     }
@@ -219,49 +219,49 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets job_id
+     * Gets jobId
      *
      * @return int
      */
     public function getJobId()
     {
-        return $this->container['job_id'];
+        return $this->container['jobId'];
     }
 
     /**
-     * Sets job_id
+     * Sets jobId
      *
-     * @param int $job_id 仕事id
+     * @param int $jobId 仕事id
      *
      * @return self
      */
-    public function setJobId($job_id)
+    public function setJobId($jobId)
     {
-        $this->container['job_id'] = $job_id;
+        $this->container['jobId'] = $jobId;
 
         return $this;
     }
 
     /**
-     * Gets job_category_id
+     * Gets jobCategoryId
      *
      * @return int
      */
     public function getJobCategoryId()
     {
-        return $this->container['job_category_id'];
+        return $this->container['jobCategoryId'];
     }
 
     /**
-     * Sets job_category_id
+     * Sets jobCategoryId
      *
-     * @param int $job_category_id 仕事カテゴリid
+     * @param int $jobCategoryId 仕事カテゴリid
      *
      * @return self
      */
-    public function setJobCategoryId($job_category_id)
+    public function setJobCategoryId($jobCategoryId)
     {
-        $this->container['job_category_id'] = $job_category_id;
+        $this->container['jobCategoryId'] = $jobCategoryId;
 
         return $this;
     }

@@ -120,15 +120,15 @@ class DefaultApi
      *
      * ログイン
      *
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin requestLogin (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\AccessToken
      */
-    public function authAdminLoginPost($request_login = null)
+    public function authAdminLoginPost($requestLogin = null)
     {
-        list($response) = $this->authAdminLoginPostWithHttpInfo($request_login);
+        list($response) = $this->authAdminLoginPostWithHttpInfo($requestLogin);
         return $response;
     }
 
@@ -137,15 +137,15 @@ class DefaultApi
      *
      * ログイン
      *
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\AccessToken, HTTP status code, HTTP response headers (array of strings)
      */
-    public function authAdminLoginPostWithHttpInfo($request_login = null)
+    public function authAdminLoginPostWithHttpInfo($requestLogin = null)
     {
-        $request = $this->authAdminLoginPostRequest($request_login);
+        $request = $this->authAdminLoginPostRequest($requestLogin);
 
         try {
             $options = $this->createHttpClientOption();
@@ -230,14 +230,14 @@ class DefaultApi
      *
      * ログイン
      *
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function authAdminLoginPostAsync($request_login = null)
+    public function authAdminLoginPostAsync($requestLogin = null)
     {
-        return $this->authAdminLoginPostAsyncWithHttpInfo($request_login)
+        return $this->authAdminLoginPostAsyncWithHttpInfo($requestLogin)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -250,15 +250,15 @@ class DefaultApi
      *
      * ログイン
      *
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function authAdminLoginPostAsyncWithHttpInfo($request_login = null)
+    public function authAdminLoginPostAsyncWithHttpInfo($requestLogin = null)
     {
         $returnType = '\App\OpenAPI\Model\AccessToken';
-        $request = $this->authAdminLoginPostRequest($request_login);
+        $request = $this->authAdminLoginPostRequest($requestLogin);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -296,12 +296,12 @@ class DefaultApi
     /**
      * Create request for operation 'authAdminLoginPost'
      *
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function authAdminLoginPostRequest($request_login = null)
+    public function authAdminLoginPostRequest($requestLogin = null)
     {
 
         $resourcePath = '/auth/admin/login';
@@ -327,11 +327,11 @@ class DefaultApi
         }
 
         // for model (json/xml)
-        if (isset($request_login)) {
+        if (isset($requestLogin)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($request_login));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestLogin));
             } else {
-                $httpBody = $request_login;
+                $httpBody = $requestLogin;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -851,15 +851,15 @@ class DefaultApi
      * リフレッシュトークン認証
      *
      * @param  string $authorization authorization (optional)
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin requestLogin (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\AccessToken
      */
-    public function authAdminRefreshPost($authorization = null, $request_login = null)
+    public function authAdminRefreshPost($authorization = null, $requestLogin = null)
     {
-        list($response) = $this->authAdminRefreshPostWithHttpInfo($authorization, $request_login);
+        list($response) = $this->authAdminRefreshPostWithHttpInfo($authorization, $requestLogin);
         return $response;
     }
 
@@ -869,15 +869,15 @@ class DefaultApi
      * リフレッシュトークン認証
      *
      * @param  string $authorization (optional)
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\AccessToken, HTTP status code, HTTP response headers (array of strings)
      */
-    public function authAdminRefreshPostWithHttpInfo($authorization = null, $request_login = null)
+    public function authAdminRefreshPostWithHttpInfo($authorization = null, $requestLogin = null)
     {
-        $request = $this->authAdminRefreshPostRequest($authorization, $request_login);
+        $request = $this->authAdminRefreshPostRequest($authorization, $requestLogin);
 
         try {
             $options = $this->createHttpClientOption();
@@ -963,14 +963,14 @@ class DefaultApi
      * リフレッシュトークン認証
      *
      * @param  string $authorization (optional)
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function authAdminRefreshPostAsync($authorization = null, $request_login = null)
+    public function authAdminRefreshPostAsync($authorization = null, $requestLogin = null)
     {
-        return $this->authAdminRefreshPostAsyncWithHttpInfo($authorization, $request_login)
+        return $this->authAdminRefreshPostAsyncWithHttpInfo($authorization, $requestLogin)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -984,15 +984,15 @@ class DefaultApi
      * リフレッシュトークン認証
      *
      * @param  string $authorization (optional)
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function authAdminRefreshPostAsyncWithHttpInfo($authorization = null, $request_login = null)
+    public function authAdminRefreshPostAsyncWithHttpInfo($authorization = null, $requestLogin = null)
     {
         $returnType = '\App\OpenAPI\Model\AccessToken';
-        $request = $this->authAdminRefreshPostRequest($authorization, $request_login);
+        $request = $this->authAdminRefreshPostRequest($authorization, $requestLogin);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1031,12 +1031,12 @@ class DefaultApi
      * Create request for operation 'authAdminRefreshPost'
      *
      * @param  string $authorization (optional)
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function authAdminRefreshPostRequest($authorization = null, $request_login = null)
+    public function authAdminRefreshPostRequest($authorization = null, $requestLogin = null)
     {
 
         $resourcePath = '/auth/admin/refresh';
@@ -1066,11 +1066,11 @@ class DefaultApi
         }
 
         // for model (json/xml)
-        if (isset($request_login)) {
+        if (isset($requestLogin)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($request_login));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestLogin));
             } else {
-                $httpBody = $request_login;
+                $httpBody = $requestLogin;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1122,15 +1122,15 @@ class DefaultApi
      *
      * ログイン
      *
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin requestLogin (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\AccessToken
      */
-    public function authFrontLoginPost($request_login = null)
+    public function authFrontLoginPost($requestLogin = null)
     {
-        list($response) = $this->authFrontLoginPostWithHttpInfo($request_login);
+        list($response) = $this->authFrontLoginPostWithHttpInfo($requestLogin);
         return $response;
     }
 
@@ -1139,15 +1139,15 @@ class DefaultApi
      *
      * ログイン
      *
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\AccessToken, HTTP status code, HTTP response headers (array of strings)
      */
-    public function authFrontLoginPostWithHttpInfo($request_login = null)
+    public function authFrontLoginPostWithHttpInfo($requestLogin = null)
     {
-        $request = $this->authFrontLoginPostRequest($request_login);
+        $request = $this->authFrontLoginPostRequest($requestLogin);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1232,14 +1232,14 @@ class DefaultApi
      *
      * ログイン
      *
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function authFrontLoginPostAsync($request_login = null)
+    public function authFrontLoginPostAsync($requestLogin = null)
     {
-        return $this->authFrontLoginPostAsyncWithHttpInfo($request_login)
+        return $this->authFrontLoginPostAsyncWithHttpInfo($requestLogin)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1252,15 +1252,15 @@ class DefaultApi
      *
      * ログイン
      *
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function authFrontLoginPostAsyncWithHttpInfo($request_login = null)
+    public function authFrontLoginPostAsyncWithHttpInfo($requestLogin = null)
     {
         $returnType = '\App\OpenAPI\Model\AccessToken';
-        $request = $this->authFrontLoginPostRequest($request_login);
+        $request = $this->authFrontLoginPostRequest($requestLogin);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1298,12 +1298,12 @@ class DefaultApi
     /**
      * Create request for operation 'authFrontLoginPost'
      *
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function authFrontLoginPostRequest($request_login = null)
+    public function authFrontLoginPostRequest($requestLogin = null)
     {
 
         $resourcePath = '/auth/front/login';
@@ -1329,11 +1329,11 @@ class DefaultApi
         }
 
         // for model (json/xml)
-        if (isset($request_login)) {
+        if (isset($requestLogin)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($request_login));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestLogin));
             } else {
-                $httpBody = $request_login;
+                $httpBody = $requestLogin;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1853,15 +1853,15 @@ class DefaultApi
      * リフレッシュトークン認証
      *
      * @param  string $authorization authorization (optional)
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin requestLogin (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\AccessToken
      */
-    public function authFrontRefreshPost($authorization = null, $request_login = null)
+    public function authFrontRefreshPost($authorization = null, $requestLogin = null)
     {
-        list($response) = $this->authFrontRefreshPostWithHttpInfo($authorization, $request_login);
+        list($response) = $this->authFrontRefreshPostWithHttpInfo($authorization, $requestLogin);
         return $response;
     }
 
@@ -1871,15 +1871,15 @@ class DefaultApi
      * リフレッシュトークン認証
      *
      * @param  string $authorization (optional)
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\AccessToken, HTTP status code, HTTP response headers (array of strings)
      */
-    public function authFrontRefreshPostWithHttpInfo($authorization = null, $request_login = null)
+    public function authFrontRefreshPostWithHttpInfo($authorization = null, $requestLogin = null)
     {
-        $request = $this->authFrontRefreshPostRequest($authorization, $request_login);
+        $request = $this->authFrontRefreshPostRequest($authorization, $requestLogin);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1965,14 +1965,14 @@ class DefaultApi
      * リフレッシュトークン認証
      *
      * @param  string $authorization (optional)
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function authFrontRefreshPostAsync($authorization = null, $request_login = null)
+    public function authFrontRefreshPostAsync($authorization = null, $requestLogin = null)
     {
-        return $this->authFrontRefreshPostAsyncWithHttpInfo($authorization, $request_login)
+        return $this->authFrontRefreshPostAsyncWithHttpInfo($authorization, $requestLogin)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1986,15 +1986,15 @@ class DefaultApi
      * リフレッシュトークン認証
      *
      * @param  string $authorization (optional)
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function authFrontRefreshPostAsyncWithHttpInfo($authorization = null, $request_login = null)
+    public function authFrontRefreshPostAsyncWithHttpInfo($authorization = null, $requestLogin = null)
     {
         $returnType = '\App\OpenAPI\Model\AccessToken';
-        $request = $this->authFrontRefreshPostRequest($authorization, $request_login);
+        $request = $this->authFrontRefreshPostRequest($authorization, $requestLogin);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2033,12 +2033,12 @@ class DefaultApi
      * Create request for operation 'authFrontRefreshPost'
      *
      * @param  string $authorization (optional)
-     * @param  \App\OpenAPI\Model\RequestLogin $request_login (optional)
+     * @param  \App\OpenAPI\Model\RequestLogin $requestLogin (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function authFrontRefreshPostRequest($authorization = null, $request_login = null)
+    public function authFrontRefreshPostRequest($authorization = null, $requestLogin = null)
     {
 
         $resourcePath = '/auth/front/refresh';
@@ -2068,11 +2068,11 @@ class DefaultApi
         }
 
         // for model (json/xml)
-        if (isset($request_login)) {
+        if (isset($requestLogin)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($request_login));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestLogin));
             } else {
-                $httpBody = $request_login;
+                $httpBody = $requestLogin;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -2392,15 +2392,15 @@ class DefaultApi
      *
      * 応募 追加
      *
-     * @param  \App\OpenAPI\Model\RequestEntry $request_entry request_entry (optional)
+     * @param  \App\OpenAPI\Model\RequestEntry $requestEntry requestEntry (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\Entry
      */
-    public function entriesPost($request_entry = null)
+    public function entriesPost($requestEntry = null)
     {
-        list($response) = $this->entriesPostWithHttpInfo($request_entry);
+        list($response) = $this->entriesPostWithHttpInfo($requestEntry);
         return $response;
     }
 
@@ -2409,15 +2409,15 @@ class DefaultApi
      *
      * 応募 追加
      *
-     * @param  \App\OpenAPI\Model\RequestEntry $request_entry (optional)
+     * @param  \App\OpenAPI\Model\RequestEntry $requestEntry (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\Entry, HTTP status code, HTTP response headers (array of strings)
      */
-    public function entriesPostWithHttpInfo($request_entry = null)
+    public function entriesPostWithHttpInfo($requestEntry = null)
     {
-        $request = $this->entriesPostRequest($request_entry);
+        $request = $this->entriesPostRequest($requestEntry);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2502,14 +2502,14 @@ class DefaultApi
      *
      * 応募 追加
      *
-     * @param  \App\OpenAPI\Model\RequestEntry $request_entry (optional)
+     * @param  \App\OpenAPI\Model\RequestEntry $requestEntry (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entriesPostAsync($request_entry = null)
+    public function entriesPostAsync($requestEntry = null)
     {
-        return $this->entriesPostAsyncWithHttpInfo($request_entry)
+        return $this->entriesPostAsyncWithHttpInfo($requestEntry)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2522,15 +2522,15 @@ class DefaultApi
      *
      * 応募 追加
      *
-     * @param  \App\OpenAPI\Model\RequestEntry $request_entry (optional)
+     * @param  \App\OpenAPI\Model\RequestEntry $requestEntry (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entriesPostAsyncWithHttpInfo($request_entry = null)
+    public function entriesPostAsyncWithHttpInfo($requestEntry = null)
     {
         $returnType = '\App\OpenAPI\Model\Entry';
-        $request = $this->entriesPostRequest($request_entry);
+        $request = $this->entriesPostRequest($requestEntry);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2568,12 +2568,12 @@ class DefaultApi
     /**
      * Create request for operation 'entriesPost'
      *
-     * @param  \App\OpenAPI\Model\RequestEntry $request_entry (optional)
+     * @param  \App\OpenAPI\Model\RequestEntry $requestEntry (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function entriesPostRequest($request_entry = null)
+    public function entriesPostRequest($requestEntry = null)
     {
 
         $resourcePath = '/entries';
@@ -2599,11 +2599,11 @@ class DefaultApi
         }
 
         // for model (json/xml)
-        if (isset($request_entry)) {
+        if (isset($requestEntry)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($request_entry));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestEntry));
             } else {
-                $httpBody = $request_entry;
+                $httpBody = $requestEntry;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -2659,15 +2659,15 @@ class DefaultApi
      *
      * ファイル 追加
      *
-     * @param  \App\OpenAPI\Model\RequestFile $request_file request_file (optional)
+     * @param  \App\OpenAPI\Model\RequestFile $requestFile requestFile (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SplFileObject
      */
-    public function filesPost($request_file = null)
+    public function filesPost($requestFile = null)
     {
-        list($response) = $this->filesPostWithHttpInfo($request_file);
+        list($response) = $this->filesPostWithHttpInfo($requestFile);
         return $response;
     }
 
@@ -2676,15 +2676,15 @@ class DefaultApi
      *
      * ファイル 追加
      *
-     * @param  \App\OpenAPI\Model\RequestFile $request_file (optional)
+     * @param  \App\OpenAPI\Model\RequestFile $requestFile (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function filesPostWithHttpInfo($request_file = null)
+    public function filesPostWithHttpInfo($requestFile = null)
     {
-        $request = $this->filesPostRequest($request_file);
+        $request = $this->filesPostRequest($requestFile);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2769,14 +2769,14 @@ class DefaultApi
      *
      * ファイル 追加
      *
-     * @param  \App\OpenAPI\Model\RequestFile $request_file (optional)
+     * @param  \App\OpenAPI\Model\RequestFile $requestFile (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function filesPostAsync($request_file = null)
+    public function filesPostAsync($requestFile = null)
     {
-        return $this->filesPostAsyncWithHttpInfo($request_file)
+        return $this->filesPostAsyncWithHttpInfo($requestFile)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2789,15 +2789,15 @@ class DefaultApi
      *
      * ファイル 追加
      *
-     * @param  \App\OpenAPI\Model\RequestFile $request_file (optional)
+     * @param  \App\OpenAPI\Model\RequestFile $requestFile (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function filesPostAsyncWithHttpInfo($request_file = null)
+    public function filesPostAsyncWithHttpInfo($requestFile = null)
     {
         $returnType = '\SplFileObject';
-        $request = $this->filesPostRequest($request_file);
+        $request = $this->filesPostRequest($requestFile);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2835,12 +2835,12 @@ class DefaultApi
     /**
      * Create request for operation 'filesPost'
      *
-     * @param  \App\OpenAPI\Model\RequestFile $request_file (optional)
+     * @param  \App\OpenAPI\Model\RequestFile $requestFile (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function filesPostRequest($request_file = null)
+    public function filesPostRequest($requestFile = null)
     {
 
         $resourcePath = '/files';
@@ -2866,11 +2866,11 @@ class DefaultApi
         }
 
         // for model (json/xml)
-        if (isset($request_file)) {
+        if (isset($requestFile)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($request_file));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestFile));
             } else {
-                $httpBody = $request_file;
+                $httpBody = $requestFile;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -3741,15 +3741,15 @@ class DefaultApi
      * 更新
      *
      * @param  int $id id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory requestJobCategory (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\JobCategory
      */
-    public function jobCategoriesIdPut($id, $request_job_category = null)
+    public function jobCategoriesIdPut($id, $requestJobCategory = null)
     {
-        list($response) = $this->jobCategoriesIdPutWithHttpInfo($id, $request_job_category);
+        list($response) = $this->jobCategoriesIdPutWithHttpInfo($id, $requestJobCategory);
         return $response;
     }
 
@@ -3759,15 +3759,15 @@ class DefaultApi
      * 更新
      *
      * @param  int $id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\JobCategory, HTTP status code, HTTP response headers (array of strings)
      */
-    public function jobCategoriesIdPutWithHttpInfo($id, $request_job_category = null)
+    public function jobCategoriesIdPutWithHttpInfo($id, $requestJobCategory = null)
     {
-        $request = $this->jobCategoriesIdPutRequest($id, $request_job_category);
+        $request = $this->jobCategoriesIdPutRequest($id, $requestJobCategory);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3853,14 +3853,14 @@ class DefaultApi
      * 更新
      *
      * @param  int $id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobCategoriesIdPutAsync($id, $request_job_category = null)
+    public function jobCategoriesIdPutAsync($id, $requestJobCategory = null)
     {
-        return $this->jobCategoriesIdPutAsyncWithHttpInfo($id, $request_job_category)
+        return $this->jobCategoriesIdPutAsyncWithHttpInfo($id, $requestJobCategory)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3874,15 +3874,15 @@ class DefaultApi
      * 更新
      *
      * @param  int $id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobCategoriesIdPutAsyncWithHttpInfo($id, $request_job_category = null)
+    public function jobCategoriesIdPutAsyncWithHttpInfo($id, $requestJobCategory = null)
     {
         $returnType = '\App\OpenAPI\Model\JobCategory';
-        $request = $this->jobCategoriesIdPutRequest($id, $request_job_category);
+        $request = $this->jobCategoriesIdPutRequest($id, $requestJobCategory);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3921,12 +3921,12 @@ class DefaultApi
      * Create request for operation 'jobCategoriesIdPut'
      *
      * @param  int $id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function jobCategoriesIdPutRequest($id, $request_job_category = null)
+    public function jobCategoriesIdPutRequest($id, $requestJobCategory = null)
     {
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -3966,11 +3966,11 @@ class DefaultApi
         }
 
         // for model (json/xml)
-        if (isset($request_job_category)) {
+        if (isset($requestJobCategory)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($request_job_category));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestJobCategory));
             } else {
-                $httpBody = $request_job_category;
+                $httpBody = $requestJobCategory;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -4026,15 +4026,15 @@ class DefaultApi
      *
      * 職種 追加
      *
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory requestJobCategory (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\JobCategory
      */
-    public function jobCategoriesPost($request_job_category = null)
+    public function jobCategoriesPost($requestJobCategory = null)
     {
-        list($response) = $this->jobCategoriesPostWithHttpInfo($request_job_category);
+        list($response) = $this->jobCategoriesPostWithHttpInfo($requestJobCategory);
         return $response;
     }
 
@@ -4043,15 +4043,15 @@ class DefaultApi
      *
      * 職種 追加
      *
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\JobCategory, HTTP status code, HTTP response headers (array of strings)
      */
-    public function jobCategoriesPostWithHttpInfo($request_job_category = null)
+    public function jobCategoriesPostWithHttpInfo($requestJobCategory = null)
     {
-        $request = $this->jobCategoriesPostRequest($request_job_category);
+        $request = $this->jobCategoriesPostRequest($requestJobCategory);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4136,14 +4136,14 @@ class DefaultApi
      *
      * 職種 追加
      *
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobCategoriesPostAsync($request_job_category = null)
+    public function jobCategoriesPostAsync($requestJobCategory = null)
     {
-        return $this->jobCategoriesPostAsyncWithHttpInfo($request_job_category)
+        return $this->jobCategoriesPostAsyncWithHttpInfo($requestJobCategory)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4156,15 +4156,15 @@ class DefaultApi
      *
      * 職種 追加
      *
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobCategoriesPostAsyncWithHttpInfo($request_job_category = null)
+    public function jobCategoriesPostAsyncWithHttpInfo($requestJobCategory = null)
     {
         $returnType = '\App\OpenAPI\Model\JobCategory';
-        $request = $this->jobCategoriesPostRequest($request_job_category);
+        $request = $this->jobCategoriesPostRequest($requestJobCategory);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4202,12 +4202,12 @@ class DefaultApi
     /**
      * Create request for operation 'jobCategoriesPost'
      *
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function jobCategoriesPostRequest($request_job_category = null)
+    public function jobCategoriesPostRequest($requestJobCategory = null)
     {
 
         $resourcePath = '/job_categories';
@@ -4233,11 +4233,11 @@ class DefaultApi
         }
 
         // for model (json/xml)
-        if (isset($request_job_category)) {
+        if (isset($requestJobCategory)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($request_job_category));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestJobCategory));
             } else {
-                $httpBody = $request_job_category;
+                $httpBody = $requestJobCategory;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -5108,15 +5108,15 @@ class DefaultApi
      * 更新
      *
      * @param  int $id id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory requestJobCategory (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\Job
      */
-    public function jobsIdPut($id, $request_job_category = null)
+    public function jobsIdPut($id, $requestJobCategory = null)
     {
-        list($response) = $this->jobsIdPutWithHttpInfo($id, $request_job_category);
+        list($response) = $this->jobsIdPutWithHttpInfo($id, $requestJobCategory);
         return $response;
     }
 
@@ -5126,15 +5126,15 @@ class DefaultApi
      * 更新
      *
      * @param  int $id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\Job, HTTP status code, HTTP response headers (array of strings)
      */
-    public function jobsIdPutWithHttpInfo($id, $request_job_category = null)
+    public function jobsIdPutWithHttpInfo($id, $requestJobCategory = null)
     {
-        $request = $this->jobsIdPutRequest($id, $request_job_category);
+        $request = $this->jobsIdPutRequest($id, $requestJobCategory);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5220,14 +5220,14 @@ class DefaultApi
      * 更新
      *
      * @param  int $id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobsIdPutAsync($id, $request_job_category = null)
+    public function jobsIdPutAsync($id, $requestJobCategory = null)
     {
-        return $this->jobsIdPutAsyncWithHttpInfo($id, $request_job_category)
+        return $this->jobsIdPutAsyncWithHttpInfo($id, $requestJobCategory)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5241,15 +5241,15 @@ class DefaultApi
      * 更新
      *
      * @param  int $id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobsIdPutAsyncWithHttpInfo($id, $request_job_category = null)
+    public function jobsIdPutAsyncWithHttpInfo($id, $requestJobCategory = null)
     {
         $returnType = '\App\OpenAPI\Model\Job';
-        $request = $this->jobsIdPutRequest($id, $request_job_category);
+        $request = $this->jobsIdPutRequest($id, $requestJobCategory);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5288,12 +5288,12 @@ class DefaultApi
      * Create request for operation 'jobsIdPut'
      *
      * @param  int $id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $request_job_category (optional)
+     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function jobsIdPutRequest($id, $request_job_category = null)
+    public function jobsIdPutRequest($id, $requestJobCategory = null)
     {
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -5333,11 +5333,11 @@ class DefaultApi
         }
 
         // for model (json/xml)
-        if (isset($request_job_category)) {
+        if (isset($requestJobCategory)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($request_job_category));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestJobCategory));
             } else {
-                $httpBody = $request_job_category;
+                $httpBody = $requestJobCategory;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -5393,15 +5393,15 @@ class DefaultApi
      *
      * 仕事 追加
      *
-     * @param  \App\OpenAPI\Model\RequestJob $request_job request_job (optional)
+     * @param  \App\OpenAPI\Model\RequestJob $requestJob requestJob (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\Job
      */
-    public function jobsPost($request_job = null)
+    public function jobsPost($requestJob = null)
     {
-        list($response) = $this->jobsPostWithHttpInfo($request_job);
+        list($response) = $this->jobsPostWithHttpInfo($requestJob);
         return $response;
     }
 
@@ -5410,15 +5410,15 @@ class DefaultApi
      *
      * 仕事 追加
      *
-     * @param  \App\OpenAPI\Model\RequestJob $request_job (optional)
+     * @param  \App\OpenAPI\Model\RequestJob $requestJob (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\Job, HTTP status code, HTTP response headers (array of strings)
      */
-    public function jobsPostWithHttpInfo($request_job = null)
+    public function jobsPostWithHttpInfo($requestJob = null)
     {
-        $request = $this->jobsPostRequest($request_job);
+        $request = $this->jobsPostRequest($requestJob);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5503,14 +5503,14 @@ class DefaultApi
      *
      * 仕事 追加
      *
-     * @param  \App\OpenAPI\Model\RequestJob $request_job (optional)
+     * @param  \App\OpenAPI\Model\RequestJob $requestJob (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobsPostAsync($request_job = null)
+    public function jobsPostAsync($requestJob = null)
     {
-        return $this->jobsPostAsyncWithHttpInfo($request_job)
+        return $this->jobsPostAsyncWithHttpInfo($requestJob)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5523,15 +5523,15 @@ class DefaultApi
      *
      * 仕事 追加
      *
-     * @param  \App\OpenAPI\Model\RequestJob $request_job (optional)
+     * @param  \App\OpenAPI\Model\RequestJob $requestJob (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobsPostAsyncWithHttpInfo($request_job = null)
+    public function jobsPostAsyncWithHttpInfo($requestJob = null)
     {
         $returnType = '\App\OpenAPI\Model\Job';
-        $request = $this->jobsPostRequest($request_job);
+        $request = $this->jobsPostRequest($requestJob);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5569,12 +5569,12 @@ class DefaultApi
     /**
      * Create request for operation 'jobsPost'
      *
-     * @param  \App\OpenAPI\Model\RequestJob $request_job (optional)
+     * @param  \App\OpenAPI\Model\RequestJob $requestJob (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function jobsPostRequest($request_job = null)
+    public function jobsPostRequest($requestJob = null)
     {
 
         $resourcePath = '/jobs';
@@ -5600,11 +5600,11 @@ class DefaultApi
         }
 
         // for model (json/xml)
-        if (isset($request_job)) {
+        if (isset($requestJob)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($request_job));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestJob));
             } else {
-                $httpBody = $request_job;
+                $httpBody = $requestJob;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -5932,15 +5932,15 @@ class DefaultApi
      *
      * 会員 追加
      *
-     * @param  \App\OpenAPI\Model\RequestUser $request_user request_user (optional)
+     * @param  \App\OpenAPI\Model\RequestUser $requestUser requestUser (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\User
      */
-    public function usersPost($request_user = null)
+    public function usersPost($requestUser = null)
     {
-        list($response) = $this->usersPostWithHttpInfo($request_user);
+        list($response) = $this->usersPostWithHttpInfo($requestUser);
         return $response;
     }
 
@@ -5949,15 +5949,15 @@ class DefaultApi
      *
      * 会員 追加
      *
-     * @param  \App\OpenAPI\Model\RequestUser $request_user (optional)
+     * @param  \App\OpenAPI\Model\RequestUser $requestUser (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\User, HTTP status code, HTTP response headers (array of strings)
      */
-    public function usersPostWithHttpInfo($request_user = null)
+    public function usersPostWithHttpInfo($requestUser = null)
     {
-        $request = $this->usersPostRequest($request_user);
+        $request = $this->usersPostRequest($requestUser);
 
         try {
             $options = $this->createHttpClientOption();
@@ -6042,14 +6042,14 @@ class DefaultApi
      *
      * 会員 追加
      *
-     * @param  \App\OpenAPI\Model\RequestUser $request_user (optional)
+     * @param  \App\OpenAPI\Model\RequestUser $requestUser (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function usersPostAsync($request_user = null)
+    public function usersPostAsync($requestUser = null)
     {
-        return $this->usersPostAsyncWithHttpInfo($request_user)
+        return $this->usersPostAsyncWithHttpInfo($requestUser)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -6062,15 +6062,15 @@ class DefaultApi
      *
      * 会員 追加
      *
-     * @param  \App\OpenAPI\Model\RequestUser $request_user (optional)
+     * @param  \App\OpenAPI\Model\RequestUser $requestUser (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function usersPostAsyncWithHttpInfo($request_user = null)
+    public function usersPostAsyncWithHttpInfo($requestUser = null)
     {
         $returnType = '\App\OpenAPI\Model\User';
-        $request = $this->usersPostRequest($request_user);
+        $request = $this->usersPostRequest($requestUser);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -6108,12 +6108,12 @@ class DefaultApi
     /**
      * Create request for operation 'usersPost'
      *
-     * @param  \App\OpenAPI\Model\RequestUser $request_user (optional)
+     * @param  \App\OpenAPI\Model\RequestUser $requestUser (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function usersPostRequest($request_user = null)
+    public function usersPostRequest($requestUser = null)
     {
 
         $resourcePath = '/users';
@@ -6139,11 +6139,11 @@ class DefaultApi
         }
 
         // for model (json/xml)
-        if (isset($request_user)) {
+        if (isset($requestUser)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($request_user));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestUser));
             } else {
-                $httpBody = $request_user;
+                $httpBody = $requestUser;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

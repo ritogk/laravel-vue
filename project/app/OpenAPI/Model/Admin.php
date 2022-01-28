@@ -63,8 +63,8 @@ class Admin implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'int',
         'name' => 'string',
         'email' => 'string',
-        'updated_at' => '\DateTime',
-        'created_at' => '\DateTime'
+        'updatedAt' => '\DateTime',
+        'createdAt' => '\DateTime'
     ];
 
     /**
@@ -78,8 +78,8 @@ class Admin implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => null,
         'name' => null,
         'email' => null,
-        'updated_at' => 'date',
-        'created_at' => 'date'
+        'updatedAt' => 'date',
+        'createdAt' => 'date'
     ];
 
     /**
@@ -112,8 +112,8 @@ class Admin implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'name' => 'name',
         'email' => 'email',
-        'updated_at' => 'updatedAt',
-        'created_at' => 'createdAt'
+        'updatedAt' => 'updatedAt',
+        'createdAt' => 'createdAt'
     ];
 
     /**
@@ -125,8 +125,8 @@ class Admin implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'name' => 'setName',
         'email' => 'setEmail',
-        'updated_at' => 'setUpdatedAt',
-        'created_at' => 'setCreatedAt'
+        'updatedAt' => 'setUpdatedAt',
+        'createdAt' => 'setCreatedAt'
     ];
 
     /**
@@ -138,8 +138,8 @@ class Admin implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'name' => 'getName',
         'email' => 'getEmail',
-        'updated_at' => 'getUpdatedAt',
-        'created_at' => 'getCreatedAt'
+        'updatedAt' => 'getUpdatedAt',
+        'createdAt' => 'getCreatedAt'
     ];
 
     /**
@@ -202,8 +202,8 @@ class Admin implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['id'] = $data['id'] ?? null;
         $this->container['name'] = $data['name'] ?? null;
         $this->container['email'] = $data['email'] ?? null;
-        $this->container['updated_at'] = $data['updated_at'] ?? null;
-        $this->container['created_at'] = $data['created_at'] ?? null;
+        $this->container['updatedAt'] = $data['updatedAt'] ?? null;
+        $this->container['createdAt'] = $data['createdAt'] ?? null;
     }
 
     /**
@@ -303,49 +303,49 @@ class Admin implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets updated_at
+     * Gets updatedAt
      *
      * @return \DateTime|null
      */
     public function getUpdatedAt()
     {
-        return $this->container['updated_at'];
+        return $this->container['updatedAt'];
     }
 
     /**
-     * Sets updated_at
+     * Sets updatedAt
      *
-     * @param \DateTime|null $updated_at 更新日時
+     * @param \DateTime|null $updatedAt 更新日時
      *
      * @return self
      */
-    public function setUpdatedAt($updated_at)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->container['updated_at'] = $updated_at;
+        $this->container['updatedAt'] = $updatedAt;
 
         return $this;
     }
 
     /**
-     * Gets created_at
+     * Gets createdAt
      *
      * @return \DateTime|null
      */
     public function getCreatedAt()
     {
-        return $this->container['created_at'];
+        return $this->container['createdAt'];
     }
 
     /**
-     * Sets created_at
+     * Sets createdAt
      *
-     * @param \DateTime|null $created_at 作成日時
+     * @param \DateTime|null $createdAt 作成日時
      *
      * @return self
      */
-    public function setCreatedAt($created_at)
+    public function setCreatedAt($createdAt)
     {
-        $this->container['created_at'] = $created_at;
+        $this->container['createdAt'] = $createdAt;
 
         return $this;
     }

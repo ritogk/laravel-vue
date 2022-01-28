@@ -60,8 +60,8 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'user_id' => 'int',
-        'job_id' => 'int'
+        'userId' => 'int',
+        'jobId' => 'int'
     ];
 
     /**
@@ -72,8 +72,8 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'user_id' => null,
-        'job_id' => null
+        'userId' => null,
+        'jobId' => null
     ];
 
     /**
@@ -103,8 +103,8 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'user_id' => 'userId',
-        'job_id' => 'jobId'
+        'userId' => 'userId',
+        'jobId' => 'jobId'
     ];
 
     /**
@@ -113,8 +113,8 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'user_id' => 'setUserId',
-        'job_id' => 'setJobId'
+        'userId' => 'setUserId',
+        'jobId' => 'setJobId'
     ];
 
     /**
@@ -123,8 +123,8 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'user_id' => 'getUserId',
-        'job_id' => 'getJobId'
+        'userId' => 'getUserId',
+        'jobId' => 'getJobId'
     ];
 
     /**
@@ -184,8 +184,8 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['user_id'] = $data['user_id'] ?? null;
-        $this->container['job_id'] = $data['job_id'] ?? null;
+        $this->container['userId'] = $data['userId'] ?? null;
+        $this->container['jobId'] = $data['jobId'] ?? null;
     }
 
     /**
@@ -213,49 +213,49 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets user_id
+     * Gets userId
      *
      * @return int|null
      */
     public function getUserId()
     {
-        return $this->container['user_id'];
+        return $this->container['userId'];
     }
 
     /**
-     * Sets user_id
+     * Sets userId
      *
-     * @param int|null $user_id 会員id
+     * @param int|null $userId 会員id
      *
      * @return self
      */
-    public function setUserId($user_id)
+    public function setUserId($userId)
     {
-        $this->container['user_id'] = $user_id;
+        $this->container['userId'] = $userId;
 
         return $this;
     }
 
     /**
-     * Gets job_id
+     * Gets jobId
      *
      * @return int|null
      */
     public function getJobId()
     {
-        return $this->container['job_id'];
+        return $this->container['jobId'];
     }
 
     /**
-     * Sets job_id
+     * Sets jobId
      *
-     * @param int|null $job_id 仕事id
+     * @param int|null $jobId 仕事id
      *
      * @return self
      */
-    public function setJobId($job_id)
+    public function setJobId($jobId)
     {
-        $this->container['job_id'] = $job_id;
+        $this->container['jobId'] = $jobId;
 
         return $this;
     }

@@ -64,14 +64,14 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'string',
         'content' => 'string',
         'attention' => 'bool',
-        'job_category_id' => 'int',
+        'jobCategoryId' => 'int',
         'price' => 'int',
         'welfare' => 'string',
         'holiday' => 'string',
         'image' => 'string',
-        'sort_no' => 'int',
-        'created_at' => '\DateTime',
-        'updated_at' => '\DateTime'
+        'sortNo' => 'int',
+        'createdAt' => '\DateTime',
+        'updatedAt' => '\DateTime'
     ];
 
     /**
@@ -86,14 +86,14 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => null,
         'content' => null,
         'attention' => null,
-        'job_category_id' => null,
+        'jobCategoryId' => null,
         'price' => null,
         'welfare' => null,
         'holiday' => null,
         'image' => null,
-        'sort_no' => null,
-        'created_at' => 'date',
-        'updated_at' => 'date'
+        'sortNo' => null,
+        'createdAt' => 'date',
+        'updatedAt' => 'date'
     ];
 
     /**
@@ -127,14 +127,14 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'title',
         'content' => 'content',
         'attention' => 'attention',
-        'job_category_id' => 'jobCategoryId',
+        'jobCategoryId' => 'jobCategoryId',
         'price' => 'price',
         'welfare' => 'welfare',
         'holiday' => 'holiday',
         'image' => 'image',
-        'sort_no' => 'sortNo',
-        'created_at' => 'createdAt',
-        'updated_at' => 'updatedAt'
+        'sortNo' => 'sortNo',
+        'createdAt' => 'createdAt',
+        'updatedAt' => 'updatedAt'
     ];
 
     /**
@@ -147,14 +147,14 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'setTitle',
         'content' => 'setContent',
         'attention' => 'setAttention',
-        'job_category_id' => 'setJobCategoryId',
+        'jobCategoryId' => 'setJobCategoryId',
         'price' => 'setPrice',
         'welfare' => 'setWelfare',
         'holiday' => 'setHoliday',
         'image' => 'setImage',
-        'sort_no' => 'setSortNo',
-        'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'sortNo' => 'setSortNo',
+        'createdAt' => 'setCreatedAt',
+        'updatedAt' => 'setUpdatedAt'
     ];
 
     /**
@@ -167,14 +167,14 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'getTitle',
         'content' => 'getContent',
         'attention' => 'getAttention',
-        'job_category_id' => 'getJobCategoryId',
+        'jobCategoryId' => 'getJobCategoryId',
         'price' => 'getPrice',
         'welfare' => 'getWelfare',
         'holiday' => 'getHoliday',
         'image' => 'getImage',
-        'sort_no' => 'getSortNo',
-        'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'sortNo' => 'getSortNo',
+        'createdAt' => 'getCreatedAt',
+        'updatedAt' => 'getUpdatedAt'
     ];
 
     /**
@@ -238,14 +238,14 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['title'] = $data['title'] ?? null;
         $this->container['content'] = $data['content'] ?? null;
         $this->container['attention'] = $data['attention'] ?? null;
-        $this->container['job_category_id'] = $data['job_category_id'] ?? null;
+        $this->container['jobCategoryId'] = $data['jobCategoryId'] ?? null;
         $this->container['price'] = $data['price'] ?? null;
         $this->container['welfare'] = $data['welfare'] ?? null;
         $this->container['holiday'] = $data['holiday'] ?? null;
         $this->container['image'] = $data['image'] ?? null;
-        $this->container['sort_no'] = $data['sort_no'] ?? null;
-        $this->container['created_at'] = $data['created_at'] ?? null;
-        $this->container['updated_at'] = $data['updated_at'] ?? null;
+        $this->container['sortNo'] = $data['sortNo'] ?? null;
+        $this->container['createdAt'] = $data['createdAt'] ?? null;
+        $this->container['updatedAt'] = $data['updatedAt'] ?? null;
     }
 
     /**
@@ -369,25 +369,25 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets job_category_id
+     * Gets jobCategoryId
      *
      * @return int|null
      */
     public function getJobCategoryId()
     {
-        return $this->container['job_category_id'];
+        return $this->container['jobCategoryId'];
     }
 
     /**
-     * Sets job_category_id
+     * Sets jobCategoryId
      *
-     * @param int|null $job_category_id 職種id
+     * @param int|null $jobCategoryId 職種id
      *
      * @return self
      */
-    public function setJobCategoryId($job_category_id)
+    public function setJobCategoryId($jobCategoryId)
     {
-        $this->container['job_category_id'] = $job_category_id;
+        $this->container['jobCategoryId'] = $jobCategoryId;
 
         return $this;
     }
@@ -489,73 +489,73 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets sort_no
+     * Gets sortNo
      *
      * @return int|null
      */
     public function getSortNo()
     {
-        return $this->container['sort_no'];
+        return $this->container['sortNo'];
     }
 
     /**
-     * Sets sort_no
+     * Sets sortNo
      *
-     * @param int|null $sort_no 並び順
+     * @param int|null $sortNo 並び順
      *
      * @return self
      */
-    public function setSortNo($sort_no)
+    public function setSortNo($sortNo)
     {
-        $this->container['sort_no'] = $sort_no;
+        $this->container['sortNo'] = $sortNo;
 
         return $this;
     }
 
     /**
-     * Gets created_at
+     * Gets createdAt
      *
      * @return \DateTime|null
      */
     public function getCreatedAt()
     {
-        return $this->container['created_at'];
+        return $this->container['createdAt'];
     }
 
     /**
-     * Sets created_at
+     * Sets createdAt
      *
-     * @param \DateTime|null $created_at 作成日時
+     * @param \DateTime|null $createdAt 作成日時
      *
      * @return self
      */
-    public function setCreatedAt($created_at)
+    public function setCreatedAt($createdAt)
     {
-        $this->container['created_at'] = $created_at;
+        $this->container['createdAt'] = $createdAt;
 
         return $this;
     }
 
     /**
-     * Gets updated_at
+     * Gets updatedAt
      *
      * @return \DateTime|null
      */
     public function getUpdatedAt()
     {
-        return $this->container['updated_at'];
+        return $this->container['updatedAt'];
     }
 
     /**
-     * Sets updated_at
+     * Sets updatedAt
      *
-     * @param \DateTime|null $updated_at 更新日時
+     * @param \DateTime|null $updatedAt 更新日時
      *
      * @return self
      */
-    public function setUpdatedAt($updated_at)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->container['updated_at'] = $updated_at;
+        $this->container['updatedAt'] = $updatedAt;
 
         return $this;
     }

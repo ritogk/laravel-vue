@@ -62,7 +62,7 @@ class QueryUserList implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'name' => 'string',
         'email' => 'string',
-        'self_pr' => 'string',
+        'selfPr' => 'string',
         'tel' => 'string'
     ];
 
@@ -76,7 +76,7 @@ class QueryUserList implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'name' => null,
         'email' => null,
-        'self_pr' => null,
+        'selfPr' => null,
         'tel' => null
     ];
 
@@ -109,7 +109,7 @@ class QueryUserList implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'name' => 'name',
         'email' => 'email',
-        'self_pr' => 'selfPr',
+        'selfPr' => 'selfPr',
         'tel' => 'tel'
     ];
 
@@ -121,7 +121,7 @@ class QueryUserList implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'name' => 'setName',
         'email' => 'setEmail',
-        'self_pr' => 'setSelfPr',
+        'selfPr' => 'setSelfPr',
         'tel' => 'setTel'
     ];
 
@@ -133,7 +133,7 @@ class QueryUserList implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'name' => 'getName',
         'email' => 'getEmail',
-        'self_pr' => 'getSelfPr',
+        'selfPr' => 'getSelfPr',
         'tel' => 'getTel'
     ];
 
@@ -196,7 +196,7 @@ class QueryUserList implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->container['name'] = $data['name'] ?? null;
         $this->container['email'] = $data['email'] ?? null;
-        $this->container['self_pr'] = $data['self_pr'] ?? null;
+        $this->container['selfPr'] = $data['selfPr'] ?? null;
         $this->container['tel'] = $data['tel'] ?? null;
     }
 
@@ -273,25 +273,25 @@ class QueryUserList implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets self_pr
+     * Gets selfPr
      *
      * @return string|null
      */
     public function getSelfPr()
     {
-        return $this->container['self_pr'];
+        return $this->container['selfPr'];
     }
 
     /**
-     * Sets self_pr
+     * Sets selfPr
      *
-     * @param string|null $self_pr 自己PR
+     * @param string|null $selfPr 自己PR
      *
      * @return self
      */
-    public function setSelfPr($self_pr)
+    public function setSelfPr($selfPr)
     {
-        $this->container['self_pr'] = $self_pr;
+        $this->container['selfPr'] = $selfPr;
 
         return $this;
     }

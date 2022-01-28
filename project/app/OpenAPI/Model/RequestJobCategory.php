@@ -63,8 +63,8 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
         'name' => 'string',
         'content' => 'string',
         'image' => 'string',
-        'sort_no' => 'int',
-        'updated_at' => '\DateTime'
+        'sortNo' => 'int',
+        'updatedAt' => '\DateTime'
     ];
 
     /**
@@ -78,8 +78,8 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
         'name' => null,
         'content' => null,
         'image' => null,
-        'sort_no' => null,
-        'updated_at' => 'date'
+        'sortNo' => null,
+        'updatedAt' => 'date'
     ];
 
     /**
@@ -112,8 +112,8 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
         'name' => 'name',
         'content' => 'content',
         'image' => 'image',
-        'sort_no' => 'sortNo',
-        'updated_at' => 'updatedAt'
+        'sortNo' => 'sortNo',
+        'updatedAt' => 'updatedAt'
     ];
 
     /**
@@ -125,8 +125,8 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
         'name' => 'setName',
         'content' => 'setContent',
         'image' => 'setImage',
-        'sort_no' => 'setSortNo',
-        'updated_at' => 'setUpdatedAt'
+        'sortNo' => 'setSortNo',
+        'updatedAt' => 'setUpdatedAt'
     ];
 
     /**
@@ -138,8 +138,8 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
         'name' => 'getName',
         'content' => 'getContent',
         'image' => 'getImage',
-        'sort_no' => 'getSortNo',
-        'updated_at' => 'getUpdatedAt'
+        'sortNo' => 'getSortNo',
+        'updatedAt' => 'getUpdatedAt'
     ];
 
     /**
@@ -202,8 +202,8 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->container['name'] = $data['name'] ?? null;
         $this->container['content'] = $data['content'] ?? null;
         $this->container['image'] = $data['image'] ?? null;
-        $this->container['sort_no'] = $data['sort_no'] ?? null;
-        $this->container['updated_at'] = $data['updated_at'] ?? null;
+        $this->container['sortNo'] = $data['sortNo'] ?? null;
+        $this->container['updatedAt'] = $data['updatedAt'] ?? null;
     }
 
     /**
@@ -224,11 +224,11 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
         if ($this->container['image'] === null) {
             $invalidProperties[] = "'image' can't be null";
         }
-        if ($this->container['sort_no'] === null) {
-            $invalidProperties[] = "'sort_no' can't be null";
+        if ($this->container['sortNo'] === null) {
+            $invalidProperties[] = "'sortNo' can't be null";
         }
-        if ($this->container['updated_at'] === null) {
-            $invalidProperties[] = "'updated_at' can't be null";
+        if ($this->container['updatedAt'] === null) {
+            $invalidProperties[] = "'updatedAt' can't be null";
         }
         return $invalidProperties;
     }
@@ -318,49 +318,49 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
-     * Gets sort_no
+     * Gets sortNo
      *
      * @return int
      */
     public function getSortNo()
     {
-        return $this->container['sort_no'];
+        return $this->container['sortNo'];
     }
 
     /**
-     * Sets sort_no
+     * Sets sortNo
      *
-     * @param int $sort_no 並び順
+     * @param int $sortNo 並び順
      *
      * @return self
      */
-    public function setSortNo($sort_no)
+    public function setSortNo($sortNo)
     {
-        $this->container['sort_no'] = $sort_no;
+        $this->container['sortNo'] = $sortNo;
 
         return $this;
     }
 
     /**
-     * Gets updated_at
+     * Gets updatedAt
      *
      * @return \DateTime
      */
     public function getUpdatedAt()
     {
-        return $this->container['updated_at'];
+        return $this->container['updatedAt'];
     }
 
     /**
-     * Sets updated_at
+     * Sets updatedAt
      *
-     * @param \DateTime $updated_at 更新日時
+     * @param \DateTime $updatedAt 更新日時
      *
      * @return self
      */
-    public function setUpdatedAt($updated_at)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->container['updated_at'] = $updated_at;
+        $this->container['updatedAt'] = $updatedAt;
 
         return $this;
     }

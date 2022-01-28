@@ -60,7 +60,7 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'storage_path' => 'string',
+        'storagePath' => 'string',
         'url' => 'string'
     ];
 
@@ -72,7 +72,7 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'storage_path' => null,
+        'storagePath' => null,
         'url' => null
     ];
 
@@ -103,7 +103,7 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'storage_path' => 'storagePath',
+        'storagePath' => 'storagePath',
         'url' => 'url'
     ];
 
@@ -113,7 +113,7 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'storage_path' => 'setStoragePath',
+        'storagePath' => 'setStoragePath',
         'url' => 'setUrl'
     ];
 
@@ -123,7 +123,7 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'storage_path' => 'getStoragePath',
+        'storagePath' => 'getStoragePath',
         'url' => 'getUrl'
     ];
 
@@ -184,7 +184,7 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['storage_path'] = $data['storage_path'] ?? null;
+        $this->container['storagePath'] = $data['storagePath'] ?? null;
         $this->container['url'] = $data['url'] ?? null;
     }
 
@@ -213,25 +213,25 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets storage_path
+     * Gets storagePath
      *
      * @return string|null
      */
     public function getStoragePath()
     {
-        return $this->container['storage_path'];
+        return $this->container['storagePath'];
     }
 
     /**
-     * Sets storage_path
+     * Sets storagePath
      *
-     * @param string|null $storage_path ストレージパス
+     * @param string|null $storagePath ストレージパス
      *
      * @return self
      */
-    public function setStoragePath($storage_path)
+    public function setStoragePath($storagePath)
     {
-        $this->container['storage_path'] = $storage_path;
+        $this->container['storagePath'] = $storagePath;
 
         return $this;
     }

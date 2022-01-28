@@ -64,10 +64,10 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'email' => 'string',
         'password' => 'string',
-        'self_pr' => 'string',
+        'selfPr' => 'string',
         'tel' => 'string',
-        'updated_at' => '\DateTime',
-        'created_at' => '\DateTime'
+        'updatedAt' => '\DateTime',
+        'createdAt' => '\DateTime'
     ];
 
     /**
@@ -82,10 +82,10 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => null,
         'email' => null,
         'password' => null,
-        'self_pr' => null,
+        'selfPr' => null,
         'tel' => null,
-        'updated_at' => 'date',
-        'created_at' => 'date'
+        'updatedAt' => 'date',
+        'createdAt' => 'date'
     ];
 
     /**
@@ -119,10 +119,10 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'name',
         'email' => 'email',
         'password' => 'password',
-        'self_pr' => 'selfPr',
+        'selfPr' => 'selfPr',
         'tel' => 'tel',
-        'updated_at' => 'updatedAt',
-        'created_at' => 'createdAt'
+        'updatedAt' => 'updatedAt',
+        'createdAt' => 'createdAt'
     ];
 
     /**
@@ -135,10 +135,10 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'setName',
         'email' => 'setEmail',
         'password' => 'setPassword',
-        'self_pr' => 'setSelfPr',
+        'selfPr' => 'setSelfPr',
         'tel' => 'setTel',
-        'updated_at' => 'setUpdatedAt',
-        'created_at' => 'setCreatedAt'
+        'updatedAt' => 'setUpdatedAt',
+        'createdAt' => 'setCreatedAt'
     ];
 
     /**
@@ -151,10 +151,10 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'getName',
         'email' => 'getEmail',
         'password' => 'getPassword',
-        'self_pr' => 'getSelfPr',
+        'selfPr' => 'getSelfPr',
         'tel' => 'getTel',
-        'updated_at' => 'getUpdatedAt',
-        'created_at' => 'getCreatedAt'
+        'updatedAt' => 'getUpdatedAt',
+        'createdAt' => 'getCreatedAt'
     ];
 
     /**
@@ -218,10 +218,10 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['name'] = $data['name'] ?? null;
         $this->container['email'] = $data['email'] ?? null;
         $this->container['password'] = $data['password'] ?? null;
-        $this->container['self_pr'] = $data['self_pr'] ?? null;
+        $this->container['selfPr'] = $data['selfPr'] ?? null;
         $this->container['tel'] = $data['tel'] ?? null;
-        $this->container['updated_at'] = $data['updated_at'] ?? null;
-        $this->container['created_at'] = $data['created_at'] ?? null;
+        $this->container['updatedAt'] = $data['updatedAt'] ?? null;
+        $this->container['createdAt'] = $data['createdAt'] ?? null;
     }
 
     /**
@@ -345,25 +345,25 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets self_pr
+     * Gets selfPr
      *
      * @return string|null
      */
     public function getSelfPr()
     {
-        return $this->container['self_pr'];
+        return $this->container['selfPr'];
     }
 
     /**
-     * Sets self_pr
+     * Sets selfPr
      *
-     * @param string|null $self_pr 自己PR
+     * @param string|null $selfPr 自己PR
      *
      * @return self
      */
-    public function setSelfPr($self_pr)
+    public function setSelfPr($selfPr)
     {
-        $this->container['self_pr'] = $self_pr;
+        $this->container['selfPr'] = $selfPr;
 
         return $this;
     }
@@ -393,49 +393,49 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets updated_at
+     * Gets updatedAt
      *
      * @return \DateTime|null
      */
     public function getUpdatedAt()
     {
-        return $this->container['updated_at'];
+        return $this->container['updatedAt'];
     }
 
     /**
-     * Sets updated_at
+     * Sets updatedAt
      *
-     * @param \DateTime|null $updated_at 更新日時
+     * @param \DateTime|null $updatedAt 更新日時
      *
      * @return self
      */
-    public function setUpdatedAt($updated_at)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->container['updated_at'] = $updated_at;
+        $this->container['updatedAt'] = $updatedAt;
 
         return $this;
     }
 
     /**
-     * Gets created_at
+     * Gets createdAt
      *
      * @return \DateTime|null
      */
     public function getCreatedAt()
     {
-        return $this->container['created_at'];
+        return $this->container['createdAt'];
     }
 
     /**
-     * Sets created_at
+     * Sets createdAt
      *
-     * @param \DateTime|null $created_at 作成日時
+     * @param \DateTime|null $createdAt 作成日時
      *
      * @return self
      */
-    public function setCreatedAt($created_at)
+    public function setCreatedAt($createdAt)
     {
-        $this->container['created_at'] = $created_at;
+        $this->container['createdAt'] = $createdAt;
 
         return $this;
     }

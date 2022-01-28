@@ -60,9 +60,9 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'access_token' => 'string',
-        'token_type' => 'string',
-        'expires_in' => 'int'
+        'accessToken' => 'string',
+        'tokenType' => 'string',
+        'expiresIn' => 'int'
     ];
 
     /**
@@ -73,9 +73,9 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'access_token' => null,
-        'token_type' => null,
-        'expires_in' => null
+        'accessToken' => null,
+        'tokenType' => null,
+        'expiresIn' => null
     ];
 
     /**
@@ -105,9 +105,9 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'access_token' => 'accessToken',
-        'token_type' => 'tokenType',
-        'expires_in' => 'expiresIn'
+        'accessToken' => 'accessToken',
+        'tokenType' => 'tokenType',
+        'expiresIn' => 'expiresIn'
     ];
 
     /**
@@ -116,9 +116,9 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'access_token' => 'setAccessToken',
-        'token_type' => 'setTokenType',
-        'expires_in' => 'setExpiresIn'
+        'accessToken' => 'setAccessToken',
+        'tokenType' => 'setTokenType',
+        'expiresIn' => 'setExpiresIn'
     ];
 
     /**
@@ -127,9 +127,9 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'access_token' => 'getAccessToken',
-        'token_type' => 'getTokenType',
-        'expires_in' => 'getExpiresIn'
+        'accessToken' => 'getAccessToken',
+        'tokenType' => 'getTokenType',
+        'expiresIn' => 'getExpiresIn'
     ];
 
     /**
@@ -189,9 +189,9 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['access_token'] = $data['access_token'] ?? null;
-        $this->container['token_type'] = $data['token_type'] ?? null;
-        $this->container['expires_in'] = $data['expires_in'] ?? null;
+        $this->container['accessToken'] = $data['accessToken'] ?? null;
+        $this->container['tokenType'] = $data['tokenType'] ?? null;
+        $this->container['expiresIn'] = $data['expiresIn'] ?? null;
     }
 
     /**
@@ -219,73 +219,73 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets access_token
+     * Gets accessToken
      *
      * @return string|null
      */
     public function getAccessToken()
     {
-        return $this->container['access_token'];
+        return $this->container['accessToken'];
     }
 
     /**
-     * Sets access_token
+     * Sets accessToken
      *
-     * @param string|null $access_token jwt
+     * @param string|null $accessToken jwt
      *
      * @return self
      */
-    public function setAccessToken($access_token)
+    public function setAccessToken($accessToken)
     {
-        $this->container['access_token'] = $access_token;
+        $this->container['accessToken'] = $accessToken;
 
         return $this;
     }
 
     /**
-     * Gets token_type
+     * Gets tokenType
      *
      * @return string|null
      */
     public function getTokenType()
     {
-        return $this->container['token_type'];
+        return $this->container['tokenType'];
     }
 
     /**
-     * Sets token_type
+     * Sets tokenType
      *
-     * @param string|null $token_type トークンタイプ
+     * @param string|null $tokenType トークンタイプ
      *
      * @return self
      */
-    public function setTokenType($token_type)
+    public function setTokenType($tokenType)
     {
-        $this->container['token_type'] = $token_type;
+        $this->container['tokenType'] = $tokenType;
 
         return $this;
     }
 
     /**
-     * Gets expires_in
+     * Gets expiresIn
      *
      * @return int|null
      */
     public function getExpiresIn()
     {
-        return $this->container['expires_in'];
+        return $this->container['expiresIn'];
     }
 
     /**
-     * Sets expires_in
+     * Sets expiresIn
      *
-     * @param int|null $expires_in 有効期限(秒)
+     * @param int|null $expiresIn 有効期限(秒)
      *
      * @return self
      */
-    public function setExpiresIn($expires_in)
+    public function setExpiresIn($expiresIn)
     {
-        $this->container['expires_in'] = $expires_in;
+        $this->container['expiresIn'] = $expiresIn;
 
         return $this;
     }

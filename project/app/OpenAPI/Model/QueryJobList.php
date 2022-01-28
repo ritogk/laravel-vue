@@ -63,7 +63,7 @@ class QueryJobList implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'string',
         'content' => 'string',
         'attention' => 'bool',
-        'job_category_id' => 'int',
+        'jobCategoryId' => 'int',
         'price' => 'int',
         'welfare' => 'string',
         'holiday' => 'string'
@@ -80,7 +80,7 @@ class QueryJobList implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => null,
         'content' => null,
         'attention' => null,
-        'job_category_id' => null,
+        'jobCategoryId' => null,
         'price' => null,
         'welfare' => null,
         'holiday' => null
@@ -116,7 +116,7 @@ class QueryJobList implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'title',
         'content' => 'content',
         'attention' => 'attention',
-        'job_category_id' => 'jobCategoryId',
+        'jobCategoryId' => 'jobCategoryId',
         'price' => 'price',
         'welfare' => 'welfare',
         'holiday' => 'holiday'
@@ -131,7 +131,7 @@ class QueryJobList implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'setTitle',
         'content' => 'setContent',
         'attention' => 'setAttention',
-        'job_category_id' => 'setJobCategoryId',
+        'jobCategoryId' => 'setJobCategoryId',
         'price' => 'setPrice',
         'welfare' => 'setWelfare',
         'holiday' => 'setHoliday'
@@ -146,7 +146,7 @@ class QueryJobList implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'getTitle',
         'content' => 'getContent',
         'attention' => 'getAttention',
-        'job_category_id' => 'getJobCategoryId',
+        'jobCategoryId' => 'getJobCategoryId',
         'price' => 'getPrice',
         'welfare' => 'getWelfare',
         'holiday' => 'getHoliday'
@@ -212,7 +212,7 @@ class QueryJobList implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['title'] = $data['title'] ?? null;
         $this->container['content'] = $data['content'] ?? null;
         $this->container['attention'] = $data['attention'] ?? null;
-        $this->container['job_category_id'] = $data['job_category_id'] ?? null;
+        $this->container['jobCategoryId'] = $data['jobCategoryId'] ?? null;
         $this->container['price'] = $data['price'] ?? null;
         $this->container['welfare'] = $data['welfare'] ?? null;
         $this->container['holiday'] = $data['holiday'] ?? null;
@@ -315,25 +315,25 @@ class QueryJobList implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets job_category_id
+     * Gets jobCategoryId
      *
      * @return int|null
      */
     public function getJobCategoryId()
     {
-        return $this->container['job_category_id'];
+        return $this->container['jobCategoryId'];
     }
 
     /**
-     * Sets job_category_id
+     * Sets jobCategoryId
      *
-     * @param int|null $job_category_id 職種id
+     * @param int|null $jobCategoryId 職種id
      *
      * @return self
      */
-    public function setJobCategoryId($job_category_id)
+    public function setJobCategoryId($jobCategoryId)
     {
-        $this->container['job_category_id'] = $job_category_id;
+        $this->container['jobCategoryId'] = $jobCategoryId;
 
         return $this;
     }
