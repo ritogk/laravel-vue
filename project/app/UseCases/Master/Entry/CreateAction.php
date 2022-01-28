@@ -7,16 +7,17 @@ use Illuminate\Http\Request;
 
 class CreateAction{
     /**
-     * __invoke
+     * Undocumented function
      *
-     * @param Request $request
+     * @param integer $job_id
+     * @param integer $user_id
      * @return array
      */
-    public function __invoke(Request $request): array
+    public function __invoke(int $job_id, int $user_id): array
     {
         $create = [
-            'job_id' => $request->job_id,
-            'user_id' => $request->user_id,
+            'job_id' => $job_id,
+            'user_id' => $user_id,
         ];
         return Entry::create($create)->toArray();
     }

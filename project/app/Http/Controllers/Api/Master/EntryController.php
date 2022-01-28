@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Api\Master;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+// request
 use App\Http\Requests\Master\EntryListRequest;
 use App\Http\Requests\Master\EntryRequest;
-
 // usecase
 use App\UseCases\Master\Entry\ListAction;
 use App\UseCases\Master\Entry\CreateAction;
+// openapi
+use App\OpenAPI;
+use App\Libs\OpenAPIUtility;
 
 class EntryController extends Controller
 {
@@ -17,11 +22,16 @@ class EntryController extends Controller
      *
      * @param  EntryListRequest $request
      * @param  ListAction $action
-     * @return array
+     * @return JsonResponse
      */
-    public function list(EntryListRequest $request, ListAction $action): array
+    public function list(EntryListRequest $request, ListAction $action): JsonResponse
     {
-        return $action($request->filter, $request->fields);
+        $parameters = new OpenAPI\Model\QueryEntryList($request->all());
+        $result = $action($parameters->getJobId(), $parameters->getJobCategoryId());
+        return response()->json(
+            OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\Entry::class, $result),
+            Response::HTTP_OK
+        );
     }
 
     /**
@@ -29,10 +39,17 @@ class EntryController extends Controller
      *
      * @param EntryRequest $request
      * @param CreateAction $action
-     * @return array
+     * @return JsonResponse
      */
-    public function create(EntryRequest $request, CreateAction $action): array
+    public function create(EntryRequest $request, CreateAction $action): JsonResponse
     {
+        $parameters = new OpenAPI\Model\RequestEntry($request->all());
+        $result = $action($parameters->getUserId(), $parameters->getJobId());
+        return response()->json(
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\Entry::class, $result),
+            Response::HTTP_CREATED
+        );
+
         return $action($request);
     }
 }

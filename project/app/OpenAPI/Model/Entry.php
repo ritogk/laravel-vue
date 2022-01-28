@@ -60,6 +60,7 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'id' => 'int',
         'userId' => 'int',
         'jobId' => 'int'
     ];
@@ -72,6 +73,7 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'id' => null,
         'userId' => null,
         'jobId' => null
     ];
@@ -103,6 +105,7 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'id' => 'id',
         'userId' => 'userId',
         'jobId' => 'jobId'
     ];
@@ -113,6 +116,7 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'id' => 'setId',
         'userId' => 'setUserId',
         'jobId' => 'setJobId'
     ];
@@ -123,6 +127,7 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'id' => 'getId',
         'userId' => 'getUserId',
         'jobId' => 'getJobId'
     ];
@@ -184,6 +189,7 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
+        $this->container['id'] = $data['id'] ?? null;
         $this->container['userId'] = $data['userId'] ?? null;
         $this->container['jobId'] = $data['jobId'] ?? null;
     }
@@ -211,6 +217,30 @@ class Entry implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
 
     /**
      * Gets userId
