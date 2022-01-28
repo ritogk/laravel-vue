@@ -15,6 +15,6 @@ class DeleteAction
     public function __invoke(string $id): array
     {
         JobCategory::where('id', $id)->delete();
-        return JobCategory::where('id', $id)->withTrashed()->first()->toArray();
+        return JobCategory::withTrashed()->where('id', $id)->first()->toArray();
     }
 }

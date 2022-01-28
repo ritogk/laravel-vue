@@ -109,11 +109,15 @@ class JobController extends Controller
      *
      * @param string $id
      * @param DeleteAction $action
-     * @return void
+     * @return JsonResponse
      */
-    public function destroy(string $id, DeleteAction $action)
+    public function destroy(string $id, DeleteAction $action): JsonResponse
     {
-        $action($id);
+        $result = $action($id);
+        return response()->json(
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\Job::class, $result),
+            Response::HTTP_OK
+        );
     }
 
     /**
