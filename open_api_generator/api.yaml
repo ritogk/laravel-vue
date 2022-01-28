@@ -98,6 +98,8 @@ paths:
         - "職種"
       summary: 更新
       description: 詳細内容
+      security:
+        - bearerAdmin: []
       parameters:
         - in: path
           name: id
@@ -121,6 +123,8 @@ paths:
         - "職種"
       summary: 削除
       description: 詳細内容
+      security:
+        - bearerAdmin: []
       parameters:
         - in: path
           name: id
@@ -162,6 +166,8 @@ paths:
         - "職種"
       summary: 職種 追加
       description: 詳細内容
+      security:
+        - bearerAdmin: []
       requestBody:
         content:
           application/json:
@@ -200,6 +206,8 @@ paths:
         - "仕事"
       summary: 更新
       description: 詳細内容
+      security:
+        - bearerAdmin: []
       parameters:
         - in: path
           name: id
@@ -223,6 +231,8 @@ paths:
         - "仕事"
       summary: 削除
       description: 詳細内容
+      security:
+        - bearerAdmin: []
       parameters:
         - in: path
           name: id
@@ -264,6 +274,8 @@ paths:
         - "仕事"
       summary: 仕事 追加
       description: 詳細内容
+      security:
+        - bearerAdmin: []
       requestBody:
         content:
           application/json:
@@ -304,6 +316,8 @@ paths:
         - "応募"
       summary: 応募 追加
       description: 詳細内容
+      security:
+        - bearerAdmin: []
       requestBody:
         content:
           application/json:
@@ -364,6 +378,8 @@ paths:
         - "ファイル"
       summary: ファイル 追加
       description: 詳細内容
+      security:
+        - bearerAdmin: []
       requestBody:
         content:
           application/json:
