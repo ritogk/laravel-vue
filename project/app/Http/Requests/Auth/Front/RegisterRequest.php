@@ -27,8 +27,8 @@ class RegisterRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'password_confirmation' => ['required', 'string', 'min:8'],
-            'self_pr' => ['required', 'max:1000'],
+            'passwordConfirmation' => ['required', 'string', 'min:8'],
+            'selfPr' => ['required', 'max:1000'],
             'tel' => ['required', 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/u'],
         ];
     }
@@ -43,7 +43,7 @@ class RegisterRequest extends FormRequest
             'name' => '氏名',
             'email' => 'メールアドレス',
             'password' => 'パスワード',
-            'self_pr' => '自己PR',
+            'selfPr' => '自己PR',
             'tel' => '電話番号',
         ];
     }

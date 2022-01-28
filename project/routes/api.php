@@ -25,7 +25,6 @@ Route::group(['prefix' => 'auth'], function () {
         Route::post('/login', [Controllers\Api\AuthFrontController::class, 'login']);
         Route::post('/logout', [Controllers\Api\AuthFrontController::class, 'logout'])->middleware(['auth:user']);
         Route::post('/refresh', [Controllers\Api\AuthFrontController::class, 'refresh']);
-        Route::post('/register', [Controllers\Api\AuthFrontController::class, 'register'])->middleware(['guest:user']);
     });
 });
 
@@ -56,6 +55,7 @@ Route::group(['prefix' => 'entries'], function () {
 // 会員マスタ
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', [Controllers\Api\Master\UserController::class, 'list'])->middleware(['auth:admin']);
+    Route::post('/', [Controllers\Api\AuthFrontController::class, 'register']);
 });
 
 // ファイル操作系

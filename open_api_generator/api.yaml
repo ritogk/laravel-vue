@@ -272,6 +272,23 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/responseUser"
+    post:
+      tags:
+        - "会員"
+      summary: 会員 追加
+      description: 詳細内容
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestUser"
+      responses:
+        "201":
+          description: 会員
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseUser"
   /files:
     post:
       tags:
@@ -436,6 +453,35 @@ components:
       required:
         - jobId
         - jobCategoryId
+    requestUser:
+      description: リクエスト 会員登録
+      type: object
+      properties:
+        name:
+          type: string
+          description: 氏名
+        email:
+          type: string
+          description: メールアドレス
+        password:
+          type: string
+          description: パスワード
+        passwordConfirmation:
+          type: string
+          description: パスワード(確認)
+        selfPr:
+          type: string
+          description: 自己PR
+        tel:
+          type: string
+          description: 電話番号
+      required:
+        - name
+        - email
+        - password
+        - passwordConfirmation
+        - selfPr
+        - tel
     requestFile:
       description: リクエスト ファイル
       type: object
