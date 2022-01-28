@@ -209,6 +209,46 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/responseJob"
+  /entries:
+    get:
+      tags:
+        - "応募"
+      summary: 一覧取得
+      description: 詳細内容
+      parameters:
+        - in: query
+          name: values
+          schema:
+            type: object
+            $ref: "#/components/schemas/queryEntryList"
+          style: form
+          explode: true
+      responses:
+        "200":
+          description: 応募一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/responseEntry"
+    post:
+      tags:
+        - "応募"
+      summary: 応募 追加
+      description: 詳細内容
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestEntry"
+      responses:
+        "201":
+          description: 応募
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseEntry"
 
 components:
   schemas:
@@ -247,6 +287,16 @@ components:
         holiday:
           type: string
           description: 休日
+    queryEntryList:
+      description: クエリパラメータ 応募一覧
+      type: object
+      properties:
+        jobId:
+          type: integer
+          description: 仕事id
+        jobCategoryId:
+          type: integer
+          description: 仕事カテゴリid
     requestJobCategory:
       description: リクエスト 職種登録
       type: object
@@ -316,6 +366,19 @@ components:
         - price
         - image
         - sortNo
+    requestEntry:
+      description: リクエスト 応募登録
+      type: object
+      properties:
+        jobId:
+          type: integer
+          description: 仕事id
+        jobCategoryId:
+          type: integer
+          description: 仕事カテゴリid
+      required:
+        - jobId
+        - jobCategoryId
     responseJobCategory:
       description: 職種
       type: object
@@ -385,6 +448,16 @@ components:
           type: string
           format: date
           description: 更新日時
+    responseEntry:
+      description: 応募
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: ユーザーid
+        jobId:
+          type: integer
+          description: 仕事id
     sex:
       description: |
         man: 男
