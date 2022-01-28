@@ -21,7 +21,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseAdmin"
+                $ref: "#/components/schemas/admin"
   /auth/admin/login:
     post:
       tags:
@@ -39,7 +39,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseAccessToken"
+                $ref: "#/components/schemas/accessToken"
   /auth/admin/refresh:
     post:
       tags:
@@ -62,7 +62,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseAccessToken"
+                $ref: "#/components/schemas/accessToken"
   /auth/admin/logout:
     post:
       tags:
@@ -89,7 +89,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseUser"
+                $ref: "#/components/schemas/user"
   /auth/front/login:
     post:
       tags:
@@ -107,7 +107,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseAccessToken"
+                $ref: "#/components/schemas/accessToken"
   /auth/front/refresh:
     post:
       tags:
@@ -130,7 +130,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseAccessToken"
+                $ref: "#/components/schemas/accessToken"
   /auth/front/logout:
     post:
       tags:
@@ -161,7 +161,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseJobCategory"
+                $ref: "#/components/schemas/jobCategory"
     put:
       tags:
         - "職種"
@@ -186,7 +186,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseJobCategory"
+                $ref: "#/components/schemas/jobCategory"
     delete:
       tags:
         - "職種"
@@ -206,7 +206,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseJobCategory"
+                $ref: "#/components/schemas/jobCategory"
   /job_categories:
     get:
       tags:
@@ -229,7 +229,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/responseJobCategory"
+                  $ref: "#/components/schemas/jobCategory"
     post:
       tags:
         - "職種"
@@ -248,7 +248,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseJobCategory"
+                $ref: "#/components/schemas/jobCategory"
   
 
   /jobs/{id}:
@@ -269,7 +269,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseJob"
+                $ref: "#/components/schemas/job"
     put:
       tags:
         - "仕事"
@@ -294,7 +294,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseJob"
+                $ref: "#/components/schemas/job"
     delete:
       tags:
         - "仕事"
@@ -314,7 +314,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseJob"
+                $ref: "#/components/schemas/job"
   /jobs:
     get:
       tags:
@@ -337,7 +337,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/responseJob"
+                  $ref: "#/components/schemas/job"
     post:
       tags:
         - "仕事"
@@ -356,7 +356,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseJob"
+                $ref: "#/components/schemas/job"
   /entries:
     get:
       tags:
@@ -379,7 +379,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/responseEntry"
+                  $ref: "#/components/schemas/entry"
     post:
       tags:
         - "応募"
@@ -398,7 +398,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseEntry"
+                $ref: "#/components/schemas/entry"
   /users:
     get:
       security:
@@ -423,7 +423,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/responseUser"
+                  $ref: "#/components/schemas/user"
     post:
       tags:
         - "会員"
@@ -440,7 +440,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseUser"
+                $ref: "#/components/schemas/user"
   /files:
     post:
       tags:
@@ -460,7 +460,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/responseFile"
+                $ref: "#/components/schemas/file"
 
 components:
   securitySchemes:
@@ -664,7 +664,7 @@ components:
       required:
         - email
         - password
-    responseJobCategory:
+    jobCategory:
       description: 職種
       type: object
       properties:
@@ -691,7 +691,7 @@ components:
           type: string
           format: date
           description: 更新日時
-    responseJob:
+    job:
       description: 仕事
       type: object
       properties:
@@ -733,7 +733,7 @@ components:
           type: string
           format: date
           description: 更新日時
-    responseEntry:
+    entry:
       description: 応募
       type: object
       properties:
@@ -743,7 +743,7 @@ components:
         jobId:
           type: integer
           description: 仕事id
-    responseUser:
+    user:
       description: 会員
       type: object
       properties:
@@ -773,7 +773,7 @@ components:
           type: string
           format: date
           description: 作成日時
-    responseFile:
+    file:
       description: ファイルパス
       type: object
       properties:
@@ -783,7 +783,7 @@ components:
         url:
           type: string
           description: フルパス
-    responseAdmin:
+    admin:
       description: 管理者
       type: object
       properties:
@@ -804,7 +804,7 @@ components:
           type: string
           format: date
           description: 作成日時
-    responseAccessToken:
+    accessToken:
       description: アクセストークン
       type: object
       properties:
