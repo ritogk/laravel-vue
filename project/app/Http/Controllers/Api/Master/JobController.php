@@ -125,11 +125,15 @@ class JobController extends Controller
      *
      * @param string $id
      * @param  FindAction $action
-     * @return array
+     * @return JsonResponse
      */
-    public function find(String $id, FindAction $action): array
+    public function find(String $id, FindAction $action): JsonResponse
     {
-        return $action($id);
+        $result = $action($id);
+        return response()->json(
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\Job::class, $result),
+            Response::HTTP_OK
+        );
     }
 
     /**
