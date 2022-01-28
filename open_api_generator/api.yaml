@@ -7,11 +7,71 @@ servers:
   - url: http://localhost:80/api
     description: 開発用
 paths:
+  /job_categories/{id}:
+    get:
+      tags:
+        - "職種"
+      summary: 1件取得
+      description: 詳細内容
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: 職種
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseJobCategory"
+    put:
+      tags:
+        - "職種"
+      summary: 更新
+      description: 詳細内容
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestJobCategory"
+      responses:
+        "200":
+          description: 職種
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseJobCategory"
+    delete:
+      tags:
+        - "職種"
+      summary: 削除
+      description: 詳細内容
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: 職種
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseJobCategory"
   /job_categories:
     get:
       tags:
         - "職種"
-      summary: 職種一覧の取得
+      summary: 一覧取得
       description: 詳細内容
       parameters:
         - in: query
@@ -29,8 +89,25 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/jobCategory"
-
+                  $ref: "#/components/schemas/responseJobCategory"
+  /job_category:
+    post:
+      tags:
+        - "職種"
+      summary: 追加
+      description: 詳細内容
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestJobCategory"
+      responses:
+        "200":
+          description: 職種
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseJobCategory"
 components:
   schemas:
     queryJobCategoryList:
@@ -43,10 +120,13 @@ components:
         content:
           type: string
           description: 内容
-    jobCategory:
+    responseJobCategory:
       description: 職種
       type: object
       properties:
+        id:
+          type: integer
+          description: id
         name:
           type: string
           description: 名称
@@ -67,6 +147,32 @@ components:
           type: string
           format: date
           description: 更新日時
+    requestJobCategory:
+      description: 職種登録リクエスト
+      type: object
+      properties:
+        name:
+          type: string
+          description: 名称
+        content:
+          type: string
+          description: 内容
+        image:
+          type: string
+          description: 画像URL
+        sortNo:
+          type: integer
+          description: 並び順
+        updatedAt:
+          type: string
+          format: date
+          description: 更新日時
+      required:
+        - name
+        - content
+        - image
+        - sortNo
+        - updatedAt
     sex:
       description: |
         man: 男
