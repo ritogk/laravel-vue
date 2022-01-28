@@ -62,11 +62,16 @@ class JobCategoryController  extends Controller
      * @param  JobCategoryRequest $request
      * @param string $id
      * @param  UpdateAction $action
-     * @return void
+     * @return JsonResponse
      */
-    public function update(JobCategoryRequest $request, string $id, UpdateAction $action): void
+    public function update(JobCategoryRequest $request, string $id, UpdateAction $action): JsonResponse
     {
-        $action($id, $request);
+        $parameters = new OpenAPI\Model\RequestJobCategory($request->all());
+        $result = $action($id, $parameters->getName(), $parameters->getContent(), $parameters->getImage(), $parameters->getSortNo());
+        return response()->json(
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\JobCategory::class, $result),
+            Response::HTTP_OK
+        );
     }
 
     /**
