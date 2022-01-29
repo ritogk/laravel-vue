@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+// request
 use App\Http\Requests\File\UploadRequest;
-
 // usecase
 use App\UseCases\File\UploadAction;
-
+// openapi
+use App\OpenAPI;
+use App\Libs\OpenAPIUtility;
 
 class FileController extends Controller
 {
@@ -16,10 +20,17 @@ class FileController extends Controller
      *
      * @param  UploadRequest $request
      * @param  UploadAction $action
-     * @return array
+     * @return JsonResponse
      */
-    public function upload(UploadRequest $request, UploadAction $action): array
+    public function upload(UploadRequest $request, UploadAction $action): JsonResponse
     {
-        return $action($request);
+        $parameters = new OpenAPI\Model\RequestFile($request->all());
+        $result = $action(
+            $parameters->getFile()
+        );
+        return response()->json(
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\File::class, $result),
+            Response::HTTP_CREATED
+        );
     }
 }
