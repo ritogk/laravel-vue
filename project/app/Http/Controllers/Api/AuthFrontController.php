@@ -4,7 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+// request
 use App\Http\Requests\Auth\Front\LoginRequest;
+// openapi
+use App\OpenAPI;
+use App\Libs\OpenAPIUtility;
 
 class AuthFrontController extends Controller
 {
@@ -16,42 +21,62 @@ class AuthFrontController extends Controller
      */
     public function login(LoginRequest $request): JsonResponse
     {
-        if (!$token = auth('user')->attempt($request->all())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        $parameters = new OpenAPI\Model\RequestLogin($request->all());
+        $request_all = ['email' => $parameters->getEmail(), 'password' => $parameters->getPassword()];
+        if (!$token = auth('user')->attempt($request_all)) {
+            return response()->json(
+                ['error' => 'Unauthorized'],
+                Response::HTTP_UNAUTHORIZED
+            );
         }
-        return $this->respondWithToken($token);
+
+        $result = $this->respondWithToken($token);
+        return response()->json(
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
+            Response::HTTP_CREATED
+        );
     }
 
     /**
      * Get the authenticated User.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function me()
+    public function me(): JsonResponse
     {
-        return response()->json(auth('user')->user());
+        return response()->json(
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, auth('user')->user()->toArray()),
+            Response::HTTP_OK
+        );
     }
 
     /**
      * Log the user out (Invalidate the token).
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function logout()
+    public function logout(): JsonResponse
     {
         auth('user')->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(
+            ['message' => 'Successfully logged out'],
+            Response::HTTP_NO_CONTENT
+        );
     }
 
     /**
      * Refresh a token.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function refresh()
+    public function refresh(): JsonResponse
     {
-        return $this->respondWithToken(auth('user')->refresh());
+        $result = $this->respondWithToken(auth('user')->refresh());
+        return response()->json(
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
+            Response::HTTP_CREATED
+        );
     }
 
 
@@ -60,14 +85,14 @@ class AuthFrontController extends Controller
      *
      * @param  string $token
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return array
      */
-    protected function respondWithToken($token)
+    protected function respondWithToken($token): array
     {
-        return response()->json([
+        return [
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('user')->factory()->getTTL() * 60
-        ]);
+        ];
     }
 }
