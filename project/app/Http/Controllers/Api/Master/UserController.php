@@ -46,7 +46,7 @@ class UserController extends Controller
      * @param  CreateAction $action
      * @return JsonResponse
      */
-    public function create(UserRequest $request, CreateAction $action)
+    public function create(UserRequest $request, CreateAction $action): JsonResponse
     {
         $parameters = new OpenAPI\Model\RequestUser($request->all());
         $result = $action(
