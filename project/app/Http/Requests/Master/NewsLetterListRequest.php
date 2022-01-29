@@ -5,7 +5,6 @@ namespace App\Http\Requests\Master;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use App\Models\Job;
 
 class NewsLetterListRequest extends FormRequest
 {
@@ -45,5 +44,20 @@ class NewsLetterListRequest extends FormRequest
             'message' => 'メッセージ',
             'send' => '送信済',
         ];
+    }
+
+    /**
+     * バリデーションエラー後の処理を変える場合はここに処理を記述する
+     * デフォルトはリダイレクト
+     *
+     * @return array
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        $response = response()->json([
+            'status' => 422,
+            'errors' => $validator->errors(),
+        ], 422);
+        throw new HttpResponseException($response);
     }
 }

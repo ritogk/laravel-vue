@@ -48,4 +48,19 @@ class UserListRequest extends FormRequest
             'tel' => '電話番号',
         ];
     }
+
+    /**
+     * バリデーションエラー後の処理を変える場合はここに処理を記述する
+     * デフォルトはリダイレクト
+     *
+     * @return array
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        $response = response()->json([
+            'status' => 422,
+            'errors' => $validator->errors(),
+        ], 422);
+        throw new HttpResponseException($response);
+    }
 }
