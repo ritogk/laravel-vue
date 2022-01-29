@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Master;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 // request
 use App\Http\Requests\Master\UserListRequest;
 // usecase
@@ -21,9 +20,9 @@ class UserController extends Controller
      *
      * @param  UserListRequest $request
      * @param  ListAction $action
-     * @return Response
+     * @return JsonResponse
      */
-    public function list(UserListRequest $request, ListAction $action): Response
+    public function list(UserListRequest $request, ListAction $action): JsonResponse
     {
         $parameters = new OpenAPI\Model\QueryUserList($request->all());
         $result = $action(
