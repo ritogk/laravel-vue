@@ -55,7 +55,7 @@ Route::group(['prefix' => 'entries'], function () {
 // 会員マスタ
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', [Controllers\Api\Master\UserController::class, 'list'])->middleware(['auth:admin']);
-    Route::post('/', [Controllers\Api\AuthFrontController::class, 'register']);
+    Route::post('/', [Controllers\Api\Master\UserController::class, 'create']);
 });
 
 // ファイル操作系

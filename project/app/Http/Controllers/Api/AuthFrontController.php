@@ -5,10 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\Auth\Front\LoginRequest;
-use App\Http\Requests\Auth\Front\RegisterRequest;
-
-// usecase
-use App\UseCases\Auth\Front\RegisterAction;
 
 class AuthFrontController extends Controller
 {
@@ -73,17 +69,5 @@ class AuthFrontController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth('user')->factory()->getTTL() * 60
         ]);
-    }
-
-    /**
-     * 会員 登録
-     *
-     * @param  RegisterRequest  $request
-     * @param  RegisterAction $action
-     * @return JsonResponse
-     */
-    public function register(RegisterRequest $request, RegisterAction $action)
-    {
-        return $action($request);
     }
 }
