@@ -4,20 +4,21 @@ namespace App\UseCases\Master\Entry;
 
 use App\Models\Entry;
 
-class ListAction{
+class ListAction
+{
     /**
-     * __invoke
+     * Undocumented function
      *
-     * @param string $filter
-     * @param string $fileds
+     * @param integer|null $job_id
+     * @param integer|null $job_category_id
      * @return array
      */
-    public function __invoke(string $filter, string $fileds): array
+    public function __invoke(int $job_id = null, int $job_category_id = null): array
     {
-        return Entry::where(json_decode($filter, true))
-                    ->select(json_decode($fileds, true))
-                    ->orderBy('created_at')
-                    ->get()
-                    ->toArray();
+        return Entry::when(isset($title), function ($query) use ($job_id) {
+            return $query->where('job_id', $job_id);
+        })->when(isset($title), function ($query) use ($job_category_id) {
+            return $query->where('job_category_id', $job_category_id);
+        })->orderBy('created_at')->get()->toArray();
     }
 }

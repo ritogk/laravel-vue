@@ -1,6 +1,6 @@
 <?php
 /**
- * QueryJobCategoryList
+ * RequestLogin
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * QueryJobCategoryList Class Doc Comment
+ * RequestLogin Class Doc Comment
  *
  * @category Class
- * @description クエリパラメータ 職種一覧
+ * @description リクエスト ログイン
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializable
+class RequestLogin implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'queryJobCategoryList';
+    protected static $openAPIModelName = 'requestLogin';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,8 +60,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'content' => 'string'
+        'email' => 'string',
+        'password' => 'string'
     ];
 
     /**
@@ -72,8 +72,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'content' => null
+        'email' => null,
+        'password' => null
     ];
 
     /**
@@ -103,8 +103,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'content' => 'content'
+        'email' => 'email',
+        'password' => 'password'
     ];
 
     /**
@@ -113,8 +113,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'content' => 'setContent'
+        'email' => 'setEmail',
+        'password' => 'setPassword'
     ];
 
     /**
@@ -123,8 +123,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'content' => 'getContent'
+        'email' => 'getEmail',
+        'password' => 'getPassword'
     ];
 
     /**
@@ -184,8 +184,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['content'] = $data['content'] ?? null;
+        $this->container['email'] = $data['email'] ?? null;
+        $this->container['password'] = $data['password'] ?? null;
     }
 
     /**
@@ -197,6 +197,12 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
+        if ($this->container['email'] === null) {
+            $invalidProperties[] = "'email' can't be null";
+        }
+        if ($this->container['password'] === null) {
+            $invalidProperties[] = "'password' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -213,49 +219,49 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets name
+     * Gets email
      *
-     * @return string|null
+     * @return string
      */
-    public function getName()
+    public function getEmail()
     {
-        return $this->container['name'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets name
+     * Sets email
      *
-     * @param string|null $name 名称
+     * @param string $email メールアドレス
      *
      * @return self
      */
-    public function setName($name)
+    public function setEmail($email)
     {
-        $this->container['name'] = $name;
+        $this->container['email'] = $email;
 
         return $this;
     }
 
     /**
-     * Gets content
+     * Gets password
      *
-     * @return string|null
+     * @return string
      */
-    public function getContent()
+    public function getPassword()
     {
-        return $this->container['content'];
+        return $this->container['password'];
     }
 
     /**
-     * Sets content
+     * Sets password
      *
-     * @param string|null $content 内容
+     * @param string $password パスワード
      *
      * @return self
      */
-    public function setContent($content)
+    public function setPassword($password)
     {
-        $this->container['content'] = $content;
+        $this->container['password'] = $password;
 
         return $this;
     }

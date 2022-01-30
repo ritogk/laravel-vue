@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ListRequest extends FormRequest
+class JobListRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,13 @@ class ListRequest extends FormRequest
     public function rules()
     {
         return [
-            'filter' => ['required', 'string'],
-            'fields' => ['required', 'string'],
+            'title' => ['nullable', 'max:50'],
+            'content' => ['nullable', 'max:1000'],
+            'attention' => ['nullable', 'integer', 'min:0|max:1'],
+            'jobCategoryId' => ['nullable', 'numeric', 'min:0|max:1'],
+            'price' => ['nullable', 'numeric'],
+            'welfare' => ['nullable', 'max:1000'],
+            'holiday' => ['nullable', 'max:1000'],
         ];
     }
 
@@ -39,13 +44,19 @@ class ListRequest extends FormRequest
     public function attributes()
     {
         return [
-            'filter' => '「抽出値 例:[["カラム", "判定記号", "値"]]) なし:[]」',
-            'fields' => '「フィールド値 例:["name", "image"] 全取得[*]」',
+            'title' => 'タイトル',
+            'content' => '内容',
+            'attention' => '注目',
+            'jobCategoryId' => 'カテゴリ',
+            'price' => '金額',
+            'welfare' => '福利厚生',
+            'holiday' => '休日',
         ];
     }
 
     /**
      * バリデーションエラー後の処理を変える場合はここに処理を記述する
+     * デフォルトはリダイレクト
      *
      * @return array
      */

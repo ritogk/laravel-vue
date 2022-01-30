@@ -1,6 +1,6 @@
 <?php
 /**
- * QueryJobCategoryList
+ * RequestFile
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * QueryJobCategoryList Class Doc Comment
+ * RequestFile Class Doc Comment
  *
  * @category Class
- * @description クエリパラメータ 職種一覧
+ * @description リクエスト ファイル
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializable
+class RequestFile implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'queryJobCategoryList';
+    protected static $openAPIModelName = 'requestFile';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,8 +60,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'content' => 'string'
+        'file' => '\SplFileObject'
     ];
 
     /**
@@ -72,8 +71,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'content' => null
+        'file' => 'binary'
     ];
 
     /**
@@ -103,8 +101,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'content' => 'content'
+        'file' => 'file'
     ];
 
     /**
@@ -113,8 +110,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'content' => 'setContent'
+        'file' => 'setFile'
     ];
 
     /**
@@ -123,8 +119,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'content' => 'getContent'
+        'file' => 'getFile'
     ];
 
     /**
@@ -184,8 +179,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['content'] = $data['content'] ?? null;
+        $this->container['file'] = $data['file'] ?? null;
     }
 
     /**
@@ -197,6 +191,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
+        if ($this->container['file'] === null) {
+            $invalidProperties[] = "'file' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -213,49 +210,25 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets name
+     * Gets file
      *
-     * @return string|null
+     * @return \SplFileObject
      */
-    public function getName()
+    public function getFile()
     {
-        return $this->container['name'];
+        return $this->container['file'];
     }
 
     /**
-     * Sets name
+     * Sets file
      *
-     * @param string|null $name 名称
+     * @param \SplFileObject $file ファイル
      *
      * @return self
      */
-    public function setName($name)
+    public function setFile($file)
     {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets content
-     *
-     * @return string|null
-     */
-    public function getContent()
-    {
-        return $this->container['content'];
-    }
-
-    /**
-     * Sets content
-     *
-     * @param string|null $content 内容
-     *
-     * @return self
-     */
-    public function setContent($content)
-    {
-        $this->container['content'] = $content;
+        $this->container['file'] = $file;
 
         return $this;
     }

@@ -4,15 +4,17 @@ namespace App\UseCases\Master\JobCategory;
 
 use App\Models\JobCategory;
 
-class DeleteAction{
+class DeleteAction
+{
     /**
      * __invoke
      *
      * @param string $id
-     * @return void
+     * @return array
      */
-    public function __invoke(string $id): void
+    public function __invoke(string $id): array
     {
         JobCategory::where('id', $id)->delete();
+        return JobCategory::withTrashed()->where('id', $id)->first()->toArray();
     }
 }

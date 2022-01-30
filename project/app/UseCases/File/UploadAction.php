@@ -1,19 +1,21 @@
 <?php
+
 namespace App\UseCases\File;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Config;
-class UploadAction{
+use Illuminate\Http\UploadedFile;
+
+class UploadAction
+{
     /**
      * __invoke
      *
-     * @param Request $request
+     * @param UploadedFile $file
      * @return array
      */
-    public function __invoke(Request $request): array
+    public function __invoke(UploadedFile $file): array
     {
-        $storage_path = Storage::putFile('public/images', $request->file, 'public');
+        $storage_path = Storage::putFile('public/images', $file, 'public');
         $url = Storage::url($storage_path);
         return ['storage_path' => $storage_path, 'url' => $url];
     }

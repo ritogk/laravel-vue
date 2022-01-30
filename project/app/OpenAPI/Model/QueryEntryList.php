@@ -1,6 +1,6 @@
 <?php
 /**
- * QueryJobCategoryList
+ * QueryEntryList
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * QueryJobCategoryList Class Doc Comment
+ * QueryEntryList Class Doc Comment
  *
  * @category Class
- * @description クエリパラメータ 職種一覧
+ * @description クエリパラメータ 応募一覧
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializable
+class QueryEntryList implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'queryJobCategoryList';
+    protected static $openAPIModelName = 'queryEntryList';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,8 +60,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'content' => 'string'
+        'jobId' => 'int',
+        'jobCategoryId' => 'int'
     ];
 
     /**
@@ -72,8 +72,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'content' => null
+        'jobId' => null,
+        'jobCategoryId' => null
     ];
 
     /**
@@ -103,8 +103,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'content' => 'content'
+        'jobId' => 'jobId',
+        'jobCategoryId' => 'jobCategoryId'
     ];
 
     /**
@@ -113,8 +113,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'content' => 'setContent'
+        'jobId' => 'setJobId',
+        'jobCategoryId' => 'setJobCategoryId'
     ];
 
     /**
@@ -123,8 +123,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'content' => 'getContent'
+        'jobId' => 'getJobId',
+        'jobCategoryId' => 'getJobCategoryId'
     ];
 
     /**
@@ -184,8 +184,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['content'] = $data['content'] ?? null;
+        $this->container['jobId'] = $data['jobId'] ?? null;
+        $this->container['jobCategoryId'] = $data['jobCategoryId'] ?? null;
     }
 
     /**
@@ -213,49 +213,49 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets name
+     * Gets jobId
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getName()
+    public function getJobId()
     {
-        return $this->container['name'];
+        return $this->container['jobId'];
     }
 
     /**
-     * Sets name
+     * Sets jobId
      *
-     * @param string|null $name 名称
+     * @param int|null $jobId 仕事id
      *
      * @return self
      */
-    public function setName($name)
+    public function setJobId($jobId)
     {
-        $this->container['name'] = $name;
+        $this->container['jobId'] = $jobId;
 
         return $this;
     }
 
     /**
-     * Gets content
+     * Gets jobCategoryId
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getContent()
+    public function getJobCategoryId()
     {
-        return $this->container['content'];
+        return $this->container['jobCategoryId'];
     }
 
     /**
-     * Sets content
+     * Sets jobCategoryId
      *
-     * @param string|null $content 内容
+     * @param int|null $jobCategoryId 仕事カテゴリid
      *
      * @return self
      */
-    public function setContent($content)
+    public function setJobCategoryId($jobCategoryId)
     {
-        $this->container['content'] = $content;
+        $this->container['jobCategoryId'] = $jobCategoryId;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * QueryJobCategoryList
+ * RequestJobCategory
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * QueryJobCategoryList Class Doc Comment
+ * RequestJobCategory Class Doc Comment
  *
  * @category Class
- * @description クエリパラメータ 職種一覧
+ * @description リクエスト 職種登録
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializable
+class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'queryJobCategoryList';
+    protected static $openAPIModelName = 'requestJobCategory';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -61,7 +61,10 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static $openAPITypes = [
         'name' => 'string',
-        'content' => 'string'
+        'content' => 'string',
+        'image' => 'string',
+        'sortNo' => 'int',
+        'updatedAt' => '\DateTime'
     ];
 
     /**
@@ -73,7 +76,10 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static $openAPIFormats = [
         'name' => null,
-        'content' => null
+        'content' => null,
+        'image' => null,
+        'sortNo' => null,
+        'updatedAt' => 'date'
     ];
 
     /**
@@ -104,7 +110,10 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $attributeMap = [
         'name' => 'name',
-        'content' => 'content'
+        'content' => 'content',
+        'image' => 'image',
+        'sortNo' => 'sortNo',
+        'updatedAt' => 'updatedAt'
     ];
 
     /**
@@ -114,7 +123,10 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $setters = [
         'name' => 'setName',
-        'content' => 'setContent'
+        'content' => 'setContent',
+        'image' => 'setImage',
+        'sortNo' => 'setSortNo',
+        'updatedAt' => 'setUpdatedAt'
     ];
 
     /**
@@ -124,7 +136,10 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $getters = [
         'name' => 'getName',
-        'content' => 'getContent'
+        'content' => 'getContent',
+        'image' => 'getImage',
+        'sortNo' => 'getSortNo',
+        'updatedAt' => 'getUpdatedAt'
     ];
 
     /**
@@ -186,6 +201,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $this->container['name'] = $data['name'] ?? null;
         $this->container['content'] = $data['content'] ?? null;
+        $this->container['image'] = $data['image'] ?? null;
+        $this->container['sortNo'] = $data['sortNo'] ?? null;
+        $this->container['updatedAt'] = $data['updatedAt'] ?? null;
     }
 
     /**
@@ -197,6 +215,21 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['content'] === null) {
+            $invalidProperties[] = "'content' can't be null";
+        }
+        if ($this->container['image'] === null) {
+            $invalidProperties[] = "'image' can't be null";
+        }
+        if ($this->container['sortNo'] === null) {
+            $invalidProperties[] = "'sortNo' can't be null";
+        }
+        if ($this->container['updatedAt'] === null) {
+            $invalidProperties[] = "'updatedAt' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -215,7 +248,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets name
      *
-     * @return string|null
+     * @return string
      */
     public function getName()
     {
@@ -225,7 +258,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets name
      *
-     * @param string|null $name 名称
+     * @param string $name 名称
      *
      * @return self
      */
@@ -239,7 +272,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets content
      *
-     * @return string|null
+     * @return string
      */
     public function getContent()
     {
@@ -249,13 +282,85 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets content
      *
-     * @param string|null $content 内容
+     * @param string $content 内容
      *
      * @return self
      */
     public function setContent($content)
     {
         $this->container['content'] = $content;
+
+        return $this;
+    }
+
+    /**
+     * Gets image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->container['image'];
+    }
+
+    /**
+     * Sets image
+     *
+     * @param string $image 画像URL
+     *
+     * @return self
+     */
+    public function setImage($image)
+    {
+        $this->container['image'] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Gets sortNo
+     *
+     * @return int
+     */
+    public function getSortNo()
+    {
+        return $this->container['sortNo'];
+    }
+
+    /**
+     * Sets sortNo
+     *
+     * @param int $sortNo 並び順
+     *
+     * @return self
+     */
+    public function setSortNo($sortNo)
+    {
+        $this->container['sortNo'] = $sortNo;
+
+        return $this;
+    }
+
+    /**
+     * Gets updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->container['updatedAt'];
+    }
+
+    /**
+     * Sets updatedAt
+     *
+     * @param \DateTime $updatedAt 更新日時
+     *
+     * @return self
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->container['updatedAt'] = $updatedAt;
 
         return $this;
     }

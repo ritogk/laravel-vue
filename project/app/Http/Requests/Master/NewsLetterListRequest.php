@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Requests\Auth\Front;
+namespace App\Http\Requests\Master;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class RegisterRequest extends FormRequest
+class NewsLetterListRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -22,14 +23,12 @@ class RegisterRequest extends FormRequest
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'password_confirmation' => ['required', 'string', 'min:8'],
-            'self_pr' => ['required', 'max:1000'],
-            'tel' => ['required', 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/u'],
+            'subject' => ['nullable', 'max:50'],
+            'message' => ['nullable', 'max:1000'],
+            'send' => ['nullable', 'boolean'],
         ];
     }
 
@@ -38,22 +37,23 @@ class RegisterRequest extends FormRequest
      *
      * @return array
      */
-    public function attributes() {
+    public function attributes()
+    {
         return [
-            'name' => '氏名',
-            'email' => 'メールアドレス',
-            'password' => 'パスワード',
-            'self_pr' => '自己PR',
-            'tel' => '電話番号',
+            'subject' => '件名',
+            'message' => 'メッセージ',
+            'send' => '送信済',
         ];
     }
 
     /**
      * バリデーションエラー後の処理を変える場合はここに処理を記述する
+     * デフォルトはリダイレクト
      *
      * @return array
      */
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator)
+    {
         $response = response()->json([
             'status' => 422,
             'errors' => $validator->errors(),

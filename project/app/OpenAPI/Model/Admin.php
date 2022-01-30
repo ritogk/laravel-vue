@@ -1,6 +1,6 @@
 <?php
 /**
- * QueryJobCategoryList
+ * Admin
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * QueryJobCategoryList Class Doc Comment
+ * Admin Class Doc Comment
  *
  * @category Class
- * @description クエリパラメータ 職種一覧
+ * @description 管理者
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializable
+class Admin implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'queryJobCategoryList';
+    protected static $openAPIModelName = 'admin';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,8 +60,11 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
+        'id' => 'int',
         'name' => 'string',
-        'content' => 'string'
+        'email' => 'string',
+        'updatedAt' => '\DateTime',
+        'createdAt' => '\DateTime'
     ];
 
     /**
@@ -72,8 +75,11 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'id' => null,
         'name' => null,
-        'content' => null
+        'email' => null,
+        'updatedAt' => 'date',
+        'createdAt' => 'date'
     ];
 
     /**
@@ -103,8 +109,11 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
+        'id' => 'id',
         'name' => 'name',
-        'content' => 'content'
+        'email' => 'email',
+        'updatedAt' => 'updatedAt',
+        'createdAt' => 'createdAt'
     ];
 
     /**
@@ -113,8 +122,11 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
+        'id' => 'setId',
         'name' => 'setName',
-        'content' => 'setContent'
+        'email' => 'setEmail',
+        'updatedAt' => 'setUpdatedAt',
+        'createdAt' => 'setCreatedAt'
     ];
 
     /**
@@ -123,8 +135,11 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
+        'id' => 'getId',
         'name' => 'getName',
-        'content' => 'getContent'
+        'email' => 'getEmail',
+        'updatedAt' => 'getUpdatedAt',
+        'createdAt' => 'getCreatedAt'
     ];
 
     /**
@@ -184,8 +199,11 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
+        $this->container['id'] = $data['id'] ?? null;
         $this->container['name'] = $data['name'] ?? null;
-        $this->container['content'] = $data['content'] ?? null;
+        $this->container['email'] = $data['email'] ?? null;
+        $this->container['updatedAt'] = $data['updatedAt'] ?? null;
+        $this->container['createdAt'] = $data['createdAt'] ?? null;
     }
 
     /**
@@ -213,6 +231,30 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
      * Gets name
      *
      * @return string|null
@@ -225,7 +267,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets name
      *
-     * @param string|null $name 名称
+     * @param string|null $name 名前
      *
      * @return self
      */
@@ -237,25 +279,73 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
     }
 
     /**
-     * Gets content
+     * Gets email
      *
      * @return string|null
      */
-    public function getContent()
+    public function getEmail()
     {
-        return $this->container['content'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets content
+     * Sets email
      *
-     * @param string|null $content 内容
+     * @param string|null $email メールアドレス
      *
      * @return self
      */
-    public function setContent($content)
+    public function setEmail($email)
     {
-        $this->container['content'] = $content;
+        $this->container['email'] = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets updatedAt
+     *
+     * @return \DateTime|null
+     */
+    public function getUpdatedAt()
+    {
+        return $this->container['updatedAt'];
+    }
+
+    /**
+     * Sets updatedAt
+     *
+     * @param \DateTime|null $updatedAt 更新日時
+     *
+     * @return self
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->container['updatedAt'] = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Gets createdAt
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedAt()
+    {
+        return $this->container['createdAt'];
+    }
+
+    /**
+     * Sets createdAt
+     *
+     * @param \DateTime|null $createdAt 作成日時
+     *
+     * @return self
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->container['createdAt'] = $createdAt;
 
         return $this;
     }

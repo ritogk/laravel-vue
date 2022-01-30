@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class JobCategoryListRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,12 @@ class JobCategoryListRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['nullable', 'string', 'max:255'],
-            'content' => ['nullable', 'string', 'max:500'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+            'passwordConfirmation' => ['required', 'string', 'min:8', 'same:password'],
+            'selfPr' => ['required', 'max:1000'],
+            'tel' => ['required', 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/u'],
         ];
     }
 
@@ -39,8 +43,12 @@ class JobCategoryListRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => '名称',
-            'content' => '内容',
+            'name' => '氏名',
+            'email' => 'メールアドレス',
+            'password' => 'パスワード',
+            'passwordConfirmation' => 'パスワード(確認)',
+            'selfPr' => '自己PR',
+            'tel' => '電話番号',
         ];
     }
 

@@ -5,8 +5,9 @@ namespace App\Http\Requests\Master;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Models\Job;
 
-class JobCategoryListRequest extends FormRequest
+class UserListRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +27,10 @@ class JobCategoryListRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['nullable', 'string', 'max:255'],
-            'content' => ['nullable', 'string', 'max:500'],
+            'name' => ['nullable', 'max:50'],
+            'email' => ['nullable', 'max:256'],
+            'selfPr' => ['nullable', 'max:1000'],
+            'tel' => ['nullable', 'max:50'],
         ];
     }
 
@@ -39,8 +42,10 @@ class JobCategoryListRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => '名称',
-            'content' => '内容',
+            'name' => '名前',
+            'email' => 'メールアドレス',
+            'selfPr' => '自己PR',
+            'tel' => '電話番号',
         ];
     }
 

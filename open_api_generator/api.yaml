@@ -7,11 +7,211 @@ servers:
   - url: http://localhost:80/api
     description: 開発用
 paths:
+  /auth/admin/me:
+    get:
+      tags:
+        - "認証 管理者"
+      summary: 自身の詳細
+      description: 詳細内容
+      security:
+        - bearerAdmin: []
+      responses:
+        "200":
+          description: 管理者
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/admin"
+  /auth/admin/login:
+    post:
+      tags:
+        - "認証 管理者"
+      summary: ログイン
+      description: 詳細内容
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestLogin"
+      responses:
+        "201":
+          description: jwt
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessToken"
+  /auth/admin/refresh:
+    post:
+      tags:
+        - "認証 管理者"
+      summary: リフレッシュトークン認証
+      description: 詳細内容
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestLogin"
+      responses:
+        "201":
+          description: jwt
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessToken"
+  /auth/admin/logout:
+    post:
+      tags:
+        - "認証 管理者"
+      summary: ログアウト
+      description: 詳細内容
+      security:
+        - bearerAdmin: []
+      responses:
+        "204":
+          description: jwt
+  
+  /auth/front/me:
+    get:
+      tags:
+        - "認証 会員"
+      summary: 自身の詳細
+      description: 詳細内容
+      security:
+        - bearerFront: []
+      responses:
+        "200":
+          description: 会員
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+  /auth/front/login:
+    post:
+      tags:
+        - "認証 会員"
+      summary: ログイン
+      description: 詳細内容
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestLogin"
+      responses:
+        "201":
+          description: jwt
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessToken"
+  /auth/front/refresh:
+    post:
+      tags:
+        - "認証 会員"
+      summary: リフレッシュトークン認証
+      description: 詳細内容
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestLogin"
+      responses:
+        "201":
+          description: jwt
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessToken"
+  /auth/front/logout:
+    post:
+      tags:
+        - "認証 会員"
+      summary: ログアウト
+      description: 会員
+      security:
+        - bearerFront: []
+      responses:
+        "204":
+          description: jwt
+
+  /job_categories/{id}:
+    get:
+      tags:
+        - "職種"
+      summary: 1件取得
+      description: 詳細内容
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: 職種
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/jobCategory"
+    put:
+      tags:
+        - "職種"
+      summary: 更新
+      description: 詳細内容
+      security:
+        - bearerAdmin: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestJobCategory"
+      responses:
+        "200":
+          description: 職種
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/jobCategory"
+    delete:
+      tags:
+        - "職種"
+      summary: 削除
+      description: 詳細内容
+      security:
+        - bearerAdmin: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: 職種
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/jobCategory"
   /job_categories:
     get:
       tags:
         - "職種"
-      summary: 職種一覧の取得
+      summary: 一覧取得
       description: 詳細内容
       parameters:
         - in: query
@@ -30,11 +230,251 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/jobCategory"
+    post:
+      tags:
+        - "職種"
+      summary: 職種 追加
+      description: 詳細内容
+      security:
+        - bearerAdmin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestJobCategory"
+      responses:
+        "201":
+          description: 職種
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/jobCategory"
+  
+
+  /jobs/{id}:
+    get:
+      tags:
+        - "仕事"
+      summary: 1件取得
+      description: 詳細内容
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: 仕事
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/job"
+    put:
+      tags:
+        - "仕事"
+      summary: 更新
+      description: 詳細内容
+      security:
+        - bearerAdmin: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestJobCategory"
+      responses:
+        "200":
+          description: 仕事
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/job"
+    delete:
+      tags:
+        - "仕事"
+      summary: 削除
+      description: 詳細内容
+      security:
+        - bearerAdmin: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: 仕事
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/job"
+  /jobs:
+    get:
+      tags:
+        - "仕事"
+      summary: 一覧取得
+      description: 詳細内容
+      parameters:
+        - in: query
+          name: values
+          schema:
+            type: object
+            $ref: "#/components/schemas/queryJobList"
+          style: form
+          explode: true
+      responses:
+        "200":
+          description: 仕事一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/job"
+    post:
+      tags:
+        - "仕事"
+      summary: 仕事 追加
+      description: 詳細内容
+      security:
+        - bearerAdmin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestJob"
+      responses:
+        "201":
+          description: 仕事
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/job"
+  /entries:
+    get:
+      tags:
+        - "応募"
+      summary: 一覧取得
+      description: 詳細内容
+      parameters:
+        - in: query
+          name: values
+          schema:
+            type: object
+            $ref: "#/components/schemas/queryEntryList"
+          style: form
+          explode: true
+      responses:
+        "200":
+          description: 応募一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/entry"
+    post:
+      tags:
+        - "応募"
+      summary: 応募 追加
+      description: 詳細内容
+      security:
+        - bearerFront: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestEntry"
+      responses:
+        "201":
+          description: 応募
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/entry"
+  /users:
+    get:
+      security:
+        - bearerAdmin: []
+      tags:
+        - "会員"
+      summary: 一覧取得
+      description: 詳細内容
+      parameters:
+        - in: query
+          name: values
+          schema:
+            type: object
+            $ref: "#/components/schemas/queryUserList"
+          style: form
+          explode: true
+      responses:
+        "200":
+          description: 会員一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/user"
+    post:
+      tags:
+        - "会員"
+      summary: 会員 追加
+      description: 詳細内容
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestUser"
+      responses:
+        "201":
+          description: 会員
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+  /files:
+    post:
+      tags:
+        - "ファイル"
+      summary: ファイル 追加
+      description: 詳細内容
+      security:
+        - bearerAdmin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestFile"
+      responses:
+        "201":
+          description: ファイルパス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/file"
 
 components:
+  securitySchemes:
+    bearerAdmin:
+      type: http
+      scheme: bearer
+      description: 管理者トークン
+    bearerFront:
+      type: http
+      scheme: bearer
+      description: 会員トークン
   schemas:
     queryJobCategoryList:
-      description: レスポンス 職種一覧
+      description: クエリパラメータ 職種一覧
       type: object
       properties:
         name:
@@ -43,10 +483,198 @@ components:
         content:
           type: string
           description: 内容
+    queryJobList:
+      description: クエリパラメータ 仕事一覧
+      type: object
+      properties:
+        title:
+          type: string
+          description: タイトル
+        content:
+          type: string
+          description: 内容
+        attention:
+          type: boolean
+          description: 注目の求人
+        jobCategoryId:
+          type: integer
+          description: 職種id
+        price:
+          type: integer
+          description: 金額
+        welfare:
+          type: string
+          description: 福利厚生
+        holiday:
+          type: string
+          description: 休日
+    queryEntryList:
+      description: クエリパラメータ 応募一覧
+      type: object
+      properties:
+        jobId:
+          type: integer
+          description: 仕事id
+        jobCategoryId:
+          type: integer
+          description: 仕事カテゴリid
+    queryUserList:
+      description: クエリパラメータ 会員一覧
+      type: object
+      properties:
+        name:
+          type: string
+          description: 氏名
+        email:
+          type: string
+          description: メールアドレス
+        selfPr:
+          type: string
+          description: 自己PR
+        tel:
+          type: string
+          description: 電話番号
+    requestJobCategory:
+      description: リクエスト 職種登録
+      type: object
+      properties:
+        name:
+          type: string
+          description: 名称
+        content:
+          type: string
+          description: 内容
+        image:
+          type: string
+          description: 画像URL
+        sortNo:
+          type: integer
+          description: 並び順
+        updatedAt:
+          type: string
+          format: date
+          description: 更新日時
+      required:
+        - name
+        - content
+        - image
+        - sortNo
+        - updatedAt
+    requestJob:
+      description: リクエスト 仕事登録
+      type: object
+      properties:
+        title:
+          type: string
+          description: タイトル
+        content:
+          type: string
+          description: 内容
+        attention:
+          type: boolean
+          description: 注目の求人
+        jobCategoryId:
+          type: integer
+          description: 職種id
+        price:
+          type: integer
+          description: 金額
+        welfare:
+          type: string
+          description: 福利厚生
+        holiday:
+          type: string
+          description: 休日
+        image:
+          type: string
+          description: 画像URL
+        sortNo:
+          type: integer
+          description: 並び順
+        updatedAt:
+          type: string
+          format: date
+          description: 更新日時
+      required:
+        - title
+        - content
+        - attention
+        - jobCategoryId
+        - price
+        - image
+        - sortNo
+    requestEntry:
+      description: リクエスト 応募登録
+      type: object
+      properties:
+        jobId:
+          type: integer
+          description: 仕事id
+        userId:
+          type: integer
+          description: 会員id
+      required:
+        - jobId
+        - jobCategoryId
+    requestUser:
+      description: リクエスト 会員登録
+      type: object
+      properties:
+        name:
+          type: string
+          description: 氏名
+        email:
+          type: string
+          description: メールアドレス
+        password:
+          type: string
+          description: パスワード
+        passwordConfirmation:
+          type: string
+          description: パスワード(確認)
+        selfPr:
+          type: string
+          description: 自己PR
+        tel:
+          type: string
+          description: 電話番号
+      required:
+        - name
+        - email
+        - password
+        - passwordConfirmation
+        - selfPr
+        - tel
+    requestFile:
+      description: リクエスト ファイル
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+          description: ファイル
+      required:
+        - file
+    requestLogin:
+      description: リクエスト ログイン
+      type: object
+      properties:
+        email:
+          type: string
+          description: メールアドレス
+        password:
+          type: string
+          description: パスワード
+      required:
+        - email
+        - password
     jobCategory:
       description: 職種
       type: object
       properties:
+        id:
+          type: integer
+          description: id
         name:
           type: string
           description: 名称
@@ -67,6 +695,135 @@ components:
           type: string
           format: date
           description: 更新日時
+    job:
+      description: 仕事
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id
+        title:
+          type: string
+          description: タイトル
+        content:
+          type: string
+          description: 内容
+        attention:
+          type: boolean
+          description: 注目の求人
+        jobCategoryId:
+          type: integer
+          description: 職種id
+        price:
+          type: integer
+          description: 金額
+        welfare:
+          type: string
+          description: 福利厚生
+        holiday:
+          type: string
+          description: 休日
+        image:
+          type: string
+          description: 画像URL
+        sortNo:
+          type: integer
+          description: 並び順
+        createdAt:
+          type: string
+          format: date
+          description: 作成日時
+        updatedAt:
+          type: string
+          format: date
+          description: 更新日時
+    entry:
+      description: 応募
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id
+        userId:
+          type: integer
+          description: 会員id
+        jobId:
+          type: integer
+          description: 仕事id
+    user:
+      description: 会員
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id
+        name:
+          type: string
+          description: 氏名
+        email:
+          type: string
+          description: メールアドレス
+        password:
+          type: string
+          description: パスワード
+        selfPr:
+          type: string
+          description: 自己PR
+        tel:
+          type: string
+          description: 電話番号
+        updatedAt:
+          type: string
+          format: date
+          description: 更新日時
+        createdAt:
+          type: string
+          format: date
+          description: 作成日時
+    file:
+      description: ファイルパス
+      type: object
+      properties:
+        storagePath:
+          type: string
+          description: ストレージパス 
+        url:
+          type: string
+          description: フルパス
+    admin:
+      description: 管理者
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id
+        name:
+          type: string
+          description: 名前
+        email:
+          type: string
+          description: メールアドレス
+        updatedAt:
+          type: string
+          format: date
+          description: 更新日時
+        createdAt:
+          type: string
+          format: date
+          description: 作成日時
+    accessToken:
+      description: アクセストークン
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: jwt
+        tokenType:
+          type: string
+          description: トークンタイプ
+        expiresIn:
+          type: integer
+          description: 有効期限(秒)
     sex:
       description: |
         man: 男

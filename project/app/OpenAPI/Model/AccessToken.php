@@ -1,6 +1,6 @@
 <?php
 /**
- * QueryJobCategoryList
+ * AccessToken
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * QueryJobCategoryList Class Doc Comment
+ * AccessToken Class Doc Comment
  *
  * @category Class
- * @description クエリパラメータ 職種一覧
+ * @description アクセストークン
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializable
+class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'queryJobCategoryList';
+    protected static $openAPIModelName = 'accessToken';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,8 +60,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'content' => 'string'
+        'accessToken' => 'string',
+        'tokenType' => 'string',
+        'expiresIn' => 'int'
     ];
 
     /**
@@ -72,8 +73,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'content' => null
+        'accessToken' => null,
+        'tokenType' => null,
+        'expiresIn' => null
     ];
 
     /**
@@ -103,8 +105,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'content' => 'content'
+        'accessToken' => 'accessToken',
+        'tokenType' => 'tokenType',
+        'expiresIn' => 'expiresIn'
     ];
 
     /**
@@ -113,8 +116,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'content' => 'setContent'
+        'accessToken' => 'setAccessToken',
+        'tokenType' => 'setTokenType',
+        'expiresIn' => 'setExpiresIn'
     ];
 
     /**
@@ -123,8 +127,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'content' => 'getContent'
+        'accessToken' => 'getAccessToken',
+        'tokenType' => 'getTokenType',
+        'expiresIn' => 'getExpiresIn'
     ];
 
     /**
@@ -184,8 +189,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['content'] = $data['content'] ?? null;
+        $this->container['accessToken'] = $data['accessToken'] ?? null;
+        $this->container['tokenType'] = $data['tokenType'] ?? null;
+        $this->container['expiresIn'] = $data['expiresIn'] ?? null;
     }
 
     /**
@@ -213,49 +219,73 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets name
+     * Gets accessToken
      *
      * @return string|null
      */
-    public function getName()
+    public function getAccessToken()
     {
-        return $this->container['name'];
+        return $this->container['accessToken'];
     }
 
     /**
-     * Sets name
+     * Sets accessToken
      *
-     * @param string|null $name 名称
+     * @param string|null $accessToken jwt
      *
      * @return self
      */
-    public function setName($name)
+    public function setAccessToken($accessToken)
     {
-        $this->container['name'] = $name;
+        $this->container['accessToken'] = $accessToken;
 
         return $this;
     }
 
     /**
-     * Gets content
+     * Gets tokenType
      *
      * @return string|null
      */
-    public function getContent()
+    public function getTokenType()
     {
-        return $this->container['content'];
+        return $this->container['tokenType'];
     }
 
     /**
-     * Sets content
+     * Sets tokenType
      *
-     * @param string|null $content 内容
+     * @param string|null $tokenType トークンタイプ
      *
      * @return self
      */
-    public function setContent($content)
+    public function setTokenType($tokenType)
     {
-        $this->container['content'] = $content;
+        $this->container['tokenType'] = $tokenType;
+
+        return $this;
+    }
+
+    /**
+     * Gets expiresIn
+     *
+     * @return int|null
+     */
+    public function getExpiresIn()
+    {
+        return $this->container['expiresIn'];
+    }
+
+    /**
+     * Sets expiresIn
+     *
+     * @param int|null $expiresIn 有効期限(秒)
+     *
+     * @return self
+     */
+    public function setExpiresIn($expiresIn)
+    {
+        $this->container['expiresIn'] = $expiresIn;
 
         return $this;
     }

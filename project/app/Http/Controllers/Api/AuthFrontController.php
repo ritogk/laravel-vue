@@ -4,62 +4,95 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+// request
 use App\Http\Requests\Auth\Front\LoginRequest;
-use App\Http\Requests\Auth\Front\RegisterRequest;
-
-// usecase
-use App\UseCases\Auth\Front\LoginAction;
-use App\UseCases\Auth\Front\LogoutAction;
-use App\UseCases\Auth\Front\UserAction;
-use App\UseCases\Auth\Front\RegisterAction;
+// openapi
+use App\OpenAPI;
+use App\Libs\OpenAPIUtility;
 
 class AuthFrontController extends Controller
 {
     /**
-     * 会員 取得
-     *
-     * @param  UserAction $action
-     * @return \App\Models\User|null
-     */
-    public function user(UserAction $action)
-    {
-        return $action();
-    }
-
-    /**
-     * 会員 登録
-     *
-     * @param  RegisterRequest  $request
-     * @param  RegisterAction $action
-     * @return JsonResponse
-     */
-    public function register(RegisterRequest $request, RegisterAction $action)
-    {
-        return $action($request);
-    }
-
-    /**
-     * 会員 ログイン
+     * login
      *
      * @param  LoginRequest $request
-     * @param  LoginAction $action
      * @return JsonResponse
      */
-    public function login(LoginRequest $request, LoginAction $action): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
-        return $action($request);
+        $parameters = new OpenAPI\Model\RequestLogin($request->all());
+        $request_all = ['email' => $parameters->getEmail(), 'password' => $parameters->getPassword()];
+        if (!$token = auth('user')->attempt($request_all)) {
+            return response()->json(
+                ['error' => 'Unauthorized'],
+                Response::HTTP_UNAUTHORIZED
+            );
+        }
+
+        $result = $this->respondWithToken($token);
+        return response()->json(
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
+            Response::HTTP_CREATED
+        );
     }
 
     /**
-     * 会員 ログアウト
+     * Get the authenticated User.
      *
-     * @param  Request $request
-     * @param  LogoutAction $action
      * @return JsonResponse
      */
-    public function logout(Request $request, LogoutAction $action): JsonResponse
+    public function me(): JsonResponse
     {
-        return $action($request);
+        return response()->json(
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, auth('user')->user()->toArray()),
+            Response::HTTP_OK
+        );
+    }
+
+    /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return JsonResponse
+     */
+    public function logout(): JsonResponse
+    {
+        auth('user')->logout();
+
+        return response()->json(
+            ['message' => 'Successfully logged out'],
+            Response::HTTP_NO_CONTENT
+        );
+    }
+
+    /**
+     * Refresh a token.
+     *
+     * @return JsonResponse
+     */
+    public function refresh(): JsonResponse
+    {
+        $result = $this->respondWithToken(auth('user')->refresh());
+        return response()->json(
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
+            Response::HTTP_CREATED
+        );
+    }
+
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return array
+     */
+    protected function respondWithToken($token): array
+    {
+        return [
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('user')->factory()->getTTL() * 60
+        ];
     }
 }

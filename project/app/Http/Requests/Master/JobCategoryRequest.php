@@ -14,7 +14,8 @@ class JobCategoryRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -23,14 +24,14 @@ class JobCategoryRequest extends FormRequest
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            'id' => 'nullable',
             'name' => 'required|max:25',
             'content' => 'required|max:1000',
             'image' => 'required',
-            'sort_no' => 'required|integer|digits_between:1,9',
-            'updated_at' => 'date|nullable',
+            'sortNo' => 'required|integer|digits_between:1,9',
+            'updatedAt' => 'date|nullable',
         ];
     }
 
@@ -39,14 +40,15 @@ class JobCategoryRequest extends FormRequest
      *
      * @return array
      */
-    public function attributes() {
+    public function attributes()
+    {
         return [
             'id' => 'id',
             'name' => '名称',
             'content' => '内容',
             'image' => '画像',
-            'sort_no' => '並び順',
-            'updated_at' => '更新日',
+            'sortNo' => '並び順',
+            'updatedAt' => '更新日',
         ];
     }
 
@@ -55,11 +57,14 @@ class JobCategoryRequest extends FormRequest
      *
      * @return void
      */
-    public function withValidator($validator) {
+    public function withValidator($validator)
+    {
         /* ここにバリデーションを書く */
         $validator->after(function ($validator) {
-            if(!empty($this->input('id'))
-                    && JobCategory::find($this->input('id'))->updated_at > $this->input('updated_at')){
+            if (
+                !empty($this->input('id'))
+                && JobCategory::find($this->input('id'))->updated_at > $this->input('updatedAt')
+            ) {
                 $validator->errors()->add('updated_at', 'すでに変更されたデータの可能性があります。最新の状態で再度実行してください。');
             }
         });
@@ -71,7 +76,8 @@ class JobCategoryRequest extends FormRequest
      *
      * @return array
      */
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator)
+    {
         $response = response()->json([
             'status' => 422,
             'errors' => $validator->errors(),

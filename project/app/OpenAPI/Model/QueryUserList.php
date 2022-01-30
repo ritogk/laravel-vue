@@ -1,6 +1,6 @@
 <?php
 /**
- * QueryJobCategoryList
+ * QueryUserList
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * QueryJobCategoryList Class Doc Comment
+ * QueryUserList Class Doc Comment
  *
  * @category Class
- * @description クエリパラメータ 職種一覧
+ * @description クエリパラメータ 会員一覧
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializable
+class QueryUserList implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'queryJobCategoryList';
+    protected static $openAPIModelName = 'queryUserList';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -61,7 +61,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static $openAPITypes = [
         'name' => 'string',
-        'content' => 'string'
+        'email' => 'string',
+        'selfPr' => 'string',
+        'tel' => 'string'
     ];
 
     /**
@@ -73,7 +75,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static $openAPIFormats = [
         'name' => null,
-        'content' => null
+        'email' => null,
+        'selfPr' => null,
+        'tel' => null
     ];
 
     /**
@@ -104,7 +108,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $attributeMap = [
         'name' => 'name',
-        'content' => 'content'
+        'email' => 'email',
+        'selfPr' => 'selfPr',
+        'tel' => 'tel'
     ];
 
     /**
@@ -114,7 +120,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $setters = [
         'name' => 'setName',
-        'content' => 'setContent'
+        'email' => 'setEmail',
+        'selfPr' => 'setSelfPr',
+        'tel' => 'setTel'
     ];
 
     /**
@@ -124,7 +132,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $getters = [
         'name' => 'getName',
-        'content' => 'getContent'
+        'email' => 'getEmail',
+        'selfPr' => 'getSelfPr',
+        'tel' => 'getTel'
     ];
 
     /**
@@ -185,7 +195,9 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
     public function __construct(array $data = null)
     {
         $this->container['name'] = $data['name'] ?? null;
-        $this->container['content'] = $data['content'] ?? null;
+        $this->container['email'] = $data['email'] ?? null;
+        $this->container['selfPr'] = $data['selfPr'] ?? null;
+        $this->container['tel'] = $data['tel'] ?? null;
     }
 
     /**
@@ -225,7 +237,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets name
      *
-     * @param string|null $name 名称
+     * @param string|null $name 氏名
      *
      * @return self
      */
@@ -237,25 +249,73 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
     }
 
     /**
-     * Gets content
+     * Gets email
      *
      * @return string|null
      */
-    public function getContent()
+    public function getEmail()
     {
-        return $this->container['content'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets content
+     * Sets email
      *
-     * @param string|null $content 内容
+     * @param string|null $email メールアドレス
      *
      * @return self
      */
-    public function setContent($content)
+    public function setEmail($email)
     {
-        $this->container['content'] = $content;
+        $this->container['email'] = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets selfPr
+     *
+     * @return string|null
+     */
+    public function getSelfPr()
+    {
+        return $this->container['selfPr'];
+    }
+
+    /**
+     * Sets selfPr
+     *
+     * @param string|null $selfPr 自己PR
+     *
+     * @return self
+     */
+    public function setSelfPr($selfPr)
+    {
+        $this->container['selfPr'] = $selfPr;
+
+        return $this;
+    }
+
+    /**
+     * Gets tel
+     *
+     * @return string|null
+     */
+    public function getTel()
+    {
+        return $this->container['tel'];
+    }
+
+    /**
+     * Sets tel
+     *
+     * @param string|null $tel 電話番号
+     *
+     * @return self
+     */
+    public function setTel($tel)
+    {
+        $this->container['tel'] = $tel;
 
         return $this;
     }

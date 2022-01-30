@@ -1,6 +1,6 @@
 <?php
 /**
- * QueryJobCategoryList
+ * File
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * QueryJobCategoryList Class Doc Comment
+ * File Class Doc Comment
  *
  * @category Class
- * @description クエリパラメータ 職種一覧
+ * @description ファイルパス
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializable
+class File implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'queryJobCategoryList';
+    protected static $openAPIModelName = 'file';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,8 +60,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'content' => 'string'
+        'storagePath' => 'string',
+        'url' => 'string'
     ];
 
     /**
@@ -72,8 +72,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'content' => null
+        'storagePath' => null,
+        'url' => null
     ];
 
     /**
@@ -103,8 +103,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'content' => 'content'
+        'storagePath' => 'storagePath',
+        'url' => 'url'
     ];
 
     /**
@@ -113,8 +113,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'content' => 'setContent'
+        'storagePath' => 'setStoragePath',
+        'url' => 'setUrl'
     ];
 
     /**
@@ -123,8 +123,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'content' => 'getContent'
+        'storagePath' => 'getStoragePath',
+        'url' => 'getUrl'
     ];
 
     /**
@@ -184,8 +184,8 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['content'] = $data['content'] ?? null;
+        $this->container['storagePath'] = $data['storagePath'] ?? null;
+        $this->container['url'] = $data['url'] ?? null;
     }
 
     /**
@@ -213,49 +213,49 @@ class QueryJobCategoryList implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets name
+     * Gets storagePath
      *
      * @return string|null
      */
-    public function getName()
+    public function getStoragePath()
     {
-        return $this->container['name'];
+        return $this->container['storagePath'];
     }
 
     /**
-     * Sets name
+     * Sets storagePath
      *
-     * @param string|null $name 名称
+     * @param string|null $storagePath ストレージパス
      *
      * @return self
      */
-    public function setName($name)
+    public function setStoragePath($storagePath)
     {
-        $this->container['name'] = $name;
+        $this->container['storagePath'] = $storagePath;
 
         return $this;
     }
 
     /**
-     * Gets content
+     * Gets url
      *
      * @return string|null
      */
-    public function getContent()
+    public function getUrl()
     {
-        return $this->container['content'];
+        return $this->container['url'];
     }
 
     /**
-     * Sets content
+     * Sets url
      *
-     * @param string|null $content 内容
+     * @param string|null $url フルパス
      *
      * @return self
      */
-    public function setContent($content)
+    public function setUrl($url)
     {
-        $this->container['content'] = $content;
+        $this->container['url'] = $url;
 
         return $this;
     }
