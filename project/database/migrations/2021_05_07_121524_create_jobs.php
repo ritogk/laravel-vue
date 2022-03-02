@@ -15,11 +15,13 @@ class CreateJobs extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('job_category_id')->constrained()->comment('仕事カテゴリID');
             $table->string('title', 50)->comment('タイトル');
             $table->text('content')->comment('内容');
             $table->boolean('attention')->comment('注目の求人');
-            $table->integer('job_category_id')->comment('仕事カテゴリID');
             $table->bigInteger('price')->comment('金額');
+            $table->text('welfare')->nullable()->comment('福利厚生');
+            $table->text('holiday')->nullable()->comment('休日');
             $table->string('image')->comment('画像パス');
             $table->integer('sort_no')->comment('並び順');
             $table->timestamps();

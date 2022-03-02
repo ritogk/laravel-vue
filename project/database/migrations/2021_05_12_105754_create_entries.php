@@ -15,11 +15,8 @@ class CreateEntries extends Migration
     {
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
-            $table->integer('job_id')->comment('仕事ID');
-            $table->string('full_name')->comment('氏名');
-            $table->text('self_pr')->comment('自己PR');
-            $table->string('tel')->comment('電話番号');
-            $table->string('email', 256)->comment('メールアドレス');
+            $table->foreignId('job_id')->constrained()->comment('仕事ID');
+            $table->foreignId('user_id')->constrained()->comment('会員ID');
             $table->timestamps();
             $table->softDeletes()->index();
         });
