@@ -1,35 +1,35 @@
-project/vendor/
-project/node_modules/
-project/npm-debug.log
-project/yarn-error.log
+back/project/vendor/
+back/project/node_modules/
+back/project/npm-debug.log
+back/project/yarn-error.log
 
 # Laravel 4 specific
-project/bootstrap/compiled.php
-project/app/storage/
+back/project/bootstrap/compiled.php
+back/project/app/storage/
 
 # Laravel 5 & Lumen specific
-project/public/storage
-project/public/hot
+back/project/public/storage
+back/project/public/hot
 
 # Laravel 5 & Lumen specific with changed public path
-project/public_html/storage
-project/public_html/hot
-project/public/css
-project/public/js
+back/project/public_html/storage
+back/project/public_html/hot
+back/project/public/css
+back/project/public/js
 
-storage/*.key
-project/.env
-project/Homestead.yaml
-project/Homestead.json
-project/.vagrant
-project/.phpunit.result.cache
+back/storage/*.key
+back/project/.env
+back/project/Homestead.yaml
+back/project/Homestead.json
+back/project/.vagrant
+back/project/.phpunit.result.cache
 
 #docker
-docker/db/data
-docker/db/sql
-project/public/mix-manifest.json
-project/public/css
-project/public/js
-project/.scribe
-project/resources/docs
-project/public/docs
+back/docker/db/data
+back/docker/db/sql
+back/project/public/mix-manifest.json
+back/project/public/css
+back/project/public/js
+back/project/.scribe
+back/project/resources/docs
+back/project/public/docs
