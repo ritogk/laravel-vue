@@ -10,7 +10,7 @@ paths:
   /auth/admin/me:
     get:
       tags:
-        - "認証 管理者"
+        - "authAdmin"
       summary: 自身の詳細
       description: 詳細内容
       security:
@@ -25,7 +25,7 @@ paths:
   /auth/admin/login:
     post:
       tags:
-        - "認証 管理者"
+        - "authAdmin"
       summary: ログイン
       description: 詳細内容
       requestBody:
@@ -43,7 +43,7 @@ paths:
   /auth/admin/refresh:
     post:
       tags:
-        - "認証 管理者"
+        - "authAdmin"
       summary: リフレッシュトークン認証
       description: 詳細内容
       parameters:
@@ -66,7 +66,7 @@ paths:
   /auth/admin/logout:
     post:
       tags:
-        - "認証 管理者"
+        - "authAdmin"
       summary: ログアウト
       description: 詳細内容
       security:
@@ -74,11 +74,11 @@ paths:
       responses:
         "204":
           description: jwt
-  
+
   /auth/front/me:
     get:
       tags:
-        - "認証 会員"
+        - "authFront"
       summary: 自身の詳細
       description: 詳細内容
       security:
@@ -93,7 +93,7 @@ paths:
   /auth/front/login:
     post:
       tags:
-        - "認証 会員"
+        - "authFront"
       summary: ログイン
       description: 詳細内容
       requestBody:
@@ -111,7 +111,7 @@ paths:
   /auth/front/refresh:
     post:
       tags:
-        - "認証 会員"
+        - "authFront"
       summary: リフレッシュトークン認証
       description: 詳細内容
       parameters:
@@ -134,7 +134,7 @@ paths:
   /auth/front/logout:
     post:
       tags:
-        - "認証 会員"
+        - "authFront"
       summary: ログアウト
       description: 会員
       security:
@@ -146,7 +146,7 @@ paths:
   /job_categories/{id}:
     get:
       tags:
-        - "職種"
+        - "jobCategorie"
       summary: 1件取得
       description: 詳細内容
       parameters:
@@ -164,7 +164,7 @@ paths:
                 $ref: "#/components/schemas/jobCategory"
     put:
       tags:
-        - "職種"
+        - "jobCategorie"
       summary: 更新
       description: 詳細内容
       security:
@@ -189,7 +189,7 @@ paths:
                 $ref: "#/components/schemas/jobCategory"
     delete:
       tags:
-        - "職種"
+        - "jobCategorie"
       summary: 削除
       description: 詳細内容
       security:
@@ -210,7 +210,7 @@ paths:
   /job_categories:
     get:
       tags:
-        - "職種"
+        - "jobCategorie"
       summary: 一覧取得
       description: 詳細内容
       parameters:
@@ -232,7 +232,7 @@ paths:
                   $ref: "#/components/schemas/jobCategory"
     post:
       tags:
-        - "職種"
+        - "jobCategorie"
       summary: 職種 追加
       description: 詳細内容
       security:
@@ -249,12 +249,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/jobCategory"
-  
 
   /jobs/{id}:
     get:
       tags:
-        - "仕事"
+        - "job"
       summary: 1件取得
       description: 詳細内容
       parameters:
@@ -272,7 +271,7 @@ paths:
                 $ref: "#/components/schemas/job"
     put:
       tags:
-        - "仕事"
+        - "job"
       summary: 更新
       description: 詳細内容
       security:
@@ -297,7 +296,7 @@ paths:
                 $ref: "#/components/schemas/job"
     delete:
       tags:
-        - "仕事"
+        - "job"
       summary: 削除
       description: 詳細内容
       security:
@@ -318,7 +317,7 @@ paths:
   /jobs:
     get:
       tags:
-        - "仕事"
+        - "job"
       summary: 一覧取得
       description: 詳細内容
       parameters:
@@ -340,7 +339,7 @@ paths:
                   $ref: "#/components/schemas/job"
     post:
       tags:
-        - "仕事"
+        - "job"
       summary: 仕事 追加
       description: 詳細内容
       security:
@@ -360,7 +359,7 @@ paths:
   /entries:
     get:
       tags:
-        - "応募"
+        - "entry"
       summary: 一覧取得
       description: 詳細内容
       parameters:
@@ -382,7 +381,7 @@ paths:
                   $ref: "#/components/schemas/entry"
     post:
       tags:
-        - "応募"
+        - "entry"
       summary: 応募 追加
       description: 詳細内容
       security:
@@ -404,7 +403,7 @@ paths:
       security:
         - bearerAdmin: []
       tags:
-        - "会員"
+        - "user"
       summary: 一覧取得
       description: 詳細内容
       parameters:
@@ -426,7 +425,7 @@ paths:
                   $ref: "#/components/schemas/user"
     post:
       tags:
-        - "会員"
+        - "user"
       summary: 会員 追加
       description: 詳細内容
       requestBody:
@@ -444,7 +443,7 @@ paths:
   /files:
     post:
       tags:
-        - "ファイル"
+        - "file"
       summary: ファイル 追加
       description: 詳細内容
       security:
@@ -786,7 +785,7 @@ components:
       properties:
         storagePath:
           type: string
-          description: ストレージパス 
+          description: ストレージパス
         url:
           type: string
           description: フルパス
