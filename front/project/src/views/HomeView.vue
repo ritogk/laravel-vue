@@ -9,8 +9,10 @@
 import { Options, Vue } from 'vue-class-component';
 import HelloWorld from '@/components/HelloWorld.vue';
 import AboutView from '@/views/AboutView.vue';
-import {} from '@/open_api';
+import { JobApi } from '@/open_api';
 
+const test = new JobApi();
+test.jobsGet({});
 @Options({
   components: {
     HelloWorld,
