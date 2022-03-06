@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: './',
+  publicPath: '/',
   // キャッシュバスティングのためにファイル名にハッシュをつけている。
   filenameHashing: true,
 };

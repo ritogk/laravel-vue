@@ -11,8 +11,8 @@ import HelloWorld from '@/components/HelloWorld.vue';
 import AboutView from '@/views/AboutView.vue';
 import { JobApi } from '@/open_api';
 
-const test = new JobApi();
-test.jobsGet({});
+// const test = new JobApi();
+// test.jobsGet({});
 @Options({
   components: {
     HelloWorld,
