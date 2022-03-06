@@ -68,11 +68,17 @@ export interface Job {
      */
     holiday?: string;
     /**
-     * 画像URL
+     * 画像の内部識別子
      * @type {string}
      * @memberof Job
      */
     image?: string;
+    /**
+     * 画像URL
+     * @type {string}
+     * @memberof Job
+     */
+    imageUrl?: string;
     /**
      * 並び順
      * @type {number}
@@ -112,6 +118,7 @@ export function JobFromJSONTyped(json: any, ignoreDiscriminator: boolean): Job {
         'welfare': !exists(json, 'welfare') ? undefined : json['welfare'],
         'holiday': !exists(json, 'holiday') ? undefined : json['holiday'],
         'image': !exists(json, 'image') ? undefined : json['image'],
+        'imageUrl': !exists(json, 'image_url') ? undefined : json['image_url'],
         'sortNo': !exists(json, 'sortNo') ? undefined : json['sortNo'],
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
@@ -136,6 +143,7 @@ export function JobToJSON(value?: Job | null): any {
         'welfare': value.welfare,
         'holiday': value.holiday,
         'image': value.image,
+        'image_url': value.imageUrl,
         'sortNo': value.sortNo,
         'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString().substr(0,10)),
         'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString().substr(0,10)),

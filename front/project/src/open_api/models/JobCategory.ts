@@ -38,11 +38,17 @@ export interface JobCategory {
      */
     content?: string;
     /**
-     * 画像URL
+     * 画像の内部識別子
      * @type {string}
      * @memberof JobCategory
      */
     image?: string;
+    /**
+     * 画像URL
+     * @type {string}
+     * @memberof JobCategory
+     */
+    imageUrl?: string;
     /**
      * 並び順
      * @type {number}
@@ -77,6 +83,7 @@ export function JobCategoryFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'name': !exists(json, 'name') ? undefined : json['name'],
         'content': !exists(json, 'content') ? undefined : json['content'],
         'image': !exists(json, 'image') ? undefined : json['image'],
+        'imageUrl': !exists(json, 'image_url') ? undefined : json['image_url'],
         'sortNo': !exists(json, 'sortNo') ? undefined : json['sortNo'],
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
@@ -96,6 +103,7 @@ export function JobCategoryToJSON(value?: JobCategory | null): any {
         'name': value.name,
         'content': value.content,
         'image': value.image,
+        'image_url': value.imageUrl,
         'sortNo': value.sortNo,
         'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString().substr(0,10)),
         'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString().substr(0,10)),

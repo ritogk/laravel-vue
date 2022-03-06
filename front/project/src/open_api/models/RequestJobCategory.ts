@@ -32,11 +32,17 @@ export interface RequestJobCategory {
      */
     content: string;
     /**
-     * 画像URL
+     * 画像の内部識別子
      * @type {string}
      * @memberof RequestJobCategory
      */
     image: string;
+    /**
+     * 画像URL
+     * @type {string}
+     * @memberof RequestJobCategory
+     */
+    imageUrl?: string;
     /**
      * 並び順
      * @type {number}
@@ -64,6 +70,7 @@ export function RequestJobCategoryFromJSONTyped(json: any, ignoreDiscriminator: 
         'name': json['name'],
         'content': json['content'],
         'image': json['image'],
+        'imageUrl': !exists(json, 'image_url') ? undefined : json['image_url'],
         'sortNo': json['sortNo'],
         'updatedAt': (new Date(json['updatedAt'])),
     };
@@ -81,6 +88,7 @@ export function RequestJobCategoryToJSON(value?: RequestJobCategory | null): any
         'name': value.name,
         'content': value.content,
         'image': value.image,
+        'image_url': value.imageUrl,
         'sortNo': value.sortNo,
         'updatedAt': (value.updatedAt.toISOString().substr(0,10)),
     };
