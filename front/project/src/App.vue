@@ -1,7 +1,9 @@
 <template>
-  <MainHeader></MainHeader>
-  <router-view />
-  <MainFooter></MainFooter>
+  <MainHeader />
+  <div class="container py-4">
+    <router-view />
+  </div>
+  <MainFooter />
 </template>
 
 <script lang="ts">
@@ -31,3 +33,12 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+</style>
