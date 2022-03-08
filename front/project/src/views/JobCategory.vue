@@ -16,7 +16,7 @@
         >
           <div class="card text-white">
             <img
-              :src="`http://localhost${category.imageUrl}`"
+              :src="category.imageUrl"
               class="card-img category-card"
               style="max-width: 20rem; height: 200px; filter: brightness(0.65)"
             />
