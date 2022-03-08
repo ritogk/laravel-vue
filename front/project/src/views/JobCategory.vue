@@ -43,7 +43,7 @@ import { defineComponent, ref } from 'vue';
 import { JobCategorieApi } from '@/open_api/apis/JobCategorieApi';
 import VueElementLoading from 'vue-element-loading';
 import { JobCategory } from '@/open_api';
-import { apiConfig } from '@/libs/constant';
+import { apiConfig } from '@/libs/config';
 
 export default defineComponent({
   components: {
