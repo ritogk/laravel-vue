@@ -43,6 +43,7 @@ import { defineComponent, ref } from 'vue';
 import { JobCategorieApi } from '@/open_api/apis/JobCategorieApi';
 import VueElementLoading from 'vue-element-loading';
 import { JobCategory } from '@/open_api';
+import { apiConfig } from '@/libs/constant';
 
 export default defineComponent({
   components: {
@@ -52,8 +53,7 @@ export default defineComponent({
     const categories = ref<JobCategory[]>([]);
     const loading = ref(true);
 
-    const jobCategoryApi = new JobCategorieApi();
-
+    const jobCategoryApi = new JobCategorieApi(apiConfig);
     const load = async () => {
       const response = await jobCategoryApi.jobCategoriesGet({});
       categories.value = response;
