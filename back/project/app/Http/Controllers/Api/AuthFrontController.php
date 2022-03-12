@@ -29,12 +29,13 @@ class AuthFrontController extends Controller
                 Response::HTTP_UNAUTHORIZED
             );
         }
-
         $result = $this->respondWithToken($token);
+        $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
+        $cookie = cookie('token', $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
-            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
+            $response_model,
             Response::HTTP_CREATED
-        );
+        )->cookie($cookie);
     }
 
     /**
@@ -73,10 +74,12 @@ class AuthFrontController extends Controller
     public function refresh(): JsonResponse
     {
         $result = $this->respondWithToken(auth('user')->refresh());
+        $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
+        $cookie = cookie('token', $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
-            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
+            $response_model,
             Response::HTTP_CREATED
-        );
+        )->cookie($cookie);
     }
 
 
