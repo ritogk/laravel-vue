@@ -21,7 +21,7 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">ユーザー名</a>
+            <a class="nav-link" href="#" v-text="user.name"></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" @click="clickLogin">ログイン</a>
@@ -39,12 +39,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { useRouter } from 'vue-router';
+import {
+  userAuthenticationKey,
+  useUserAuthenticationType,
+} from '@/composables/useUserAuthentication';
 
 export default defineComponent({
   setup() {
     const router = useRouter();
+    const { userAuthenticationRefs } = inject(
+      userAuthenticationKey
+    ) as useUserAuthenticationType;
+
     // 「タイトル」押下
     const clickTitle = () => {
       router.push('/');
@@ -57,7 +65,12 @@ export default defineComponent({
     const clickLogin = () => {
       router.push({ name: 'UserLogin' });
     };
-    return { clickTitle, clickRegistration, clickLogin };
+    return {
+      user: userAuthenticationRefs.user,
+      clickTitle,
+      clickRegistration,
+      clickLogin,
+    };
   },
 });
 </script>

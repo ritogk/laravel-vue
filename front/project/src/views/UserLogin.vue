@@ -59,14 +59,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, inject } from 'vue';
 import { useRouter } from 'vue-router';
-import { useUserAuthentication } from '@/composables/useUserAuthentication';
 import { validaitonErrorsType } from '@/libs/type';
+import {
+  userAuthenticationKey,
+  useUserAuthenticationType,
+} from '@/composables/useUserAuthentication';
 
 export default defineComponent({
   setup() {
     const router = useRouter();
+    const { login } = inject(
+      userAuthenticationKey
+    ) as useUserAuthenticationType;
 
     // フォームの状態
     const form = reactive({ email: 'root@rito.co.jp', password: 'root' });
@@ -75,19 +81,14 @@ export default defineComponent({
 
     // 「ログイン」ボタン押下
     const clickLogin = async () => {
-      // ログインの処理
-      const response = await useUserAuthentication().login(
-        form.email,
-        form.password
-      );
-
-      // 正常の処理
-      if (!('errors' in response)) {
+      // ログイン
+      const response = await login(form.email, form.password);
+      // 正常の場合
+      if (!response) {
         router.push('/');
         return;
       }
-
-      // バリデーションで弾かれた場合の処理
+      // バリデーションで弾かれた場合の場合
       formErrors.email = '';
       formErrors.password = '';
       const errors = (response as validaitonErrorsType).errors;

@@ -7,9 +7,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, provide } from 'vue';
 import MainHeader from '@/components/MainHeader.vue';
 import MainFooter from '@/components/MainFooter.vue';
+import {
+  useUserAuthentication,
+  userAuthenticationKey,
+} from '@/composables/useUserAuthentication';
 
 export default defineComponent({
   components: {
@@ -17,17 +21,11 @@ export default defineComponent({
     MainFooter,
   },
   setup() {
-    // const categories = ref<JobCategory[]>([]);
-    // const loading = ref(true);
+    const userAuthentication = useUserAuthentication();
+    provide(userAuthenticationKey, userAuthentication);
 
-    // const jobCategoryApi = new JobCategorieApi();
-
-    // const load = async () => {
-    //   const response = await jobCategoryApi.jobCategoriesGet({});
-    //   categories.value = response;
-    //   loading.value = false;
-    // };
-    // load();
+    // ログイン済のユーザー情報を取得
+    userAuthentication.getMe();
 
     return {};
   },
