@@ -54,7 +54,9 @@
         </div>
         <!-- 検索-->
         <div class="mt-3">
-          <button type="button" class="btn btn-primary w-100">検索</button>
+          <button type="button" class="btn btn-primary w-100 text-light">
+            検索
+          </button>
         </div>
       </div>
     </div>
