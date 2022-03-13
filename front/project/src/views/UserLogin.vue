@@ -5,15 +5,23 @@
       <div class="card-body">
         <!-- 入力(メールアドレス) -->
         <div class="mb-3">
-          <label for="inputMailAddress" class="form-label fs-6"
+          <label for="inputMailAddress" class="form-label"
             >メールアドレス</label
           >
           <input
             type="email"
             class="form-control form-control-sm"
+            v-bind:class="[formErrors.email !== '' ? 'is-invalid' : '']"
             id="inputMailAddress"
-            placeholder="test@test.co.jp"
+            aria-describedby="inputMailAddressFeedback"
             v-model="form.email"
+            placeholder="test@test.co.jp"
+          />
+          <div
+            id="inputMailAddressFeedback"
+            class="invalid-feedback"
+            v-text="formErrors.email"
+            v-show="formErrors.email !== ''"
           />
         </div>
         <!-- 入力(パスワード)) -->
@@ -22,9 +30,17 @@
           <input
             type="password"
             class="form-control form-control-sm"
+            v-bind:class="[formErrors.password !== '' ? 'is-invalid' : '']"
             id="inputPassword"
-            placeholder="test"
+            aria-describedby="inputPasswordFeedback"
             v-model="form.password"
+            placeholder="test"
+          />
+          <div
+            id="inputPasswordFeedback"
+            class="invalid-feedback"
+            v-text="formErrors.password"
+            v-show="formErrors.password !== ''"
           />
         </div>
         <!-- 検索-->
@@ -46,6 +62,7 @@
 import { defineComponent, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUserAuthentication } from '@/composables/useUserAuthentication';
+import { validaitonErrorsType } from '@/libs/type';
 
 export default defineComponent({
   setup() {
@@ -53,14 +70,36 @@ export default defineComponent({
 
     // フォームの状態
     const form = reactive({ email: 'root@rito.co.jp', password: 'root' });
+    // フォームのエラー内容
+    const formErrors = reactive({ email: '', password: '' });
 
     // 「ログイン」ボタン押下
     const clickLogin = async () => {
-      await useUserAuthentication().login(form.email, form.password);
-      router.push('/');
+      // ログインの処理
+      const response = await useUserAuthentication().login(
+        form.email,
+        form.password
+      );
+
+      // 正常の処理
+      if (!('errors' in response)) {
+        router.push('/');
+        return;
+      }
+
+      // バリデーションで弾かれた場合の処理
+      formErrors.email = '';
+      formErrors.password = '';
+      const errors = (response as validaitonErrorsType).errors;
+      if ('email' in errors) {
+        formErrors.email = errors['email'][0];
+      }
+      if ('password' in errors) {
+        formErrors.password = errors['password'][0];
+      }
     };
 
-    return { form, clickLogin };
+    return { form, formErrors, clickLogin };
   },
 });
 </script>

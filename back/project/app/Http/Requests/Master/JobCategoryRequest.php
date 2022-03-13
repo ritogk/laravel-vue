@@ -79,9 +79,9 @@ class JobCategoryRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $response = response()->json([
-            'status' => 422,
+            'status' => 400,
             'errors' => $validator->errors(),
-        ], 422);
+        ], 400);
         throw new HttpResponseException($response);
     }
 }

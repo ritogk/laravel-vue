@@ -1,5 +1,6 @@
 import { InjectionKey, readonly } from 'vue';
 import { apiConfig } from '@/libs/config';
+import { validaitonErrorsType } from '@/libs/type';
 import { User, UserApi, UsersPostRequest } from '@/open_api';
 
 // メイン関数のtype
@@ -10,8 +11,8 @@ type useUserType = {
     tel: string,
     mail: string,
     pasword: string,
-    passwordConfirm: string
-  ): Promise<User>;
+    passwordConfirmation: string
+  ): Promise<User | validaitonErrorsType>;
 };
 
 const userApi = new UserApi(apiConfig);
@@ -25,8 +26,8 @@ const useUser = (): useUserType => {
     tel: string,
     mail: string,
     password: string,
-    passwordConfirm: string
-  ): Promise<User> => {
+    passwordConfirmation: string
+  ): Promise<User | validaitonErrorsType> => {
     const request: UsersPostRequest = {
       requestUser: {
         name: name,
@@ -34,11 +35,17 @@ const useUser = (): useUserType => {
         tel: tel,
         email: mail,
         password: password,
-        passwordConfirmation: passwordConfirm,
+        passwordConfirmation: passwordConfirmation,
       },
     };
-    const response = await userApi.usersPost(request);
-    return response;
+    try {
+      return await userApi.usersPost(request);
+    } catch (err: any) {
+      const json = await err.json();
+      return Promise.resolve({
+        errors: json.errors,
+      } as validaitonErrorsType);
+    }
   };
   return { registration: readonly(registration) };
 };
