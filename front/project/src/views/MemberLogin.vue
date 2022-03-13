@@ -45,22 +45,19 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { AuthFrontApi, AuthFrontLoginPostRequest } from '@/open_api';
-import { apiConfig } from '@/libs/config';
+import { useAuthentication } from '@/composables/useAuthentication';
 
 export default defineComponent({
   setup() {
     const router = useRouter();
+    const authentication = useAuthentication();
+
     // フォームの状態
     const form = reactive({ email: 'root@rito.co.jp', password: 'root' });
 
     // 「ログイン」ボタン押下
     const clickLogin = async () => {
-      const authFrontApi = new AuthFrontApi(apiConfig);
-      const request: AuthFrontLoginPostRequest = {
-        requestLogin: { email: form.email, password: form.password },
-      };
-      await authFrontApi.authFrontLoginPost(request);
+      await authentication.login(form.email, form.password);
       router.push('/');
     };
 
