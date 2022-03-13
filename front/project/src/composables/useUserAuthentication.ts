@@ -13,6 +13,7 @@ type useUserAuthenticationType = {
   userAuthenticationRefs: ToRefs<{ user: User }>;
   login(email: string, password: string): Promise<void | validaitonErrorsType>;
   refresh(): Promise<AccessToken>;
+  logout(): Promise<void>;
   getMe(): Promise<void>;
 };
 
@@ -34,9 +35,8 @@ const useUserAuthentication = (): useUserAuthenticationType => {
     try {
       // ログイン
       await authFrontApi.authFrontLoginPost(request);
-      // ユーザーの情報を取得
-      state.user = await authFrontApi.authFrontMeGet();
-      return;
+      // ログイン済のユーザー情報を取得
+      getMe();
     } catch (err: any) {
       const json = await err.json();
       return Promise.resolve({
@@ -51,6 +51,12 @@ const useUserAuthentication = (): useUserAuthenticationType => {
     return response;
   };
 
+  // ログアウト
+  const logout = async (): Promise<void> => {
+    await authFrontApi.authFrontLogoutPost({});
+    state.user = {} as User;
+  };
+
   // ログイン済のユーザー情報を取得
   const getMe = async (): Promise<void> => {
     state.user = await authFrontApi.authFrontMeGet();
@@ -60,6 +66,7 @@ const useUserAuthentication = (): useUserAuthenticationType => {
     userAuthenticationRefs: toRefs(state),
     login: readonly(login),
     refresh: readonly(refresh),
+    logout: readonly(logout),
     getMe: readonly(getMe),
   };
 };

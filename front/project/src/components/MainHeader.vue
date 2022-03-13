@@ -16,7 +16,11 @@
       <div class="collapse navbar-collapse text-end" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#"
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="#"
+              @click="clickLogout"
               >ログアウト</a
             >
           </li>
@@ -49,7 +53,7 @@ import {
 export default defineComponent({
   setup() {
     const router = useRouter();
-    const { userAuthenticationRefs } = inject(
+    const { userAuthenticationRefs, logout } = inject(
       userAuthenticationKey
     ) as useUserAuthenticationType;
 
@@ -61,6 +65,10 @@ export default defineComponent({
     const clickRegistration = () => {
       router.push({ name: 'UserRegistration' });
     };
+    // 「ログアウト」押下
+    const clickLogout = () => {
+      logout();
+    };
     // 「ログイン」押下
     const clickLogin = () => {
       router.push({ name: 'UserLogin' });
@@ -70,6 +78,7 @@ export default defineComponent({
       clickTitle,
       clickRegistration,
       clickLogin,
+      clickLogout,
     };
   },
 });
