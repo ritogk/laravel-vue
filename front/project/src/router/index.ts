@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import JobCategory from '@/views/JobCategory.vue';
 import JobEntry from '@/views/JobEntry.vue';
-import MemberLogin from '@/views/MemberLogin.vue';
+import UserLogin from '@/views/UserLogin.vue';
 import UserRegistration from '@/views/UserRegistration.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/login',
-    name: 'MemberLogin',
-    component: MemberLogin,
+    path: '/user-login',
+    name: 'UserLogin',
+    component: UserLogin,
   },
   {
     path: '/user-registration',

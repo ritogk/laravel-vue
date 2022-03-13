@@ -3,7 +3,7 @@ import { apiConfig } from '@/libs/config';
 import { User, AuthFrontApi, AuthFrontLoginPostRequest } from '@/open_api';
 
 // メイン関数のtype
-type useAuthenticationType = {
+type useUserAuthenticationType = {
   state: ToRefs<{ member: User }>;
   login(email: string, password: string): Promise<void>;
 };
@@ -11,7 +11,7 @@ type useAuthenticationType = {
 const authFrontApi = new AuthFrontApi(apiConfig);
 
 // メイン関数
-const useAuthentication = (): useAuthenticationType => {
+const useUserAuthentication = (): useUserAuthenticationType => {
   // 状態
   const state = reactive({ member: {} as User });
   // ログイン処理
@@ -24,5 +24,5 @@ const useAuthentication = (): useAuthenticationType => {
   return { state: toRefs(state), login: readonly(login) };
 };
 
-const injectionKey: InjectionKey<useAuthenticationType> = Symbol('Auth');
-export { useAuthentication, useAuthenticationType, injectionKey };
+const injectionKey: InjectionKey<useUserAuthenticationType> = Symbol('Auth');
+export { useUserAuthentication, useUserAuthenticationType, injectionKey };

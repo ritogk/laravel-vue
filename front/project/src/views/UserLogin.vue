@@ -43,21 +43,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthentication } from '@/composables/useAuthentication';
+import { useUserAuthentication } from '@/composables/useUserAuthentication';
 
 export default defineComponent({
   setup() {
     const router = useRouter();
-    const authentication = useAuthentication();
 
     // フォームの状態
     const form = reactive({ email: 'root@rito.co.jp', password: 'root' });
 
     // 「ログイン」ボタン押下
     const clickLogin = async () => {
-      await authentication.login(form.email, form.password);
+      await useUserAuthentication().login(form.email, form.password);
       router.push('/');
     };
 

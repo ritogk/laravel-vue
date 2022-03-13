@@ -85,10 +85,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUser } from '@/composables/useUser';
-import { useAuthentication } from '@/composables/useAuthentication';
+import { useUserAuthentication } from '@/composables/useUserAuthentication';
 
 export default defineComponent({
   setup() {
@@ -115,7 +115,7 @@ export default defineComponent({
         form.passwordConfirm
       );
       // ログイン
-      await useAuthentication().login(form.mail, form.password);
+      await useUserAuthentication().login(form.mail, form.password);
       router.push('/');
     };
 
