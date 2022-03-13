@@ -26,7 +26,7 @@
                 <span v-text="category.content"></span>
                 <a
                   href="#"
-                  @click.prevent="pageTransition(category)"
+                  @click.prevent="clickCategory(category.id)"
                   class="stretched-link"
                 ></a>
               </p>
@@ -40,28 +40,36 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { JobCategorieApi } from '@/open_api/apis/JobCategorieApi';
+import { useRouter } from 'vue-router';
 import VueElementLoading from 'vue-element-loading';
-import { JobCategory } from '@/open_api';
-import { apiConfig } from '@/libs/config';
+import { useJobCategory } from '@/composables/useJobCategory';
 
 export default defineComponent({
   components: {
     VueElementLoading,
   },
   setup() {
-    const categories = ref<JobCategory[]>([]);
+    const router = useRouter();
+    const jobCategory = useJobCategory();
     const loading = ref(true);
+    const categories = jobCategory.jobCategoryRefs.items;
 
-    const jobCategoryApi = new JobCategorieApi(apiConfig);
+    // 職種一覧を取得
     const load = async () => {
-      const response = await jobCategoryApi.jobCategoriesGet({});
-      categories.value = response;
+      await jobCategory.getJobCategory();
       loading.value = false;
     };
     load();
 
-    return { categories, loading };
+    // 「職種」クリック時
+    const clickCategory = (categoryId: string) => {
+      router.push({
+        name: 'JobEntry',
+        query: { jobCategoryId: categoryId },
+      });
+    };
+
+    return { categories, loading, clickCategory };
   },
 });
 </script>
