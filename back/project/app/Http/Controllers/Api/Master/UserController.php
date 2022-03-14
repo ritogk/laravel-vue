@@ -26,12 +26,11 @@ class UserController extends Controller
      */
     public function list(UserListRequest $request, ListAction $action): JsonResponse
     {
-        $parameters = new OpenAPI\Model\QueryUserList($request->all());
         $result = $action(
-            $parameters->getName(),
-            $parameters->getEmail(),
-            $parameters->getSelfPr(),
-            $parameters->getTel()
+            $request->name(),
+            $request->email(),
+            $request->selfPr(),
+            $request->tel()
         );
         return response()->json(
             OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\User::class, $result),
@@ -48,13 +47,13 @@ class UserController extends Controller
      */
     public function create(UserRequest $request, CreateAction $action): JsonResponse
     {
-        $parameters = new OpenAPI\Model\RequestUser($request->all());
+        $requestBody = new OpenAPI\Model\RequestUser($request->all());
         $result = $action(
-            $parameters->getName(),
-            $parameters->getEmail(),
-            $parameters->getPassword(),
-            $parameters->getSelfPr(),
-            $parameters->getTel()
+            $requestBody->getName(),
+            $requestBody->getEmail(),
+            $requestBody->getPassword(),
+            $requestBody->getSelfPr(),
+            $requestBody->getTel()
         );
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, $result),

@@ -120,15 +120,16 @@ class EntryApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryEntryList $values values (optional)
+     * @param  int $jobId 仕事id (optional)
+     * @param  int $jobCategoryId 仕事カテゴリid (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\Entry[]
      */
-    public function entriesGet($values = null)
+    public function entriesGet($jobId = null, $jobCategoryId = null)
     {
-        list($response) = $this->entriesGetWithHttpInfo($values);
+        list($response) = $this->entriesGetWithHttpInfo($jobId, $jobCategoryId);
         return $response;
     }
 
@@ -137,15 +138,16 @@ class EntryApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryEntryList $values (optional)
+     * @param  int $jobId 仕事id (optional)
+     * @param  int $jobCategoryId 仕事カテゴリid (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\Entry[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function entriesGetWithHttpInfo($values = null)
+    public function entriesGetWithHttpInfo($jobId = null, $jobCategoryId = null)
     {
-        $request = $this->entriesGetRequest($values);
+        $request = $this->entriesGetRequest($jobId, $jobCategoryId);
 
         try {
             $options = $this->createHttpClientOption();
@@ -230,14 +232,15 @@ class EntryApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryEntryList $values (optional)
+     * @param  int $jobId 仕事id (optional)
+     * @param  int $jobCategoryId 仕事カテゴリid (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entriesGetAsync($values = null)
+    public function entriesGetAsync($jobId = null, $jobCategoryId = null)
     {
-        return $this->entriesGetAsyncWithHttpInfo($values)
+        return $this->entriesGetAsyncWithHttpInfo($jobId, $jobCategoryId)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -250,15 +253,16 @@ class EntryApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryEntryList $values (optional)
+     * @param  int $jobId 仕事id (optional)
+     * @param  int $jobCategoryId 仕事カテゴリid (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entriesGetAsyncWithHttpInfo($values = null)
+    public function entriesGetAsyncWithHttpInfo($jobId = null, $jobCategoryId = null)
     {
         $returnType = '\App\OpenAPI\Model\Entry[]';
-        $request = $this->entriesGetRequest($values);
+        $request = $this->entriesGetRequest($jobId, $jobCategoryId);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -296,12 +300,13 @@ class EntryApi
     /**
      * Create request for operation 'entriesGet'
      *
-     * @param  \App\OpenAPI\Model\QueryEntryList $values (optional)
+     * @param  int $jobId 仕事id (optional)
+     * @param  int $jobCategoryId 仕事カテゴリid (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function entriesGetRequest($values = null)
+    public function entriesGetRequest($jobId = null, $jobCategoryId = null)
     {
 
         $resourcePath = '/entries';
@@ -312,14 +317,25 @@ class EntryApi
         $multipart = false;
 
         // query params
-        if ($values !== null) {
-            if('form' === 'form' && is_array($values)) {
-                foreach($values as $key => $value) {
+        if ($jobId !== null) {
+            if('form' === 'form' && is_array($jobId)) {
+                foreach($jobId as $key => $value) {
                     $queryParams[$key] = $value;
                 }
             }
             else {
-                $queryParams['values'] = $values;
+                $queryParams['jobId'] = $jobId;
+            }
+        }
+        // query params
+        if ($jobCategoryId !== null) {
+            if('form' === 'form' && is_array($jobCategoryId)) {
+                foreach($jobCategoryId as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['jobCategoryId'] = $jobCategoryId;
             }
         }
 

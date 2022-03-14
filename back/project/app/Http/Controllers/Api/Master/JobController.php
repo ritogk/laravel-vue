@@ -32,15 +32,14 @@ class JobController extends Controller
      */
     public function list(JobListRequest $request, ListAction $action): JsonResponse
     {
-        $parameters = new OpenAPI\Model\QueryJobList($request->all());
         $result = $action(
-            $parameters->getTitle(),
-            $parameters->getContent(),
-            $parameters->getAttention(),
-            $parameters->getJobCategoryId(),
-            $parameters->getPrice(),
-            $parameters->getWelfare(),
-            $parameters->getHoliday()
+            $request->title,
+            $request->content,
+            $request->attention,
+            $request->jobCategoryId,
+            $request->price,
+            $request->welfare,
+            $request->holiday,
         );
         return response()->json(
             OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\Job::class, $result),
@@ -57,17 +56,17 @@ class JobController extends Controller
      */
     public function create(JobRequest $request, CreateAction $action): JsonResponse
     {
-        $parameters = new OpenAPI\Model\RequestJob($request->all());
+        $requestBody = new OpenAPI\Model\RequestJob($request->all());
         $result = $action(
-            $parameters->getTitle(),
-            $parameters->getContent(),
-            $parameters->getAttention(),
-            $parameters->getJobCategoryId(),
-            $parameters->getPrice(),
-            $parameters->getWelfare(),
-            $parameters->getHoliday(),
-            $parameters->getImage(),
-            $parameters->getSortNo()
+            $requestBody->getTitle(),
+            $requestBody->getContent(),
+            $requestBody->getAttention(),
+            $requestBody->getJobCategoryId(),
+            $requestBody->getPrice(),
+            $requestBody->getWelfare(),
+            $requestBody->getHoliday(),
+            $requestBody->getImage(),
+            $requestBody->getSortNo()
         );
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\Job::class, $result),
@@ -85,18 +84,18 @@ class JobController extends Controller
      */
     public function update(JobRequest $request, string $id, UpdateAction $action): JsonResponse
     {
-        $parameters = new OpenAPI\Model\RequestJob($request->all());
+        $requestBody = new OpenAPI\Model\RequestJob($request->all());
         $result = $action(
             $id,
-            $parameters->getTitle(),
-            $parameters->getContent(),
-            $parameters->getAttention(),
-            $parameters->getJobCategoryId(),
-            $parameters->getPrice(),
-            $parameters->getWelfare(),
-            $parameters->getHoliday(),
-            $parameters->getImage(),
-            $parameters->getSortNo()
+            $requestBody->getTitle(),
+            $requestBody->getContent(),
+            $requestBody->getAttention(),
+            $requestBody->getJobCategoryId(),
+            $requestBody->getPrice(),
+            $requestBody->getWelfare(),
+            $requestBody->getHoliday(),
+            $requestBody->getImage(),
+            $requestBody->getSortNo()
         );
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\Job::class, $result),

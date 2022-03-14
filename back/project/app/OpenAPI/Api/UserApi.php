@@ -120,15 +120,18 @@ class UserApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryUserList $values values (optional)
+     * @param  string $name 氏名 (optional)
+     * @param  string $email メールアドレス (optional)
+     * @param  string $selfPr 自己PR (optional)
+     * @param  string $tel 電話番号 (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\User[]
      */
-    public function usersGet($values = null)
+    public function usersGet($name = null, $email = null, $selfPr = null, $tel = null)
     {
-        list($response) = $this->usersGetWithHttpInfo($values);
+        list($response) = $this->usersGetWithHttpInfo($name, $email, $selfPr, $tel);
         return $response;
     }
 
@@ -137,15 +140,18 @@ class UserApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryUserList $values (optional)
+     * @param  string $name 氏名 (optional)
+     * @param  string $email メールアドレス (optional)
+     * @param  string $selfPr 自己PR (optional)
+     * @param  string $tel 電話番号 (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\User[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function usersGetWithHttpInfo($values = null)
+    public function usersGetWithHttpInfo($name = null, $email = null, $selfPr = null, $tel = null)
     {
-        $request = $this->usersGetRequest($values);
+        $request = $this->usersGetRequest($name, $email, $selfPr, $tel);
 
         try {
             $options = $this->createHttpClientOption();
@@ -230,14 +236,17 @@ class UserApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryUserList $values (optional)
+     * @param  string $name 氏名 (optional)
+     * @param  string $email メールアドレス (optional)
+     * @param  string $selfPr 自己PR (optional)
+     * @param  string $tel 電話番号 (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function usersGetAsync($values = null)
+    public function usersGetAsync($name = null, $email = null, $selfPr = null, $tel = null)
     {
-        return $this->usersGetAsyncWithHttpInfo($values)
+        return $this->usersGetAsyncWithHttpInfo($name, $email, $selfPr, $tel)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -250,15 +259,18 @@ class UserApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryUserList $values (optional)
+     * @param  string $name 氏名 (optional)
+     * @param  string $email メールアドレス (optional)
+     * @param  string $selfPr 自己PR (optional)
+     * @param  string $tel 電話番号 (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function usersGetAsyncWithHttpInfo($values = null)
+    public function usersGetAsyncWithHttpInfo($name = null, $email = null, $selfPr = null, $tel = null)
     {
         $returnType = '\App\OpenAPI\Model\User[]';
-        $request = $this->usersGetRequest($values);
+        $request = $this->usersGetRequest($name, $email, $selfPr, $tel);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -296,12 +308,15 @@ class UserApi
     /**
      * Create request for operation 'usersGet'
      *
-     * @param  \App\OpenAPI\Model\QueryUserList $values (optional)
+     * @param  string $name 氏名 (optional)
+     * @param  string $email メールアドレス (optional)
+     * @param  string $selfPr 自己PR (optional)
+     * @param  string $tel 電話番号 (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function usersGetRequest($values = null)
+    public function usersGetRequest($name = null, $email = null, $selfPr = null, $tel = null)
     {
 
         $resourcePath = '/users';
@@ -312,14 +327,47 @@ class UserApi
         $multipart = false;
 
         // query params
-        if ($values !== null) {
-            if('form' === 'form' && is_array($values)) {
-                foreach($values as $key => $value) {
+        if ($name !== null) {
+            if('form' === 'form' && is_array($name)) {
+                foreach($name as $key => $value) {
                     $queryParams[$key] = $value;
                 }
             }
             else {
-                $queryParams['values'] = $values;
+                $queryParams['name'] = $name;
+            }
+        }
+        // query params
+        if ($email !== null) {
+            if('form' === 'form' && is_array($email)) {
+                foreach($email as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['email'] = $email;
+            }
+        }
+        // query params
+        if ($selfPr !== null) {
+            if('form' === 'form' && is_array($selfPr)) {
+                foreach($selfPr as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['selfPr'] = $selfPr;
+            }
+        }
+        // query params
+        if ($tel !== null) {
+            if('form' === 'form' && is_array($tel)) {
+                foreach($tel as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['tel'] = $tel;
             }
         }
 

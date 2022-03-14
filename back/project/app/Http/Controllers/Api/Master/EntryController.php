@@ -26,8 +26,7 @@ class EntryController extends Controller
      */
     public function list(EntryListRequest $request, ListAction $action): JsonResponse
     {
-        $parameters = new OpenAPI\Model\QueryEntryList($request->all());
-        $result = $action($parameters->getJobId(), $parameters->getJobCategoryId());
+        $result = $action($request->jobId, $request->userId);
         return response()->json(
             OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\Entry::class, $result),
             Response::HTTP_OK
@@ -43,8 +42,8 @@ class EntryController extends Controller
      */
     public function create(EntryRequest $request, CreateAction $action): JsonResponse
     {
-        $parameters = new OpenAPI\Model\RequestEntry($request->all());
-        $result = $action($parameters->getUserId(), $parameters->getJobId());
+        $requestBody = new OpenAPI\Model\RequestEntry($request->all());
+        $result = $action($requestBody->getUserId(), $requestBody->getJobId());
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\Entry::class, $result),
             Response::HTTP_CREATED

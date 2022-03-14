@@ -18,9 +18,6 @@ import {
     Job,
     JobFromJSON,
     JobToJSON,
-    QueryJobList,
-    QueryJobListFromJSON,
-    QueryJobListToJSON,
     RequestJob,
     RequestJobFromJSON,
     RequestJobToJSON,
@@ -30,7 +27,13 @@ import {
 } from '../models';
 
 export interface JobsGetRequest {
-    values?: QueryJobList;
+    title?: string;
+    content?: string;
+    attention?: boolean;
+    jobCategoryId?: number;
+    price?: number;
+    welfare?: string;
+    holiday?: string;
 }
 
 export interface JobsIdDeleteRequest {
@@ -60,7 +63,13 @@ export interface JobApiInterface {
     /**
      * 詳細内容
      * @summary 一覧取得
-     * @param {QueryJobList} [values] 
+     * @param {string} [title] タイトル
+     * @param {string} [content] 内容
+     * @param {boolean} [attention] 注目の求人
+     * @param {number} [jobCategoryId] 職種id
+     * @param {number} [price] 金額
+     * @param {string} [welfare] 福利厚生
+     * @param {string} [holiday] 休日
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof JobApiInterface
@@ -152,8 +161,32 @@ export class JobApi extends runtime.BaseAPI implements JobApiInterface {
     async jobsGetRaw(requestParameters: JobsGetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Job>>> {
         const queryParameters: any = {};
 
-        if (requestParameters.values !== undefined) {
-            queryParameters['values'] = requestParameters.values;
+        if (requestParameters.title !== undefined) {
+            queryParameters['title'] = requestParameters.title;
+        }
+
+        if (requestParameters.content !== undefined) {
+            queryParameters['content'] = requestParameters.content;
+        }
+
+        if (requestParameters.attention !== undefined) {
+            queryParameters['attention'] = requestParameters.attention;
+        }
+
+        if (requestParameters.jobCategoryId !== undefined) {
+            queryParameters['jobCategoryId'] = requestParameters.jobCategoryId;
+        }
+
+        if (requestParameters.price !== undefined) {
+            queryParameters['price'] = requestParameters.price;
+        }
+
+        if (requestParameters.welfare !== undefined) {
+            queryParameters['welfare'] = requestParameters.welfare;
+        }
+
+        if (requestParameters.holiday !== undefined) {
+            queryParameters['holiday'] = requestParameters.holiday;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

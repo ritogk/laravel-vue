@@ -18,16 +18,14 @@ import {
     Entry,
     EntryFromJSON,
     EntryToJSON,
-    QueryEntryList,
-    QueryEntryListFromJSON,
-    QueryEntryListToJSON,
     RequestEntry,
     RequestEntryFromJSON,
     RequestEntryToJSON,
 } from '../models';
 
 export interface EntriesGetRequest {
-    values?: QueryEntryList;
+    jobId?: number;
+    jobCategoryId?: number;
 }
 
 export interface EntriesPostRequest {
@@ -44,7 +42,8 @@ export interface EntryApiInterface {
     /**
      * 詳細内容
      * @summary 一覧取得
-     * @param {QueryEntryList} [values] 
+     * @param {number} [jobId] 仕事id
+     * @param {number} [jobCategoryId] 仕事カテゴリid
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EntryApiInterface
@@ -87,8 +86,12 @@ export class EntryApi extends runtime.BaseAPI implements EntryApiInterface {
     async entriesGetRaw(requestParameters: EntriesGetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Entry>>> {
         const queryParameters: any = {};
 
-        if (requestParameters.values !== undefined) {
-            queryParameters['values'] = requestParameters.values;
+        if (requestParameters.jobId !== undefined) {
+            queryParameters['jobId'] = requestParameters.jobId;
+        }
+
+        if (requestParameters.jobCategoryId !== undefined) {
+            queryParameters['jobCategoryId'] = requestParameters.jobCategoryId;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

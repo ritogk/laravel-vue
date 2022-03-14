@@ -120,15 +120,21 @@ class JobApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryJobList $values values (optional)
+     * @param  string $title タイトル (optional)
+     * @param  string $content 内容 (optional)
+     * @param  bool $attention 注目の求人 (optional)
+     * @param  int $jobCategoryId 職種id (optional)
+     * @param  int $price 金額 (optional)
+     * @param  string $welfare 福利厚生 (optional)
+     * @param  string $holiday 休日 (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\Job[]
      */
-    public function jobsGet($values = null)
+    public function jobsGet($title = null, $content = null, $attention = null, $jobCategoryId = null, $price = null, $welfare = null, $holiday = null)
     {
-        list($response) = $this->jobsGetWithHttpInfo($values);
+        list($response) = $this->jobsGetWithHttpInfo($title, $content, $attention, $jobCategoryId, $price, $welfare, $holiday);
         return $response;
     }
 
@@ -137,15 +143,21 @@ class JobApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryJobList $values (optional)
+     * @param  string $title タイトル (optional)
+     * @param  string $content 内容 (optional)
+     * @param  bool $attention 注目の求人 (optional)
+     * @param  int $jobCategoryId 職種id (optional)
+     * @param  int $price 金額 (optional)
+     * @param  string $welfare 福利厚生 (optional)
+     * @param  string $holiday 休日 (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\Job[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function jobsGetWithHttpInfo($values = null)
+    public function jobsGetWithHttpInfo($title = null, $content = null, $attention = null, $jobCategoryId = null, $price = null, $welfare = null, $holiday = null)
     {
-        $request = $this->jobsGetRequest($values);
+        $request = $this->jobsGetRequest($title, $content, $attention, $jobCategoryId, $price, $welfare, $holiday);
 
         try {
             $options = $this->createHttpClientOption();
@@ -230,14 +242,20 @@ class JobApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryJobList $values (optional)
+     * @param  string $title タイトル (optional)
+     * @param  string $content 内容 (optional)
+     * @param  bool $attention 注目の求人 (optional)
+     * @param  int $jobCategoryId 職種id (optional)
+     * @param  int $price 金額 (optional)
+     * @param  string $welfare 福利厚生 (optional)
+     * @param  string $holiday 休日 (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobsGetAsync($values = null)
+    public function jobsGetAsync($title = null, $content = null, $attention = null, $jobCategoryId = null, $price = null, $welfare = null, $holiday = null)
     {
-        return $this->jobsGetAsyncWithHttpInfo($values)
+        return $this->jobsGetAsyncWithHttpInfo($title, $content, $attention, $jobCategoryId, $price, $welfare, $holiday)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -250,15 +268,21 @@ class JobApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryJobList $values (optional)
+     * @param  string $title タイトル (optional)
+     * @param  string $content 内容 (optional)
+     * @param  bool $attention 注目の求人 (optional)
+     * @param  int $jobCategoryId 職種id (optional)
+     * @param  int $price 金額 (optional)
+     * @param  string $welfare 福利厚生 (optional)
+     * @param  string $holiday 休日 (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobsGetAsyncWithHttpInfo($values = null)
+    public function jobsGetAsyncWithHttpInfo($title = null, $content = null, $attention = null, $jobCategoryId = null, $price = null, $welfare = null, $holiday = null)
     {
         $returnType = '\App\OpenAPI\Model\Job[]';
-        $request = $this->jobsGetRequest($values);
+        $request = $this->jobsGetRequest($title, $content, $attention, $jobCategoryId, $price, $welfare, $holiday);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -296,12 +320,18 @@ class JobApi
     /**
      * Create request for operation 'jobsGet'
      *
-     * @param  \App\OpenAPI\Model\QueryJobList $values (optional)
+     * @param  string $title タイトル (optional)
+     * @param  string $content 内容 (optional)
+     * @param  bool $attention 注目の求人 (optional)
+     * @param  int $jobCategoryId 職種id (optional)
+     * @param  int $price 金額 (optional)
+     * @param  string $welfare 福利厚生 (optional)
+     * @param  string $holiday 休日 (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function jobsGetRequest($values = null)
+    public function jobsGetRequest($title = null, $content = null, $attention = null, $jobCategoryId = null, $price = null, $welfare = null, $holiday = null)
     {
 
         $resourcePath = '/jobs';
@@ -312,14 +342,80 @@ class JobApi
         $multipart = false;
 
         // query params
-        if ($values !== null) {
-            if('form' === 'form' && is_array($values)) {
-                foreach($values as $key => $value) {
+        if ($title !== null) {
+            if('form' === 'form' && is_array($title)) {
+                foreach($title as $key => $value) {
                     $queryParams[$key] = $value;
                 }
             }
             else {
-                $queryParams['values'] = $values;
+                $queryParams['title'] = $title;
+            }
+        }
+        // query params
+        if ($content !== null) {
+            if('form' === 'form' && is_array($content)) {
+                foreach($content as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['content'] = $content;
+            }
+        }
+        // query params
+        if ($attention !== null) {
+            if('form' === 'form' && is_array($attention)) {
+                foreach($attention as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['attention'] = $attention;
+            }
+        }
+        // query params
+        if ($jobCategoryId !== null) {
+            if('form' === 'form' && is_array($jobCategoryId)) {
+                foreach($jobCategoryId as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['jobCategoryId'] = $jobCategoryId;
+            }
+        }
+        // query params
+        if ($price !== null) {
+            if('form' === 'form' && is_array($price)) {
+                foreach($price as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['price'] = $price;
+            }
+        }
+        // query params
+        if ($welfare !== null) {
+            if('form' === 'form' && is_array($welfare)) {
+                foreach($welfare as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['welfare'] = $welfare;
+            }
+        }
+        // query params
+        if ($holiday !== null) {
+            if('form' === 'form' && is_array($holiday)) {
+                foreach($holiday as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['holiday'] = $holiday;
             }
         }
 

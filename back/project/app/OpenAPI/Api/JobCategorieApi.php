@@ -120,15 +120,16 @@ class JobCategorieApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryJobCategoryList $values values (optional)
+     * @param  string $name 名称 (optional)
+     * @param  string $content 内容 (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\JobCategory[]
      */
-    public function jobCategoriesGet($values = null)
+    public function jobCategoriesGet($name = null, $content = null)
     {
-        list($response) = $this->jobCategoriesGetWithHttpInfo($values);
+        list($response) = $this->jobCategoriesGetWithHttpInfo($name, $content);
         return $response;
     }
 
@@ -137,15 +138,16 @@ class JobCategorieApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryJobCategoryList $values (optional)
+     * @param  string $name 名称 (optional)
+     * @param  string $content 内容 (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\JobCategory[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function jobCategoriesGetWithHttpInfo($values = null)
+    public function jobCategoriesGetWithHttpInfo($name = null, $content = null)
     {
-        $request = $this->jobCategoriesGetRequest($values);
+        $request = $this->jobCategoriesGetRequest($name, $content);
 
         try {
             $options = $this->createHttpClientOption();
@@ -230,14 +232,15 @@ class JobCategorieApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryJobCategoryList $values (optional)
+     * @param  string $name 名称 (optional)
+     * @param  string $content 内容 (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobCategoriesGetAsync($values = null)
+    public function jobCategoriesGetAsync($name = null, $content = null)
     {
-        return $this->jobCategoriesGetAsyncWithHttpInfo($values)
+        return $this->jobCategoriesGetAsyncWithHttpInfo($name, $content)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -250,15 +253,16 @@ class JobCategorieApi
      *
      * 一覧取得
      *
-     * @param  \App\OpenAPI\Model\QueryJobCategoryList $values (optional)
+     * @param  string $name 名称 (optional)
+     * @param  string $content 内容 (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobCategoriesGetAsyncWithHttpInfo($values = null)
+    public function jobCategoriesGetAsyncWithHttpInfo($name = null, $content = null)
     {
         $returnType = '\App\OpenAPI\Model\JobCategory[]';
-        $request = $this->jobCategoriesGetRequest($values);
+        $request = $this->jobCategoriesGetRequest($name, $content);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -296,12 +300,13 @@ class JobCategorieApi
     /**
      * Create request for operation 'jobCategoriesGet'
      *
-     * @param  \App\OpenAPI\Model\QueryJobCategoryList $values (optional)
+     * @param  string $name 名称 (optional)
+     * @param  string $content 内容 (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function jobCategoriesGetRequest($values = null)
+    public function jobCategoriesGetRequest($name = null, $content = null)
     {
 
         $resourcePath = '/job_categories';
@@ -312,14 +317,25 @@ class JobCategorieApi
         $multipart = false;
 
         // query params
-        if ($values !== null) {
-            if('form' === 'form' && is_array($values)) {
-                foreach($values as $key => $value) {
+        if ($name !== null) {
+            if('form' === 'form' && is_array($name)) {
+                foreach($name as $key => $value) {
                     $queryParams[$key] = $value;
                 }
             }
             else {
-                $queryParams['values'] = $values;
+                $queryParams['name'] = $name;
+            }
+        }
+        // query params
+        if ($content !== null) {
+            if('form' === 'form' && is_array($content)) {
+                foreach($content as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['content'] = $content;
             }
         }
 

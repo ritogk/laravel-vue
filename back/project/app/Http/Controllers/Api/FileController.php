@@ -24,9 +24,9 @@ class FileController extends Controller
      */
     public function upload(UploadRequest $request, UploadAction $action): JsonResponse
     {
-        $parameters = new OpenAPI\Model\RequestFile($request->all());
+        $requestBody = new OpenAPI\Model\RequestFile($request->all());
         $result = $action(
-            $parameters->getFile()
+            $requestBody->getFile()
         );
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\File::class, $result),

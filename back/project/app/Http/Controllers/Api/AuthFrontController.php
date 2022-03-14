@@ -21,8 +21,8 @@ class AuthFrontController extends Controller
      */
     public function login(LoginRequest $request): JsonResponse
     {
-        $parameters = new OpenAPI\Model\RequestLogin($request->all());
-        $request_all = ['email' => $parameters->getEmail(), 'password' => $parameters->getPassword()];
+        $requestBody = new OpenAPI\Model\RequestLogin($request->all());
+        $request_all = ['email' => $requestBody->getEmail(), 'password' => $requestBody->getPassword()];
         if (!$token = auth('user')->attempt($request_all)) {
             return response()->json(
                 ['error' => 'Unauthorized'],

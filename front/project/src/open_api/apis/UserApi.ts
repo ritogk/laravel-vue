@@ -15,9 +15,6 @@
 
 import * as runtime from '../runtime';
 import {
-    QueryUserList,
-    QueryUserListFromJSON,
-    QueryUserListToJSON,
     RequestUser,
     RequestUserFromJSON,
     RequestUserToJSON,
@@ -27,7 +24,10 @@ import {
 } from '../models';
 
 export interface UsersGetRequest {
-    values?: QueryUserList;
+    name?: string;
+    email?: string;
+    selfPr?: string;
+    tel?: string;
 }
 
 export interface UsersPostRequest {
@@ -44,7 +44,10 @@ export interface UserApiInterface {
     /**
      * 詳細内容
      * @summary 一覧取得
-     * @param {QueryUserList} [values] 
+     * @param {string} [name] 氏名
+     * @param {string} [email] メールアドレス
+     * @param {string} [selfPr] 自己PR
+     * @param {string} [tel] 電話番号
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApiInterface
@@ -87,8 +90,20 @@ export class UserApi extends runtime.BaseAPI implements UserApiInterface {
     async usersGetRaw(requestParameters: UsersGetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<User>>> {
         const queryParameters: any = {};
 
-        if (requestParameters.values !== undefined) {
-            queryParameters['values'] = requestParameters.values;
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.email !== undefined) {
+            queryParameters['email'] = requestParameters.email;
+        }
+
+        if (requestParameters.selfPr !== undefined) {
+            queryParameters['selfPr'] = requestParameters.selfPr;
+        }
+
+        if (requestParameters.tel !== undefined) {
+            queryParameters['tel'] = requestParameters.tel;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

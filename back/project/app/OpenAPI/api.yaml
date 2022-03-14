@@ -215,12 +215,17 @@ paths:
       description: 詳細内容
       parameters:
         - in: query
-          name: values
+          name: name
           schema:
-            type: object
-            $ref: "#/components/schemas/queryJobCategoryList"
-          style: form
-          explode: true
+            type: string
+          description: 名称
+          required: false
+        - in: query
+          name: content
+          schema:
+            type: string
+          description: 内容
+          required: false
       responses:
         "200":
           description: 職種一覧
@@ -322,12 +327,47 @@ paths:
       description: 詳細内容
       parameters:
         - in: query
-          name: values
+          name: title
           schema:
-            type: object
-            $ref: "#/components/schemas/queryJobList"
-          style: form
-          explode: true
+            type: string
+          description: タイトル
+          required: false
+        - in: query
+          name: content
+          schema:
+            type: string
+          description: 内容
+          required: false
+        - in: query
+          name: attention
+          schema:
+            type: boolean
+          description: 注目の求人
+          required: false
+        - in: query
+          name: jobCategoryId
+          schema:
+            type: integer
+          description: 職種id
+          required: false
+        - in: query
+          name: price
+          schema:
+            type: integer
+          description: 金額
+          required: false
+        - in: query
+          name: welfare
+          schema:
+            type: string
+          description: 福利厚生
+          required: false
+        - in: query
+          name: holiday
+          schema:
+            type: string
+          description: 休日
+          required: false
       responses:
         "200":
           description: 仕事一覧
@@ -364,12 +404,17 @@ paths:
       description: 詳細内容
       parameters:
         - in: query
-          name: values
+          name: jobId
           schema:
-            type: object
-            $ref: "#/components/schemas/queryEntryList"
-          style: form
-          explode: true
+            type: integer
+          description: 仕事id
+          required: false
+        - in: query
+          name: jobCategoryId
+          schema:
+            type: integer
+          description: 仕事カテゴリid
+          required: false
       responses:
         "200":
           description: 応募一覧
@@ -408,12 +453,29 @@ paths:
       description: 詳細内容
       parameters:
         - in: query
-          name: values
+          name: name
           schema:
-            type: object
-            $ref: "#/components/schemas/queryUserList"
-          style: form
-          explode: true
+            type: string
+          description: 氏名
+          required: false
+        - in: query
+          name: email
+          schema:
+            type: string
+          description: メールアドレス
+          required: false
+        - in: query
+          name: selfPr
+          schema:
+            type: string
+          description: 自己PR
+          required: false
+        - in: query
+          name: tel
+          schema:
+            type: string
+          description: 電話番号
+          required: false
       responses:
         "200":
           description: 会員一覧
@@ -472,67 +534,6 @@ components:
       scheme: bearer
       description: 会員トークン
   schemas:
-    queryJobCategoryList:
-      description: クエリパラメータ 職種一覧
-      type: object
-      properties:
-        name:
-          type: string
-          description: 名称
-        content:
-          type: string
-          description: 内容
-    queryJobList:
-      description: クエリパラメータ 仕事一覧
-      type: object
-      properties:
-        title:
-          type: string
-          description: タイトル
-        content:
-          type: string
-          description: 内容
-        attention:
-          type: boolean
-          description: 注目の求人
-        jobCategoryId:
-          type: integer
-          description: 職種id
-        price:
-          type: integer
-          description: 金額
-        welfare:
-          type: string
-          description: 福利厚生
-        holiday:
-          type: string
-          description: 休日
-    queryEntryList:
-      description: クエリパラメータ 応募一覧
-      type: object
-      properties:
-        jobId:
-          type: integer
-          description: 仕事id
-        jobCategoryId:
-          type: integer
-          description: 仕事カテゴリid
-    queryUserList:
-      description: クエリパラメータ 会員一覧
-      type: object
-      properties:
-        name:
-          type: string
-          description: 氏名
-        email:
-          type: string
-          description: メールアドレス
-        selfPr:
-          type: string
-          description: 自己PR
-        tel:
-          type: string
-          description: 電話番号
     requestJobCategory:
       description: リクエスト 職種登録
       type: object

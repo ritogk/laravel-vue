@@ -18,16 +18,14 @@ import {
     JobCategory,
     JobCategoryFromJSON,
     JobCategoryToJSON,
-    QueryJobCategoryList,
-    QueryJobCategoryListFromJSON,
-    QueryJobCategoryListToJSON,
     RequestJobCategory,
     RequestJobCategoryFromJSON,
     RequestJobCategoryToJSON,
 } from '../models';
 
 export interface JobCategoriesGetRequest {
-    values?: QueryJobCategoryList;
+    name?: string;
+    content?: string;
 }
 
 export interface JobCategoriesIdDeleteRequest {
@@ -57,7 +55,8 @@ export interface JobCategorieApiInterface {
     /**
      * 詳細内容
      * @summary 一覧取得
-     * @param {QueryJobCategoryList} [values] 
+     * @param {string} [name] 名称
+     * @param {string} [content] 内容
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof JobCategorieApiInterface
@@ -149,8 +148,12 @@ export class JobCategorieApi extends runtime.BaseAPI implements JobCategorieApiI
     async jobCategoriesGetRaw(requestParameters: JobCategoriesGetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<JobCategory>>> {
         const queryParameters: any = {};
 
-        if (requestParameters.values !== undefined) {
-            queryParameters['values'] = requestParameters.values;
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.content !== undefined) {
+            queryParameters['content'] = requestParameters.content;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

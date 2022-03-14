@@ -31,8 +31,7 @@ class JobCategoryController  extends Controller
      */
     public function list(JobCategoryListRequest $request, ListAction $action): JsonResponse
     {
-        $parameters = new OpenAPI\Model\QueryJobCategoryList($request->all());
-        $result = $action($parameters->getName(), $parameters->getContent());
+        $result = $action($request->name, $request->content);
         return response()->json(
             OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\JobCategory::class, $result),
             Response::HTTP_OK
@@ -48,8 +47,13 @@ class JobCategoryController  extends Controller
      */
     public function create(JobCategoryRequest $request, CreateAction $action): JsonResponse
     {
-        $parameters = new OpenAPI\Model\RequestJobCategory($request->all());
-        $result = $action($parameters->getName(), $parameters->getContent(), $parameters->getImage(), $parameters->getSortNo());
+        $requestBody = new OpenAPI\Model\RequestJobCategory($request->all());
+        $result = $action(
+            $requestBody->getName(),
+            $requestBody->getContent(),
+            $requestBody->getImage(),
+            $requestBody->getSortNo()
+        );
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\JobCategory::class, $result),
             Response::HTTP_CREATED
@@ -66,8 +70,14 @@ class JobCategoryController  extends Controller
      */
     public function update(JobCategoryRequest $request, string $id, UpdateAction $action): JsonResponse
     {
-        $parameters = new OpenAPI\Model\RequestJobCategory($request->all());
-        $result = $action($id, $parameters->getName(), $parameters->getContent(), $parameters->getImage(), $parameters->getSortNo());
+        $requestBody = new OpenAPI\Model\RequestJobCategory($request->all());
+        $result = $action(
+            $id,
+            $requestBody->getName(),
+            $requestBody->getContent(),
+            $requestBody->getImage(),
+            $requestBody->getSortNo()
+        );
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\JobCategory::class, $result),
             Response::HTTP_OK
