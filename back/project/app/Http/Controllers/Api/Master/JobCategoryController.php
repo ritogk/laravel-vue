@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api\Master;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 // request
-use App\Http\Requests\Master\JobCategoryListRequest;
 use App\Http\Requests\Master\JobCategoryRequest;
 // usecase
 use App\UseCases\Master\JobCategory\ListAction;
@@ -25,13 +25,14 @@ class JobCategoryController  extends Controller
     /**
      * 職種 一覧取得
      *
-     * @param  JobCategoryListRequest $request
+     * @param  Request $request
      * @param  ListAction $action
      * @return JsonResponse
      */
-    public function list(JobCategoryListRequest $request, ListAction $action): JsonResponse
+    public function list(Request $request, ListAction $action): JsonResponse
     {
-        $result = $action($request->name, $request->content);
+        $parameters = new OpenAPI\Model\QueryJobCategoryList($request->all());
+        $result = $action($parameters->getName(), $parameters->getContent());
         return response()->json(
             OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\JobCategory::class, $result),
             Response::HTTP_OK

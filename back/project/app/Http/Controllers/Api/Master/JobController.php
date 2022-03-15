@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api\Master;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 // request
-use App\Http\Requests\Master\JobListRequest;
 use App\Http\Requests\Master\JobRequest;
 // usecase
 use App\UseCases\Master\Job\ListAction;
@@ -26,20 +26,21 @@ class JobController extends Controller
     /**
      * 仕事 一覧取得
      *
-     * @param  JobListRequest $request
+     * @param  Request $request
      * @param  ListAction $action
      * @return JsonResponse
      */
-    public function list(JobListRequest $request, ListAction $action): JsonResponse
+    public function list(Request $request, ListAction $action): JsonResponse
     {
+        $parameters = new OpenAPI\Model\QueryJobList($request->all());
         $result = $action(
-            $request->title,
-            $request->content,
-            $request->attention,
-            $request->jobCategoryId,
-            $request->price,
-            $request->welfare,
-            $request->holiday,
+            $parameters->getTitle(),
+            $parameters->getContent(),
+            $parameters->getAttention() === "true",
+            $parameters->getJobCategoryId(),
+            $parameters->getPrice(),
+            $parameters->getWelfare(),
+            $parameters->getHoliday()
         );
         return response()->json(
             OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\Job::class, $result),

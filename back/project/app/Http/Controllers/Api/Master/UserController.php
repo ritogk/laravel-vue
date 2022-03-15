@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api\Master;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 // request
-use App\Http\Requests\Master\UserListRequest;
 use App\Http\Requests\Master\UserRequest;
 // usecase
 use App\UseCases\Master\User\ListAction;
@@ -20,17 +20,18 @@ class UserController extends Controller
     /**
      * 会員 一覧取得
      *
-     * @param  UserListRequest $request
+     * @param  Request $request
      * @param  ListAction $action
      * @return JsonResponse
      */
-    public function list(UserListRequest $request, ListAction $action): JsonResponse
+    public function list(Request $request, ListAction $action): JsonResponse
     {
+        $parameters = new OpenAPI\Model\QueryUserList($request->all());
         $result = $action(
-            $request->name(),
-            $request->email(),
-            $request->selfPr(),
-            $request->tel()
+            $parameters->getName(),
+            $parameters->getEmail(),
+            $parameters->getSelfPr(),
+            $parameters->getTel()
         );
         return response()->json(
             OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\User::class, $result),

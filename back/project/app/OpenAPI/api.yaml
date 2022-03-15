@@ -534,6 +534,67 @@ components:
       scheme: bearer
       description: 会員トークン
   schemas:
+    queryJobCategoryList:
+      description: クエリパラメータ 職種一覧
+      type: object
+      properties:
+        name:
+          type: string
+          description: 名称
+        content:
+          type: string
+          description: 内容
+    queryJobList:
+      description: クエリパラメータ 仕事一覧
+      type: object
+      properties:
+        title:
+          type: string
+          description: タイトル
+        content:
+          type: string
+          description: 内容
+        attention:
+          type: boolean
+          description: 注目の求人
+        jobCategoryId:
+          type: integer
+          description: 職種id
+        price:
+          type: integer
+          description: 金額
+        welfare:
+          type: string
+          description: 福利厚生
+        holiday:
+          type: string
+          description: 休日
+    queryEntryList:
+      description: クエリパラメータ 応募一覧
+      type: object
+      properties:
+        jobId:
+          type: integer
+          description: 仕事id
+        jobCategoryId:
+          type: integer
+          description: 仕事カテゴリid
+    queryUserList:
+      description: クエリパラメータ 会員一覧
+      type: object
+      properties:
+        name:
+          type: string
+          description: 氏名
+        email:
+          type: string
+          description: メールアドレス
+        selfPr:
+          type: string
+          description: 自己PR
+        tel:
+          type: string
+          description: 電話番号
     requestJobCategory:
       description: リクエスト 職種登録
       type: object

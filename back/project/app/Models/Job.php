@@ -52,6 +52,10 @@ class Job extends Model
 
     protected $guarded = ['id', 'updated_at', 'created_at', 'deleted_at']; // ブラックリスト
 
+    protected $casts = [
+        'attention' => 'boolean'
+    ];
+
     // リレーション
     public function jobCategory()
     {
@@ -65,14 +69,14 @@ class Job extends Model
     }
 
     /**
-    * 日時を日本時間に変換する
-    * laravel7からtoArray, toJson内の日時がUTC固定になったので
-    *
-    * @param  \DateTimeInterface  $date
-    * @return string
-    */
-   protected function serializeDate(DateTimeInterface $date)
-   {
-       return $date->format('Y-m-d H:i:s');
-   }
+     * 日時を日本時間に変換する
+     * laravel7からtoArray, toJson内の日時がUTC固定になったので
+     *
+     * @param  \DateTimeInterface  $date
+     * @return string
+     */
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 }
