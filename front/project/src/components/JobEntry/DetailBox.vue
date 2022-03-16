@@ -84,7 +84,6 @@ export default defineComponent({
 
     // 「申し込み」押下時
     const clickEntry = async (): Promise<void> => {
-      debugger;
       if (props.modalInfo.job.id !== undefined && user.value.id !== undefined) {
         await job.entryJob(props.modalInfo.job.id, user.value.id);
         props.modalInfo?.object.hide();

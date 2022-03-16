@@ -21,17 +21,26 @@
               aria-current="page"
               href="#"
               @click="clickLogout"
+              v-show="isLogin"
               >ログアウト</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" v-text="user.name"></a>
+            <a class="nav-link" href="#" v-text="loginUser.name"></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" @click="clickLogin">ログイン</a>
+            <a class="nav-link" href="#" @click="clickLogin" v-show="!isLogin"
+              >ログイン</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" @click="clickRegistration">新規登録</a>
+            <a
+              class="nav-link"
+              href="#"
+              @click="clickRegistration"
+              v-show="!isLogin"
+              >新規登録</a
+            >
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">管理画面</a>
@@ -74,7 +83,8 @@ export default defineComponent({
       router.push({ name: 'UserLogin' });
     };
     return {
-      user: userAuthenticationRefs.user,
+      loginUser: userAuthenticationRefs.user,
+      isLogin: userAuthenticationRefs.isLogin,
       clickTitle,
       clickRegistration,
       clickLogin,

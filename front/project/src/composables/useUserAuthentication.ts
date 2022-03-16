@@ -10,7 +10,7 @@ import {
 
 // メイン関数のtype
 type useUserAuthenticationType = {
-  userAuthenticationRefs: ToRefs<{ user: User }>;
+  userAuthenticationRefs: ToRefs<{ user: User; isLogin: boolean }>;
   login(email: string, password: string): Promise<void | validaitonErrorsType>;
   refresh(): Promise<AccessToken>;
   logout(): Promise<void>;
@@ -22,7 +22,7 @@ const authFrontApi = new AuthFrontApi(apiConfig);
 // メイン関数
 const useUserAuthentication = (): useUserAuthenticationType => {
   // 状態
-  const state = reactive({ user: {} as User });
+  const state = reactive({ user: {} as User, isLogin: false });
 
   // ログイン処理
   const login = async (
@@ -54,12 +54,14 @@ const useUserAuthentication = (): useUserAuthenticationType => {
   // ログアウト
   const logout = async (): Promise<void> => {
     await authFrontApi.authFrontLogoutPost({});
+    state.isLogin = false;
     state.user = {} as User;
   };
 
   // ログイン済のユーザー情報を取得
   const getMe = async (): Promise<void> => {
     state.user = await authFrontApi.authFrontMeGet();
+    state.isLogin = true;
   };
 
   return {

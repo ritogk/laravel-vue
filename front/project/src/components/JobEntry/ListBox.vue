@@ -27,7 +27,8 @@
   border: solid 1px #ffda45;
   background: #ffda45;
   color: #333;
-  text-align: center;
+  text-align: left;
+  width: 13%;
 }
 </style>
 
@@ -35,26 +36,29 @@
   <!-- 一覧ボックス -->
   <div class="w-75 ps-3">
     <VueElementLoading :active="loading" spinner="ring" size="50" />
-    <div
-      v-for="(job, index) in jobs"
-      :key="`job-${index}`"
-      @click="clickJob(job)"
-      class="card mb-3"
-    >
+    <div v-for="(job, index) in jobs" :key="`job-${index}`" class="card mb-3">
       <div class="card-header bg-primary text-white" v-text="job.title"></div>
       <div class="trim">
         <img :src="job.imageUrl" class="card-img-top trim_img" />
       </div>
       <div class="card-body">
         <div class="px-1">
+          <div v-show="job.attention">
+            <p class="job_attention">★注目の求人</p>
+          </div>
           <p class="job_content" v-text="job.content"></p>
           <p class="job_content">
             {{ job.price !== undefined ? convertComma(job.price) : '' }}円~
           </p>
-          <div v-show="job.attention">
-            <p class="job_attention">注目の求人</p>
+          <div v-show="isLogin" @click="clickJob(job)">
+            <button
+              type="button"
+              class="btn btn-primary w-100 text-light"
+              @click="clickSearch"
+            >
+              この求人に応募する
+            </button>
           </div>
-          <a href="#" class="stretched-link"></a>
         </div>
       </div>
     </div>
@@ -81,6 +85,10 @@ import VueElementLoading from 'vue-element-loading';
 import { defineComponent, inject, reactive, onMounted, ref } from 'vue';
 import DetailBox from '@/components/JobEntry/DetailBox.vue';
 import { jobKey, useJobType } from '@/composables/useJob';
+import {
+  userAuthenticationKey,
+  useUserAuthenticationType,
+} from '@/composables/useUserAuthentication';
 import { convertComma } from '@/libs/utils';
 import { Job } from '@/open_api';
 import { Modal } from 'bootstrap';
@@ -92,6 +100,11 @@ export default defineComponent({
   },
   setup() {
     const { jobRefs } = inject(jobKey) as useJobType;
+    const { userAuthenticationRefs } = inject(
+      userAuthenticationKey
+    ) as useUserAuthenticationType;
+
+    const isLogin = userAuthenticationRefs.isLogin;
     const jobs = jobRefs.items;
     const loading = ref(true);
 
@@ -121,7 +134,7 @@ export default defineComponent({
       modalInfo.job.imageUrl = job.imageUrl;
       modalInfo.object.show();
     };
-    return { jobs, clickJob, convertComma, modalInfo, loading };
+    return { jobs, clickJob, convertComma, modalInfo, loading, isLogin };
   },
 });
 </script>
