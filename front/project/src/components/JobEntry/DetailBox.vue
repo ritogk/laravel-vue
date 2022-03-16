@@ -1,6 +1,13 @@
+<style scoped>
+/* 改行 */
+.multiple {
+  white-space: pre-wrap;
+}
+</style>
+
 <template>
   <div class="modal-header bg-primary">
-    <h5 class="modal-title text-white" id="modalLabel">プログラマー募集!!</h5>
+    <h5 class="modal-title text-white" id="modalLabel">{{ job?.title }}</h5>
     <button
       type="button"
       class="btn-close"
@@ -16,27 +23,33 @@
       />
       <div class="card-body">
         <div>
-          <h1>プログラマー募集!!</h1>
+          <h1>{{ job?.title }}</h1>
         </div>
         <div class="py-3">
           <h3>仕事内容</h3>
-          <span class="multiple"></span>
+          <span class="multiple">{{ job?.content }}</span>
         </div>
         <div class="py-3">
           <h3>金額</h3>
-          <span></span>
+          <span>{{ job ?? convertComma(job?.price) }}円~ </span>
         </div>
         <div class="py-3">
           <h3>福利厚生</h3>
-          <span class="multiple"></span>
+          <span class="multiple">{{ job?.welfare }}</span>
         </div>
         <div class="py-3">
           <h3>休日</h3>
-          <span class="multiple"></span>
+          <span class="multiple">{{ job?.holiday }}</span>
         </div>
 
         <div class="py-2">
-          <button type="button" class="btn btn-primary w-100">申し込む</button>
+          <button
+            type="button"
+            class="btn btn-primary w-100 text-light"
+            @click="clickEntry"
+          >
+            申し込む
+          </button>
         </div>
       </div>
     </div>
@@ -44,12 +57,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import 'bootstrap';
+import { defineComponent, PropType } from 'vue';
+import { Modal } from 'bootstrap';
+import { Job } from '@/open_api';
+import { convertComma } from '@/libs/utils';
 export default defineComponent({
-  setup() {
-    const flg = false;
-    return { flg };
+  props: {
+    modalInfo: Object as PropType<{ object: Modal; job: Job }>,
+  },
+  setup(props) {
+    // 「申し込み」押下時
+    const clickEntry = () => {
+      props.modalInfo?.object.hide();
+    };
+    return { job: props.modalInfo?.job, convertComma, clickEntry };
   },
 });
 </script>

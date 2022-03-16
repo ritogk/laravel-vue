@@ -6,38 +6,41 @@
       <div class="card-body">
         <!-- 入力(職種) -->
         <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label fs-6"
-            >職種</label
+          <label for="inputJobCategpryOd" class="form-label fs-6">職種</label>
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            v-model="condition.jobCategoryId"
           >
-          <select class="form-select" aria-label="Default select example">
-            <option selected>全て</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="">全て</option>
+            <option
+              v-for="(name, index) in jobCategoryNms"
+              :key="`jobCategory${index}`"
+              v-bind:value="index"
+              v-text="name"
+            ></option>
           </select>
         </div>
         <!-- 入力(仕事内容) -->
         <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label fs-6"
-            >仕事内容</label
-          >
+          <label for="inputContent" class="form-label fs-6">仕事内容</label>
           <input
-            type="email"
+            type="text"
             class="form-control form-control-sm"
-            id="exampleFormControlInput1"
+            id="inputContent"
             placeholder="どんな求人をお探しですか"
+            v-model="condition.content"
           />
         </div>
         <!-- 入力(金額) -->
         <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label fs-6"
-            >金額</label
-          >
+          <label for="inputPrice" class="form-label fs-6">金額</label>
           <input
-            type="email"
+            type="number"
             class="form-control form-control-sm"
-            id="exampleFormControlInput1"
+            id="inputPrice"
             placeholder="最低金額を入力してください"
+            v-model="condition.price"
           />
         </div>
         <!-- 入力(注目の求人)-->
@@ -46,15 +49,20 @@
             class="form-check-input"
             type="checkbox"
             value=""
-            id="flexCheckDefault"
+            id="inputAttention"
+            v-model="condition.attention"
           />
-          <label class="form-check-label" for="flexCheckDefault">
+          <label class="form-check-label" for="inputAttention">
             注目の求人
           </label>
         </div>
         <!-- 検索-->
         <div class="mt-3">
-          <button type="button" class="btn btn-primary w-100 text-light">
+          <button
+            type="button"
+            class="btn btn-primary w-100 text-light"
+            @click="clickSearch"
+          >
             検索
           </button>
         </div>
@@ -64,11 +72,43 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, inject, reactive, PropType } from 'vue';
+import { jobKey, useJobType } from '@/composables/useJob';
+import { useJobCategory } from '@/composables/useJobCategory';
 
 export default defineComponent({
-  setup() {
-    return {};
+  props: {
+    jobCategoryId: Number as PropType<number | undefined>,
+  },
+  setup(props) {
+    const { getJob } = inject(jobKey) as useJobType;
+    const { jobCategoryRefs, getJobCategory } = useJobCategory();
+
+    // セレクト用の職種一覧を取得
+    getJobCategory();
+    const jobCategoryNms = jobCategoryRefs.names;
+
+    // 検索条件
+    const condition = reactive({
+      jobCategoryId: props.jobCategoryId,
+      content: '',
+      price: '',
+      attention: false,
+    });
+
+    // 「検索」ボタン押下時
+    const clickSearch = (): void => {
+      getJob(
+        condition.jobCategoryId ? condition.jobCategoryId : undefined,
+        condition.content ? condition.content : undefined,
+        condition.price ? Number(condition.price) : undefined,
+        condition.attention
+      );
+    };
+
+    // 仕事一覧を取得
+    clickSearch();
+    return { condition, clickSearch, jobCategoryNms };
   },
 });
 </script>
