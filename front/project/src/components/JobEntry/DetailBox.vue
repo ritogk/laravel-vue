@@ -17,10 +17,7 @@
   </div>
   <div class="modal-body">
     <div class="card">
-      <img
-        :src="`https://business-textbooks.com/btextbooks/wp-content/uploads/2020/02/3854adc57415272a6dbdaf4017e4d6b4-135.jpg`"
-        class="card-img-top"
-      />
+      <img :src="job.imageUrl" class="card-img-top" />
       <div class="card-body">
         <div>
           <h1>{{ job?.title }}</h1>
@@ -31,7 +28,7 @@
         </div>
         <div class="py-3">
           <h3>金額</h3>
-          <span>{{ job ?? convertComma(job?.price) }}円~ </span>
+          <span>{{ job?.price }}円~ </span>
         </div>
         <div class="py-3">
           <h3>福利厚生</h3>
@@ -57,19 +54,41 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, inject } from 'vue';
 import { Modal } from 'bootstrap';
 import { Job } from '@/open_api';
 import { convertComma } from '@/libs/utils';
+import {
+  userAuthenticationKey,
+  useUserAuthenticationType,
+} from '@/composables/useUserAuthentication';
+import { useJob } from '@/composables/useJob';
 export default defineComponent({
   props: {
-    modalInfo: Object as PropType<{ object: Modal; job: Job }>,
+    modalInfo: {
+      type: Object as PropType<{ object: Modal; job: Job }>,
+      required: true,
+    },
   },
   setup(props) {
+    const { userAuthenticationRefs } = inject(
+      userAuthenticationKey
+    ) as useUserAuthenticationType;
+
+    const job = useJob();
+
+    // ユーザー情報取得
+    const user = userAuthenticationRefs.user;
+
     // 「申し込み」押下時
-    const clickEntry = () => {
-      props.modalInfo?.object.hide();
+    const clickEntry = async (): Promise<void> => {
+      debugger;
+      if (props.modalInfo.job.id !== undefined && user.value.id !== undefined) {
+        await job.entryJob(props.modalInfo.job.id, user.value.id);
+        props.modalInfo?.object.hide();
+      }
     };
+
     return { job: props.modalInfo?.job, convertComma, clickEntry };
   },
 });

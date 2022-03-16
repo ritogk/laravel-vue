@@ -42,10 +42,7 @@
     >
       <div class="card-header bg-primary text-white" v-text="job.title"></div>
       <div class="trim">
-        <img
-          :src="`https://business-textbooks.com/btextbooks/wp-content/uploads/2020/02/3854adc57415272a6dbdaf4017e4d6b4-135.jpg`"
-          class="card-img-top trim_img"
-        />
+        <img :src="job.imageUrl" class="card-img-top trim_img" />
       </div>
       <div class="card-body">
         <div class="px-1">
@@ -105,6 +102,7 @@ export default defineComponent({
 
     // 「仕事」エリアをクリックした場合
     const clickJob = (job: Job) => {
+      modalInfo.job.id = job.id;
       modalInfo.job.title = job.title;
       modalInfo.job.content = job.content;
       modalInfo.job.price = job.price;

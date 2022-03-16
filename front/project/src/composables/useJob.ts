@@ -1,6 +1,6 @@
 import { InjectionKey, reactive, readonly, ToRefs, toRefs } from 'vue';
 import { apiConfig } from '@/libs/config';
-import { JobApi, Job, JobsGetRequest } from '@/open_api';
+import { JobApi, Job, JobsGetRequest, Entry, EntryApi } from '@/open_api';
 
 // メイン関数のtype
 type useJobType = {
@@ -13,9 +13,11 @@ type useJobType = {
     price?: number,
     attention?: boolean
   ): Promise<Array<Job>>;
+  entryJob(jobId: number, userId: number): Promise<Entry>;
 };
 
 const jobApi = new JobApi(apiConfig);
+const entryApi = new EntryApi(apiConfig);
 
 // メイン関数
 const useJob = (): useJobType => {
@@ -42,9 +44,17 @@ const useJob = (): useJobType => {
     return jobs;
   };
 
+  // 求人に対して申し込みを行う。
+  const entryJob = async (jobId: number, userId: number): Promise<Entry> => {
+    return await entryApi.entriesPost({
+      requestEntry: { jobId: jobId, userId: userId },
+    });
+  };
+
   return {
     jobRefs: toRefs(state),
     getJob: readonly(getJob),
+    entryJob: readonly(entryJob),
   };
 };
 
