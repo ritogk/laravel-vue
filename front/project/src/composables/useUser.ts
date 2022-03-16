@@ -1,4 +1,4 @@
-import { InjectionKey, readonly } from 'vue';
+import { InjectionKey } from 'vue';
 import { apiConfig } from '@/libs/config';
 import { validaitonErrorsType } from '@/libs/type';
 import { User, UserApi, UsersPostRequest } from '@/open_api';

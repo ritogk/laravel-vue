@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use \Cookie;
 // request
 use App\Http\Requests\Auth\Front\LoginRequest;
 // openapi
@@ -59,11 +60,10 @@ class AuthFrontController extends Controller
     public function logout(): JsonResponse
     {
         auth('user')->logout();
-
         return response()->json(
             ['message' => 'Successfully logged out'],
             Response::HTTP_NO_CONTENT
-        );
+        )->cookie(Cookie::forget('token'));
     }
 
     /**

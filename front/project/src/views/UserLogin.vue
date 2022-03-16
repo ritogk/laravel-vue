@@ -70,7 +70,7 @@ import {
 export default defineComponent({
   setup() {
     const router = useRouter();
-    const { login } = inject(
+    const { login, getMe } = inject(
       userAuthenticationKey
     ) as useUserAuthenticationType;
 
@@ -83,6 +83,8 @@ export default defineComponent({
     const clickLogin = async () => {
       // ログイン
       const response = await login(form.email, form.password);
+      // ログイン済のユーザー情報を取得
+      getMe();
       // 正常の場合
       if (!response) {
         router.push('/');

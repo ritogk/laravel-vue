@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use \Cookie;
 // request
 use App\Http\Requests\Auth\Admin\LoginRequest;
 // openapi
@@ -61,7 +62,7 @@ class AuthAdminController extends Controller
         return response()->json(
             ['message' => 'Successfully logged out'],
             Response::HTTP_NO_CONTENT
-        );
+        )->cookie(Cookie::forget('token'));
     }
 
     /**

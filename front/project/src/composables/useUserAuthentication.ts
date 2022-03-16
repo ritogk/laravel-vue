@@ -1,4 +1,4 @@
-import { InjectionKey, reactive, readonly, ToRefs, toRefs } from 'vue';
+import { InjectionKey, reactive, ToRefs, toRefs } from 'vue';
 import { apiConfig } from '@/libs/config';
 import { validaitonErrorsType } from '@/libs/type';
 import {
@@ -35,8 +35,6 @@ const useUserAuthentication = (): useUserAuthenticationType => {
     try {
       // ログイン
       await authFrontApi.authFrontLoginPost(request);
-      // ログイン済のユーザー情報を取得
-      getMe();
     } catch (err: any) {
       const json = await err.json();
       return Promise.resolve({
@@ -53,14 +51,28 @@ const useUserAuthentication = (): useUserAuthenticationType => {
 
   // ログアウト
   const logout = async (): Promise<void> => {
-    await authFrontApi.authFrontLogoutPost({});
+    try {
+      await authFrontApi.authFrontLogoutPost({});
+    } catch (err: any) {
+      if (err.status !== 401) return;
+      // リフレッシュトークン更新
+      await refresh();
+      state.user = await authFrontApi.authFrontMeGet();
+    }
     state.isLogin = false;
     state.user = {} as User;
   };
 
   // ログイン済のユーザー情報を取得
   const getMe = async (): Promise<void> => {
-    state.user = await authFrontApi.authFrontMeGet();
+    try {
+      state.user = await authFrontApi.authFrontMeGet();
+    } catch (err: any) {
+      if (err.status !== 401) return;
+      // リフレッシュトークン更新
+      await refresh();
+      state.user = await authFrontApi.authFrontMeGet();
+    }
     state.isLogin = true;
   };
 

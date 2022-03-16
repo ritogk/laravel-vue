@@ -1,6 +1,7 @@
-import { InjectionKey, reactive, readonly, ToRefs, toRefs } from 'vue';
+import { InjectionKey, reactive, ToRefs, toRefs } from 'vue';
 import { apiConfig } from '@/libs/config';
 import { JobApi, Job, JobsGetRequest, Entry, EntryApi } from '@/open_api';
+import { useUserAuthentication } from '@/composables/useUserAuthentication';
 
 // メイン関数のtype
 type useJobType = {
@@ -44,11 +45,20 @@ const useJob = (): useJobType => {
     return jobs;
   };
 
-  // 求人に対して申し込みを行う。
+  // 仕事に対しての申込
   const entryJob = async (jobId: number, userId: number): Promise<Entry> => {
-    return await entryApi.entriesPost({
-      requestEntry: { jobId: jobId, userId: userId },
-    });
+    try {
+      return await entryApi.entriesPost({
+        requestEntry: { jobId: jobId, userId: userId },
+      });
+    } catch (err: any) {
+      if (err.status !== 401) return {};
+      // リフレッシュトークン更新
+      await useUserAuthentication().refresh();
+      return await entryApi.entriesPost({
+        requestEntry: { jobId: jobId, userId: userId },
+      });
+    }
   };
 
   return {

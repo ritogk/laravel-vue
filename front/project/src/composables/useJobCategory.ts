@@ -1,4 +1,4 @@
-import { InjectionKey, reactive, readonly, ToRefs, toRefs } from 'vue';
+import { reactive, ToRefs, toRefs } from 'vue';
 import { apiConfig } from '@/libs/config';
 import { JobCategorieApi, JobCategory } from '@/open_api';
 
