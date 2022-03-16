@@ -34,6 +34,7 @@
 <template>
   <!-- 一覧ボックス -->
   <div class="w-75 ps-3">
+    <VueElementLoading :active="loading" spinner="ring" size="50" />
     <div
       v-for="(job, index) in jobs"
       :key="`job-${index}`"
@@ -47,7 +48,9 @@
       <div class="card-body">
         <div class="px-1">
           <p class="job_content" v-text="job.content"></p>
-          <p class="job_content" v-text="`${convertComma(job.price)}円~`"></p>
+          <p class="job_content">
+            {{ job.price !== undefined ? convertComma(job.price) : '' }}円~
+          </p>
           <div v-show="job.attention">
             <p class="job_attention">注目の求人</p>
           </div>
@@ -74,7 +77,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, reactive, onMounted } from 'vue';
+import VueElementLoading from 'vue-element-loading';
+import { defineComponent, inject, reactive, onMounted, ref } from 'vue';
 import DetailBox from '@/components/JobEntry/DetailBox.vue';
 import { jobKey, useJobType } from '@/composables/useJob';
 import { convertComma } from '@/libs/utils';
@@ -84,10 +88,12 @@ import { Modal } from 'bootstrap';
 export default defineComponent({
   components: {
     DetailBox,
+    VueElementLoading,
   },
   setup() {
     const { jobRefs } = inject(jobKey) as useJobType;
     const jobs = jobRefs.items;
+    const loading = ref(true);
 
     // 仕事詳細のモーダル情報
     const modalInfo = reactive({
@@ -98,9 +104,12 @@ export default defineComponent({
       modalInfo.object = new Modal('#modalJobDetail', {
         keyboard: false,
       });
+      setTimeout(function () {
+        loading.value = false;
+      }, 1000);
     });
 
-    // 「仕事」エリアをクリックした場合
+    // 「仕事」カードのクリック時
     const clickJob = (job: Job) => {
       modalInfo.job.id = job.id;
       modalInfo.job.title = job.title;
@@ -112,7 +121,7 @@ export default defineComponent({
       modalInfo.job.imageUrl = job.imageUrl;
       modalInfo.object.show();
     };
-    return { jobs, clickJob, convertComma, modalInfo };
+    return { jobs, clickJob, convertComma, modalInfo, loading };
   },
 });
 </script>

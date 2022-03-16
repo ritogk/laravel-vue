@@ -28,7 +28,9 @@
         </div>
         <div class="py-3">
           <h3>金額</h3>
-          <span>{{ job?.price }}円~ </span>
+          <span
+            >{{ job.price !== undefined ? convertComma(job.price) : '' }}円~
+          </span>
         </div>
         <div class="py-3">
           <h3>福利厚生</h3>
