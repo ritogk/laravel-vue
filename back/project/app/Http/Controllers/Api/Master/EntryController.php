@@ -44,7 +44,7 @@ class EntryController extends Controller
     public function create(EntryRequest $request, CreateAction $action): JsonResponse
     {
         $requestBody = new OpenAPI\Model\RequestEntry($request->all());
-        $result = $action($requestBody->getUserId(), $requestBody->getJobId());
+        $result = $action($requestBody->getJobId(), $requestBody->getUserId());
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\Entry::class, $result),
             Response::HTTP_CREATED
