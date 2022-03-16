@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use \Cookie;
 // request
 use App\Http\Requests\Auth\Front\LoginRequest;
 // openapi
@@ -21,20 +22,21 @@ class AuthFrontController extends Controller
      */
     public function login(LoginRequest $request): JsonResponse
     {
-        $parameters = new OpenAPI\Model\RequestLogin($request->all());
-        $request_all = ['email' => $parameters->getEmail(), 'password' => $parameters->getPassword()];
+        $requestBody = new OpenAPI\Model\RequestLogin($request->all());
+        $request_all = ['email' => $requestBody->getEmail(), 'password' => $requestBody->getPassword()];
         if (!$token = auth('user')->attempt($request_all)) {
             return response()->json(
                 ['error' => 'Unauthorized'],
                 Response::HTTP_UNAUTHORIZED
             );
         }
-
         $result = $this->respondWithToken($token);
+        $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
+        $cookie = cookie('token', $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
-            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
+            $response_model,
             Response::HTTP_CREATED
-        );
+        )->cookie($cookie);
     }
 
     /**
@@ -58,11 +60,10 @@ class AuthFrontController extends Controller
     public function logout(): JsonResponse
     {
         auth('user')->logout();
-
         return response()->json(
             ['message' => 'Successfully logged out'],
             Response::HTTP_NO_CONTENT
-        );
+        )->cookie(Cookie::forget('token'));
     }
 
     /**
@@ -73,10 +74,12 @@ class AuthFrontController extends Controller
     public function refresh(): JsonResponse
     {
         $result = $this->respondWithToken(auth('user')->refresh());
+        $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
+        $cookie = cookie('token', $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
-            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
+            $response_model,
             Response::HTTP_CREATED
-        );
+        )->cookie($cookie);
     }
 
 

@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api\Master;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 // request
-use App\Http\Requests\Master\JobListRequest;
 use App\Http\Requests\Master\JobRequest;
 // usecase
 use App\UseCases\Master\Job\ListAction;
@@ -26,17 +26,17 @@ class JobController extends Controller
     /**
      * 仕事 一覧取得
      *
-     * @param  JobListRequest $request
+     * @param  Request $request
      * @param  ListAction $action
      * @return JsonResponse
      */
-    public function list(JobListRequest $request, ListAction $action): JsonResponse
+    public function list(Request $request, ListAction $action): JsonResponse
     {
         $parameters = new OpenAPI\Model\QueryJobList($request->all());
         $result = $action(
             $parameters->getTitle(),
             $parameters->getContent(),
-            $parameters->getAttention(),
+            $parameters->getAttention() === "true",
             $parameters->getJobCategoryId(),
             $parameters->getPrice(),
             $parameters->getWelfare(),
@@ -57,17 +57,17 @@ class JobController extends Controller
      */
     public function create(JobRequest $request, CreateAction $action): JsonResponse
     {
-        $parameters = new OpenAPI\Model\RequestJob($request->all());
+        $requestBody = new OpenAPI\Model\RequestJob($request->all());
         $result = $action(
-            $parameters->getTitle(),
-            $parameters->getContent(),
-            $parameters->getAttention(),
-            $parameters->getJobCategoryId(),
-            $parameters->getPrice(),
-            $parameters->getWelfare(),
-            $parameters->getHoliday(),
-            $parameters->getImage(),
-            $parameters->getSortNo()
+            $requestBody->getTitle(),
+            $requestBody->getContent(),
+            $requestBody->getAttention(),
+            $requestBody->getJobCategoryId(),
+            $requestBody->getPrice(),
+            $requestBody->getWelfare(),
+            $requestBody->getHoliday(),
+            $requestBody->getImage(),
+            $requestBody->getSortNo()
         );
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\Job::class, $result),
@@ -85,18 +85,18 @@ class JobController extends Controller
      */
     public function update(JobRequest $request, string $id, UpdateAction $action): JsonResponse
     {
-        $parameters = new OpenAPI\Model\RequestJob($request->all());
+        $requestBody = new OpenAPI\Model\RequestJob($request->all());
         $result = $action(
             $id,
-            $parameters->getTitle(),
-            $parameters->getContent(),
-            $parameters->getAttention(),
-            $parameters->getJobCategoryId(),
-            $parameters->getPrice(),
-            $parameters->getWelfare(),
-            $parameters->getHoliday(),
-            $parameters->getImage(),
-            $parameters->getSortNo()
+            $requestBody->getTitle(),
+            $requestBody->getContent(),
+            $requestBody->getAttention(),
+            $requestBody->getJobCategoryId(),
+            $requestBody->getPrice(),
+            $requestBody->getWelfare(),
+            $requestBody->getHoliday(),
+            $requestBody->getImage(),
+            $requestBody->getSortNo()
         );
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\Job::class, $result),

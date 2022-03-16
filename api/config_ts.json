@@ -1,5 +1,5 @@
 {
-    "supportsES6": "true",
-    "withInterfaces": "true",
-    "typescriptThreePlus": "true"
+  "supportsES6": true,
+  "withInterfaces": true,
+  "typescriptThreePlus": true
 }

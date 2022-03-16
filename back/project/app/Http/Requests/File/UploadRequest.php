@@ -13,7 +13,8 @@ class UploadRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -22,7 +23,8 @@ class UploadRequest extends FormRequest
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'file' => 'required|file|mimes:jpeg,png,jpg',
         ];
@@ -33,7 +35,8 @@ class UploadRequest extends FormRequest
      *
      * @return array
      */
-    public function attributes() {
+    public function attributes()
+    {
         return [
             'file' => 'ファイル',
         ];
@@ -45,11 +48,12 @@ class UploadRequest extends FormRequest
      *
      * @return array
      */
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator)
+    {
         $response = response()->json([
-            'status' => 422,
+            'status' => 400,
             'errors' => $validator->errors(),
-        ], 422);
+        ], 400);
         throw new HttpResponseException($response);
     }
 }
