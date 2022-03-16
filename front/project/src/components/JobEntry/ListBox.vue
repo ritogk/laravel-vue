@@ -36,7 +36,11 @@
   <!-- 一覧ボックス -->
   <div class="w-75 ps-3">
     <VueElementLoading :active="loading" spinner="ring" size="50" />
-    <div v-for="(job, index) in jobs" :key="`job-${index}`" class="card mb-3">
+    <div
+      v-for="(job, index) in jobs"
+      :key="`job-${index}`"
+      class="card mb-3 border-primary"
+    >
       <div class="card-header bg-primary text-white" v-text="job.title"></div>
       <div class="trim">
         <img :src="job.imageUrl" class="card-img-top trim_img" />

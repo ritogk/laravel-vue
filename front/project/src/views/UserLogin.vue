@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card w-75 mx-auto">
+    <div class="card w-75 mx-auto border-primary">
       <div class="card-header bg-primary text-white">ログイン</div>
       <div class="card-body">
         <!-- 入力(メールアドレス) -->

@@ -1,7 +1,7 @@
 <template>
   <!-- 検索ボックス -->
   <div class="w-25">
-    <div class="card">
+    <div class="card border-primary">
       <div class="card-header bg-primary text-white">検索</div>
       <div class="card-body">
         <!-- 入力(職種) -->

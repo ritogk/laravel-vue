@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card w-100 mx-auto">
+    <div class="card w-100 mx-auto border-primary">
       <div class="card-header bg-primary text-white">会員登録</div>
       <div class="card-body">
         <!-- 入力(氏名) -->
