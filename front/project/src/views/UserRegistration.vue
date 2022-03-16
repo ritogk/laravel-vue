@@ -135,15 +135,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, inject } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUser } from '@/composables/useUser';
-import { useUserAuthentication } from '@/composables/useUserAuthentication';
+import {
+  useUserAuthenticationType,
+  userAuthenticationKey,
+} from '@/composables/useUserAuthentication';
 import { validaitonErrorsType } from '@/libs/type';
 
 export default defineComponent({
   setup() {
+    const { login } = inject(
+      userAuthenticationKey
+    ) as useUserAuthenticationType;
+
     const router = useRouter();
+
     // フォームの状態
     const form = reactive({
       name: '山田 太郎',
@@ -177,7 +185,7 @@ export default defineComponent({
       // 正常時の処理
       if (!('errors' in response)) {
         // ログイン
-        await useUserAuthentication().login(form.email, form.password);
+        await login(form.email, form.password);
         router.push('/');
         return;
       }
