@@ -47,7 +47,7 @@ const useUser = (): useUserType => {
       } as validaitonErrorsType);
     }
   };
-  return { registration: readonly(registration) };
+  return { registration: registration };
 };
 
 const injectionKey: InjectionKey<useUserType> = Symbol('Auth');

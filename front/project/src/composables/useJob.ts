@@ -53,8 +53,8 @@ const useJob = (): useJobType => {
 
   return {
     jobRefs: toRefs(state),
-    getJob: readonly(getJob),
-    entryJob: readonly(entryJob),
+    getJob: getJob,
+    entryJob: entryJob,
   };
 };
 

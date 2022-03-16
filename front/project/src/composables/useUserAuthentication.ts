@@ -64,10 +64,10 @@ const useUserAuthentication = (): useUserAuthenticationType => {
 
   return {
     userAuthenticationRefs: toRefs(state),
-    login: readonly(login),
-    refresh: readonly(refresh),
-    logout: readonly(logout),
-    getMe: readonly(getMe),
+    login: login,
+    refresh: refresh,
+    logout: logout,
+    getMe: getMe,
   };
 };
 

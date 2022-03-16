@@ -41,7 +41,7 @@ const useJobCategory = (): useJobCategoryType => {
 
   return {
     jobCategoryRefs: toRefs(state),
-    getJobCategory: readonly(getJobCategory),
+    getJobCategory: getJobCategory,
   };
 };
 
