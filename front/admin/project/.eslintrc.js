@@ -23,6 +23,7 @@ module.exports = {
         semi: true,
       },
     ],
+    'vue/multi-word-component-names': 'off',
   },
   overrides: [
     {
