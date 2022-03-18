@@ -4,8 +4,6 @@
 
 <script lang="ts">
 import { defineComponent, provide } from 'vue';
-import MainHeader from '@/components/MainHeader.vue';
-import MainFooter from '@/components/MainFooter.vue';
 import {
   useUserAuthentication,
   userAuthenticationKey,
