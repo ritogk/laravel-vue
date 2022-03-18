@@ -50,7 +50,6 @@
         </template>
         <template #empty> No customers found. </template>
         <template #loading> Loading customers data. Please wait. </template>
-        <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
         <Column field="name" header="名称" sortable style="min-width: 14rem">
           <template #body="{ data }">
             {{ data.name }}
