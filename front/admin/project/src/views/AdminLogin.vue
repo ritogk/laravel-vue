@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container py-4">
     <div class="card w-75 mx-auto border-primary">
       <div class="card-header bg-primary text-white">ログイン</div>
       <div class="card-body">

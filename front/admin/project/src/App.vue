@@ -1,9 +1,5 @@
 <template>
-  <MainHeader />
-  <div class="container py-4">
-    <router-view />
-  </div>
-  <MainFooter />
+  <router-view />
 </template>
 
 <script lang="ts">
@@ -16,10 +12,6 @@ import {
 } from '@/composables/useUserAuthentication';
 
 export default defineComponent({
-  components: {
-    MainHeader,
-    MainFooter,
-  },
   setup() {
     const userAuthentication = useUserAuthentication();
     provide(userAuthenticationKey, userAuthentication);
