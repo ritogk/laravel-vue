@@ -1,0 +1,15 @@
+version: "3"
+services:
+  vue:
+    container_name: f_lvs_user
+    build: ./docker/vue
+    ports:
+      - 8080:8080
+    volumes:
+      - ./project:/usr/src/app
+    stdin_open: true
+    tty: true
+    networks:
+      - f_lvs
+networks:
+  f_lvs:

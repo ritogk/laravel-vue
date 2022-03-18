@@ -1,10 +1,10 @@
 version: "3"
 services:
   vue:
-    container_name: f_lvs_vue
+    container_name: f_lvs_admin
     build: ./docker/vue
     ports:
-      - 8080:8080
+      - 8088:8088
     volumes:
       - ./project:/usr/src/app
     stdin_open: true
