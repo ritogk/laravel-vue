@@ -13,7 +13,9 @@
       </div>
       <div class="card-footer text-muted">
         <button class="btn btn-primary text-white me-2">検索</button>
-        <button class="btn btn-primary text-white me-2">新規作成</button>
+        <button class="btn btn-primary text-white me-2" @click="clickCreate">
+          新規作成
+        </button>
         <button class="btn btn-primary text-white me-2">マスタ出力</button>
       </div>
     </div>
@@ -113,10 +115,12 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { FilterMatchMode, FilterOperator } from 'primevue/api';
 
 export default defineComponent({
   setup() {
+    const router = useRouter();
     onMounted(() => {
       customers.value = [
         {
@@ -171,10 +175,15 @@ export default defineComponent({
       },
     });
     const loading = ref(true);
+
+    const clickCreate = () => {
+      router.push({ name: 'JobCategoryMasterEdit' });
+    };
     return {
       customers,
       filters,
       loading,
+      clickCreate,
     };
   },
 });
