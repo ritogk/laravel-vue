@@ -19,14 +19,4 @@ const fileToBlob = async (file: File) =>
     type: file.type,
   });
 
-/**
- * * バリデーションエラーの型かどうかの判定を行います。
- * @param item
- * @returns
- */
-// eslint-disable-next-line
-const isValidaitonErrorsType = (item: any): item is validaitonErrorsType => {
-  return !!(item as validaitonErrorsType)?.errors;
-};
-
-export { convertComma, fileToBlob, isValidaitonErrorsType };
+export { convertComma, fileToBlob };

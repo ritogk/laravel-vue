@@ -115,7 +115,8 @@ import { useRoute } from 'vue-router';
 import { useRouter } from 'vue-router';
 import { useFile } from '@/composables/useFile';
 import { useJobCategory } from '@/composables/useJobCategory';
-import { fileToBlob, isValidaitonErrorsType } from '@/libs/utils';
+import { fileToBlob } from '@/libs/utils';
+import { isValidaitonErrorsType } from '@/libs/validation';
 
 export default defineComponent({
   setup() {
@@ -201,7 +202,7 @@ export default defineComponent({
         return;
       }
 
-      // ■バリデーションで弾かれた場合の場合
+      // ■以降の処理はバリデーションで弾かれた場合
       // エラーメッセージの初期化を行う。
       Object.keys(formRefs.errors).forEach(function (key) {
         formRefs.errors[key as keyof typeof formRefs.errors] = '';
@@ -209,9 +210,7 @@ export default defineComponent({
       // エラーメッセージをセット。
       const errors = response.errors;
       Object.keys(errors).forEach(function (key) {
-        if (Object.keys(errors).indexOf(key) !== -1) {
-          formRefs.errors[key as keyof typeof formRefs.errors] = errors[key][0];
-        }
+        formRefs.errors[key as keyof typeof formRefs.errors] = errors[key][0];
       });
       // 汎用エラーメッセージをセット。
       if (Object.keys(errors).indexOf('message') !== -1) {
