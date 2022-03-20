@@ -6,23 +6,47 @@
       <div class="card-body">
         <div class="row g-3">
           <div class="col-md-6">
-            <label for="inputEmail4" class="form-label">名称</label>
-            <input type="email" class="form-control" id="inputEmail4" />
+            <label for="inputName" class="form-label">名称</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              v-model="condition.name"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputContent" class="form-label">内容</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputContent"
+              v-model="condition.content"
+            />
           </div>
         </div>
       </div>
       <div class="card-footer text-muted">
-        <button class="btn btn-primary text-white me-2">検索</button>
-        <button class="btn btn-primary text-white me-2" @click="clickCreate">
-          新規作成
-        </button>
-        <button class="btn btn-primary text-white me-2">マスタ出力</button>
+        <div class="d-flex">
+          <div>
+            <button
+              class="btn btn-primary text-white me-2"
+              @click="clickSearch"
+            >
+              検索
+            </button>
+          </div>
+          <div>
+            <button class="btn btn-primary text-white" @click="clickCreate">
+              新規作成
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="card mt-3">
       <DataTable
-        :value="customers"
+        :value="jobCategories"
         :paginator="true"
         class="p-datatable-customers"
         stripedRows
@@ -35,7 +59,7 @@
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
         :rowsPerPageOptions="[10, 25, 50]"
         currentPageReportTemplate="{totalRecords} 件中 {first} から {last} まで表示"
-        :globalFilterFields="['name', 'balance']"
+        :globalFilterFields="['name', 'content', 'sortNo']"
         responsiveLayout="scroll"
       >
         <template #header>
@@ -45,13 +69,13 @@
               <i class="pi pi-search" />
               <InputText
                 v-model="filters['global'].value"
-                placeholder="Keyword Search"
+                placeholder="キーワードを入力して下さい。"
               />
             </span>
           </div>
         </template>
-        <template #empty> No customers found. </template>
-        <template #loading> Loading customers data. Please wait. </template>
+        <template #empty> データが存在しません。 </template>
+        <template #loading> Loading data. Please wait. </template>
         <Column field="name" header="名称" sortable style="min-width: 14rem">
           <template #body="{ data }">
             {{ data.name }}
@@ -61,29 +85,25 @@
               type="text"
               v-model="filterModel.value"
               class="p-column-filter"
-              placeholder="Search by name"
+              placeholder="Search by 名称"
             />
           </template>
         </Column>
-        <Column
-          field="balance"
-          header="内容"
-          sortable
-          dataType="numeric"
-          style="min-width: 8rem"
-        >
+
+        <Column field="content" header="内容" sortable style="min-width: 14rem">
           <template #body="{ data }">
-            {{ data.balance }}
+            {{ data.content }}
           </template>
           <template #filter="{ filterModel }">
-            <InputNumber
+            <InputText
+              type="text"
               v-model="filterModel.value"
-              mode="currency"
-              currency="USD"
-              locale="en-US"
+              class="p-column-filter"
+              placeholder="Search by 内容"
             />
           </template>
         </Column>
+
         <Column
           field="sortNo"
           header="並び順"
@@ -92,20 +112,20 @@
           style="min-width: 8rem"
         >
           <template #body="{ data }">
-            {{ data.balance }}
+            {{ data.sortNo }}
           </template>
         </Column>
         <Column
           field="action"
           header="操作"
           sortable
-          dataType="numeric"
+          dataType="text"
           style="min-width: 8rem"
         >
           <template #body="{ data }">
             <button class="btn btn-success text-white me-2">編集</button>
             <button class="btn btn-danger text-white">削除</button>
-            <span v-text="data.balance" hidden></span>
+            <span v-text="data.sortNo" hidden></span>
           </template>
         </Column>
       </DataTable>
@@ -114,76 +134,81 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent, ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { FilterMatchMode, FilterOperator } from 'primevue/api';
+import { useJobCategory } from '@/composables/useJobCategory';
 
 export default defineComponent({
   setup() {
     const router = useRouter();
-    onMounted(() => {
-      customers.value = [
-        {
-          id: 1000,
-          name: 'James Butt',
-          country: {
-            name: 'Algeria',
-            code: 'dz',
-          },
-          company: 'Benton, John B Jr',
-          date: '2015-09-13',
-          status: 'unqualified',
-          verified: true,
-          activity: 17,
-          representative: {
-            name: 'Ioni Bowcher',
-            image: 'ionibowcher.png',
-          },
-          balance: 70663,
-        },
-        {
-          id: 1001,
-          name: 'Josephine Darakjy',
-          country: {
-            name: 'Egypt',
-            code: 'eg',
-          },
-          company: 'Chanay, Jeffrey A Esq',
-          date: '2019-02-09',
-          status: 'proposal',
-          verified: true,
-          activity: 0,
-          representative: {
-            name: 'Amy Elsner',
-            image: 'amyelsner.png',
-          },
-          balance: 82429,
-        },
-      ];
-      loading.value = false;
+
+    const jobCategory = useJobCategory();
+    const jobCategories = jobCategory.jobCategoryRefs.items;
+
+    // ローディングを判別するフラグ
+    const loading = ref(true);
+
+    // 検索条件
+    const condition = reactive({
+      name: '',
+      content: '',
     });
-    const customers = ref();
+
+    const load = async () => {
+      await jobCategory.getJobCategory();
+      loading.value = false;
+    };
+    load();
+
+    // データテーブル内の絞り込み設定
     const filters = ref({
+      // 全体
       global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+      // 名称
       name: {
         operator: FilterOperator.AND,
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
-      balance: {
+      // 内容
+      content: {
         operator: FilterOperator.AND,
-        constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
     });
-    const loading = ref(true);
 
+    // 「検索」押下時の処理
+    const clickSearch = () => {
+      jobCategory.getJobCategory(
+        condition.name ? condition.name : undefined,
+        condition.content ? condition.content : undefined
+      );
+    };
+
+    // 「csv出力」押下時の処理
+    const clickCsvOutput = () => {
+      alert(1);
+    };
+
+    // 「新規作成」押下時の処理
     const clickCreate = () => {
       router.push({ name: 'JobCategoryMasterEdit' });
     };
+
+    // 「編集」押下時の処理
+    const clickEdit = (id: number) => {
+      alert(2);
+    };
+
     return {
-      customers,
-      filters,
+      jobCategories,
       loading,
+      condition,
+      filters,
       clickCreate,
+      clickEdit,
+      clickSearch,
+      clickCsvOutput,
     };
   },
 });

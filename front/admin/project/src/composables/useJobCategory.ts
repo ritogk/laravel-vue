@@ -1,6 +1,10 @@
 import { reactive, ToRefs, toRefs } from 'vue';
 import { apiConfig } from '@/libs/config';
-import { JobCategorieApi, JobCategory } from '@/open_api';
+import {
+  JobCategorieApi,
+  JobCategory,
+  JobCategoriesGetRequest,
+} from '@/open_api';
 
 // メイン関数のtype
 type useJobCategoryType = {
@@ -8,7 +12,7 @@ type useJobCategoryType = {
     items: JobCategory[];
     names: { [key: number]: string };
   }>;
-  getJobCategory(): Promise<Array<JobCategory>>;
+  getJobCategory(name?: string, content?: string): Promise<Array<JobCategory>>;
 };
 
 const jobCategorieApi = new JobCategorieApi(apiConfig);
@@ -21,9 +25,23 @@ const useJobCategory = (): useJobCategoryType => {
     names: {} as { [key: number]: string },
   });
 
-  // 職種一覧の取得
-  const getJobCategory = async (): Promise<Array<JobCategory>> => {
-    const jobCategories = await jobCategorieApi.jobCategoriesGet({});
+  /**
+   * 職種一覧を取得します。
+   * @param name
+   * @param content
+   * @returns
+   */
+  const getJobCategory = async (
+    name?: string,
+    content?: string
+  ): Promise<Array<JobCategory>> => {
+    const requestParameters: JobCategoriesGetRequest = {
+      name: name,
+      content: content,
+    };
+    const jobCategories = await jobCategorieApi.jobCategoriesGet(
+      requestParameters
+    );
     state.items.splice(0, state.items.length, ...jobCategories);
     generateNames();
     return jobCategories;
