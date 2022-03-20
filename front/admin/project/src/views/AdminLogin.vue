@@ -22,7 +22,7 @@
             v-bind:class="[formErrors.email !== '' ? 'is-invalid' : '']"
             id="inputMailAddress"
             aria-describedby="inputMailAddressFeedback"
-            v-model="form.email"
+            v-model="formInputs.email"
             placeholder="test@test.co.jp"
           />
           <div
@@ -41,7 +41,7 @@
             v-bind:class="[formErrors.password !== '' ? 'is-invalid' : '']"
             id="inputPassword"
             aria-describedby="inputPasswordFeedback"
-            v-model="form.password"
+            v-model="formInputs.password"
             placeholder="test"
           />
           <div
@@ -97,7 +97,7 @@ export default defineComponent({
       },
     });
 
-    // 「ログイン」ボタン押下
+    // 「ログイン」ボタン押下の処理
     const clickLogin = async () => {
       // ログイン
       const response = await login(
@@ -119,7 +119,7 @@ export default defineComponent({
       Object.keys(formRefs.errors).forEach(function (key) {
         formRefs.errors[key as keyof typeof formRefs.errors] = '';
       });
-      // エラーメッセージをセット。
+      // サーバーサイドから受け取ったエラーメッセージをセット。
       const errors = response.errors;
       Object.keys(errors).forEach(function (key) {
         formRefs.errors[key as keyof typeof formRefs.errors] = errors[key][0];
@@ -130,7 +130,11 @@ export default defineComponent({
       }
     };
 
-    return { form: formRefs.inputs, formErrors: formRefs.errors, clickLogin };
+    return {
+      formInputs: formRefs.inputs,
+      formErrors: formRefs.errors,
+      clickLogin,
+    };
   },
 });
 </script>

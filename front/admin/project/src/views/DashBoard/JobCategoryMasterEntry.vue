@@ -21,7 +21,7 @@
             v-bind:class="[formErrors.name !== '' ? 'is-invalid' : '']"
             id="inputName"
             aria-describedby="inputNameFeedback"
-            v-model="form.name"
+            v-model="formInputs.name"
             placeholder="名称を入力して下さい。"
           />
           <div
@@ -39,7 +39,7 @@
             v-bind:class="[formErrors.content !== '' ? 'is-invalid' : '']"
             id="inputContent"
             aria-describedby="inputContentFeedback"
-            v-model="form.content"
+            v-model="formInputs.content"
             placeholder="内容を入力して下さい。"
             rows="5"
           />
@@ -59,7 +59,7 @@
             v-bind:class="[formErrors.sortNo !== '' ? 'is-invalid' : '']"
             id="inputSortNo"
             aria-describedby="inputSortNoFeedback"
-            v-model="form.sortNo"
+            v-model="formInputs.sortNo"
             placeholder="並び順を入力して下さい。"
           />
           <div
@@ -87,7 +87,12 @@
             v-show="formErrors.image !== ''"
           />
         </div>
-        <img :src="form.url" class="img-fluid" alt="..." v-show="form.url" />
+        <img
+          :src="formInputs.url"
+          class="img-fluid"
+          alt="..."
+          v-show="formInputs.url"
+        />
       </div>
       <div class="card-footer text-muted">
         <button
@@ -207,7 +212,7 @@ export default defineComponent({
       Object.keys(formRefs.errors).forEach(function (key) {
         formRefs.errors[key as keyof typeof formRefs.errors] = '';
       });
-      // エラーメッセージをセット。
+      // サーバーサイドから受け取ったエラーメッセージをセット。
       const errors = response.errors;
       Object.keys(errors).forEach(function (key) {
         formRefs.errors[key as keyof typeof formRefs.errors] = errors[key][0];
@@ -225,7 +230,7 @@ export default defineComponent({
     };
 
     return {
-      form: formRefs.inputs,
+      formInputs: formRefs.inputs,
       formErrors: formRefs.errors,
       uploadFile,
       clickEntry,
