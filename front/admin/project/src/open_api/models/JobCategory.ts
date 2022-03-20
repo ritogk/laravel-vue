@@ -24,37 +24,37 @@ export interface JobCategory {
      * @type {number}
      * @memberof JobCategory
      */
-    id?: number;
+    id: number;
     /**
      * 名称
      * @type {string}
      * @memberof JobCategory
      */
-    name?: string;
+    name: string;
     /**
      * 内容
      * @type {string}
      * @memberof JobCategory
      */
-    content?: string;
+    content: string;
     /**
      * 画像の内部識別子
      * @type {string}
      * @memberof JobCategory
      */
-    image?: string;
+    image: string;
     /**
      * 画像URL
      * @type {string}
      * @memberof JobCategory
      */
-    imageUrl?: string;
+    imageUrl: string;
     /**
      * 並び順
      * @type {number}
      * @memberof JobCategory
      */
-    sortNo?: number;
+    sortNo: number;
     /**
      * 作成日時
      * @type {Date}
@@ -79,12 +79,12 @@ export function JobCategoryFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'content': !exists(json, 'content') ? undefined : json['content'],
-        'image': !exists(json, 'image') ? undefined : json['image'],
-        'imageUrl': !exists(json, 'image_url') ? undefined : json['image_url'],
-        'sortNo': !exists(json, 'sortNo') ? undefined : json['sortNo'],
+        'id': json['id'],
+        'name': json['name'],
+        'content': json['content'],
+        'image': json['image'],
+        'imageUrl': json['imageUrl'],
+        'sortNo': json['sortNo'],
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
     };
@@ -103,7 +103,7 @@ export function JobCategoryToJSON(value?: JobCategory | null): any {
         'name': value.name,
         'content': value.content,
         'image': value.image,
-        'image_url': value.imageUrl,
+        'imageUrl': value.imageUrl,
         'sortNo': value.sortNo,
         'createdAt': value.createdAt === undefined ? undefined : (value.createdAt.toISOString().substr(0,10)),
         'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString().substr(0,10)),

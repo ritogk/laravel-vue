@@ -197,6 +197,12 @@ class FilePath implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['storagePath'] === null) {
+            $invalidProperties[] = "'storagePath' can't be null";
+        }
+        if ($this->container['url'] === null) {
+            $invalidProperties[] = "'url' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -215,7 +221,7 @@ class FilePath implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets storagePath
      *
-     * @return string|null
+     * @return string
      */
     public function getStoragePath()
     {
@@ -225,7 +231,7 @@ class FilePath implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets storagePath
      *
-     * @param string|null $storagePath ストレージパス
+     * @param string $storagePath ストレージパス
      *
      * @return self
      */
@@ -239,7 +245,7 @@ class FilePath implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets url
      *
-     * @return string|null
+     * @return string
      */
     public function getUrl()
     {
@@ -249,7 +255,7 @@ class FilePath implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets url
      *
-     * @param string|null $url フルパス
+     * @param string $url フルパス
      *
      * @return self
      */

@@ -105,7 +105,7 @@ export function RequestJobFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'welfare': !exists(json, 'welfare') ? undefined : json['welfare'],
         'holiday': !exists(json, 'holiday') ? undefined : json['holiday'],
         'image': json['image'],
-        'imageUrl': !exists(json, 'image_url') ? undefined : json['image_url'],
+        'imageUrl': !exists(json, 'imageUrl') ? undefined : json['imageUrl'],
         'sortNo': json['sortNo'],
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
     };
@@ -128,7 +128,7 @@ export function RequestJobToJSON(value?: RequestJob | null): any {
         'welfare': value.welfare,
         'holiday': value.holiday,
         'image': value.image,
-        'image_url': value.imageUrl,
+        'imageUrl': value.imageUrl,
         'sortNo': value.sortNo,
         'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString().substr(0,10)),
     };

@@ -70,7 +70,7 @@ export function RequestJobCategoryFromJSONTyped(json: any, ignoreDiscriminator: 
         'name': json['name'],
         'content': json['content'],
         'image': json['image'],
-        'imageUrl': !exists(json, 'image_url') ? undefined : json['image_url'],
+        'imageUrl': !exists(json, 'imageUrl') ? undefined : json['imageUrl'],
         'sortNo': json['sortNo'],
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
     };
@@ -88,7 +88,7 @@ export function RequestJobCategoryToJSON(value?: RequestJobCategory | null): any
         'name': value.name,
         'content': value.content,
         'image': value.image,
-        'image_url': value.imageUrl,
+        'imageUrl': value.imageUrl,
         'sortNo': value.sortNo,
         'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString().substr(0,10)),
     };

@@ -69,7 +69,6 @@
 <script lang="ts">
 import { defineComponent, reactive, inject } from 'vue';
 import { useRouter } from 'vue-router';
-import { validaitonErrorsType } from '@/libs/type';
 import {
   adminAuthenticationKey,
   useAdminAuthenticationType,

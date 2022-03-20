@@ -608,7 +608,7 @@ components:
         image:
           type: string
           description: 画像の内部識別子
-        image_url:
+        imageUrl:
           type: string
           description: 画像URL
         sortNo:
@@ -651,7 +651,7 @@ components:
         image:
           type: string
           description: 画像の内部識別子
-        image_url:
+        imageUrl:
           type: string
           description: 画像URL
         sortNo:
@@ -750,7 +750,7 @@ components:
         image:
           type: string
           description: 画像の内部識別子
-        image_url:
+        imageUrl:
           type: string
           description: 画像URL
         sortNo:
@@ -764,6 +764,13 @@ components:
           type: string
           format: date
           description: 更新日時
+      required:
+        - id
+        - name
+        - content
+        - image
+        - imageUrl
+        - sortNo
     job:
       description: 仕事
       type: object
@@ -795,7 +802,7 @@ components:
         image:
           type: string
           description: 画像の内部識別子
-        image_url:
+        imageUrl:
           type: string
           description: 画像URL
         sortNo:

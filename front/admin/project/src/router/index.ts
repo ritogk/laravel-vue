@@ -2,7 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import AdminLogin from '@/views/AdminLogin.vue';
 import DashBoard from '@/views/DashBoard.vue';
 import JobCategoryMasterList from '@/views/DashBoard/JobCategoryMasterList.vue';
-import JobCategoryMasterEdit from '@/views/DashBoard/JobCategoryMasterEdit.vue';
+import JobCategoryMasterEntry from '@/views/DashBoard/JobCategoryMasterEntry.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,9 +21,14 @@ const routes: Array<RouteRecordRaw> = [
         component: JobCategoryMasterList,
       },
       {
-        path: 'job-category-master-edit',
+        path: 'job-category-master-create',
+        name: 'JobCategoryMasterCreate',
+        component: JobCategoryMasterEntry,
+      },
+      {
+        path: 'job-category-master-edit/:id',
         name: 'JobCategoryMasterEdit',
-        component: JobCategoryMasterEdit,
+        component: JobCategoryMasterEntry,
       },
     ],
   },

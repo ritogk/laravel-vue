@@ -114,7 +114,7 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
         'name' => 'name',
         'content' => 'content',
         'image' => 'image',
-        'imageUrl' => 'image_url',
+        'imageUrl' => 'imageUrl',
         'sortNo' => 'sortNo',
         'updatedAt' => 'updatedAt'
     ];

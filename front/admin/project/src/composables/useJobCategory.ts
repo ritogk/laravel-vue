@@ -6,6 +6,7 @@ import {
   JobCategory,
   JobCategoriesGetRequest,
   JobCategoriesPostRequest,
+  JobCategoriesIdPutRequest,
 } from '@/open_api';
 
 // メイン関数のtype
@@ -14,8 +15,19 @@ type useJobCategoryType = {
     items: JobCategory[];
     names: { [key: number]: string };
   }>;
-  getJobCategory(name?: string, content?: string): Promise<Array<JobCategory>>;
+  getJobCategories(
+    name?: string,
+    content?: string
+  ): Promise<Array<JobCategory>>;
+  findJobCategory(id: number): Promise<JobCategory>;
   createJobCategory(
+    name: string,
+    content: string,
+    image: string,
+    sortNo: number
+  ): Promise<JobCategory | validaitonErrorsType>;
+  updateJobCategory(
+    id: number,
     name: string,
     content: string,
     image: string,
@@ -39,7 +51,7 @@ const useJobCategory = (): useJobCategoryType => {
    * @param content
    * @returns
    */
-  const getJobCategory = async (
+  const getJobCategories = async (
     name?: string,
     content?: string
   ): Promise<Array<JobCategory>> => {
@@ -65,6 +77,15 @@ const useJobCategory = (): useJobCategoryType => {
         state.names[item.id] = item.name ?? '';
       }
     });
+  };
+
+  /**
+   * 職種を１件取得します。
+   * @param id
+   * @returns
+   */
+  const findJobCategory = async (id: number): Promise<JobCategory> => {
+    return await jobCategorieApi.jobCategoriesIdGet({ id: id });
   };
 
   /**
@@ -98,10 +119,47 @@ const useJobCategory = (): useJobCategoryType => {
     }
   };
 
+  /**
+   * 職種 更新
+   * @param id
+   * @param name
+   * @param content
+   * @param image
+   * @param sortNo
+   * @returns
+   */
+  const updateJobCategory = async (
+    id: number,
+    name: string,
+    content: string,
+    image: string,
+    sortNo: number
+  ): Promise<JobCategory | validaitonErrorsType> => {
+    const request: JobCategoriesIdPutRequest = {
+      id: id,
+      requestJobCategory: {
+        name: name,
+        content: content,
+        image: image,
+        sortNo: sortNo,
+      },
+    };
+    try {
+      return await jobCategorieApi.jobCategoriesIdPut(request);
+    } catch (err: any) {
+      const json = await err.json();
+      return Promise.resolve({
+        errors: json.errors,
+      } as validaitonErrorsType);
+    }
+  };
+
   return {
     jobCategoryRefs: toRefs(state),
-    getJobCategory: getJobCategory,
+    getJobCategories: getJobCategories,
+    findJobCategory: findJobCategory,
     createJobCategory: createJobCategory,
+    updateJobCategory: updateJobCategory,
   };
 };
 

@@ -134,7 +134,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'welfare' => 'welfare',
         'holiday' => 'holiday',
         'image' => 'image',
-        'imageUrl' => 'image_url',
+        'imageUrl' => 'imageUrl',
         'sortNo' => 'sortNo',
         'createdAt' => 'createdAt',
         'updatedAt' => 'updatedAt'

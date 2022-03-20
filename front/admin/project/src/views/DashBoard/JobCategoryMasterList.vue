@@ -123,7 +123,12 @@
           style="min-width: 8rem"
         >
           <template #body="{ data }">
-            <button class="btn btn-success text-white me-2">編集</button>
+            <button
+              class="btn btn-success text-white me-2"
+              @click="clickEdit(data.id)"
+            >
+              編集
+            </button>
             <button class="btn btn-danger text-white">削除</button>
             <span v-text="data.sortNo" hidden></span>
           </template>
@@ -156,7 +161,7 @@ export default defineComponent({
     });
 
     const load = async () => {
-      await jobCategory.getJobCategory();
+      await jobCategory.getJobCategories();
       loading.value = false;
     };
     load();
@@ -179,7 +184,7 @@ export default defineComponent({
 
     // 「検索」押下時の処理
     const clickSearch = () => {
-      jobCategory.getJobCategory(
+      jobCategory.getJobCategories(
         condition.name ? condition.name : undefined,
         condition.content ? condition.content : undefined
       );
@@ -192,12 +197,15 @@ export default defineComponent({
 
     // 「新規作成」押下時の処理
     const clickCreate = () => {
-      router.push({ name: 'JobCategoryMasterEdit' });
+      router.push({ name: 'JobCategoryMasterCreate' });
     };
 
     // 「編集」押下時の処理
     const clickEdit = (id: number) => {
-      alert(id);
+      router.push({
+        name: 'JobCategoryMasterEdit',
+        params: { id: id },
+      });
     };
 
     return {

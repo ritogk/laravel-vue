@@ -32,11 +32,11 @@ export default defineComponent({
   color: #2c3e50;
 }
 
+/* routerが切り替わったタイミングでフェードさせる*/
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.9s ease;
 }
-
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

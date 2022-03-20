@@ -129,7 +129,7 @@ class RequestJob implements ModelInterface, ArrayAccess, \JsonSerializable
         'welfare' => 'welfare',
         'holiday' => 'holiday',
         'image' => 'image',
-        'imageUrl' => 'image_url',
+        'imageUrl' => 'imageUrl',
         'sortNo' => 'sortNo',
         'updatedAt' => 'updatedAt'
     ];
