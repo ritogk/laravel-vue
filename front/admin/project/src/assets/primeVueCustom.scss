@@ -1,0 +1,9 @@
+@import '~primevue/resources/themes/saga-blue/theme.css';
+@import '~primevue/resources/primevue.min.css';
+@import '~primeicons/primeicons.css';
+
+/* データテーブルのヘッダースタイルを変更 */
+.p-datatable-header {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}

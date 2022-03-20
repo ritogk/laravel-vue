@@ -119,7 +119,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'name',
         'content' => 'content',
         'image' => 'image',
-        'imageUrl' => 'image_url',
+        'imageUrl' => 'imageUrl',
         'sortNo' => 'sortNo',
         'createdAt' => 'createdAt',
         'updatedAt' => 'updatedAt'
@@ -233,6 +233,24 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['content'] === null) {
+            $invalidProperties[] = "'content' can't be null";
+        }
+        if ($this->container['image'] === null) {
+            $invalidProperties[] = "'image' can't be null";
+        }
+        if ($this->container['imageUrl'] === null) {
+            $invalidProperties[] = "'imageUrl' can't be null";
+        }
+        if ($this->container['sortNo'] === null) {
+            $invalidProperties[] = "'sortNo' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -251,7 +269,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets id
      *
-     * @return int|null
+     * @return int
      */
     public function getId()
     {
@@ -261,7 +279,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param int|null $id id
+     * @param int $id id
      *
      * @return self
      */
@@ -275,7 +293,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets name
      *
-     * @return string|null
+     * @return string
      */
     public function getName()
     {
@@ -285,7 +303,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name 名称
+     * @param string $name 名称
      *
      * @return self
      */
@@ -299,7 +317,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets content
      *
-     * @return string|null
+     * @return string
      */
     public function getContent()
     {
@@ -309,7 +327,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets content
      *
-     * @param string|null $content 内容
+     * @param string $content 内容
      *
      * @return self
      */
@@ -323,7 +341,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets image
      *
-     * @return string|null
+     * @return string
      */
     public function getImage()
     {
@@ -333,7 +351,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets image
      *
-     * @param string|null $image 画像の内部識別子
+     * @param string $image 画像の内部識別子
      *
      * @return self
      */
@@ -347,7 +365,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets imageUrl
      *
-     * @return string|null
+     * @return string
      */
     public function getImageUrl()
     {
@@ -357,7 +375,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets imageUrl
      *
-     * @param string|null $imageUrl 画像URL
+     * @param string $imageUrl 画像URL
      *
      * @return self
      */
@@ -371,7 +389,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets sortNo
      *
-     * @return int|null
+     * @return int
      */
     public function getSortNo()
     {
@@ -381,7 +399,7 @@ class JobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets sortNo
      *
-     * @param int|null $sortNo 並び順
+     * @param int $sortNo 並び順
      *
      * @return self
      */

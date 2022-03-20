@@ -114,7 +114,7 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
         'name' => 'name',
         'content' => 'content',
         'image' => 'image',
-        'imageUrl' => 'image_url',
+        'imageUrl' => 'imageUrl',
         'sortNo' => 'sortNo',
         'updatedAt' => 'updatedAt'
     ];
@@ -232,9 +232,6 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
         }
         if ($this->container['sortNo'] === null) {
             $invalidProperties[] = "'sortNo' can't be null";
-        }
-        if ($this->container['updatedAt'] === null) {
-            $invalidProperties[] = "'updatedAt' can't be null";
         }
         return $invalidProperties;
     }
@@ -374,7 +371,7 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets updatedAt
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getUpdatedAt()
     {
@@ -384,7 +381,7 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets updatedAt
      *
-     * @param \DateTime $updatedAt 更新日時
+     * @param \DateTime|null $updatedAt 更新日時
      *
      * @return self
      */

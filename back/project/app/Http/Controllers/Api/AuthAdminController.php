@@ -26,16 +26,18 @@ class AuthAdminController extends Controller
         $request_all = ['email' => $requestBody->getEmail(), 'password' => $requestBody->getPassword()];
         if (!$token = auth('admin')->attempt($request_all)) {
             return response()->json(
-                ['error' => 'Unauthorized'],
+                ['errors' => ['message' => ['認証に失敗しました。']]],
                 Response::HTTP_UNAUTHORIZED
             );
         }
 
         $result = $this->respondWithToken($token);
+        $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
+        $cookie = cookie('token', $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
             Response::HTTP_CREATED
-        );
+        )->cookie($cookie);
     }
 
     /**
@@ -73,10 +75,12 @@ class AuthAdminController extends Controller
     public function refresh(): JsonResponse
     {
         $result = $this->respondWithToken(auth('admin')->refresh());
+        $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
+        $cookie = cookie('token', $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
             Response::HTTP_CREATED
-        );
+        )->cookie($cookie);
     }
 
 

@@ -17,7 +17,7 @@ class LoginAction
     public function __invoke(Request $request): JsonResponse
     {
         if (!$token = auth('user')->attempt($request->all())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['errors' => ['message' => ['認証に失敗しました。']]], 401);
         }
         return $this->respondWithToken($token);
     }

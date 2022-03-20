@@ -120,15 +120,15 @@ class FileApi
      *
      * ファイル 追加
      *
-     * @param  \App\OpenAPI\Model\RequestFile $requestFile requestFile (optional)
+     * @param  \SplFileObject $file ファイル (required)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \App\OpenAPI\Model\FilePath
      */
-    public function filesPost($requestFile = null)
+    public function filesPost($file)
     {
-        list($response) = $this->filesPostWithHttpInfo($requestFile);
+        list($response) = $this->filesPostWithHttpInfo($file);
         return $response;
     }
 
@@ -137,15 +137,15 @@ class FileApi
      *
      * ファイル 追加
      *
-     * @param  \App\OpenAPI\Model\RequestFile $requestFile (optional)
+     * @param  \SplFileObject $file ファイル (required)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \App\OpenAPI\Model\FilePath, HTTP status code, HTTP response headers (array of strings)
      */
-    public function filesPostWithHttpInfo($requestFile = null)
+    public function filesPostWithHttpInfo($file)
     {
-        $request = $this->filesPostRequest($requestFile);
+        $request = $this->filesPostRequest($file);
 
         try {
             $options = $this->createHttpClientOption();
@@ -184,20 +184,20 @@ class FileApi
 
             switch($statusCode) {
                 case 201:
-                    if ('\SplFileObject' === '\SplFileObject') {
+                    if ('\App\OpenAPI\Model\FilePath' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        ObjectSerializer::deserialize($content, '\App\OpenAPI\Model\FilePath', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SplFileObject';
+            $returnType = '\App\OpenAPI\Model\FilePath';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -215,7 +215,7 @@ class FileApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\App\OpenAPI\Model\FilePath',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -230,14 +230,14 @@ class FileApi
      *
      * ファイル 追加
      *
-     * @param  \App\OpenAPI\Model\RequestFile $requestFile (optional)
+     * @param  \SplFileObject $file ファイル (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function filesPostAsync($requestFile = null)
+    public function filesPostAsync($file)
     {
-        return $this->filesPostAsyncWithHttpInfo($requestFile)
+        return $this->filesPostAsyncWithHttpInfo($file)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -250,15 +250,15 @@ class FileApi
      *
      * ファイル 追加
      *
-     * @param  \App\OpenAPI\Model\RequestFile $requestFile (optional)
+     * @param  \SplFileObject $file ファイル (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function filesPostAsyncWithHttpInfo($requestFile = null)
+    public function filesPostAsyncWithHttpInfo($file)
     {
-        $returnType = '\SplFileObject';
-        $request = $this->filesPostRequest($requestFile);
+        $returnType = '\App\OpenAPI\Model\FilePath';
+        $request = $this->filesPostRequest($file);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -296,13 +296,19 @@ class FileApi
     /**
      * Create request for operation 'filesPost'
      *
-     * @param  \App\OpenAPI\Model\RequestFile $requestFile (optional)
+     * @param  \SplFileObject $file ファイル (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function filesPostRequest($requestFile = null)
+    public function filesPostRequest($file)
     {
+        // verify the required parameter 'file' is set
+        if ($file === null || (is_array($file) && count($file) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $file when calling filesPost'
+            );
+        }
 
         $resourcePath = '/files';
         $formParams = [];
@@ -314,6 +320,18 @@ class FileApi
 
 
 
+        // form params
+        if ($file !== null) {
+            $multipart = true;
+            $formParams['file'] = [];
+            $paramFiles = is_array($file) ? $file : [$file];
+            foreach ($paramFiles as $paramFile) {
+                $formParams['file'][] = \GuzzleHttp\Psr7\Utils::tryFopen(
+                    ObjectSerializer::toFormValue($paramFile),
+                    'rb'
+                );
+            }
+        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -322,18 +340,12 @@ class FileApi
         } else {
             $headers = $this->headerSelector->selectHeaders(
                 ['application/json'],
-                ['application/json']
+                ['multipart/form-data']
             );
         }
 
         // for model (json/xml)
-        if (isset($requestFile)) {
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestFile));
-            } else {
-                $httpBody = $requestFile;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
