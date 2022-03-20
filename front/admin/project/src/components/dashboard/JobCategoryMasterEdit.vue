@@ -78,16 +78,16 @@ import { defineComponent, reactive, inject } from 'vue';
 import { useRouter } from 'vue-router';
 import { validaitonErrorsType } from '@/libs/type';
 import {
-  userAuthenticationKey,
-  useUserAuthenticationType,
-} from '@/composables/useUserAuthentication';
+  adminAuthenticationKey,
+  useAdminAuthenticationType,
+} from '@/composables/useAdminAuthentication';
 
 export default defineComponent({
   setup() {
     const router = useRouter();
     const { login, getMe } = inject(
-      userAuthenticationKey
-    ) as useUserAuthenticationType;
+      adminAuthenticationKey
+    ) as useAdminAuthenticationType;
 
     // フォームの状態
     const form = reactive({ email: 'root@rito.co.jp', password: 'root' });

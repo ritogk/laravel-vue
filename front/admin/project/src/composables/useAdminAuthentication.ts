@@ -3,24 +3,24 @@ import { apiConfig } from '@/libs/config';
 import { validaitonErrorsType } from '@/libs/type';
 import {
   User,
-  AuthFrontApi,
-  AuthFrontLoginPostRequest,
+  AuthAdminApi,
+  AuthAdminLoginPostRequest,
   AccessToken,
 } from '@/open_api';
 
 // メイン関数のtype
-type useUserAuthenticationType = {
-  userAuthenticationRefs: ToRefs<{ user: User; isLogin: boolean }>;
+type useAdminAuthenticationType = {
+  adminAuthenticationRefs: ToRefs<{ user: User; isLogin: boolean }>;
   login(email: string, password: string): Promise<void | validaitonErrorsType>;
   refresh(): Promise<AccessToken>;
   logout(): Promise<void>;
   getMe(): Promise<void>;
 };
 
-const authFrontApi = new AuthFrontApi(apiConfig);
+const authAdminApi = new AuthAdminApi(apiConfig);
 
 // メイン関数
-const useUserAuthentication = (): useUserAuthenticationType => {
+const useAdminAuthentication = (): useAdminAuthenticationType => {
   // 状態
   const state = reactive({ user: {} as User, isLogin: false });
 
@@ -29,12 +29,12 @@ const useUserAuthentication = (): useUserAuthenticationType => {
     email: string,
     password: string
   ): Promise<void | validaitonErrorsType> => {
-    const request: AuthFrontLoginPostRequest = {
+    const request: AuthAdminLoginPostRequest = {
       requestLogin: { email: email, password: password },
     };
     try {
       // ログイン
-      await authFrontApi.authFrontLoginPost(request);
+      await authAdminApi.authAdminLoginPost(request);
     } catch (err: any) {
       const json = await err.json();
       return Promise.resolve({
@@ -45,19 +45,19 @@ const useUserAuthentication = (): useUserAuthenticationType => {
 
   // アクセストークンのリフレッシュ
   const refresh = async (): Promise<AccessToken> => {
-    const response = await authFrontApi.authFrontRefreshPost({});
+    const response = await authAdminApi.authAdminRefreshPost({});
     return response;
   };
 
   // ログアウト
   const logout = async (): Promise<void> => {
     try {
-      await authFrontApi.authFrontLogoutPost({});
+      await authAdminApi.authAdminLogoutPost({});
     } catch (err: any) {
       if (err.status !== 401) return;
       // リフレッシュトークン更新
       await refresh();
-      state.user = await authFrontApi.authFrontMeGet();
+      state.user = await authAdminApi.authAdminMeGet();
     }
     state.isLogin = false;
     state.user = {} as User;
@@ -66,18 +66,18 @@ const useUserAuthentication = (): useUserAuthenticationType => {
   // ログイン済のユーザー情報を取得
   const getMe = async (): Promise<void> => {
     try {
-      state.user = await authFrontApi.authFrontMeGet();
+      state.user = await authAdminApi.authAdminMeGet();
     } catch (err: any) {
       if (err.status !== 401) return;
       // リフレッシュトークン更新
       await refresh();
-      state.user = await authFrontApi.authFrontMeGet();
+      state.user = await authAdminApi.authAdminMeGet();
     }
     state.isLogin = true;
   };
 
   return {
-    userAuthenticationRefs: toRefs(state),
+    adminAuthenticationRefs: toRefs(state),
     login: login,
     refresh: refresh,
     logout: logout,
@@ -85,10 +85,11 @@ const useUserAuthentication = (): useUserAuthenticationType => {
   };
 };
 
-const userAuthenticationKey: InjectionKey<useUserAuthenticationType> =
-  Symbol('UserAuthentication');
+const adminAuthenticationKey: InjectionKey<useAdminAuthenticationType> = Symbol(
+  'AdminAuthentication'
+);
 export {
-  useUserAuthentication,
-  useUserAuthenticationType,
-  userAuthenticationKey,
+  useAdminAuthentication,
+  useAdminAuthenticationType,
+  adminAuthenticationKey,
 };

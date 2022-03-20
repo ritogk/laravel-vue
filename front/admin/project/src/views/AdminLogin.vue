@@ -63,19 +63,19 @@ import { defineComponent, reactive, inject } from 'vue';
 import { useRouter } from 'vue-router';
 import { validaitonErrorsType } from '@/libs/type';
 import {
-  userAuthenticationKey,
-  useUserAuthenticationType,
-} from '@/composables/useUserAuthentication';
+  adminAuthenticationKey,
+  useAdminAuthenticationType,
+} from '@/composables/useAdminAuthentication';
 
 export default defineComponent({
   setup() {
     const router = useRouter();
     const { login, getMe } = inject(
-      userAuthenticationKey
-    ) as useUserAuthenticationType;
+      adminAuthenticationKey
+    ) as useAdminAuthenticationType;
 
     // フォームの状態
-    const form = reactive({ email: 'root@rito.co.jp', password: 'root' });
+    const form = reactive({ email: 'test@test.co.jp', password: 'test' });
     // フォームのエラー内容
     const formErrors = reactive({ email: '', password: '' });
 
@@ -84,10 +84,10 @@ export default defineComponent({
       // ログイン
       const response = await login(form.email, form.password);
       // ログイン済のユーザー情報を取得
-      getMe();
+      await getMe();
       // 正常の場合
       if (!response) {
-        router.push('/');
+        router.push({ name: 'DashBoard' });
         return;
       }
       // バリデーションで弾かれた場合の場合

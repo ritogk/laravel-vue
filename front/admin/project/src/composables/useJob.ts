@@ -1,7 +1,7 @@
 import { InjectionKey, reactive, ToRefs, toRefs } from 'vue';
 import { apiConfig } from '@/libs/config';
 import { JobApi, Job, JobsGetRequest, Entry, EntryApi } from '@/open_api';
-import { useUserAuthentication } from '@/composables/useUserAuthentication';
+import { useAdminAuthentication } from '@/composables/useAdminAuthentication';
 
 // メイン関数のtype
 type useJobType = {
@@ -54,7 +54,7 @@ const useJob = (): useJobType => {
     } catch (err: any) {
       if (err.status !== 401) return {};
       // リフレッシュトークン更新
-      await useUserAuthentication().refresh();
+      await useAdminAuthentication().refresh();
       return await entryApi.entriesPost({
         requestEntry: { jobId: jobId, userId: userId },
       });

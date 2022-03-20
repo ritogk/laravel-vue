@@ -32,10 +32,12 @@ class AuthAdminController extends Controller
         }
 
         $result = $this->respondWithToken($token);
+        $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
+        $cookie = cookie('token', $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
             Response::HTTP_CREATED
-        );
+        )->cookie($cookie);
     }
 
     /**
@@ -73,10 +75,12 @@ class AuthAdminController extends Controller
     public function refresh(): JsonResponse
     {
         $result = $this->respondWithToken(auth('admin')->refresh());
+        $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
+        $cookie = cookie('token', $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
             Response::HTTP_CREATED
-        );
+        )->cookie($cookie);
     }
 
 

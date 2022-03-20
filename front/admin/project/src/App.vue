@@ -5,17 +5,17 @@
 <script lang="ts">
 import { defineComponent, provide } from 'vue';
 import {
-  useUserAuthentication,
-  userAuthenticationKey,
-} from '@/composables/useUserAuthentication';
+  useAdminAuthentication,
+  adminAuthenticationKey,
+} from '@/composables/useAdminAuthentication';
 
 export default defineComponent({
   setup() {
-    const userAuthentication = useUserAuthentication();
-    provide(userAuthenticationKey, userAuthentication);
+    const adminAuthentication = useAdminAuthentication();
+    provide(adminAuthenticationKey, adminAuthentication);
 
     // ログイン済のユーザー情報を取得
-    userAuthentication.getMe();
+    adminAuthentication.getMe();
 
     return {};
   },

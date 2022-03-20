@@ -119,7 +119,7 @@ body {
       />
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
+          <a class="nav-link" href="#" @click="clickLogout">ログアウト</a>
         </li>
       </ul>
     </header>
@@ -186,17 +186,33 @@ body {
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { useRouter } from 'vue-router';
+import {
+  useAdminAuthenticationType,
+  adminAuthenticationKey,
+} from '@/composables/useAdminAuthentication';
 
 export default defineComponent({
   setup() {
     const router = useRouter();
 
+    const { adminAuthenticationRefs, logout } = inject(
+      adminAuthenticationKey
+    ) as useAdminAuthenticationType;
+    const user = adminAuthenticationRefs.user;
+
+    // 「職種マスタ」押下時の処理
     const clickJobCategory = () => {
       router.push({ name: 'JobCategoryMasterList' });
     };
-    return { clickJobCategory };
+
+    // 「ログアウト」押下時の処理
+    const clickLogout = () => {
+      logout();
+      router.push({ name: 'AdminLogin' });
+    };
+    return { user, clickJobCategory, clickLogout };
   },
 });
 </script>
