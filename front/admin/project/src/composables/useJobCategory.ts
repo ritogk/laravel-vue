@@ -33,6 +33,7 @@ type useJobCategoryType = {
     image: string,
     sortNo: number
   ): Promise<JobCategory | validaitonErrorsType>;
+  deleteJobCategory(id: number): Promise<JobCategory>;
 };
 
 const jobCategorieApi = new JobCategorieApi(apiConfig);
@@ -154,12 +155,22 @@ const useJobCategory = (): useJobCategoryType => {
     }
   };
 
+  /**
+   * 職種 削除
+   * @param id
+   * @returns
+   */
+  const deleteJobCategory = async (id: number): Promise<JobCategory> => {
+    return await jobCategorieApi.jobCategoriesIdDelete({ id: id });
+  };
+
   return {
     jobCategoryRefs: toRefs(state),
     getJobCategories: getJobCategories,
     findJobCategory: findJobCategory,
     createJobCategory: createJobCategory,
     updateJobCategory: updateJobCategory,
+    deleteJobCategory: deleteJobCategory,
   };
 };
 

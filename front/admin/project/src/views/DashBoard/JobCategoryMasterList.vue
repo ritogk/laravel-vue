@@ -129,7 +129,12 @@
             >
               編集
             </button>
-            <button class="btn btn-danger text-white">削除</button>
+            <button
+              class="btn btn-danger text-white"
+              @click="clickDelete(data.id)"
+            >
+              削除
+            </button>
             <span v-text="data.sortNo" hidden></span>
           </template>
         </Column>
@@ -190,11 +195,6 @@ export default defineComponent({
       );
     };
 
-    // 「csv出力」押下時の処理
-    const clickCsvOutput = () => {
-      alert(1);
-    };
-
     // 「新規作成」押下時の処理
     const clickCreate = () => {
       router.push({ name: 'JobCategoryMasterCreate' });
@@ -208,6 +208,15 @@ export default defineComponent({
       });
     };
 
+    // 「削除」押下時の処理
+    const clickDelete = async (id: number) => {
+      const name = jobCategories.value.find((v) => v.id === id)?.name;
+      if (window.confirm(`「${name}」を削除します。\nよろしいですか？`)) {
+        await jobCategory.deleteJobCategory(id);
+        clickSearch();
+      }
+    };
+
     return {
       jobCategories,
       loading,
@@ -216,7 +225,7 @@ export default defineComponent({
       clickCreate,
       clickEdit,
       clickSearch,
-      clickCsvOutput,
+      clickDelete,
     };
   },
 });
