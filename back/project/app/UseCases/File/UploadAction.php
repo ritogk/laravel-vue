@@ -16,7 +16,6 @@ class UploadAction
     public function __invoke(UploadedFile $file): array
     {
         $storage_path = Storage::putFile('public/images', $file, 'public');
-        $url = Storage::url($storage_path);
-        return ['storage_path' => $storage_path, 'url' => $url];
+        return ['storage_path' => $storage_path, 'url' => config('filesystems.base_url') . Storage::url($storage_path)];
     }
 }

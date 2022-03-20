@@ -54,7 +54,7 @@ export interface RequestJobCategory {
      * @type {Date}
      * @memberof RequestJobCategory
      */
-    updatedAt: Date;
+    updatedAt?: Date;
 }
 
 export function RequestJobCategoryFromJSON(json: any): RequestJobCategory {
@@ -72,7 +72,7 @@ export function RequestJobCategoryFromJSONTyped(json: any, ignoreDiscriminator: 
         'image': json['image'],
         'imageUrl': !exists(json, 'image_url') ? undefined : json['image_url'],
         'sortNo': json['sortNo'],
-        'updatedAt': (new Date(json['updatedAt'])),
+        'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
     };
 }
 
@@ -90,7 +90,7 @@ export function RequestJobCategoryToJSON(value?: RequestJobCategory | null): any
         'image': value.image,
         'image_url': value.imageUrl,
         'sortNo': value.sortNo,
-        'updatedAt': (value.updatedAt.toISOString().substr(0,10)),
+        'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString().substr(0,10)),
     };
 }
 

@@ -15,13 +15,13 @@
 
 import * as runtime from '../runtime';
 import {
-    RequestFile,
-    RequestFileFromJSON,
-    RequestFileToJSON,
+    FilePath,
+    FilePathFromJSON,
+    FilePathToJSON,
 } from '../models';
 
 export interface FilesPostRequest {
-    requestFile?: RequestFile;
+    file: Blob;
 }
 
 /**
@@ -34,18 +34,18 @@ export interface FileApiInterface {
     /**
      * 詳細内容
      * @summary ファイル 追加
-     * @param {RequestFile} [requestFile] 
+     * @param {Blob} file ファイル
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FileApiInterface
      */
-    filesPostRaw(requestParameters: FilesPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<any>>;
+    filesPostRaw(requestParameters: FilesPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FilePath>>;
 
     /**
      * 詳細内容
      * ファイル 追加
      */
-    filesPost(requestParameters: FilesPostRequest, initOverrides?: RequestInit): Promise<any>;
+    filesPost(requestParameters: FilesPostRequest, initOverrides?: RequestInit): Promise<FilePath>;
 
 }
 
@@ -58,12 +58,14 @@ export class FileApi extends runtime.BaseAPI implements FileApiInterface {
      * 詳細内容
      * ファイル 追加
      */
-    async filesPostRaw(requestParameters: FilesPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<any>> {
+    async filesPostRaw(requestParameters: FilesPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FilePath>> {
+        if (requestParameters.file === null || requestParameters.file === undefined) {
+            throw new runtime.RequiredError('file','Required parameter requestParameters.file was null or undefined when calling filesPost.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
             const token = this.configuration.accessToken;
@@ -73,22 +75,42 @@ export class FileApi extends runtime.BaseAPI implements FileApiInterface {
                 headerParameters["Authorization"] = `Bearer ${tokenString}`;
             }
         }
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        useForm = canConsumeForm;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
+
+        if (requestParameters.file !== undefined) {
+            formParams.append('file', requestParameters.file as any);
+        }
+
         const response = await this.request({
             path: `/files`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: RequestFileToJSON(requestParameters.requestFile),
+            body: formParams,
         }, initOverrides);
 
-        return new runtime.TextApiResponse(response) as any;
+        return new runtime.JSONApiResponse(response, (jsonValue) => FilePathFromJSON(jsonValue));
     }
 
     /**
      * 詳細内容
      * ファイル 追加
      */
-    async filesPost(requestParameters: FilesPostRequest, initOverrides?: RequestInit): Promise<any> {
+    async filesPost(requestParameters: FilesPostRequest, initOverrides?: RequestInit): Promise<FilePath> {
         const response = await this.filesPostRaw(requestParameters, initOverrides);
         return await response.value();
     }

@@ -24,7 +24,12 @@ const useAdminAuthentication = (): useAdminAuthenticationType => {
   // 状態
   const state = reactive({ user: {} as User, isLogin: false });
 
-  // ログイン処理
+  /**
+   * ログイン処理
+   * @param email
+   * @param password
+   * @returns
+   */
   const login = async (
     email: string,
     password: string

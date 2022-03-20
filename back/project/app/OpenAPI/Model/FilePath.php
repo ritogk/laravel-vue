@@ -1,6 +1,6 @@
 <?php
 /**
- * RequestJobCategory
+ * FilePath
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * RequestJobCategory Class Doc Comment
+ * FilePath Class Doc Comment
  *
  * @category Class
- * @description リクエスト 職種登録
+ * @description ファイルパス
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializable
+class FilePath implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'requestJobCategory';
+    protected static $openAPIModelName = 'filePath';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,12 +60,8 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'content' => 'string',
-        'image' => 'string',
-        'imageUrl' => 'string',
-        'sortNo' => 'int',
-        'updatedAt' => '\DateTime'
+        'storagePath' => 'string',
+        'url' => 'string'
     ];
 
     /**
@@ -76,12 +72,8 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'content' => null,
-        'image' => null,
-        'imageUrl' => null,
-        'sortNo' => null,
-        'updatedAt' => 'date'
+        'storagePath' => null,
+        'url' => null
     ];
 
     /**
@@ -111,12 +103,8 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'content' => 'content',
-        'image' => 'image',
-        'imageUrl' => 'image_url',
-        'sortNo' => 'sortNo',
-        'updatedAt' => 'updatedAt'
+        'storagePath' => 'storagePath',
+        'url' => 'url'
     ];
 
     /**
@@ -125,12 +113,8 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'content' => 'setContent',
-        'image' => 'setImage',
-        'imageUrl' => 'setImageUrl',
-        'sortNo' => 'setSortNo',
-        'updatedAt' => 'setUpdatedAt'
+        'storagePath' => 'setStoragePath',
+        'url' => 'setUrl'
     ];
 
     /**
@@ -139,12 +123,8 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'content' => 'getContent',
-        'image' => 'getImage',
-        'imageUrl' => 'getImageUrl',
-        'sortNo' => 'getSortNo',
-        'updatedAt' => 'getUpdatedAt'
+        'storagePath' => 'getStoragePath',
+        'url' => 'getUrl'
     ];
 
     /**
@@ -204,12 +184,8 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['content'] = $data['content'] ?? null;
-        $this->container['image'] = $data['image'] ?? null;
-        $this->container['imageUrl'] = $data['imageUrl'] ?? null;
-        $this->container['sortNo'] = $data['sortNo'] ?? null;
-        $this->container['updatedAt'] = $data['updatedAt'] ?? null;
+        $this->container['storagePath'] = $data['storagePath'] ?? null;
+        $this->container['url'] = $data['url'] ?? null;
     }
 
     /**
@@ -221,18 +197,6 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ($this->container['content'] === null) {
-            $invalidProperties[] = "'content' can't be null";
-        }
-        if ($this->container['image'] === null) {
-            $invalidProperties[] = "'image' can't be null";
-        }
-        if ($this->container['sortNo'] === null) {
-            $invalidProperties[] = "'sortNo' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -249,145 +213,49 @@ class RequestJobCategory implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name 名称
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets content
-     *
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->container['content'];
-    }
-
-    /**
-     * Sets content
-     *
-     * @param string $content 内容
-     *
-     * @return self
-     */
-    public function setContent($content)
-    {
-        $this->container['content'] = $content;
-
-        return $this;
-    }
-
-    /**
-     * Gets image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->container['image'];
-    }
-
-    /**
-     * Sets image
-     *
-     * @param string $image 画像の内部識別子
-     *
-     * @return self
-     */
-    public function setImage($image)
-    {
-        $this->container['image'] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Gets imageUrl
+     * Gets storagePath
      *
      * @return string|null
      */
-    public function getImageUrl()
+    public function getStoragePath()
     {
-        return $this->container['imageUrl'];
+        return $this->container['storagePath'];
     }
 
     /**
-     * Sets imageUrl
+     * Sets storagePath
      *
-     * @param string|null $imageUrl 画像URL
+     * @param string|null $storagePath ストレージパス
      *
      * @return self
      */
-    public function setImageUrl($imageUrl)
+    public function setStoragePath($storagePath)
     {
-        $this->container['imageUrl'] = $imageUrl;
+        $this->container['storagePath'] = $storagePath;
 
         return $this;
     }
 
     /**
-     * Gets sortNo
+     * Gets url
      *
-     * @return int
+     * @return string|null
      */
-    public function getSortNo()
+    public function getUrl()
     {
-        return $this->container['sortNo'];
+        return $this->container['url'];
     }
 
     /**
-     * Sets sortNo
+     * Sets url
      *
-     * @param int $sortNo 並び順
+     * @param string|null $url フルパス
      *
      * @return self
      */
-    public function setSortNo($sortNo)
+    public function setUrl($url)
     {
-        $this->container['sortNo'] = $sortNo;
-
-        return $this;
-    }
-
-    /**
-     * Gets updatedAt
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updatedAt'];
-    }
-
-    /**
-     * Sets updatedAt
-     *
-     * @param \DateTime|null $updatedAt 更新日時
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->container['updatedAt'] = $updatedAt;
+        $this->container['url'] = $url;
 
         return $this;
     }

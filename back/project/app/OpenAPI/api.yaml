@@ -512,7 +512,7 @@ paths:
         - bearerAdmin: []
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: "#/components/schemas/requestFile"
       responses:
@@ -521,7 +521,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/file"
+                $ref: "#/components/schemas/filePath"
 
 components:
   securitySchemes:
@@ -623,7 +623,6 @@ components:
         - content
         - image
         - sortNo
-        - updatedAt
     requestJob:
       description: リクエスト 仕事登録
       type: object
@@ -853,7 +852,7 @@ components:
           type: string
           format: date
           description: 作成日時
-    file:
+    filePath:
       description: ファイルパス
       type: object
       properties:

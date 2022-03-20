@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import AdminLogin from '@/views/AdminLogin.vue';
 import DashBoard from '@/views/DashBoard.vue';
-import JobCategoryMasterList from '@/components/dashboard/JobCategoryMasterList.vue';
-import JobCategoryMasterEdit from '@/components/dashboard/JobCategoryMasterEdit.vue';
+import JobCategoryMasterList from '@/views/DashBoard/JobCategoryMasterList.vue';
+import JobCategoryMasterEdit from '@/views/DashBoard/JobCategoryMasterEdit.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
