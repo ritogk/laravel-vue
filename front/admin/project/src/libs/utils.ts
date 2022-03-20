@@ -20,10 +20,11 @@ const fileToBlob = async (file: File) =>
   });
 
 /**
- * バリデーションエラーの型かどうかの判定を行います。
+ * * バリデーションエラーの型かどうかの判定を行います。
  * @param item
  * @returns
  */
+// eslint-disable-next-line
 const isValidaitonErrorsType = (item: any): item is validaitonErrorsType => {
   return !!(item as validaitonErrorsType)?.errors;
 };

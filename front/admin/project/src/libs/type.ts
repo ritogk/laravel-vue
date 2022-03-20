@@ -1,6 +1,6 @@
 type validaitonErrorsType = {
   errors: {
-    [index: string]: string;
+    [index: string]: string[];
   };
 };
 

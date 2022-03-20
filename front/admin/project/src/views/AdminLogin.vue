@@ -3,6 +3,14 @@
     <div class="card w-75 mx-auto border-primary">
       <div class="card-header bg-primary text-white">ログイン</div>
       <div class="card-body">
+        <!-- 汎用エラーメッセージ -->
+        <div class="mb-3">
+          <div
+            class="text-danger"
+            v-text="formErrors.general"
+            v-show="formErrors.general !== ''"
+          />
+        </div>
         <!-- 入力(メールアドレス) -->
         <div class="mb-3">
           <label for="inputMailAddress" class="form-label"
@@ -66,6 +74,7 @@ import {
   adminAuthenticationKey,
   useAdminAuthenticationType,
 } from '@/composables/useAdminAuthentication';
+import { isValidaitonErrorsType } from '@/libs/utils';
 
 export default defineComponent({
   setup() {
@@ -75,34 +84,55 @@ export default defineComponent({
     ) as useAdminAuthenticationType;
 
     // フォームの状態
-    const form = reactive({ email: 'test@test.co.jp', password: 'test' });
-    // フォームのエラー内容
-    const formErrors = reactive({ email: '', password: '' });
+    const formRefs = reactive({
+      // 入力値
+      inputs: {
+        email: 'test@test.co.jp',
+        password: 'test',
+      },
+      // エラーメッセージ
+      errors: {
+        email: '',
+        password: '',
+        general: '',
+      },
+    });
 
     // 「ログイン」ボタン押下
     const clickLogin = async () => {
       // ログイン
-      const response = await login(form.email, form.password);
-      // ログイン済のユーザー情報を取得
-      await getMe();
+      const response = await login(
+        formRefs.inputs.email,
+        formRefs.inputs.password
+      );
+
       // 正常の場合
-      if (!response) {
+      if (!isValidaitonErrorsType(response)) {
+        // ログイン済のユーザー情報を取得
+        await getMe();
+        // 「ダッシュボード」画面へ繊維
         router.push({ name: 'DashBoard' });
         return;
       }
-      // バリデーションで弾かれた場合の場合
-      formErrors.email = '';
-      formErrors.password = '';
-      const errors = (response as validaitonErrorsType).errors;
-      if ('email' in errors) {
-        formErrors.email = errors['email'][0];
-      }
-      if ('password' in errors) {
-        formErrors.password = errors['password'][0];
+
+      // ■バリデーションで弾かれた場合の場合
+      // エラーメッセージの初期化を行う。
+      Object.keys(formRefs.errors).forEach(function (key) {
+        formRefs.errors[key as keyof typeof formRefs.errors] = '';
+      });
+      // エラーをセット。
+      const errors = response.errors;
+      Object.keys(errors).forEach(function (key) {
+        if (Object.keys(errors).indexOf(key) !== -1) {
+          formRefs.errors[key as keyof typeof formRefs.errors] = errors[key][0];
+        }
+      });
+      if (Object.keys(errors).indexOf('message') !== -1) {
+        formRefs.errors.general = errors['message'][0];
       }
     };
 
-    return { form, formErrors, clickLogin };
+    return { form: formRefs.inputs, formErrors: formRefs.errors, clickLogin };
   },
 });
 </script>

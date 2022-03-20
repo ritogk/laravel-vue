@@ -4,6 +4,14 @@
     <div class="card w-100 mx-auto">
       <div class="card-header">ログイン</div>
       <div class="card-body">
+        <!-- 汎用エラーメッセージ -->
+        <div class="mb-3">
+          <div
+            class="text-danger"
+            v-text="formErrors.general"
+            v-show="formErrors.general !== ''"
+          />
+        </div>
         <!-- 入力(名称) -->
         <div class="mb-3">
           <label for="inputName" class="form-label">名称</label>
@@ -96,80 +104,87 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, inject } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useFile } from '@/composables/useFile';
 import { useJobCategory } from '@/composables/useJobCategory';
 import { fileToBlob, isValidaitonErrorsType } from '@/libs/utils';
-import { validaitonErrorsType } from '@/libs/type';
 
 export default defineComponent({
   setup() {
     const router = useRouter();
-
     const { upload } = useFile();
     const { createJobCategory } = useJobCategory();
+
     // フォームの状態
-    const form = reactive({
-      name: '',
-      content: '',
-      sortNo: 1,
-      image: '',
-      url: '',
-    });
-    // フォームのエラー内容
-    const formErrors = reactive({
-      name: '',
-      content: '',
-      sortNo: '',
-      image: '',
-      url: '',
+    const formRefs = reactive({
+      // 入力値
+      inputs: {
+        name: '',
+        content: '',
+        sortNo: 1,
+        image: '',
+        url: '',
+      },
+      // エラー内容
+      errors: {
+        name: '',
+        content: '',
+        sortNo: '',
+        image: '',
+        url: '',
+        general: '',
+      },
     });
 
-    // ファイルのアップロードを行います。
+    // ファイル選択後にサーバーへアップロードを行う。
     const uploadFile = async (event: Event) => {
       const file = (event.currentTarget as HTMLInputElement).files?.item(0);
       if (file !== null && file !== undefined) {
         const blob = await fileToBlob(file);
         const response = await upload(blob);
-        form.image = response.storagePath;
-        form.url = response.url;
+        formRefs.inputs.image = response.storagePath;
+        formRefs.inputs.url = response.url;
       }
     };
 
     // 「登録」押下時の処理
     const clickEntry = async () => {
       const response = await createJobCategory(
-        form.name,
-        form.content,
-        form.image,
-        form.sortNo
+        formRefs.inputs.name,
+        formRefs.inputs.content,
+        formRefs.inputs.image,
+        formRefs.inputs.sortNo
       );
       // 正常の場合
       if (!isValidaitonErrorsType(response)) {
         router.push({ name: 'JobCategoryMasterList' });
         return;
       }
-      // バリデーションで弾かれた場合の場合
-      formErrors.name = '';
-      formErrors.content = '';
-      formErrors.sortNo = '';
-      formErrors.image = '';
-      const errors = (response as validaitonErrorsType).errors;
-      if ('name' in errors) {
-        formErrors.name = errors['name'][0];
-      }
-      if ('content' in errors) {
-        formErrors.content = errors['content'][0];
-      }
-      if ('image' in errors) {
-        formErrors.image = errors['image'][0];
-      }
-      if ('sortNo' in errors) {
-        formErrors.sortNo = errors['sortNo'][0];
+
+      // ■バリデーションで弾かれた場合の場合
+      // エラーメッセージの初期化を行う。
+      Object.keys(formRefs.errors).forEach(function (key) {
+        formRefs.errors[key as keyof typeof formRefs.errors] = '';
+      });
+      // エラーをセット。
+      const errors = response.errors;
+      Object.keys(errors).forEach(function (key) {
+        if (Object.keys(errors).indexOf(key) !== -1) {
+          formRefs.errors[key as keyof typeof formRefs.errors] = errors[key][0];
+        }
+      });
+      if (Object.keys(errors).indexOf('message') !== -1) {
+        formRefs.errors.general = errors['message'][0];
       }
     };
-    return { form, formErrors, uploadFile, clickEntry };
+
+    return {
+      form: formRefs.inputs,
+      formErrors: formRefs.errors,
+      uploadFile,
+      clickEntry,
+    };
   },
 });
 </script>

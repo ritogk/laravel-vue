@@ -197,7 +197,7 @@ export default defineComponent({
 
     // 「編集」押下時の処理
     const clickEdit = (id: number) => {
-      alert(2);
+      alert(id);
     };
 
     return {

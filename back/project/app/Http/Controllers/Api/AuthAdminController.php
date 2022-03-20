@@ -26,7 +26,7 @@ class AuthAdminController extends Controller
         $request_all = ['email' => $requestBody->getEmail(), 'password' => $requestBody->getPassword()];
         if (!$token = auth('admin')->attempt($request_all)) {
             return response()->json(
-                ['error' => 'Unauthorized'],
+                ['errors' => ['message' => ['認証に失敗しました。']]],
                 Response::HTTP_UNAUTHORIZED
             );
         }
