@@ -1,5 +1,7 @@
 <template>
-  <router-view />
+  <transition name="fade">
+    <router-view />
+  </transition>
 </template>
 
 <script lang="ts">
@@ -28,5 +30,15 @@ export default defineComponent({
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.9s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
