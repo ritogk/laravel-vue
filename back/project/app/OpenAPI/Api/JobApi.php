@@ -1031,15 +1031,15 @@ class JobApi
      * 更新
      *
      * @param  int $id id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory requestJobCategory (optional)
+     * @param  \App\OpenAPI\Model\RequestJob $requestJob requestJob (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\Job
      */
-    public function jobsIdPut($id, $requestJobCategory = null)
+    public function jobsIdPut($id, $requestJob = null)
     {
-        list($response) = $this->jobsIdPutWithHttpInfo($id, $requestJobCategory);
+        list($response) = $this->jobsIdPutWithHttpInfo($id, $requestJob);
         return $response;
     }
 
@@ -1049,15 +1049,15 @@ class JobApi
      * 更新
      *
      * @param  int $id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
+     * @param  \App\OpenAPI\Model\RequestJob $requestJob (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\Job, HTTP status code, HTTP response headers (array of strings)
      */
-    public function jobsIdPutWithHttpInfo($id, $requestJobCategory = null)
+    public function jobsIdPutWithHttpInfo($id, $requestJob = null)
     {
-        $request = $this->jobsIdPutRequest($id, $requestJobCategory);
+        $request = $this->jobsIdPutRequest($id, $requestJob);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1143,14 +1143,14 @@ class JobApi
      * 更新
      *
      * @param  int $id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
+     * @param  \App\OpenAPI\Model\RequestJob $requestJob (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobsIdPutAsync($id, $requestJobCategory = null)
+    public function jobsIdPutAsync($id, $requestJob = null)
     {
-        return $this->jobsIdPutAsyncWithHttpInfo($id, $requestJobCategory)
+        return $this->jobsIdPutAsyncWithHttpInfo($id, $requestJob)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1164,15 +1164,15 @@ class JobApi
      * 更新
      *
      * @param  int $id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
+     * @param  \App\OpenAPI\Model\RequestJob $requestJob (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function jobsIdPutAsyncWithHttpInfo($id, $requestJobCategory = null)
+    public function jobsIdPutAsyncWithHttpInfo($id, $requestJob = null)
     {
         $returnType = '\App\OpenAPI\Model\Job';
-        $request = $this->jobsIdPutRequest($id, $requestJobCategory);
+        $request = $this->jobsIdPutRequest($id, $requestJob);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1211,12 +1211,12 @@ class JobApi
      * Create request for operation 'jobsIdPut'
      *
      * @param  int $id (required)
-     * @param  \App\OpenAPI\Model\RequestJobCategory $requestJobCategory (optional)
+     * @param  \App\OpenAPI\Model\RequestJob $requestJob (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function jobsIdPutRequest($id, $requestJobCategory = null)
+    public function jobsIdPutRequest($id, $requestJob = null)
     {
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -1256,11 +1256,11 @@ class JobApi
         }
 
         // for model (json/xml)
-        if (isset($requestJobCategory)) {
+        if (isset($requestJob)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestJobCategory));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($requestJob));
             } else {
-                $httpBody = $requestJobCategory;
+                $httpBody = $requestJob;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

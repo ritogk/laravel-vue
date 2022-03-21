@@ -291,7 +291,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/requestJobCategory"
+              $ref: "#/components/schemas/requestJob"
       responses:
         "200":
           description: 仕事

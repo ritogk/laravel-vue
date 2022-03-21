@@ -21,9 +21,6 @@ import {
     RequestJob,
     RequestJobFromJSON,
     RequestJobToJSON,
-    RequestJobCategory,
-    RequestJobCategoryFromJSON,
-    RequestJobCategoryToJSON,
 } from '../models';
 
 export interface JobsGetRequest {
@@ -46,7 +43,7 @@ export interface JobsIdGetRequest {
 
 export interface JobsIdPutRequest {
     id: number;
-    requestJobCategory?: RequestJobCategory;
+    requestJob?: RequestJob;
 }
 
 export interface JobsPostRequest {
@@ -118,7 +115,7 @@ export interface JobApiInterface {
      * 詳細内容
      * @summary 更新
      * @param {number} id 
-     * @param {RequestJobCategory} [requestJobCategory] 
+     * @param {RequestJob} [requestJob] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof JobApiInterface
@@ -310,7 +307,7 @@ export class JobApi extends runtime.BaseAPI implements JobApiInterface {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: RequestJobCategoryToJSON(requestParameters.requestJobCategory),
+            body: RequestJobToJSON(requestParameters.requestJob),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => JobFromJSON(jsonValue));
