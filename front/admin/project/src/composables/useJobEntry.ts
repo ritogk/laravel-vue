@@ -1,14 +1,6 @@
 import { InjectionKey, reactive, ToRefs, toRefs } from 'vue';
 import { apiConfig } from '@/libs/config';
-import {
-  EntryApi,
-  ResponseJobEntry,
-  EntriesGetRequest,
-  Entry,
-  Job,
-} from '@/open_api';
-import { useAdminAuthentication } from '@/composables/useAdminAuthentication';
-import { validaitonErrorsType } from '@/libs/validation';
+import { EntryApi, ResponseJobEntry, EntriesGetRequest } from '@/open_api';
 
 // メイン関数のtype
 type useJobEntryType = {

@@ -832,6 +832,9 @@ components:
         jobCategoryId:
           type: integer
           description: 職種id
+        jobCategory:
+          $ref: "#/components/schemas/jobCategory"
+          description: 職種
         price:
           type: integer
           description: 金額

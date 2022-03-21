@@ -73,12 +73,12 @@
         :rowsPerPageOptions="[10, 25, 50]"
         currentPageReportTemplate="{totalRecords} 件中 {first} から {last} まで表示"
         :globalFilterFields="[
-          'jobNm',
-          'jobCategoryNm',
-          'userName',
-          'email',
-          'tel',
-          'selfPr',
+          'job.title',
+          'job.jobCategory.name',
+          'user.name',
+          'user.email',
+          'user.tel',
+          'user.selfPr',
           'entryDate',
         ]"
         responsiveLayout="scroll"
@@ -97,7 +97,12 @@
         </template>
         <template #empty> データが存在しません。 </template>
         <template #loading> Loading data. Please wait. </template>
-        <Column field="jobNm" header="求人名" sortable style="min-width: 14rem">
+        <Column
+          field="job.title"
+          header="求人名"
+          sortable
+          style="min-width: 14rem"
+        >
           <template #body="{ data }">
             {{ data.job.title }}
           </template>
@@ -112,13 +117,13 @@
         </Column>
 
         <Column
-          field="jobCategoryNm"
+          field="job.jobCategory.name"
           header="職種"
           sortable
           style="min-width: 14rem"
         >
           <template #body="{ data }">
-            {{ jobCategoryNms[data.job.jobCategoryId] }}
+            {{ data.job.jobCategory.name }}
           </template>
           <template #filter="{ filterModel }">
             <InputText
@@ -131,7 +136,7 @@
         </Column>
 
         <Column
-          field="userName"
+          field="user.name"
           header="氏名"
           sortable
           style="min-width: 14rem"
@@ -150,7 +155,7 @@
         </Column>
 
         <Column
-          field="email"
+          field="user.email"
           header="メールアドレス"
           sortable
           style="min-width: 14rem"
@@ -168,7 +173,12 @@
           </template>
         </Column>
 
-        <Column field="tel" header="電話番号" sortable style="min-width: 14rem">
+        <Column
+          field="user.tel"
+          header="電話番号"
+          sortable
+          style="min-width: 14rem"
+        >
           <template #body="{ data }">
             {{ data.user.tel }}
           </template>
@@ -183,7 +193,7 @@
         </Column>
 
         <Column
-          field="selfPr"
+          field="user.selfPr"
           header="自己PR"
           sortable
           style="min-width: 14rem"
@@ -226,7 +236,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue';
-import { useRouter } from 'vue-router';
 import { FilterMatchMode, FilterOperator } from 'primevue/api';
 import { useJobEntry } from '@/composables/useJobEntry';
 import { useJobCategory } from '@/composables/useJobCategory';
@@ -234,8 +243,6 @@ import moment from 'moment';
 
 export default defineComponent({
   setup() {
-    const router = useRouter();
-
     const jobEntry = useJobEntry();
     const jobEntries = jobEntry.jobEntryRefs.items;
 
@@ -265,32 +272,32 @@ export default defineComponent({
       // 全体
       global: { value: null, matchMode: FilterMatchMode.CONTAINS },
       // 求人名
-      jobNm: {
+      'job.title': {
         operator: FilterOperator.AND,
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
       // 職種
-      jobCategoryNms: {
+      'job.jobCategory.name': {
         operator: FilterOperator.AND,
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
       // 氏名
-      userName: {
+      'user.name': {
         operator: FilterOperator.AND,
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
       // メールアドレス
-      email: {
+      'user.email': {
         operator: FilterOperator.AND,
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
       // 電話番号
-      tel: {
+      'user.tel': {
         operator: FilterOperator.AND,
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
       // 自己PR
-      selfPr: {
+      'user.selfPr': {
         operator: FilterOperator.AND,
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },

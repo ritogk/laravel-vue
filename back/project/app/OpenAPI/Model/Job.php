@@ -65,6 +65,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'content' => 'string',
         'attention' => 'bool',
         'jobCategoryId' => 'int',
+        'jobCategory' => '\App\OpenAPI\Model\JobCategory',
         'price' => 'int',
         'welfare' => 'string',
         'holiday' => 'string',
@@ -88,6 +89,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'content' => null,
         'attention' => null,
         'jobCategoryId' => null,
+        'jobCategory' => null,
         'price' => null,
         'welfare' => null,
         'holiday' => null,
@@ -130,6 +132,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'content' => 'content',
         'attention' => 'attention',
         'jobCategoryId' => 'jobCategoryId',
+        'jobCategory' => 'jobCategory',
         'price' => 'price',
         'welfare' => 'welfare',
         'holiday' => 'holiday',
@@ -151,6 +154,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'content' => 'setContent',
         'attention' => 'setAttention',
         'jobCategoryId' => 'setJobCategoryId',
+        'jobCategory' => 'setJobCategory',
         'price' => 'setPrice',
         'welfare' => 'setWelfare',
         'holiday' => 'setHoliday',
@@ -172,6 +176,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'content' => 'getContent',
         'attention' => 'getAttention',
         'jobCategoryId' => 'getJobCategoryId',
+        'jobCategory' => 'getJobCategory',
         'price' => 'getPrice',
         'welfare' => 'getWelfare',
         'holiday' => 'getHoliday',
@@ -244,6 +249,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['content'] = $data['content'] ?? null;
         $this->container['attention'] = $data['attention'] ?? null;
         $this->container['jobCategoryId'] = $data['jobCategoryId'] ?? null;
+        $this->container['jobCategory'] = $data['jobCategory'] ?? null;
         $this->container['price'] = $data['price'] ?? null;
         $this->container['welfare'] = $data['welfare'] ?? null;
         $this->container['holiday'] = $data['holiday'] ?? null;
@@ -421,6 +427,30 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setJobCategoryId($jobCategoryId)
     {
         $this->container['jobCategoryId'] = $jobCategoryId;
+
+        return $this;
+    }
+
+    /**
+     * Gets jobCategory
+     *
+     * @return \App\OpenAPI\Model\JobCategory|null
+     */
+    public function getJobCategory()
+    {
+        return $this->container['jobCategory'];
+    }
+
+    /**
+     * Sets jobCategory
+     *
+     * @param \App\OpenAPI\Model\JobCategory|null $jobCategory jobCategory
+     *
+     * @return self
+     */
+    public function setJobCategory($jobCategory)
+    {
+        $this->container['jobCategory'] = $jobCategory;
 
         return $this;
     }

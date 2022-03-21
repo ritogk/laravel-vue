@@ -125,13 +125,13 @@
         </Column>
 
         <Column
-          field="jobCategory"
+          field="jobCategory.name"
           header="職種"
           sortable
           style="min-width: 14rem"
         >
           <template #body="{ data }">
-            {{ jobCategoryNms[data.jobCategoryId] }}
+            {{ data.jobCategory.name }}
           </template>
           <template #filter="{ filterModel }">
             <InputText
@@ -201,7 +201,6 @@ import { defineComponent, ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { FilterMatchMode, FilterOperator } from 'primevue/api';
 import { useJob } from '@/composables/useJob';
-import { useJobCategory } from '@/composables/useJobCategory';
 import { convertComma } from '@/libs/utils';
 
 export default defineComponent({
@@ -210,9 +209,6 @@ export default defineComponent({
 
     const job = useJob();
     const jobs = job.jobRefs.items;
-
-    const jobCategory = useJobCategory();
-    const jobCategoryNms = jobCategory.jobCategoryRefs.names;
 
     // ローディングを判別するフラグ
     const loading = ref(true);
@@ -225,7 +221,6 @@ export default defineComponent({
 
     const load = async () => {
       await job.getJobs();
-      await jobCategory.getJobCategories();
       loading.value = false;
     };
     load();
@@ -245,7 +240,7 @@ export default defineComponent({
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
       // 職種
-      jobCategory: {
+      'jobCategory.name': {
         operator: FilterOperator.AND,
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
@@ -287,7 +282,6 @@ export default defineComponent({
     };
 
     return {
-      jobCategoryNms,
       jobs,
       loading,
       condition,

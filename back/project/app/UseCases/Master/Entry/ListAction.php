@@ -32,6 +32,6 @@ class ListAction
                 $query->when(isset($self_pr), function ($query) use ($self_pr) {
                     return $query->where('self_pr', 'like', "%$self_pr%");
                 });
-            })->with(['job', 'user'])->orderBy('created_at')->get()->toArray();
+            })->with(['job.jobCategory', 'user'])->orderBy('created_at')->get()->toArray();
     }
 }

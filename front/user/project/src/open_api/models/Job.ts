@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    JobCategory,
+    JobCategoryFromJSON,
+    JobCategoryFromJSONTyped,
+    JobCategoryToJSON,
+} from './';
+
 /**
  * 仕事
  * @export
@@ -49,6 +56,12 @@ export interface Job {
      * @memberof Job
      */
     jobCategoryId: number;
+    /**
+     * 
+     * @type {JobCategory}
+     * @memberof Job
+     */
+    jobCategory?: JobCategory;
     /**
      * 金額
      * @type {number}
@@ -114,6 +127,7 @@ export function JobFromJSONTyped(json: any, ignoreDiscriminator: boolean): Job {
         'content': json['content'],
         'attention': json['attention'],
         'jobCategoryId': json['jobCategoryId'],
+        'jobCategory': !exists(json, 'jobCategory') ? undefined : JobCategoryFromJSON(json['jobCategory']),
         'price': json['price'],
         'welfare': !exists(json, 'welfare') ? undefined : json['welfare'],
         'holiday': !exists(json, 'holiday') ? undefined : json['holiday'],
@@ -139,6 +153,7 @@ export function JobToJSON(value?: Job | null): any {
         'content': value.content,
         'attention': value.attention,
         'jobCategoryId': value.jobCategoryId,
+        'jobCategory': JobCategoryToJSON(value.jobCategory),
         'price': value.price,
         'welfare': value.welfare,
         'holiday': value.holiday,
