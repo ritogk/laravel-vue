@@ -141,7 +141,12 @@ body {
             </h6>
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a
+                  class="nav-link"
+                  href="#"
+                  v-bind:class="{ active: isActiveMenuNo(3) }"
+                  @mouseover="setActiveMenuNo(3)"
+                >
                   <vue-feather type="file"></vue-feather>
                   選考一覧
                 </a>
@@ -157,13 +162,26 @@ body {
             </h6>
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
+                <a
+                  class="nav-link"
+                  v-bind:class="{ active: isActiveMenuNo(2) }"
+                  @mouseover="setActiveMenuNo(2)"
+                  aria-current="page"
+                  href="#"
+                  @click="clickJob"
+                >
                   <vue-feather type="home"></vue-feather>
                   仕事マスタ
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" @click="clickJobCategory">
+                <a
+                  class="nav-link"
+                  v-bind:class="{ active: isActiveMenuNo(1) }"
+                  @mouseover="setActiveMenuNo(1)"
+                  href="#"
+                  @click="clickJobCategory"
+                >
                   <vue-feather type="file"></vue-feather>
                   職種マスタ
                 </a>
@@ -186,7 +204,7 @@ body {
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import {
   useAdminAuthenticationType,
@@ -202,9 +220,15 @@ export default defineComponent({
     ) as useAdminAuthenticationType;
     const user = adminAuthenticationRefs.user;
 
-    // 「職種マスタ」押下時の処理
-    const clickJobCategory = () => {
-      router.push({ name: 'JobCategoryMasterList' });
+    // アクティブなメニューNo
+    const activeMenuNo = ref(0);
+    // 指定のメニューNoがアクティブかどうかを判定します。
+    const isActiveMenuNo = (index: number): boolean => {
+      return activeMenuNo.value === index;
+    };
+    // アクティブなメニューNoを設定します。
+    const setActiveMenuNo = (index: number) => {
+      activeMenuNo.value = index;
     };
 
     // 「ログアウト」押下時の処理
@@ -212,7 +236,25 @@ export default defineComponent({
       logout();
       router.push({ name: 'AdminLogin' });
     };
-    return { user, clickJobCategory, clickLogout };
+
+    // 「職種マスタ」押下時の処理
+    const clickJobCategory = () => {
+      router.push({ name: 'JobCategoryMasterList' });
+    };
+
+    // 「仕事マスタ」押下時の処理
+    const clickJob = () => {
+      router.push({ name: 'JobMasterList' });
+    };
+
+    return {
+      user,
+      clickJobCategory,
+      clickLogout,
+      clickJob,
+      isActiveMenuNo,
+      setActiveMenuNo,
+    };
   },
 });
 </script>
