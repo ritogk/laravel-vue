@@ -104,7 +104,7 @@ export default defineComponent({
         formRefs.inputs.password
       );
       // ログイン済のユーザー情報を取得
-      getMe();
+      await getMe();
       // 正常の場合
       if (!response) {
         router.push('/');
