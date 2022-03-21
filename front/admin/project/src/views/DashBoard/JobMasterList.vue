@@ -6,7 +6,7 @@
       <div class="card-body">
         <div class="row g-3">
           <div class="col-md-6">
-            <label for="inputName" class="form-label">名称</label>
+            <label for="inputName" class="form-label">タイトル</label>
             <input
               type="text"
               class="form-control"
@@ -15,13 +15,20 @@
             />
           </div>
           <div class="col-md-6">
-            <label for="inputContent" class="form-label">内容</label>
-            <input
-              type="text"
-              class="form-control"
-              id="inputContent"
-              v-model="condition.content"
-            />
+            <label for="inputContent" class="form-label">カテゴリ</label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              v-model="condition.name"
+            >
+              <option value="">全て</option>
+              <!-- <option
+                v-for="(name, index) in jobCategoryNms"
+                :key="`jobCategory${index}`"
+                v-bind:value="index"
+                v-text="name"
+              ></option> -->
+            </select>
           </div>
         </div>
       </div>
@@ -76,7 +83,12 @@
         </template>
         <template #empty> データが存在しません。 </template>
         <template #loading> Loading data. Please wait. </template>
-        <Column field="name" header="名称" sortable style="min-width: 14rem">
+        <Column
+          field="name"
+          header="タイトル"
+          sortable
+          style="min-width: 14rem"
+        >
           <template #body="{ data }">
             {{ data.name }}
           </template>
@@ -85,7 +97,7 @@
               type="text"
               v-model="filterModel.value"
               class="p-column-filter"
-              placeholder="Search by 名称"
+              placeholder="Search by タイトル"
             />
           </template>
         </Column>
@@ -105,6 +117,39 @@
         </Column>
 
         <Column
+          field="content"
+          header="カテゴリ"
+          sortable
+          style="min-width: 14rem"
+        >
+          <template #body="{ data }">
+            {{ data.content }}
+          </template>
+          <template #filter="{ filterModel }">
+            <InputText
+              type="text"
+              v-model="filterModel.value"
+              class="p-column-filter"
+              placeholder="Search by カテゴリ"
+            />
+          </template>
+        </Column>
+
+        <Column field="content" header="金額" sortable style="min-width: 14rem">
+          <template #body="{ data }">
+            {{ data.content }}
+          </template>
+          <template #filter="{ filterModel }">
+            <InputText
+              type="text"
+              v-model="filterModel.value"
+              class="p-column-filter"
+              placeholder="Search by 金額"
+            />
+          </template>
+        </Column>
+
+        <Column
           field="sortNo"
           header="並び順"
           sortable
@@ -115,6 +160,7 @@
             {{ data.sortNo }}
           </template>
         </Column>
+
         <Column
           field="action"
           header="操作"

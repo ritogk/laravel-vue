@@ -69,7 +69,7 @@ const useJobCategory = (): useJobCategoryType => {
   };
 
   /**
-   * id毎の職種一覧を取得
+   * idと名称の職種辞書を取得
    */
   const generateNames = (): void => {
     state.names = {};

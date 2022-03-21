@@ -2,7 +2,7 @@
   <div class="w-100">
     <h1 class="h2 mb-3">仕事マスタ(編集)</h1>
     <div class="card w-100 mx-auto">
-      <div class="card-header">ログイン</div>
+      <div class="card-header">登録内容</div>
       <div class="card-body">
         <!-- 汎用エラーメッセージ -->
         <div class="mb-3">
@@ -12,9 +12,10 @@
             v-show="formErrors.general !== ''"
           />
         </div>
+
         <!-- 入力(名称) -->
         <div class="mb-3">
-          <label for="inputName" class="form-label">名称</label>
+          <label for="inputName" class="form-label">タイトル</label>
           <input
             type="text"
             class="form-control form-control-sm"
@@ -22,7 +23,7 @@
             id="inputName"
             aria-describedby="inputNameFeedback"
             v-model="formInputs.name"
-            placeholder="名称を入力して下さい。"
+            placeholder="タイトルを入力して下さい。"
           />
           <div
             id="inputNameFeedback"
@@ -31,6 +32,7 @@
             v-show="formErrors.name !== ''"
           />
         </div>
+
         <!-- 入力(内容) -->
         <div class="mb-3">
           <label for="inputContent" class="form-label">内容</label>
@@ -50,6 +52,87 @@
             v-show="formErrors.content !== ''"
           />
         </div>
+
+        <!-- 入力(カテゴリ) -->
+        <div class="mb-3">
+          <label for="inputContent" class="form-label">カテゴリ</label>
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            v-model="formInputs.content"
+          >
+            <option value="">全て</option>
+            <!-- <option
+                v-for="(name, index) in jobCategoryNms"
+                :key="`jobCategory${index}`"
+                v-bind:value="index"
+                v-text="name"
+              ></option> -->
+          </select>
+          <div
+            id="inputContentFeedback"
+            class="invalid-feedback"
+            v-text="formErrors.content"
+            v-show="formErrors.content !== ''"
+          />
+        </div>
+
+        <!-- 入力(福利厚生) -->
+        <div class="mb-3">
+          <label for="inputContent" class="form-label">福利厚生</label>
+          <textarea
+            class="form-control form-control-sm"
+            v-bind:class="[formErrors.content !== '' ? 'is-invalid' : '']"
+            id="inputContent"
+            aria-describedby="inputContentFeedback"
+            v-model="formInputs.content"
+            placeholder="福利厚生を入力して下さい。"
+            rows="5"
+          />
+          <div
+            id="inputContentFeedback"
+            class="invalid-feedback"
+            v-text="formErrors.content"
+            v-show="formErrors.content !== ''"
+          />
+        </div>
+
+        <!-- 入力(休日) -->
+        <div class="mb-3">
+          <label for="inputContent" class="form-label">休日</label>
+          <textarea
+            class="form-control form-control-sm"
+            v-bind:class="[formErrors.content !== '' ? 'is-invalid' : '']"
+            id="inputContent"
+            aria-describedby="inputContentFeedback"
+            v-model="formInputs.content"
+            placeholder="休日を入力して下さい。"
+            rows="5"
+          />
+          <div
+            id="inputContentFeedback"
+            class="invalid-feedback"
+            v-text="formErrors.content"
+            v-show="formErrors.content !== ''"
+          />
+        </div>
+
+        <!-- 入力(注目させる) -->
+        <div class="mb-3">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="inputAttention"
+              v-model="formInputs.content"
+            />
+            <label class="form-check-label" for="inputAttention">
+              注目させる
+            </label>
+          </div>
+        </div>
+
         <!-- 入力(並び順) -->
         <div class="mb-3">
           <label for="inputSortNo" class="form-label">並び順</label>
