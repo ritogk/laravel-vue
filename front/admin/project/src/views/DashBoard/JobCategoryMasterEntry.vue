@@ -1,8 +1,8 @@
 <template>
   <div class="w-100">
-    <h1 class="h2 mb-3">職種マスタ(編集)</h1>
+    <h1 class="h2 mb-3">職種マスタ(登録)</h1>
     <div class="card w-100 mx-auto">
-      <div class="card-header">ログイン</div>
+      <div class="card-header">登録内容</div>
       <div class="card-body">
         <!-- 汎用エラーメッセージ -->
         <div class="mb-3">
@@ -189,7 +189,7 @@ export default defineComponent({
           formRefs.inputs.name,
           formRefs.inputs.content,
           formRefs.inputs.image,
-          formRefs.inputs.sortNo
+          formRefs.inputs.sortNo ? Number(formRefs.inputs.sortNo) : null
         );
       } else {
         // 編集の場合
@@ -198,7 +198,7 @@ export default defineComponent({
           formRefs.inputs.name,
           formRefs.inputs.content,
           formRefs.inputs.image,
-          formRefs.inputs.sortNo
+          formRefs.inputs.sortNo ? Number(formRefs.inputs.sortNo) : null
         );
       }
       // 正常の場合

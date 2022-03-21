@@ -21,11 +21,16 @@ import {
     RequestEntry,
     RequestEntryFromJSON,
     RequestEntryToJSON,
+    ResponseJobEntry,
+    ResponseJobEntryFromJSON,
+    ResponseJobEntryToJSON,
 } from '../models';
 
 export interface EntriesGetRequest {
     jobId?: number;
     jobCategoryId?: number;
+    userName?: string;
+    selfPr?: string;
 }
 
 export interface EntriesPostRequest {
@@ -44,17 +49,19 @@ export interface EntryApiInterface {
      * @summary 一覧取得
      * @param {number} [jobId] 仕事id
      * @param {number} [jobCategoryId] 仕事カテゴリid
+     * @param {string} [userName] ユーザー名
+     * @param {string} [selfPr] 自己PR
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EntryApiInterface
      */
-    entriesGetRaw(requestParameters: EntriesGetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Entry>>>;
+    entriesGetRaw(requestParameters: EntriesGetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ResponseJobEntry>>>;
 
     /**
      * 詳細内容
      * 一覧取得
      */
-    entriesGet(requestParameters: EntriesGetRequest, initOverrides?: RequestInit): Promise<Array<Entry>>;
+    entriesGet(requestParameters: EntriesGetRequest, initOverrides?: RequestInit): Promise<Array<ResponseJobEntry>>;
 
     /**
      * 詳細内容
@@ -83,7 +90,7 @@ export class EntryApi extends runtime.BaseAPI implements EntryApiInterface {
      * 詳細内容
      * 一覧取得
      */
-    async entriesGetRaw(requestParameters: EntriesGetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Entry>>> {
+    async entriesGetRaw(requestParameters: EntriesGetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ResponseJobEntry>>> {
         const queryParameters: any = {};
 
         if (requestParameters.jobId !== undefined) {
@@ -92,6 +99,14 @@ export class EntryApi extends runtime.BaseAPI implements EntryApiInterface {
 
         if (requestParameters.jobCategoryId !== undefined) {
             queryParameters['jobCategoryId'] = requestParameters.jobCategoryId;
+        }
+
+        if (requestParameters.userName !== undefined) {
+            queryParameters['userName'] = requestParameters.userName;
+        }
+
+        if (requestParameters.selfPr !== undefined) {
+            queryParameters['selfPr'] = requestParameters.selfPr;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -103,14 +118,14 @@ export class EntryApi extends runtime.BaseAPI implements EntryApiInterface {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(EntryFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ResponseJobEntryFromJSON));
     }
 
     /**
      * 詳細内容
      * 一覧取得
      */
-    async entriesGet(requestParameters: EntriesGetRequest, initOverrides?: RequestInit): Promise<Array<Entry>> {
+    async entriesGet(requestParameters: EntriesGetRequest, initOverrides?: RequestInit): Promise<Array<ResponseJobEntry>> {
         const response = await this.entriesGetRaw(requestParameters, initOverrides);
         return await response.value();
     }

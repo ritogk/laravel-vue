@@ -35,7 +35,7 @@ class ListAction
             return $query->where('holiday', 'like', "%$holiday%");
         })->when(isset($price), function ($query) use ($price) {
             return $query->where('price', '>=', $price);
-        })->orderBy('sort_no')->get()->toArray();
+        })->with('jobCategory')->orderBy('sort_no')->get()->toArray();
 
         // ファイルurlを変換
         if (count($items) >= 1 && array_key_exists('image', $items[0])) {

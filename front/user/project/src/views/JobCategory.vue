@@ -14,23 +14,12 @@
           v-show="!loading"
           class="m-2"
         >
-          <div class="card text-white">
-            <img
-              :src="category.imageUrl"
-              class="card-img category-card"
-              style="max-width: 20rem; height: 200px; filter: brightness(0.65)"
+          <div @click.prevent="clickCategory(category.id)">
+            <TextOnImage
+              :imageUrl="category.imageUrl"
+              :title="category.name"
+              :text="category.content"
             />
-            <div class="card-img-overlay">
-              <h4 class="card-title" v-text="category.name"></h4>
-              <p class="card-text">
-                <span v-text="category.content"></span>
-                <a
-                  href="#"
-                  @click.prevent="clickCategory(category.id)"
-                  class="stretched-link"
-                ></a>
-              </p>
-            </div>
           </div>
         </div>
       </div>
@@ -41,12 +30,14 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import TextOnImage from '@/components/TextOnImage.vue';
 import VueElementLoading from 'vue-element-loading';
 import { useJobCategory } from '@/composables/useJobCategory';
 
 export default defineComponent({
   components: {
     VueElementLoading,
+    TextOnImage,
   },
   setup() {
     const router = useRouter();
@@ -54,14 +45,14 @@ export default defineComponent({
     const loading = ref(true);
     const categories = jobCategory.jobCategoryRefs.items;
 
-    // 職種一覧を取得
+    // 読み込み
     const load = async () => {
       await jobCategory.getJobCategory();
       loading.value = false;
     };
     load();
 
-    // 「職種」クリック時
+    // 「職種」押下時の処理
     const clickCategory = (categoryId: string) => {
       router.push({
         name: 'JobEntry',

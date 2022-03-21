@@ -63,7 +63,6 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'int',
         'name' => 'string',
         'email' => 'string',
-        'password' => 'string',
         'selfPr' => 'string',
         'tel' => 'string',
         'updatedAt' => '\DateTime',
@@ -81,7 +80,6 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => null,
         'name' => null,
         'email' => null,
-        'password' => null,
         'selfPr' => null,
         'tel' => null,
         'updatedAt' => 'date',
@@ -118,7 +116,6 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'name' => 'name',
         'email' => 'email',
-        'password' => 'password',
         'selfPr' => 'selfPr',
         'tel' => 'tel',
         'updatedAt' => 'updatedAt',
@@ -134,7 +131,6 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'name' => 'setName',
         'email' => 'setEmail',
-        'password' => 'setPassword',
         'selfPr' => 'setSelfPr',
         'tel' => 'setTel',
         'updatedAt' => 'setUpdatedAt',
@@ -150,7 +146,6 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'name' => 'getName',
         'email' => 'getEmail',
-        'password' => 'getPassword',
         'selfPr' => 'getSelfPr',
         'tel' => 'getTel',
         'updatedAt' => 'getUpdatedAt',
@@ -217,7 +212,6 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['id'] = $data['id'] ?? null;
         $this->container['name'] = $data['name'] ?? null;
         $this->container['email'] = $data['email'] ?? null;
-        $this->container['password'] = $data['password'] ?? null;
         $this->container['selfPr'] = $data['selfPr'] ?? null;
         $this->container['tel'] = $data['tel'] ?? null;
         $this->container['updatedAt'] = $data['updatedAt'] ?? null;
@@ -233,6 +227,21 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['email'] === null) {
+            $invalidProperties[] = "'email' can't be null";
+        }
+        if ($this->container['selfPr'] === null) {
+            $invalidProperties[] = "'selfPr' can't be null";
+        }
+        if ($this->container['tel'] === null) {
+            $invalidProperties[] = "'tel' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -251,7 +260,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets id
      *
-     * @return int|null
+     * @return int
      */
     public function getId()
     {
@@ -261,7 +270,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param int|null $id id
+     * @param int $id id
      *
      * @return self
      */
@@ -275,7 +284,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets name
      *
-     * @return string|null
+     * @return string
      */
     public function getName()
     {
@@ -285,7 +294,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name 氏名
+     * @param string $name 氏名
      *
      * @return self
      */
@@ -299,7 +308,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets email
      *
-     * @return string|null
+     * @return string
      */
     public function getEmail()
     {
@@ -309,7 +318,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets email
      *
-     * @param string|null $email メールアドレス
+     * @param string $email メールアドレス
      *
      * @return self
      */
@@ -321,33 +330,9 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets password
-     *
-     * @return string|null
-     */
-    public function getPassword()
-    {
-        return $this->container['password'];
-    }
-
-    /**
-     * Sets password
-     *
-     * @param string|null $password パスワード
-     *
-     * @return self
-     */
-    public function setPassword($password)
-    {
-        $this->container['password'] = $password;
-
-        return $this;
-    }
-
-    /**
      * Gets selfPr
      *
-     * @return string|null
+     * @return string
      */
     public function getSelfPr()
     {
@@ -357,7 +342,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets selfPr
      *
-     * @param string|null $selfPr 自己PR
+     * @param string $selfPr 自己PR
      *
      * @return self
      */
@@ -371,7 +356,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets tel
      *
-     * @return string|null
+     * @return string
      */
     public function getTel()
     {
@@ -381,7 +366,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tel
      *
-     * @param string|null $tel 電話番号
+     * @param string $tel 電話番号
      *
      * @return self
      */

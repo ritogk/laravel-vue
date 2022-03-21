@@ -1,8 +1,4 @@
 <style scoped>
-body {
-  font-size: 0.875rem;
-}
-
 .feather {
   width: 16px;
   height: 16px;
@@ -57,87 +53,82 @@ body {
   font-size: 0.95rem;
   text-transform: uppercase;
 }
-
-.navbar-brand {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-size: 1rem;
-  background-color: rgba(0, 0, 0, 0.25);
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
-}
-
-.navbar .navbar-toggler {
-  top: 0.25rem;
-  right: 1rem;
-}
-
-.navbar .form-control {
-  padding: 0.75rem 1rem;
-  border-width: 0;
-  border-radius: 0;
-}
-
-.form-control-dark {
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-.form-control-dark:focus {
-  border-color: transparent;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
-}
-
-.header-bar {
-  background: #212529 !important;
-}
 </style>
 
 <template>
-  <div>
-    <!-- ヘッダー -->
-    <Header />
-    <div class="container-fluid">
-      <div class="row">
-        <!-- サイドバー -->
-        <Sidebar />
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <div
-            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3"
+  <nav
+    id="sidebarMenu"
+    class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
+  >
+    <div class="position-sticky pt-1">
+      <h6
+        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+      >
+        <span>メイン</span>
+        <a class="link-secondary" href="#" aria-label="Add a new report">
+          <span data-feather="plus-circle"></span>
+        </a>
+      </h6>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="#"
+            v-bind:class="{ active: isActiveMenuNo(3) }"
+            @mouseover="setActiveMenuNo(3)"
+            @click="clickConsideration"
           >
-            <!-- 画面の表示エリア-->
-            <transition name="fade">
-              <router-view />
-            </transition>
-          </div>
-        </main>
-      </div>
+            <vue-feather type="file"></vue-feather>
+            選考一覧
+          </a>
+        </li>
+      </ul>
+      <h6
+        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+      >
+        <span>マスタ</span>
+        <a class="link-secondary" href="#" aria-label="Add a new report">
+          <span data-feather="plus-circle"></span>
+        </a>
+      </h6>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            v-bind:class="{ active: isActiveMenuNo(2) }"
+            @mouseover="setActiveMenuNo(2)"
+            aria-current="page"
+            href="#"
+            @click="clickJob"
+          >
+            <vue-feather type="home"></vue-feather>
+            仕事マスタ
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            v-bind:class="{ active: isActiveMenuNo(1) }"
+            @mouseover="setActiveMenuNo(1)"
+            href="#"
+            @click="clickJobCategory"
+          >
+            <vue-feather type="file"></vue-feather>
+            職種マスタ
+          </a>
+        </li>
+      </ul>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import Header from '@/components/dashborad/Header.vue';
-import Sidebar from '@/components/dashborad/Sidebar.vue';
-import {
-  useAdminAuthenticationType,
-  adminAuthenticationKey,
-} from '@/composables/useAdminAuthentication';
 
 export default defineComponent({
-  components: {
-    Header,
-    Sidebar,
-  },
   setup() {
     const router = useRouter();
-
-    const { adminAuthenticationRefs, logout } = inject(
-      adminAuthenticationKey
-    ) as useAdminAuthenticationType;
-    const user = adminAuthenticationRefs.user;
 
     // アクティブなメニューNo
     const activeMenuNo = ref(0);
@@ -148,12 +139,6 @@ export default defineComponent({
     // アクティブなメニューNoを設定します。
     const setActiveMenuNo = (index: number) => {
       activeMenuNo.value = index;
-    };
-
-    // 「ログアウト」押下時の処理
-    const clickLogout = () => {
-      logout();
-      router.push({ name: 'AdminLogin' });
     };
 
     // 「選考一覧」押下時の処理
@@ -172,10 +157,8 @@ export default defineComponent({
     };
 
     return {
-      user,
       clickConsideration,
       clickJobCategory,
-      clickLogout,
       clickJob,
       isActiveMenuNo,
       setActiveMenuNo,

@@ -65,6 +65,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'content' => 'string',
         'attention' => 'bool',
         'jobCategoryId' => 'int',
+        'jobCategory' => '\App\OpenAPI\Model\JobCategory',
         'price' => 'int',
         'welfare' => 'string',
         'holiday' => 'string',
@@ -88,6 +89,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'content' => null,
         'attention' => null,
         'jobCategoryId' => null,
+        'jobCategory' => null,
         'price' => null,
         'welfare' => null,
         'holiday' => null,
@@ -130,6 +132,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'content' => 'content',
         'attention' => 'attention',
         'jobCategoryId' => 'jobCategoryId',
+        'jobCategory' => 'jobCategory',
         'price' => 'price',
         'welfare' => 'welfare',
         'holiday' => 'holiday',
@@ -151,6 +154,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'content' => 'setContent',
         'attention' => 'setAttention',
         'jobCategoryId' => 'setJobCategoryId',
+        'jobCategory' => 'setJobCategory',
         'price' => 'setPrice',
         'welfare' => 'setWelfare',
         'holiday' => 'setHoliday',
@@ -172,6 +176,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         'content' => 'getContent',
         'attention' => 'getAttention',
         'jobCategoryId' => 'getJobCategoryId',
+        'jobCategory' => 'getJobCategory',
         'price' => 'getPrice',
         'welfare' => 'getWelfare',
         'holiday' => 'getHoliday',
@@ -244,6 +249,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['content'] = $data['content'] ?? null;
         $this->container['attention'] = $data['attention'] ?? null;
         $this->container['jobCategoryId'] = $data['jobCategoryId'] ?? null;
+        $this->container['jobCategory'] = $data['jobCategory'] ?? null;
         $this->container['price'] = $data['price'] ?? null;
         $this->container['welfare'] = $data['welfare'] ?? null;
         $this->container['holiday'] = $data['holiday'] ?? null;
@@ -263,6 +269,33 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['title'] === null) {
+            $invalidProperties[] = "'title' can't be null";
+        }
+        if ($this->container['content'] === null) {
+            $invalidProperties[] = "'content' can't be null";
+        }
+        if ($this->container['attention'] === null) {
+            $invalidProperties[] = "'attention' can't be null";
+        }
+        if ($this->container['jobCategoryId'] === null) {
+            $invalidProperties[] = "'jobCategoryId' can't be null";
+        }
+        if ($this->container['price'] === null) {
+            $invalidProperties[] = "'price' can't be null";
+        }
+        if ($this->container['image'] === null) {
+            $invalidProperties[] = "'image' can't be null";
+        }
+        if ($this->container['imageUrl'] === null) {
+            $invalidProperties[] = "'imageUrl' can't be null";
+        }
+        if ($this->container['sortNo'] === null) {
+            $invalidProperties[] = "'sortNo' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -281,7 +314,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets id
      *
-     * @return int|null
+     * @return int
      */
     public function getId()
     {
@@ -291,7 +324,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param int|null $id id
+     * @param int $id id
      *
      * @return self
      */
@@ -305,7 +338,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets title
      *
-     * @return string|null
+     * @return string
      */
     public function getTitle()
     {
@@ -315,7 +348,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets title
      *
-     * @param string|null $title タイトル
+     * @param string $title タイトル
      *
      * @return self
      */
@@ -329,7 +362,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets content
      *
-     * @return string|null
+     * @return string
      */
     public function getContent()
     {
@@ -339,7 +372,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets content
      *
-     * @param string|null $content 内容
+     * @param string $content 内容
      *
      * @return self
      */
@@ -353,7 +386,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets attention
      *
-     * @return bool|null
+     * @return bool
      */
     public function getAttention()
     {
@@ -363,7 +396,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets attention
      *
-     * @param bool|null $attention 注目の求人
+     * @param bool $attention 注目の求人
      *
      * @return self
      */
@@ -377,7 +410,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets jobCategoryId
      *
-     * @return int|null
+     * @return int
      */
     public function getJobCategoryId()
     {
@@ -387,7 +420,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets jobCategoryId
      *
-     * @param int|null $jobCategoryId 職種id
+     * @param int $jobCategoryId 職種id
      *
      * @return self
      */
@@ -399,9 +432,33 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets jobCategory
+     *
+     * @return \App\OpenAPI\Model\JobCategory|null
+     */
+    public function getJobCategory()
+    {
+        return $this->container['jobCategory'];
+    }
+
+    /**
+     * Sets jobCategory
+     *
+     * @param \App\OpenAPI\Model\JobCategory|null $jobCategory jobCategory
+     *
+     * @return self
+     */
+    public function setJobCategory($jobCategory)
+    {
+        $this->container['jobCategory'] = $jobCategory;
+
+        return $this;
+    }
+
+    /**
      * Gets price
      *
-     * @return int|null
+     * @return int
      */
     public function getPrice()
     {
@@ -411,7 +468,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price
      *
-     * @param int|null $price 金額
+     * @param int $price 金額
      *
      * @return self
      */
@@ -473,7 +530,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets image
      *
-     * @return string|null
+     * @return string
      */
     public function getImage()
     {
@@ -483,7 +540,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets image
      *
-     * @param string|null $image 画像の内部識別子
+     * @param string $image 画像の内部識別子
      *
      * @return self
      */
@@ -497,7 +554,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets imageUrl
      *
-     * @return string|null
+     * @return string
      */
     public function getImageUrl()
     {
@@ -507,7 +564,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets imageUrl
      *
-     * @param string|null $imageUrl 画像URL
+     * @param string $imageUrl 画像URL
      *
      * @return self
      */
@@ -521,7 +578,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets sortNo
      *
-     * @return int|null
+     * @return int
      */
     public function getSortNo()
     {
@@ -531,7 +588,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets sortNo
      *
-     * @param int|null $sortNo 並び順
+     * @param int $sortNo 並び順
      *
      * @return self
      */

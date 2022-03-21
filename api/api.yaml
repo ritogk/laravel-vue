@@ -291,7 +291,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/requestJobCategory"
+              $ref: "#/components/schemas/requestJob"
       responses:
         "200":
           description: 仕事
@@ -415,6 +415,18 @@ paths:
             type: integer
           description: 仕事カテゴリid
           required: false
+        - in: query
+          name: userName
+          schema:
+            type: string
+          description: ユーザー名
+          required: false
+        - in: query
+          name: selfPr
+          schema:
+            type: string
+          description: 自己PR
+          required: false
       responses:
         "200":
           description: 応募一覧
@@ -423,7 +435,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/entry"
+                  $ref: "#/components/schemas/responseJobEntry"
     post:
       tags:
         - "entry"
@@ -579,6 +591,12 @@ components:
         jobCategoryId:
           type: integer
           description: 仕事カテゴリid
+        userName:
+          type: string
+          description: ユーザー名
+        selfPr:
+          type: string
+          description: 自己PR
     queryUserList:
       description: クエリパラメータ 会員一覧
       type: object
@@ -613,6 +631,7 @@ components:
           description: 画像URL
         sortNo:
           type: integer
+          nullable: true
           description: 並び順
         updatedAt:
           type: string
@@ -638,9 +657,11 @@ components:
           description: 注目の求人
         jobCategoryId:
           type: integer
+          nullable: true
           description: 職種id
         price:
           type: integer
+          nullable: true
           description: 金額
         welfare:
           type: string
@@ -656,6 +677,7 @@ components:
           description: 画像URL
         sortNo:
           type: integer
+          nullable: true
           description: 並び順
         updatedAt:
           type: string
@@ -678,7 +700,7 @@ components:
           description: 仕事id
         userId:
           type: integer
-          description: 会員id
+          description: ユーザーid
       required:
         - jobId
         - jobCategoryId
@@ -734,6 +756,26 @@ components:
       required:
         - email
         - password
+    responseJobEntry:
+      description: レスポンス 仕事応募内容
+      type: object
+      properties:
+        entryId:
+          type: integer
+          description: エントリーid
+        entryDate:
+          type: string
+          format: date
+          description: エントリー日時
+        user:
+          $ref: "#/components/schemas/user"
+          description: ユーザー情報
+        job:
+          $ref: "#/components/schemas/job"
+          description: 仕事情報
+      required:
+        - jobId
+        - jobCategoryId
     jobCategory:
       description: 職種
       type: object
@@ -790,6 +832,9 @@ components:
         jobCategoryId:
           type: integer
           description: 職種id
+        jobCategory:
+          $ref: "#/components/schemas/jobCategory"
+          description: 職種
         price:
           type: integer
           description: 金額
@@ -816,6 +861,16 @@ components:
           type: string
           format: date
           description: 更新日時
+      required:
+        - id
+        - title
+        - content
+        - attention
+        - jobCategoryId
+        - price
+        - image
+        - imageUrl
+        - sortNo
     entry:
       description: 応募
       type: object
@@ -842,9 +897,6 @@ components:
         email:
           type: string
           description: メールアドレス
-        password:
-          type: string
-          description: パスワード
         selfPr:
           type: string
           description: 自己PR
@@ -859,6 +911,12 @@ components:
           type: string
           format: date
           description: 作成日時
+      required:
+        - id
+        - name
+        - email
+        - selfPr
+        - tel
     filePath:
       description: ファイルパス
       type: object

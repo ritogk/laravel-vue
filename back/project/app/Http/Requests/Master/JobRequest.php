@@ -53,7 +53,7 @@ class JobRequest extends FormRequest
             'title' => 'タイトル',
             'content' => '内容',
             'attention' => '注目',
-            'jobCategoryId' => 'カテゴリ',
+            'jobCategoryId' => '職種',
             'price' => '金額',
             'welfare' => '福利厚生',
             'holiday' => '休日',

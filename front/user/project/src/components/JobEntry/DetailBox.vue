@@ -82,7 +82,7 @@ export default defineComponent({
     // ユーザー情報取得
     const user = userAuthenticationRefs.user;
 
-    // 「申し込み」押下時
+    // 「申し込み」押下時の処理
     const clickEntry = async (): Promise<void> => {
       if (props.modalInfo.job.id !== undefined && user.value.id !== undefined) {
         await job.entryJob(props.modalInfo.job.id, user.value.id);

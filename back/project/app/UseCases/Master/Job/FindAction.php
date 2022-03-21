@@ -17,6 +17,7 @@ class FindAction
     {
         $item = Job::where('id', $id)
             ->select('id', 'title', 'content', 'attention', 'job_category_id', 'price', 'image', 'sort_no', 'welfare', 'holiday', 'updated_at')
+            ->with('jobCategory')
             ->first()
             ->toArray();
         // ファイルのurlをセット

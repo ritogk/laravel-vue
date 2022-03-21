@@ -13,7 +13,7 @@
             id="inputName"
             placeholder="test@test.co.jp"
             aria-describedby="inputNameFeedback"
-            v-model="form.name"
+            v-model="formInputs.name"
           />
           <div
             id="inputNameFeedback"
@@ -31,7 +31,7 @@
             id="inputSelfPr"
             placeholder="Excelがうまいです。"
             aria-describedby="inputSelfPrFeedback"
-            v-model="form.selfPr"
+            v-model="formInputs.selfPr"
             rows="3"
           ></textarea>
           <div
@@ -51,7 +51,7 @@
             id="inputTel"
             placeholder="011-1111-1111"
             aria-describedby="inputTelFeedback"
-            v-model="form.tel"
+            v-model="formInputs.tel"
           />
           <div
             id="inputTelFeedback"
@@ -70,7 +70,7 @@
             id="inputEmail"
             placeholder="test@test.co.jp"
             aria-describedby="inputEmailFeedback"
-            v-model="form.email"
+            v-model="formInputs.email"
           />
           <div
             id="inputEmailFeedback"
@@ -88,7 +88,7 @@
             v-bind:class="[formErrors.password !== '' ? 'is-invalid' : '']"
             id="inputPassword"
             aria-describedby="inputPasswordFeedback"
-            v-model="form.password"
+            v-model="formInputs.password"
           />
           <div
             id="inputPasswordFeedback"
@@ -110,7 +110,7 @@
             ]"
             id="inputPasswordConfirmation"
             aria-describedby="inputPasswordConfirmationFeedback"
-            v-model="form.passwordConfirmation"
+            v-model="formInputs.passwordConfirmation"
           />
           <div
             id="inputPasswordConfirmationFeedback"
@@ -142,7 +142,6 @@ import {
   useUserAuthenticationType,
   userAuthenticationKey,
 } from '@/composables/useUserAuthentication';
-import { validaitonErrorsType } from '@/libs/type';
 
 export default defineComponent({
   setup() {
@@ -153,72 +152,68 @@ export default defineComponent({
     const router = useRouter();
 
     // フォームの状態
-    const form = reactive({
-      name: '山田 太郎',
-      selfPr: 'Excelがうまいです。',
-      tel: '011-1111-1111',
-      email: 'normal@normal.co.jp',
-      password: 'normal',
-      passwordConfirmation: 'normal',
-    });
-    // フォームのエラー内容
-    const formErrors = reactive({
-      name: '',
-      selfPr: '',
-      tel: '',
-      email: '',
-      password: '',
-      passwordConfirmation: '',
+    const formRefs = reactive({
+      // 入力値
+      inputs: {
+        name: '山田 太郎',
+        selfPr: 'Excelがうまいです。',
+        tel: '011-1111-1111',
+        email: 'normal@normal.co.jp',
+        password: 'normal',
+        passwordConfirmation: 'normal',
+      },
+      // エラーメッセージ
+      errors: {
+        name: '',
+        selfPr: '',
+        tel: '',
+        email: '',
+        password: '',
+        passwordConfirmation: '',
+        general: '',
+      },
     });
 
     // 「会員登録」ボタン押下
     const clickRegistration = async () => {
       // ユーザー登録を行う
       const response = await useUser().registration(
-        form.name,
-        form.selfPr,
-        form.tel,
-        form.email,
-        form.password,
-        form.passwordConfirmation
+        formRefs.inputs.name,
+        formRefs.inputs.selfPr,
+        formRefs.inputs.tel,
+        formRefs.inputs.email,
+        formRefs.inputs.password,
+        formRefs.inputs.passwordConfirmation
       );
       // 正常時の処理
       if (!('errors' in response)) {
         // ログイン
-        await login(form.email, form.password);
+        await login(formRefs.inputs.email, formRefs.inputs.password);
         router.push('/');
         return;
       }
 
-      // バリデーションで弾かれた場合の処理
-      formErrors.name = '';
-      formErrors.selfPr = '';
-      formErrors.tel = '';
-      formErrors.email = '';
-      formErrors.password = '';
-      formErrors.passwordConfirmation = '';
-      const errors = (response as validaitonErrorsType).errors;
-      if ('name' in errors) {
-        formErrors.name = errors['name'][0];
-      }
-      if ('selfPr' in errors) {
-        formErrors.selfPr = errors['selfPr'][0];
-      }
-      if ('tel' in errors) {
-        formErrors.tel = errors['tel'][0];
-      }
-      if ('email' in errors) {
-        formErrors.email = errors['email'][0];
-      }
-      if ('password' in errors) {
-        formErrors.password = errors['password'][0];
-      }
-      if ('passwordConfirmation' in errors) {
-        formErrors.passwordConfirmation = errors['passwordConfirmation'][0];
+      // ■以降の処理はバリデーションで弾かれた場合
+      // エラーメッセージの初期化を行う。
+      Object.keys(formRefs.errors).forEach(function (key) {
+        formRefs.errors[key as keyof typeof formRefs.errors] = '';
+      });
+      // サーバーサイドから受け取ったエラーメッセージをセット。
+      const errors = response.errors;
+      Object.keys(errors).forEach(function (key) {
+        formRefs.errors[key as keyof typeof formRefs.errors] = errors[key][0];
+      });
+      // 汎用エラーメッセージをセット。
+      if (Object.keys(errors).indexOf('message') !== -1) {
+        formRefs.errors.general = errors['message'][0];
       }
     };
 
-    return { form, formErrors, clickRegistration };
+    return {
+      formInputs: formRefs.inputs,
+      formErrors: formRefs.errors,
+      clickRegistration,
+    };
   },
 });
 </script>

@@ -61,7 +61,9 @@ class QueryEntryList implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'jobId' => 'int',
-        'jobCategoryId' => 'int'
+        'jobCategoryId' => 'int',
+        'userName' => 'string',
+        'selfPr' => 'string'
     ];
 
     /**
@@ -73,7 +75,9 @@ class QueryEntryList implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'jobId' => null,
-        'jobCategoryId' => null
+        'jobCategoryId' => null,
+        'userName' => null,
+        'selfPr' => null
     ];
 
     /**
@@ -104,7 +108,9 @@ class QueryEntryList implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'jobId' => 'jobId',
-        'jobCategoryId' => 'jobCategoryId'
+        'jobCategoryId' => 'jobCategoryId',
+        'userName' => 'userName',
+        'selfPr' => 'selfPr'
     ];
 
     /**
@@ -114,7 +120,9 @@ class QueryEntryList implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'jobId' => 'setJobId',
-        'jobCategoryId' => 'setJobCategoryId'
+        'jobCategoryId' => 'setJobCategoryId',
+        'userName' => 'setUserName',
+        'selfPr' => 'setSelfPr'
     ];
 
     /**
@@ -124,7 +132,9 @@ class QueryEntryList implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'jobId' => 'getJobId',
-        'jobCategoryId' => 'getJobCategoryId'
+        'jobCategoryId' => 'getJobCategoryId',
+        'userName' => 'getUserName',
+        'selfPr' => 'getSelfPr'
     ];
 
     /**
@@ -186,6 +196,8 @@ class QueryEntryList implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->container['jobId'] = $data['jobId'] ?? null;
         $this->container['jobCategoryId'] = $data['jobCategoryId'] ?? null;
+        $this->container['userName'] = $data['userName'] ?? null;
+        $this->container['selfPr'] = $data['selfPr'] ?? null;
     }
 
     /**
@@ -256,6 +268,54 @@ class QueryEntryList implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setJobCategoryId($jobCategoryId)
     {
         $this->container['jobCategoryId'] = $jobCategoryId;
+
+        return $this;
+    }
+
+    /**
+     * Gets userName
+     *
+     * @return string|null
+     */
+    public function getUserName()
+    {
+        return $this->container['userName'];
+    }
+
+    /**
+     * Sets userName
+     *
+     * @param string|null $userName ユーザー名
+     *
+     * @return self
+     */
+    public function setUserName($userName)
+    {
+        $this->container['userName'] = $userName;
+
+        return $this;
+    }
+
+    /**
+     * Gets selfPr
+     *
+     * @return string|null
+     */
+    public function getSelfPr()
+    {
+        return $this->container['selfPr'];
+    }
+
+    /**
+     * Sets selfPr
+     *
+     * @param string|null $selfPr 自己PR
+     *
+     * @return self
+     */
+    public function setSelfPr($selfPr)
+    {
+        $this->container['selfPr'] = $selfPr;
 
         return $this;
     }

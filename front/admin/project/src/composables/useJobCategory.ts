@@ -24,14 +24,14 @@ type useJobCategoryType = {
     name: string,
     content: string,
     image: string,
-    sortNo: number
+    sortNo: number | null
   ): Promise<JobCategory | validaitonErrorsType>;
   updateJobCategory(
     id: number,
     name: string,
     content: string,
     image: string,
-    sortNo: number
+    sortNo: number | null
   ): Promise<JobCategory | validaitonErrorsType>;
   deleteJobCategory(id: number): Promise<JobCategory>;
 };
@@ -69,7 +69,7 @@ const useJobCategory = (): useJobCategoryType => {
   };
 
   /**
-   * id毎の職種一覧を取得
+   * idと名称の職種辞書を取得
    */
   const generateNames = (): void => {
     state.names = {};
@@ -100,7 +100,7 @@ const useJobCategory = (): useJobCategoryType => {
     name: string,
     content: string,
     image: string,
-    sortNo: number
+    sortNo: number | null
   ): Promise<JobCategory | validaitonErrorsType> => {
     const request: JobCategoriesPostRequest = {
       requestJobCategory: {
@@ -112,6 +112,7 @@ const useJobCategory = (): useJobCategoryType => {
     };
     try {
       return await jobCategorieApi.jobCategoriesPost(request);
+      // eslint-disable-next-line
     } catch (err: any) {
       const json = await err.json();
       return Promise.resolve({
@@ -134,7 +135,7 @@ const useJobCategory = (): useJobCategoryType => {
     name: string,
     content: string,
     image: string,
-    sortNo: number
+    sortNo: number | null
   ): Promise<JobCategory | validaitonErrorsType> => {
     const request: JobCategoriesIdPutRequest = {
       id: id,
@@ -147,6 +148,7 @@ const useJobCategory = (): useJobCategoryType => {
     };
     try {
       return await jobCategorieApi.jobCategoriesIdPut(request);
+      // eslint-disable-next-line
     } catch (err: any) {
       const json = await err.json();
       return Promise.resolve({

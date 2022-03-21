@@ -41,4 +41,13 @@ export default defineComponent({
 .fade-leave-to {
   opacity: 0;
 }
+
+/** テキストの一部をカットして表示する。 */
+.cut-text {
+  display: block;
+  width: 400px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 </style>

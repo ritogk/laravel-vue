@@ -5,8 +5,10 @@ docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:v5.3.0 gener
 OUTPUT_USER_PATH='../front/user/project/src/open_api'
 OUTPUT_ADMIN_PATH='../front/admin/project/src/open_api'
 # vue側にコピー
+rm -rf ${OUTPUT_USER_PATH}
 mkdir -p ${OUTPUT_USER_PATH}
 cp -r .${WORK_PATH}/* ${OUTPUT_USER_PATH}
+rm -rf ${OUTPUT_ADMIN_PATH}
 mkdir -p ${OUTPUT_ADMIN_PATH}
 cp -r .${WORK_PATH}/* ${OUTPUT_ADMIN_PATH}
 

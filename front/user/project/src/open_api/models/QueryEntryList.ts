@@ -31,6 +31,18 @@ export interface QueryEntryList {
      * @memberof QueryEntryList
      */
     jobCategoryId?: number;
+    /**
+     * ユーザー名
+     * @type {string}
+     * @memberof QueryEntryList
+     */
+    userName?: string;
+    /**
+     * 自己PR
+     * @type {string}
+     * @memberof QueryEntryList
+     */
+    selfPr?: string;
 }
 
 export function QueryEntryListFromJSON(json: any): QueryEntryList {
@@ -45,6 +57,8 @@ export function QueryEntryListFromJSONTyped(json: any, ignoreDiscriminator: bool
         
         'jobId': !exists(json, 'jobId') ? undefined : json['jobId'],
         'jobCategoryId': !exists(json, 'jobCategoryId') ? undefined : json['jobCategoryId'],
+        'userName': !exists(json, 'userName') ? undefined : json['userName'],
+        'selfPr': !exists(json, 'selfPr') ? undefined : json['selfPr'],
     };
 }
 
@@ -59,6 +73,8 @@ export function QueryEntryListToJSON(value?: QueryEntryList | null): any {
         
         'jobId': value.jobId,
         'jobCategoryId': value.jobCategoryId,
+        'userName': value.userName,
+        'selfPr': value.selfPr,
     };
 }
 

@@ -48,7 +48,7 @@ export interface RequestJobCategory {
      * @type {number}
      * @memberof RequestJobCategory
      */
-    sortNo: number;
+    sortNo: number | null;
     /**
      * 更新日時
      * @type {Date}

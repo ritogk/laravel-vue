@@ -1,4 +1,3 @@
-import { validaitonErrorsType } from '@/libs/type';
 /**
  * 数値にカンマを付与した形に整形する
  * @param num

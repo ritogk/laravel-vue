@@ -2,7 +2,7 @@ import { InjectionKey, reactive, ToRefs, toRefs } from 'vue';
 import { apiConfig } from '@/libs/config';
 import { validaitonErrorsType } from '@/libs/type';
 import {
-  User,
+  Admin,
   AuthAdminApi,
   AuthAdminLoginPostRequest,
   AccessToken,
@@ -10,7 +10,7 @@ import {
 
 // メイン関数のtype
 type useAdminAuthenticationType = {
-  adminAuthenticationRefs: ToRefs<{ user: User; isLogin: boolean }>;
+  adminAuthenticationRefs: ToRefs<{ user: Admin; isLogin: boolean }>;
   login(email: string, password: string): Promise<void | validaitonErrorsType>;
   refresh(): Promise<AccessToken>;
   logout(): Promise<void>;
@@ -22,7 +22,7 @@ const authAdminApi = new AuthAdminApi(apiConfig);
 // メイン関数
 const useAdminAuthentication = (): useAdminAuthenticationType => {
   // 状態
-  const state = reactive({ user: {} as User, isLogin: false });
+  const state = reactive({ user: {} as Admin, isLogin: false });
 
   /**
    * ログイン処理
@@ -40,6 +40,7 @@ const useAdminAuthentication = (): useAdminAuthenticationType => {
     try {
       // ログイン
       await authAdminApi.authAdminLoginPost(request);
+      // eslint-disable-next-line
     } catch (err: any) {
       const json = await err.json();
       return Promise.resolve({
@@ -58,6 +59,7 @@ const useAdminAuthentication = (): useAdminAuthenticationType => {
   const logout = async (): Promise<void> => {
     try {
       await authAdminApi.authAdminLogoutPost({});
+      // eslint-disable-next-line
     } catch (err: any) {
       if (err.status !== 401) return;
       // リフレッシュトークン更新
@@ -65,13 +67,14 @@ const useAdminAuthentication = (): useAdminAuthenticationType => {
       state.user = await authAdminApi.authAdminMeGet();
     }
     state.isLogin = false;
-    state.user = {} as User;
+    state.user = {} as Admin;
   };
 
   // ログイン済のユーザー情報を取得
   const getMe = async (): Promise<void> => {
     try {
       state.user = await authAdminApi.authAdminMeGet();
+      // eslint-disable-next-line
     } catch (err: any) {
       if (err.status !== 401) return;
       // リフレッシュトークン更新

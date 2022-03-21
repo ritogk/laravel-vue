@@ -35,6 +35,7 @@ const useUserAuthentication = (): useUserAuthenticationType => {
     try {
       // ログイン
       await authFrontApi.authFrontLoginPost(request);
+      // eslint-disable-next-line
     } catch (err: any) {
       const json = await err.json();
       return Promise.resolve({
@@ -53,6 +54,7 @@ const useUserAuthentication = (): useUserAuthenticationType => {
   const logout = async (): Promise<void> => {
     try {
       await authFrontApi.authFrontLogoutPost({});
+      // eslint-disable-next-line
     } catch (err: any) {
       if (err.status !== 401) return;
       // リフレッシュトークン更新
@@ -67,6 +69,7 @@ const useUserAuthentication = (): useUserAuthenticationType => {
   const getMe = async (): Promise<void> => {
     try {
       state.user = await authFrontApi.authFrontMeGet();
+      // eslint-disable-next-line
     } catch (err: any) {
       if (err.status !== 401) return;
       // リフレッシュトークン更新
