@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import AdminLogin from '@/views/AdminLogin.vue';
 import DashBoard from '@/views/DashBoard.vue';
+import ConsiderationList from '@/views/DashBoard/ConsiderationList.vue';
 import JobCategoryMasterList from '@/views/DashBoard/JobCategoryMasterList.vue';
 import JobCategoryMasterEntry from '@/views/DashBoard/JobCategoryMasterEntry.vue';
 import JobMasterList from '@/views/DashBoard/JobMasterList.vue';
@@ -16,6 +17,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'DashBoard',
     component: DashBoard,
     children: [
+      // 選考一覧
+      {
+        path: 'consideration-list',
+        name: 'ConsiderationList',
+        component: ConsiderationList,
+      },
       // 職種マスタ(一覧)
       {
         path: 'job-category-master-list',

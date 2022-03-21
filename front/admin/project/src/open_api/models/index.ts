@@ -15,5 +15,6 @@ export * from './RequestJob';
 export * from './RequestJobCategory';
 export * from './RequestLogin';
 export * from './RequestUser';
+export * from './ResponseJobEntry';
 export * from './Sex';
 export * from './User';

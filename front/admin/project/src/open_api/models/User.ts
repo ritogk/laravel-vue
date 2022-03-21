@@ -24,37 +24,31 @@ export interface User {
      * @type {number}
      * @memberof User
      */
-    id?: number;
+    id: number;
     /**
      * 氏名
      * @type {string}
      * @memberof User
      */
-    name?: string;
+    name: string;
     /**
      * メールアドレス
      * @type {string}
      * @memberof User
      */
-    email?: string;
-    /**
-     * パスワード
-     * @type {string}
-     * @memberof User
-     */
-    password?: string;
+    email: string;
     /**
      * 自己PR
      * @type {string}
      * @memberof User
      */
-    selfPr?: string;
+    selfPr: string;
     /**
      * 電話番号
      * @type {string}
      * @memberof User
      */
-    tel?: string;
+    tel: string;
     /**
      * 更新日時
      * @type {Date}
@@ -79,12 +73,11 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'password': !exists(json, 'password') ? undefined : json['password'],
-        'selfPr': !exists(json, 'selfPr') ? undefined : json['selfPr'],
-        'tel': !exists(json, 'tel') ? undefined : json['tel'],
+        'id': json['id'],
+        'name': json['name'],
+        'email': json['email'],
+        'selfPr': json['selfPr'],
+        'tel': json['tel'],
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
     };
@@ -102,7 +95,6 @@ export function UserToJSON(value?: User | null): any {
         'id': value.id,
         'name': value.name,
         'email': value.email,
-        'password': value.password,
         'selfPr': value.selfPr,
         'tel': value.tel,
         'updatedAt': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString().substr(0,10)),

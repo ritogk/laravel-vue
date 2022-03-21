@@ -122,14 +122,16 @@ class EntryApi
      *
      * @param  int $jobId 仕事id (optional)
      * @param  int $jobCategoryId 仕事カテゴリid (optional)
+     * @param  string $userName ユーザー名 (optional)
+     * @param  string $selfPr 自己PR (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \App\OpenAPI\Model\Entry[]
+     * @return \App\OpenAPI\Model\ResponseJobEntry[]
      */
-    public function entriesGet($jobId = null, $jobCategoryId = null)
+    public function entriesGet($jobId = null, $jobCategoryId = null, $userName = null, $selfPr = null)
     {
-        list($response) = $this->entriesGetWithHttpInfo($jobId, $jobCategoryId);
+        list($response) = $this->entriesGetWithHttpInfo($jobId, $jobCategoryId, $userName, $selfPr);
         return $response;
     }
 
@@ -140,14 +142,16 @@ class EntryApi
      *
      * @param  int $jobId 仕事id (optional)
      * @param  int $jobCategoryId 仕事カテゴリid (optional)
+     * @param  string $userName ユーザー名 (optional)
+     * @param  string $selfPr 自己PR (optional)
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \App\OpenAPI\Model\Entry[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \App\OpenAPI\Model\ResponseJobEntry[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function entriesGetWithHttpInfo($jobId = null, $jobCategoryId = null)
+    public function entriesGetWithHttpInfo($jobId = null, $jobCategoryId = null, $userName = null, $selfPr = null)
     {
-        $request = $this->entriesGetRequest($jobId, $jobCategoryId);
+        $request = $this->entriesGetRequest($jobId, $jobCategoryId, $userName, $selfPr);
 
         try {
             $options = $this->createHttpClientOption();
@@ -186,20 +190,20 @@ class EntryApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\App\OpenAPI\Model\Entry[]' === '\SplFileObject') {
+                    if ('\App\OpenAPI\Model\ResponseJobEntry[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\App\OpenAPI\Model\Entry[]', []),
+                        ObjectSerializer::deserialize($content, '\App\OpenAPI\Model\ResponseJobEntry[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\App\OpenAPI\Model\Entry[]';
+            $returnType = '\App\OpenAPI\Model\ResponseJobEntry[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -217,7 +221,7 @@ class EntryApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\App\OpenAPI\Model\Entry[]',
+                        '\App\OpenAPI\Model\ResponseJobEntry[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -234,13 +238,15 @@ class EntryApi
      *
      * @param  int $jobId 仕事id (optional)
      * @param  int $jobCategoryId 仕事カテゴリid (optional)
+     * @param  string $userName ユーザー名 (optional)
+     * @param  string $selfPr 自己PR (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entriesGetAsync($jobId = null, $jobCategoryId = null)
+    public function entriesGetAsync($jobId = null, $jobCategoryId = null, $userName = null, $selfPr = null)
     {
-        return $this->entriesGetAsyncWithHttpInfo($jobId, $jobCategoryId)
+        return $this->entriesGetAsyncWithHttpInfo($jobId, $jobCategoryId, $userName, $selfPr)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -255,14 +261,16 @@ class EntryApi
      *
      * @param  int $jobId 仕事id (optional)
      * @param  int $jobCategoryId 仕事カテゴリid (optional)
+     * @param  string $userName ユーザー名 (optional)
+     * @param  string $selfPr 自己PR (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entriesGetAsyncWithHttpInfo($jobId = null, $jobCategoryId = null)
+    public function entriesGetAsyncWithHttpInfo($jobId = null, $jobCategoryId = null, $userName = null, $selfPr = null)
     {
-        $returnType = '\App\OpenAPI\Model\Entry[]';
-        $request = $this->entriesGetRequest($jobId, $jobCategoryId);
+        $returnType = '\App\OpenAPI\Model\ResponseJobEntry[]';
+        $request = $this->entriesGetRequest($jobId, $jobCategoryId, $userName, $selfPr);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -302,11 +310,13 @@ class EntryApi
      *
      * @param  int $jobId 仕事id (optional)
      * @param  int $jobCategoryId 仕事カテゴリid (optional)
+     * @param  string $userName ユーザー名 (optional)
+     * @param  string $selfPr 自己PR (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function entriesGetRequest($jobId = null, $jobCategoryId = null)
+    public function entriesGetRequest($jobId = null, $jobCategoryId = null, $userName = null, $selfPr = null)
     {
 
         $resourcePath = '/entries';
@@ -336,6 +346,28 @@ class EntryApi
             }
             else {
                 $queryParams['jobCategoryId'] = $jobCategoryId;
+            }
+        }
+        // query params
+        if ($userName !== null) {
+            if('form' === 'form' && is_array($userName)) {
+                foreach($userName as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['userName'] = $userName;
+            }
+        }
+        // query params
+        if ($selfPr !== null) {
+            if('form' === 'form' && is_array($selfPr)) {
+                foreach($selfPr as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['selfPr'] = $selfPr;
             }
         }
 

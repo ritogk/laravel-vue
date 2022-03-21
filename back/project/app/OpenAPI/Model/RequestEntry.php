@@ -252,7 +252,7 @@ class RequestEntry implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets userId
      *
-     * @param int|null $userId 会員id
+     * @param int|null $userId ユーザーid
      *
      * @return self
      */

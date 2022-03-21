@@ -26,7 +26,7 @@ export interface RequestEntry {
      */
     jobId: number;
     /**
-     * 会員id
+     * ユーザーid
      * @type {number}
      * @memberof RequestEntry
      */

@@ -146,6 +146,7 @@ body {
                   href="#"
                   v-bind:class="{ active: isActiveMenuNo(3) }"
                   @mouseover="setActiveMenuNo(3)"
+                  @click="clickConsideration"
                 >
                   <vue-feather type="file"></vue-feather>
                   選考一覧
@@ -239,6 +240,11 @@ export default defineComponent({
       router.push({ name: 'AdminLogin' });
     };
 
+    // 「選考一覧」押下時の処理
+    const clickConsideration = () => {
+      router.push({ name: 'ConsiderationList' });
+    };
+
     // 「職種マスタ」押下時の処理
     const clickJobCategory = () => {
       router.push({ name: 'JobCategoryMasterList' });
@@ -251,6 +257,7 @@ export default defineComponent({
 
     return {
       user,
+      clickConsideration,
       clickJobCategory,
       clickLogout,
       clickJob,

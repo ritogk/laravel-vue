@@ -1,6 +1,6 @@
 <?php
 /**
- * File
+ * ResponseJobEntry
  *
  * PHP version 7.3
  *
@@ -32,10 +32,10 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * File Class Doc Comment
+ * ResponseJobEntry Class Doc Comment
  *
  * @category Class
- * @description ファイルパス
+ * @description レスポンス 仕事応募内容
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +43,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class File implements ModelInterface, ArrayAccess, \JsonSerializable
+class ResponseJobEntry implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'file';
+    protected static $openAPIModelName = 'responseJobEntry';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,8 +60,10 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'storagePath' => 'string',
-        'url' => 'string'
+        'entryId' => 'int',
+        'entryDate' => '\DateTime',
+        'user' => '\App\OpenAPI\Model\User',
+        'job' => '\App\OpenAPI\Model\Job'
     ];
 
     /**
@@ -72,8 +74,10 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'storagePath' => null,
-        'url' => null
+        'entryId' => null,
+        'entryDate' => 'date',
+        'user' => null,
+        'job' => null
     ];
 
     /**
@@ -103,8 +107,10 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'storagePath' => 'storagePath',
-        'url' => 'url'
+        'entryId' => 'entryId',
+        'entryDate' => 'entryDate',
+        'user' => 'user',
+        'job' => 'job'
     ];
 
     /**
@@ -113,8 +119,10 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'storagePath' => 'setStoragePath',
-        'url' => 'setUrl'
+        'entryId' => 'setEntryId',
+        'entryDate' => 'setEntryDate',
+        'user' => 'setUser',
+        'job' => 'setJob'
     ];
 
     /**
@@ -123,8 +131,10 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'storagePath' => 'getStoragePath',
-        'url' => 'getUrl'
+        'entryId' => 'getEntryId',
+        'entryDate' => 'getEntryDate',
+        'user' => 'getUser',
+        'job' => 'getJob'
     ];
 
     /**
@@ -184,8 +194,10 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['storagePath'] = $data['storagePath'] ?? null;
-        $this->container['url'] = $data['url'] ?? null;
+        $this->container['entryId'] = $data['entryId'] ?? null;
+        $this->container['entryDate'] = $data['entryDate'] ?? null;
+        $this->container['user'] = $data['user'] ?? null;
+        $this->container['job'] = $data['job'] ?? null;
     }
 
     /**
@@ -213,49 +225,97 @@ class File implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets storagePath
+     * Gets entryId
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getStoragePath()
+    public function getEntryId()
     {
-        return $this->container['storagePath'];
+        return $this->container['entryId'];
     }
 
     /**
-     * Sets storagePath
+     * Sets entryId
      *
-     * @param string|null $storagePath ストレージパス
+     * @param int|null $entryId エントリーid
      *
      * @return self
      */
-    public function setStoragePath($storagePath)
+    public function setEntryId($entryId)
     {
-        $this->container['storagePath'] = $storagePath;
+        $this->container['entryId'] = $entryId;
 
         return $this;
     }
 
     /**
-     * Gets url
+     * Gets entryDate
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getUrl()
+    public function getEntryDate()
     {
-        return $this->container['url'];
+        return $this->container['entryDate'];
     }
 
     /**
-     * Sets url
+     * Sets entryDate
      *
-     * @param string|null $url フルパス
+     * @param \DateTime|null $entryDate エントリー日時
      *
      * @return self
      */
-    public function setUrl($url)
+    public function setEntryDate($entryDate)
     {
-        $this->container['url'] = $url;
+        $this->container['entryDate'] = $entryDate;
+
+        return $this;
+    }
+
+    /**
+     * Gets user
+     *
+     * @return \App\OpenAPI\Model\User|null
+     */
+    public function getUser()
+    {
+        return $this->container['user'];
+    }
+
+    /**
+     * Sets user
+     *
+     * @param \App\OpenAPI\Model\User|null $user user
+     *
+     * @return self
+     */
+    public function setUser($user)
+    {
+        $this->container['user'] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Gets job
+     *
+     * @return \App\OpenAPI\Model\Job|null
+     */
+    public function getJob()
+    {
+        return $this->container['job'];
+    }
+
+    /**
+     * Sets job
+     *
+     * @param \App\OpenAPI\Model\Job|null $job job
+     *
+     * @return self
+     */
+    public function setJob($job)
+    {
+        $this->container['job'] = $job;
 
         return $this;
     }

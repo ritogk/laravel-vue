@@ -1,21 +1,12 @@
 <template>
   <div class="w-100">
-    <h1 class="h2 mb-3">仕事マスタ</h1>
+    <h1 class="h2 mb-3">選考一覧</h1>
     <div class="card">
       <div class="card-header">検索条件</div>
       <div class="card-body">
-        <div class="row g-3">
+        <div class="row g-3 mb-3">
           <div class="col-md-6">
-            <label for="inputName" class="form-label">タイトル</label>
-            <input
-              type="text"
-              class="form-control"
-              id="inputName"
-              v-model="condition.title"
-            />
-          </div>
-          <div class="col-md-6">
-            <label for="inputContent" class="form-label">職種</label>
+            <label for="inputJobCategory" class="form-label">職種</label>
             <select
               class="form-select"
               aria-label="Default select example"
@@ -31,6 +22,26 @@
             </select>
           </div>
         </div>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="inputName" class="form-label">氏名</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              v-model="condition.userName"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputSelfPr" class="form-label">自己PR</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputSelfPr"
+              v-model="condition.selfPr"
+            />
+          </div>
+        </div>
       </div>
       <div class="card-footer text-muted">
         <div class="d-flex">
@@ -42,18 +53,13 @@
               検索
             </button>
           </div>
-          <div>
-            <button class="btn btn-primary text-white" @click="clickCreate">
-              新規作成
-            </button>
-          </div>
         </div>
       </div>
     </div>
 
     <div class="card mt-3">
       <DataTable
-        :value="jobs"
+        :value="jobEntries"
         :paginator="true"
         class="p-datatable-customers"
         stripedRows
@@ -67,11 +73,13 @@
         :rowsPerPageOptions="[10, 25, 50]"
         currentPageReportTemplate="{totalRecords} 件中 {first} から {last} まで表示"
         :globalFilterFields="[
-          'title',
-          'content',
-          'jobCategory',
-          'price',
-          'sortNo',
+          'jobNm',
+          'jobCategoryNm',
+          'userName',
+          'email',
+          'tel',
+          'selfPr',
+          'entryDate',
         ]"
         responsiveLayout="scroll"
       >
@@ -89,49 +97,28 @@
         </template>
         <template #empty> データが存在しません。 </template>
         <template #loading> Loading data. Please wait. </template>
-        <Column
-          field="name"
-          header="タイトル"
-          sortable
-          style="min-width: 14rem"
-        >
+        <Column field="jobNm" header="求人名" sortable style="min-width: 14rem">
           <template #body="{ data }">
-            {{ data.title }}
+            {{ data.job.title }}
           </template>
           <template #filter="{ filterModel }">
             <InputText
               type="text"
               v-model="filterModel.value"
               class="p-column-filter"
-              placeholder="Search by タイトル"
-            />
-          </template>
-        </Column>
-
-        <Column field="content" header="内容" sortable style="min-width: 14rem">
-          <template #body="{ data }">
-            <div class="cut-text">
-              {{ data.content }}
-            </div>
-          </template>
-          <template #filter="{ filterModel }">
-            <InputText
-              type="text"
-              v-model="filterModel.value"
-              class="p-column-filter"
-              placeholder="Search by 内容"
+              placeholder="Search by 求人名"
             />
           </template>
         </Column>
 
         <Column
-          field="jobCategory"
+          field="jobCategoryNm"
           header="職種"
           sortable
           style="min-width: 14rem"
         >
           <template #body="{ data }">
-            {{ jobCategoryNms[data.jobCategoryId] }}
+            {{ jobCategoryNms[data.job.jobCategoryId] }}
           </template>
           <template #filter="{ filterModel }">
             <InputText
@@ -143,52 +130,93 @@
           </template>
         </Column>
 
-        <Column field="price" header="金額" sortable style="min-width: 14rem">
+        <Column
+          field="userName"
+          header="氏名"
+          sortable
+          style="min-width: 14rem"
+        >
           <template #body="{ data }">
-            {{ convertComma(data.price) }}
+            {{ data.user.name }}
           </template>
           <template #filter="{ filterModel }">
             <InputText
               type="text"
               v-model="filterModel.value"
               class="p-column-filter"
-              placeholder="Search by 金額"
+              placeholder="Search by 氏名"
             />
           </template>
         </Column>
 
         <Column
-          field="sortNo"
-          header="並び順"
+          field="email"
+          header="メールアドレス"
           sortable
-          dataType="numeric"
-          style="min-width: 8rem"
+          style="min-width: 14rem"
         >
           <template #body="{ data }">
-            {{ data.sortNo }}
+            {{ data.user.email }}
+          </template>
+          <template #filter="{ filterModel }">
+            <InputText
+              type="text"
+              v-model="filterModel.value"
+              class="p-column-filter"
+              placeholder="Search by メールアドレス"
+            />
+          </template>
+        </Column>
+
+        <Column field="tel" header="電話番号" sortable style="min-width: 14rem">
+          <template #body="{ data }">
+            {{ data.user.tel }}
+          </template>
+          <template #filter="{ filterModel }">
+            <InputText
+              type="text"
+              v-model="filterModel.value"
+              class="p-column-filter"
+              placeholder="Search by 電話番号"
+            />
           </template>
         </Column>
 
         <Column
-          field="action"
-          header="操作"
-          dataType="text"
-          style="min-width: 8rem"
+          field="selfPr"
+          header="自己PR"
+          sortable
+          style="min-width: 14rem"
         >
           <template #body="{ data }">
-            <button
-              class="btn btn-success text-white me-2"
-              @click="clickEdit(data.id)"
-            >
-              編集
-            </button>
-            <button
-              class="btn btn-danger text-white"
-              @click="clickDelete(data.id)"
-            >
-              削除
-            </button>
-            <span v-text="data.sortNo" hidden></span>
+            {{ data.user.selfPr }}
+          </template>
+          <template #filter="{ filterModel }">
+            <InputText
+              type="text"
+              v-model="filterModel.value"
+              class="p-column-filter"
+              placeholder="Search by 自己PR"
+            />
+          </template>
+        </Column>
+
+        <Column
+          field="entryDate"
+          header="応募日"
+          sortable
+          style="min-width: 14rem"
+        >
+          <template #body="{ data }">
+            {{ moment(data.entryDate).format('YYYY/MM/DD') }}
+          </template>
+          <template #filter="{ filterModel }">
+            <InputText
+              type="text"
+              v-model="filterModel.value"
+              class="p-column-filter"
+              placeholder="Search by 応募日"
+            />
           </template>
         </Column>
       </DataTable>
@@ -200,16 +228,16 @@
 import { defineComponent, ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { FilterMatchMode, FilterOperator } from 'primevue/api';
-import { useJob } from '@/composables/useJob';
+import { useJobEntry } from '@/composables/useJobEntry';
 import { useJobCategory } from '@/composables/useJobCategory';
-import { convertComma } from '@/libs/utils';
+import moment from 'moment';
 
 export default defineComponent({
   setup() {
     const router = useRouter();
 
-    const job = useJob();
-    const jobs = job.jobRefs.items;
+    const jobEntry = useJobEntry();
+    const jobEntries = jobEntry.jobEntryRefs.items;
 
     const jobCategory = useJobCategory();
     const jobCategoryNms = jobCategory.jobCategoryRefs.names;
@@ -219,12 +247,14 @@ export default defineComponent({
 
     // 検索条件
     const condition = reactive({
-      title: '',
       jobCategoryId: '',
+      userName: '',
+      selfPr: '',
     });
 
+    // 読み込み
     const load = async () => {
-      await job.getJobs();
+      await jobEntry.getJobEntries();
       await jobCategory.getJobCategories();
       loading.value = false;
     };
@@ -234,23 +264,38 @@ export default defineComponent({
     const filters = ref({
       // 全体
       global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-      // タイトル
-      title: {
-        operator: FilterOperator.AND,
-        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
-      },
-      // 内容
-      content: {
+      // 求人名
+      jobNm: {
         operator: FilterOperator.AND,
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
       // 職種
-      jobCategory: {
+      jobCategoryNms: {
         operator: FilterOperator.AND,
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
-      // 金額
-      price: {
+      // 氏名
+      userName: {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+      },
+      // メールアドレス
+      email: {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+      },
+      // 電話番号
+      tel: {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+      },
+      // 自己PR
+      selfPr: {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+      },
+      // 応募日
+      entryDate: {
         operator: FilterOperator.AND,
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
@@ -258,45 +303,22 @@ export default defineComponent({
 
     // 「検索」押下時の処理
     const clickSearch = () => {
-      job.getJobs(
-        condition.title ? condition.title : undefined,
-        condition.jobCategoryId ? Number(condition.jobCategoryId) : undefined
+      jobEntry.getJobEntries(
+        undefined,
+        condition.jobCategoryId ? Number(condition.jobCategoryId) : undefined,
+        condition.userName ? condition.userName : undefined,
+        condition.selfPr ? condition.selfPr : undefined
       );
-    };
-
-    // 「新規作成」押下時の処理
-    const clickCreate = () => {
-      router.push({ name: 'JobMasterCreate' });
-    };
-
-    // 「編集」押下時の処理
-    const clickEdit = (id: number) => {
-      router.push({
-        name: 'JobMasterEdit',
-        params: { id: id },
-      });
-    };
-
-    // 「削除」押下時の処理
-    const clickDelete = async (id: number) => {
-      const name = jobs.value.find((v) => v.id === id)?.title;
-      if (window.confirm(`「${name}」を削除します。\nよろしいですか？`)) {
-        await job.deleteJob(id);
-        clickSearch();
-      }
     };
 
     return {
       jobCategoryNms,
-      jobs,
+      jobEntries,
       loading,
       condition,
       filters,
-      convertComma,
-      clickCreate,
-      clickEdit,
       clickSearch,
-      clickDelete,
+      moment,
     };
   },
 });

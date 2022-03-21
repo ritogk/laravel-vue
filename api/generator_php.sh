@@ -7,6 +7,7 @@ grep -l 'NUMBER_' .${WORK_PATH}/lib/Model/* | xargs sed -i 's/NUMBER_//g'
 
 OUTPUT_PATH='../back/project/app/OpenAPI'
 # laravel側にコピー
+rm -rf ${OUTPUT_PATH}
 mkdir -p ${OUTPUT_PATH}
 cp -r .${WORK_PATH}/lib/* ${OUTPUT_PATH}
 cp api.yaml ${OUTPUT_PATH}
