@@ -1,6 +1,6 @@
 <template>
   <div class="w-100">
-    <h1 class="h2 mb-3">職種マスタ(編集)</h1>
+    <h1 class="h2 mb-3">職種マスタ(登録)</h1>
     <div class="card w-100 mx-auto">
       <div class="card-header">登録内容</div>
       <div class="card-body">

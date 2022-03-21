@@ -1,6 +1,6 @@
 <template>
   <div class="w-100">
-    <h1 class="h2 mb-3">仕事マスタ(編集)</h1>
+    <h1 class="h2 mb-3">仕事マスタ(登録)</h1>
     <div class="card w-100 mx-auto">
       <div class="card-header">登録内容</div>
       <div class="card-body">
@@ -13,23 +13,50 @@
           />
         </div>
 
+        <!-- 入力(職種) -->
+        <div class="mb-3">
+          <label for="inputJobCategoryId" class="form-label">職種</label>
+          <select
+            class="form-select"
+            v-bind:class="[formErrors.jobCategoryId !== '' ? 'is-invalid' : '']"
+            id="inputJobCategoryId"
+            aria-describedby="inputJobCategoryIdFeedback"
+            aria-label="Default select example"
+            v-model="formInputs.jobCategoryId"
+          >
+            <option value=""></option>
+            <option
+              v-for="(name, index) in jobCategoryNms"
+              :key="`jobCategory${index}`"
+              v-bind:value="index"
+              v-text="name"
+            ></option>
+          </select>
+          <div
+            id="inputJobCategoryIdFeedback"
+            class="invalid-feedback"
+            v-text="formErrors.jobCategoryId"
+            v-show="formErrors.jobCategoryId !== ''"
+          />
+        </div>
+
         <!-- 入力(名称) -->
         <div class="mb-3">
-          <label for="inputName" class="form-label">タイトル</label>
+          <label for="inputTitle" class="form-label">タイトル</label>
           <input
             type="text"
             class="form-control form-control-sm"
-            v-bind:class="[formErrors.name !== '' ? 'is-invalid' : '']"
-            id="inputName"
-            aria-describedby="inputNameFeedback"
-            v-model="formInputs.name"
+            v-bind:class="[formErrors.title !== '' ? 'is-invalid' : '']"
+            id="inputTitle"
+            aria-describedby="inputTitleFeedback"
+            v-model="formInputs.title"
             placeholder="タイトルを入力して下さい。"
           />
           <div
-            id="inputNameFeedback"
+            id="inputTitleFeedback"
             class="invalid-feedback"
-            v-text="formErrors.name"
-            v-show="formErrors.name !== ''"
+            v-text="formErrors.title"
+            v-show="formErrors.title !== ''"
           />
         </div>
 
@@ -53,67 +80,64 @@
           />
         </div>
 
-        <!-- 入力(カテゴリ) -->
+        <!-- 入力(金額) -->
         <div class="mb-3">
-          <label for="inputContent" class="form-label">カテゴリ</label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            v-model="formInputs.content"
-          >
-            <option value="">全て</option>
-            <!-- <option
-                v-for="(name, index) in jobCategoryNms"
-                :key="`jobCategory${index}`"
-                v-bind:value="index"
-                v-text="name"
-              ></option> -->
-          </select>
+          <label for="inputPrice" class="form-label">金額</label>
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            v-bind:class="[formErrors.price !== '' ? 'is-invalid' : '']"
+            id="inputPrice"
+            aria-describedby="inputPriceFeedback"
+            v-model="formInputs.price"
+            placeholder="金額を入力して下さい。"
+            required="required"
+          />
           <div
-            id="inputContentFeedback"
+            id="inputPriceFeedback"
             class="invalid-feedback"
-            v-text="formErrors.content"
-            v-show="formErrors.content !== ''"
+            v-text="formErrors.price"
+            v-show="formErrors.price !== ''"
           />
         </div>
 
         <!-- 入力(福利厚生) -->
         <div class="mb-3">
-          <label for="inputContent" class="form-label">福利厚生</label>
+          <label for="inputWelfare" class="form-label">福利厚生</label>
           <textarea
             class="form-control form-control-sm"
-            v-bind:class="[formErrors.content !== '' ? 'is-invalid' : '']"
-            id="inputContent"
-            aria-describedby="inputContentFeedback"
-            v-model="formInputs.content"
+            v-bind:class="[formErrors.welfare !== '' ? 'is-invalid' : '']"
+            id="inputWelfare"
+            aria-describedby="inputWelfareFeedback"
+            v-model="formInputs.welfare"
             placeholder="福利厚生を入力して下さい。"
             rows="5"
           />
           <div
-            id="inputContentFeedback"
+            id="inputWelfareFeedback"
             class="invalid-feedback"
-            v-text="formErrors.content"
-            v-show="formErrors.content !== ''"
+            v-text="formErrors.welfare"
+            v-show="formErrors.welfare !== ''"
           />
         </div>
 
         <!-- 入力(休日) -->
         <div class="mb-3">
-          <label for="inputContent" class="form-label">休日</label>
+          <label for="inputHoliday" class="form-label">休日</label>
           <textarea
             class="form-control form-control-sm"
-            v-bind:class="[formErrors.content !== '' ? 'is-invalid' : '']"
-            id="inputContent"
-            aria-describedby="inputContentFeedback"
-            v-model="formInputs.content"
+            v-bind:class="[formErrors.holiday !== '' ? 'is-invalid' : '']"
+            id="inputHoliday"
+            aria-describedby="inputHolidayFeedback"
+            v-model="formInputs.holiday"
             placeholder="休日を入力して下さい。"
             rows="5"
           />
           <div
-            id="inputContentFeedback"
+            id="inputHolidayFeedback"
             class="invalid-feedback"
-            v-text="formErrors.content"
-            v-show="formErrors.content !== ''"
+            v-text="formErrors.holiday"
+            v-show="formErrors.holiday !== ''"
           />
         </div>
 
@@ -122,15 +146,22 @@
           <div class="form-check">
             <input
               class="form-check-input"
+              v-bind:class="[formErrors.attention !== '' ? 'is-invalid' : '']"
               type="checkbox"
               value=""
               id="inputAttention"
-              v-model="formInputs.content"
+              v-model="formInputs.attention"
             />
             <label class="form-check-label" for="inputAttention">
               注目させる
             </label>
           </div>
+          <div
+            id="inputAttention"
+            class="invalid-feedback"
+            v-text="formErrors.attention"
+            v-show="formErrors.attention !== ''"
+          />
         </div>
 
         <!-- 入力(並び順) -->
@@ -152,6 +183,7 @@
             v-show="formErrors.sortNo !== ''"
           />
         </div>
+
         <!-- 選択(画像) -->
         <div class="mb-3">
           <label for="inputImage" class="form-label">画像</label>
@@ -203,6 +235,7 @@ import { useRoute } from 'vue-router';
 import { useRouter } from 'vue-router';
 import { useFile } from '@/composables/useFile';
 import { useJobCategory } from '@/composables/useJobCategory';
+import { useJob } from '@/composables/useJob';
 import { fileToBlob } from '@/libs/utils';
 import { isValidaitonErrorsType } from '@/libs/validation';
 
@@ -211,46 +244,68 @@ export default defineComponent({
     const route = useRoute();
     const router = useRouter();
     const { upload } = useFile();
-    const { findJobCategory, createJobCategory, updateJobCategory } =
-      useJobCategory();
+    const { findJob, createJob, updateJob } = useJob();
+    const jobCategory = useJobCategory();
+
+    const jobCategoryNms = jobCategory.jobCategoryRefs.names;
 
     // 編集モードかどうかの判別フラグ
     const isEditMode = route.params.id !== undefined;
-    // 職種id
+    // id
     const id = isEditMode ? Number(route.params.id) : 0;
-    const load = async () => {
-      // 編集モードの場合にマスタから値を取得する
-      if (isEditMode) {
-        const jobCategory = await findJobCategory(id);
-        formRefs.inputs.name = jobCategory.name;
-        formRefs.inputs.content = jobCategory.content;
-        formRefs.inputs.image = jobCategory.image;
-        formRefs.inputs.url = jobCategory.imageUrl;
-        formRefs.inputs.sortNo = jobCategory.sortNo;
-      }
-    };
-    load();
 
     // フォームの状態
     const formRefs = reactive({
       // 入力値
       inputs: {
-        name: '',
+        title: '',
         content: '',
-        sortNo: 1,
+        jobCategoryId: '',
+        attention: false,
+        price: '',
+        welfare: '',
+        holiday: '',
+        sortNo: '',
         image: '',
         url: '',
       },
       // エラー内容
       errors: {
-        name: '',
+        title: '',
         content: '',
+        jobCategoryId: '',
+        attention: '',
+        price: '',
+        welfare: '',
+        holiday: '',
         sortNo: '',
         image: '',
         url: '',
         general: '',
       },
     });
+
+    /**
+     * 読み込み処理
+     */
+    const load = async () => {
+      jobCategory.getJobCategories();
+      // 編集モードの場合にマスタから値を取得する
+      if (isEditMode) {
+        const job = await findJob(id);
+        formRefs.inputs.title = job.title;
+        formRefs.inputs.content = job.content;
+        formRefs.inputs.jobCategoryId = String(job.jobCategoryId);
+        formRefs.inputs.attention = job.attention;
+        formRefs.inputs.price = String(job.price);
+        formRefs.inputs.welfare = job.welfare ?? '';
+        formRefs.inputs.holiday = job.holiday ?? '';
+        formRefs.inputs.image = job.image;
+        formRefs.inputs.url = job.imageUrl;
+        formRefs.inputs.sortNo = String(job.sortNo);
+      }
+    };
+    load();
 
     // ファイル選択後にサーバーへアップロードを行う。
     const uploadFile = async (event: Event) => {
@@ -268,20 +323,34 @@ export default defineComponent({
       let response;
       if (!isEditMode) {
         // 新規登録の場合
-        response = await createJobCategory(
-          formRefs.inputs.name,
+        response = await createJob(
+          formRefs.inputs.title,
           formRefs.inputs.content,
+          formRefs.inputs.attention,
+          formRefs.inputs.jobCategoryId
+            ? Number(formRefs.inputs.jobCategoryId)
+            : null,
+          formRefs.inputs.price ? Number(formRefs.inputs.price) : null,
           formRefs.inputs.image,
-          formRefs.inputs.sortNo
+          formRefs.inputs.sortNo ? Number(formRefs.inputs.sortNo) : null,
+          formRefs.inputs.welfare ?? undefined,
+          formRefs.inputs.holiday ?? undefined
         );
       } else {
         // 編集の場合
-        response = await updateJobCategory(
+        response = await updateJob(
           id,
-          formRefs.inputs.name,
+          formRefs.inputs.title,
           formRefs.inputs.content,
+          formRefs.inputs.attention,
+          formRefs.inputs.jobCategoryId
+            ? Number(formRefs.inputs.jobCategoryId)
+            : null,
+          formRefs.inputs.price ? Number(formRefs.inputs.price) : null,
           formRefs.inputs.image,
-          formRefs.inputs.sortNo
+          formRefs.inputs.sortNo ? Number(formRefs.inputs.sortNo) : null,
+          formRefs.inputs.welfare ?? undefined,
+          formRefs.inputs.holiday ?? undefined
         );
       }
       // 正常の場合
@@ -314,6 +383,7 @@ export default defineComponent({
 
     return {
       formInputs: formRefs.inputs,
+      jobCategoryNms,
       formErrors: formRefs.errors,
       uploadFile,
       clickEntry,

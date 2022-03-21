@@ -42,13 +42,13 @@ export interface RequestJob {
      * @type {number}
      * @memberof RequestJob
      */
-    jobCategoryId: number;
+    jobCategoryId: number | null;
     /**
      * 金額
      * @type {number}
      * @memberof RequestJob
      */
-    price: number;
+    price: number | null;
     /**
      * 福利厚生
      * @type {string}
@@ -78,7 +78,7 @@ export interface RequestJob {
      * @type {number}
      * @memberof RequestJob
      */
-    sortNo: number;
+    sortNo: number | null;
     /**
      * 更新日時
      * @type {Date}

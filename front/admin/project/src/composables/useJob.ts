@@ -29,10 +29,10 @@ type useJobType = {
     title: string,
     content: string,
     attention: boolean,
-    jobCategoryId: number,
-    price: number,
+    jobCategoryId: number | null,
+    price: number | null,
     image: string,
-    sortNo: number,
+    sortNo: number | null,
     welfare?: string,
     holiday?: string
   ): Promise<Job | validaitonErrorsType>;
@@ -41,10 +41,10 @@ type useJobType = {
     title: string,
     content: string,
     attention: boolean,
-    jobCategoryId: number,
-    price: number,
+    jobCategoryId: number | null,
+    price: number | null,
     image: string,
-    sortNo: number,
+    sortNo: number | null,
     welfare?: string,
     holiday?: string
   ): Promise<Job | validaitonErrorsType>;
@@ -100,19 +100,25 @@ const useJob = (): useJobType => {
 
   /**
    * 仕事 新規登録
-   * @param name
+   * @param title
    * @param content
+   * @param attention
+   * @param jobCategoryId
+   * @param price
    * @param image
    * @param sortNo
+   * @param welfare
+   * @param holiday
+   * @returns
    */
   const createJob = async (
     title: string,
     content: string,
     attention: boolean,
-    jobCategoryId: number,
-    price: number,
+    jobCategoryId: number | null,
+    price: number | null,
     image: string,
-    sortNo: number,
+    sortNo: number | null,
     welfare?: string,
     holiday?: string
   ): Promise<Job | validaitonErrorsType> => {
@@ -158,10 +164,10 @@ const useJob = (): useJobType => {
     title: string,
     content: string,
     attention: boolean,
-    jobCategoryId: number,
-    price: number,
+    jobCategoryId: number | null,
+    price: number | null,
     image: string,
-    sortNo: number,
+    sortNo: number | null,
     welfare?: string,
     holiday?: string
   ): Promise<Job | validaitonErrorsType> => {

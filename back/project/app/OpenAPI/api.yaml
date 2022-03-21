@@ -613,6 +613,7 @@ components:
           description: 画像URL
         sortNo:
           type: integer
+          nullable: true
           description: 並び順
         updatedAt:
           type: string
@@ -638,9 +639,11 @@ components:
           description: 注目の求人
         jobCategoryId:
           type: integer
+          nullable: true
           description: 職種id
         price:
           type: integer
+          nullable: true
           description: 金額
         welfare:
           type: string
@@ -656,6 +659,7 @@ components:
           description: 画像URL
         sortNo:
           type: integer
+          nullable: true
           description: 並び順
         updatedAt:
           type: string
@@ -816,6 +820,16 @@ components:
           type: string
           format: date
           description: 更新日時
+      required:
+        - id
+        - title
+        - content
+        - attention
+        - jobCategoryId
+        - price
+        - image
+        - imageUrl
+        - sortNo
     entry:
       description: 応募
       type: object

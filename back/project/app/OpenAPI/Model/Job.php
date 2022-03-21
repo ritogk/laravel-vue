@@ -263,6 +263,33 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['title'] === null) {
+            $invalidProperties[] = "'title' can't be null";
+        }
+        if ($this->container['content'] === null) {
+            $invalidProperties[] = "'content' can't be null";
+        }
+        if ($this->container['attention'] === null) {
+            $invalidProperties[] = "'attention' can't be null";
+        }
+        if ($this->container['jobCategoryId'] === null) {
+            $invalidProperties[] = "'jobCategoryId' can't be null";
+        }
+        if ($this->container['price'] === null) {
+            $invalidProperties[] = "'price' can't be null";
+        }
+        if ($this->container['image'] === null) {
+            $invalidProperties[] = "'image' can't be null";
+        }
+        if ($this->container['imageUrl'] === null) {
+            $invalidProperties[] = "'imageUrl' can't be null";
+        }
+        if ($this->container['sortNo'] === null) {
+            $invalidProperties[] = "'sortNo' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -281,7 +308,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets id
      *
-     * @return int|null
+     * @return int
      */
     public function getId()
     {
@@ -291,7 +318,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param int|null $id id
+     * @param int $id id
      *
      * @return self
      */
@@ -305,7 +332,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets title
      *
-     * @return string|null
+     * @return string
      */
     public function getTitle()
     {
@@ -315,7 +342,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets title
      *
-     * @param string|null $title タイトル
+     * @param string $title タイトル
      *
      * @return self
      */
@@ -329,7 +356,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets content
      *
-     * @return string|null
+     * @return string
      */
     public function getContent()
     {
@@ -339,7 +366,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets content
      *
-     * @param string|null $content 内容
+     * @param string $content 内容
      *
      * @return self
      */
@@ -353,7 +380,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets attention
      *
-     * @return bool|null
+     * @return bool
      */
     public function getAttention()
     {
@@ -363,7 +390,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets attention
      *
-     * @param bool|null $attention 注目の求人
+     * @param bool $attention 注目の求人
      *
      * @return self
      */
@@ -377,7 +404,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets jobCategoryId
      *
-     * @return int|null
+     * @return int
      */
     public function getJobCategoryId()
     {
@@ -387,7 +414,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets jobCategoryId
      *
-     * @param int|null $jobCategoryId 職種id
+     * @param int $jobCategoryId 職種id
      *
      * @return self
      */
@@ -401,7 +428,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets price
      *
-     * @return int|null
+     * @return int
      */
     public function getPrice()
     {
@@ -411,7 +438,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price
      *
-     * @param int|null $price 金額
+     * @param int $price 金額
      *
      * @return self
      */
@@ -473,7 +500,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets image
      *
-     * @return string|null
+     * @return string
      */
     public function getImage()
     {
@@ -483,7 +510,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets image
      *
-     * @param string|null $image 画像の内部識別子
+     * @param string $image 画像の内部識別子
      *
      * @return self
      */
@@ -497,7 +524,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets imageUrl
      *
-     * @return string|null
+     * @return string
      */
     public function getImageUrl()
     {
@@ -507,7 +534,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets imageUrl
      *
-     * @param string|null $imageUrl 画像URL
+     * @param string $imageUrl 画像URL
      *
      * @return self
      */
@@ -521,7 +548,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets sortNo
      *
-     * @return int|null
+     * @return int
      */
     public function getSortNo()
     {
@@ -531,7 +558,7 @@ class Job implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets sortNo
      *
-     * @param int|null $sortNo 並び順
+     * @param int $sortNo 並び順
      *
      * @return self
      */

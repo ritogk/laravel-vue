@@ -24,37 +24,37 @@ export interface Job {
      * @type {number}
      * @memberof Job
      */
-    id?: number;
+    id: number;
     /**
      * タイトル
      * @type {string}
      * @memberof Job
      */
-    title?: string;
+    title: string;
     /**
      * 内容
      * @type {string}
      * @memberof Job
      */
-    content?: string;
+    content: string;
     /**
      * 注目の求人
      * @type {boolean}
      * @memberof Job
      */
-    attention?: boolean;
+    attention: boolean;
     /**
      * 職種id
      * @type {number}
      * @memberof Job
      */
-    jobCategoryId?: number;
+    jobCategoryId: number;
     /**
      * 金額
      * @type {number}
      * @memberof Job
      */
-    price?: number;
+    price: number;
     /**
      * 福利厚生
      * @type {string}
@@ -72,19 +72,19 @@ export interface Job {
      * @type {string}
      * @memberof Job
      */
-    image?: string;
+    image: string;
     /**
      * 画像URL
      * @type {string}
      * @memberof Job
      */
-    imageUrl?: string;
+    imageUrl: string;
     /**
      * 並び順
      * @type {number}
      * @memberof Job
      */
-    sortNo?: number;
+    sortNo: number;
     /**
      * 作成日時
      * @type {Date}
@@ -109,17 +109,17 @@ export function JobFromJSONTyped(json: any, ignoreDiscriminator: boolean): Job {
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'title': !exists(json, 'title') ? undefined : json['title'],
-        'content': !exists(json, 'content') ? undefined : json['content'],
-        'attention': !exists(json, 'attention') ? undefined : json['attention'],
-        'jobCategoryId': !exists(json, 'jobCategoryId') ? undefined : json['jobCategoryId'],
-        'price': !exists(json, 'price') ? undefined : json['price'],
+        'id': json['id'],
+        'title': json['title'],
+        'content': json['content'],
+        'attention': json['attention'],
+        'jobCategoryId': json['jobCategoryId'],
+        'price': json['price'],
         'welfare': !exists(json, 'welfare') ? undefined : json['welfare'],
         'holiday': !exists(json, 'holiday') ? undefined : json['holiday'],
-        'image': !exists(json, 'image') ? undefined : json['image'],
-        'imageUrl': !exists(json, 'imageUrl') ? undefined : json['imageUrl'],
-        'sortNo': !exists(json, 'sortNo') ? undefined : json['sortNo'],
+        'image': json['image'],
+        'imageUrl': json['imageUrl'],
+        'sortNo': json['sortNo'],
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
     };

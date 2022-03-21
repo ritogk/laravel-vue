@@ -195,7 +195,9 @@ body {
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3"
           >
             <!-- 画面の表示エリア-->
-            <router-view />
+            <transition name="fade">
+              <router-view />
+            </transition>
           </div>
         </main>
       </div>
