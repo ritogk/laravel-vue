@@ -40,6 +40,7 @@ const useUser = (): useUserType => {
     };
     try {
       return await userApi.usersPost(request);
+      // eslint-disable-next-line
     } catch (err: any) {
       const json = await err.json();
       return Promise.resolve({

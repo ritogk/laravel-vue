@@ -40,6 +40,7 @@ const useAdminAuthentication = (): useAdminAuthenticationType => {
     try {
       // ログイン
       await authAdminApi.authAdminLoginPost(request);
+      // eslint-disable-next-line
     } catch (err: any) {
       const json = await err.json();
       return Promise.resolve({
@@ -58,6 +59,7 @@ const useAdminAuthentication = (): useAdminAuthenticationType => {
   const logout = async (): Promise<void> => {
     try {
       await authAdminApi.authAdminLogoutPost({});
+      // eslint-disable-next-line
     } catch (err: any) {
       if (err.status !== 401) return;
       // リフレッシュトークン更新
@@ -72,6 +74,7 @@ const useAdminAuthentication = (): useAdminAuthenticationType => {
   const getMe = async (): Promise<void> => {
     try {
       state.user = await authAdminApi.authAdminMeGet();
+      // eslint-disable-next-line
     } catch (err: any) {
       if (err.status !== 401) return;
       // リフレッシュトークン更新

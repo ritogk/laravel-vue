@@ -51,6 +51,7 @@ const useJob = (): useJobType => {
       return await entryApi.entriesPost({
         requestEntry: { jobId: jobId, userId: userId },
       });
+      // eslint-disable-next-line
     } catch (err: any) {
       if (err.status !== 401) return {};
       // リフレッシュトークン更新

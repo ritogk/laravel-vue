@@ -112,6 +112,7 @@ const useJobCategory = (): useJobCategoryType => {
     };
     try {
       return await jobCategorieApi.jobCategoriesPost(request);
+      // eslint-disable-next-line
     } catch (err: any) {
       const json = await err.json();
       return Promise.resolve({
@@ -147,6 +148,7 @@ const useJobCategory = (): useJobCategoryType => {
     };
     try {
       return await jobCategorieApi.jobCategoriesIdPut(request);
+      // eslint-disable-next-line
     } catch (err: any) {
       const json = await err.json();
       return Promise.resolve({

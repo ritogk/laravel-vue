@@ -96,7 +96,7 @@ export default defineComponent({
       attention: false,
     });
 
-    // 「検索」ボタン押下時
+    // 「検索」押下時 の処理
     const clickSearch = (): void => {
       getJob(
         condition.jobCategoryId ? condition.jobCategoryId : undefined,

@@ -1,7 +1,9 @@
 <template>
   <MainHeader />
   <div class="container py-4">
-    <router-view />
+    <transition name="fade">
+      <router-view />
+    </transition>
   </div>
   <MainFooter />
 </template>
@@ -38,5 +40,15 @@ export default defineComponent({
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+/* routerが切り替わったタイミングでフェードさせる*/
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.9s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

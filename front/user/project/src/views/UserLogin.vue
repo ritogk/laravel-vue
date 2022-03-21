@@ -3,6 +3,14 @@
     <div class="card w-75 mx-auto border-primary">
       <div class="card-header bg-primary text-white">ログイン</div>
       <div class="card-body">
+        <!-- 汎用エラーメッセージ -->
+        <div class="mb-3">
+          <div
+            class="text-danger"
+            v-text="formErrors.general"
+            v-show="formErrors.general !== ''"
+          />
+        </div>
         <!-- 入力(メールアドレス) -->
         <div class="mb-3">
           <label for="inputMailAddress" class="form-label"
@@ -14,7 +22,7 @@
             v-bind:class="[formErrors.email !== '' ? 'is-invalid' : '']"
             id="inputMailAddress"
             aria-describedby="inputMailAddressFeedback"
-            v-model="form.email"
+            v-model="formInputs.email"
             placeholder="test@test.co.jp"
           />
           <div
@@ -33,7 +41,7 @@
             v-bind:class="[formErrors.password !== '' ? 'is-invalid' : '']"
             id="inputPassword"
             aria-describedby="inputPasswordFeedback"
-            v-model="form.password"
+            v-model="formInputs.password"
             placeholder="test"
           />
           <div
@@ -61,7 +69,6 @@
 <script lang="ts">
 import { defineComponent, reactive, inject } from 'vue';
 import { useRouter } from 'vue-router';
-import { validaitonErrorsType } from '@/libs/type';
 import {
   userAuthenticationKey,
   useUserAuthenticationType,
@@ -75,14 +82,27 @@ export default defineComponent({
     ) as useUserAuthenticationType;
 
     // フォームの状態
-    const form = reactive({ email: 'root@rito.co.jp', password: 'root' });
-    // フォームのエラー内容
-    const formErrors = reactive({ email: '', password: '' });
+    const formRefs = reactive({
+      // 入力値
+      inputs: {
+        email: 'root@rito.co.jp',
+        password: 'root',
+      },
+      // エラーメッセージ
+      errors: {
+        email: '',
+        password: '',
+        general: '',
+      },
+    });
 
-    // 「ログイン」ボタン押下
+    // 「ログイン」ボタン押下の処理
     const clickLogin = async () => {
       // ログイン
-      const response = await login(form.email, form.password);
+      const response = await login(
+        formRefs.inputs.email,
+        formRefs.inputs.password
+      );
       // ログイン済のユーザー情報を取得
       getMe();
       // 正常の場合
@@ -90,19 +110,28 @@ export default defineComponent({
         router.push('/');
         return;
       }
-      // バリデーションで弾かれた場合の場合
-      formErrors.email = '';
-      formErrors.password = '';
-      const errors = (response as validaitonErrorsType).errors;
-      if ('email' in errors) {
-        formErrors.email = errors['email'][0];
-      }
-      if ('password' in errors) {
-        formErrors.password = errors['password'][0];
+
+      // ■以降の処理はバリデーションで弾かれた場合
+      // エラーメッセージの初期化を行う。
+      Object.keys(formRefs.errors).forEach(function (key) {
+        formRefs.errors[key as keyof typeof formRefs.errors] = '';
+      });
+      // サーバーサイドから受け取ったエラーメッセージをセット。
+      const errors = response.errors;
+      Object.keys(errors).forEach(function (key) {
+        formRefs.errors[key as keyof typeof formRefs.errors] = errors[key][0];
+      });
+      // 汎用エラーメッセージをセット。
+      if (Object.keys(errors).indexOf('message') !== -1) {
+        formRefs.errors.general = errors['message'][0];
       }
     };
 
-    return { form, formErrors, clickLogin };
+    return {
+      formInputs: formRefs.inputs,
+      formErrors: formRefs.errors,
+      clickLogin,
+    };
   },
 });
 </script>

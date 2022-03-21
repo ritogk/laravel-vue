@@ -54,14 +54,14 @@ export default defineComponent({
     const loading = ref(true);
     const categories = jobCategory.jobCategoryRefs.items;
 
-    // 職種一覧を取得
+    // 読み込み
     const load = async () => {
       await jobCategory.getJobCategory();
       loading.value = false;
     };
     load();
 
-    // 「職種」クリック時
+    // 「職種」押下時の処理
     const clickCategory = (categoryId: string) => {
       router.push({
         name: 'JobEntry',

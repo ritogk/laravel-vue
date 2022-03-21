@@ -138,6 +138,7 @@ const useJob = (): useJobType => {
     };
     try {
       return await jobApi.jobsPost(request);
+      // eslint-disable-next-line
     } catch (err: any) {
       const json = await err.json();
       return Promise.resolve({
@@ -188,6 +189,7 @@ const useJob = (): useJobType => {
     };
     try {
       return await jobApi.jobsIdPut(request);
+      // eslint-disable-next-line
     } catch (err: any) {
       const json = await err.json();
       return Promise.resolve({
@@ -216,6 +218,7 @@ const useJob = (): useJobType => {
       return await entryApi.entriesPost({
         requestEntry: { jobId: jobId, userId: userId },
       });
+      // eslint-disable-next-line
     } catch (err: any) {
       if (err.status !== 401) return {};
       // リフレッシュトークン更新
