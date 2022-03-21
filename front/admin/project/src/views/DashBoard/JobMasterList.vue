@@ -19,7 +19,7 @@
             <select
               class="form-select"
               aria-label="Default select example"
-              v-model="condition.name"
+              v-model="condition.jobCategoryId"
             >
               <option value="">全て</option>
               <!-- <option
@@ -53,7 +53,7 @@
 
     <div class="card mt-3">
       <DataTable
-        :value="jobCategories"
+        :value="jobs"
         :paginator="true"
         class="p-datatable-customers"
         stripedRows
@@ -90,7 +90,7 @@
           style="min-width: 14rem"
         >
           <template #body="{ data }">
-            {{ data.name }}
+            {{ data.title }}
           </template>
           <template #filter="{ filterModel }">
             <InputText
@@ -117,27 +117,27 @@
         </Column>
 
         <Column
-          field="content"
-          header="カテゴリ"
+          field="jobCategory"
+          header="職種"
           sortable
           style="min-width: 14rem"
         >
           <template #body="{ data }">
-            {{ data.content }}
+            {{ jobCategoryNms[data.jobCategoryId] }}
           </template>
           <template #filter="{ filterModel }">
             <InputText
               type="text"
               v-model="filterModel.value"
               class="p-column-filter"
-              placeholder="Search by カテゴリ"
+              placeholder="Search by 職種"
             />
           </template>
         </Column>
 
-        <Column field="content" header="金額" sortable style="min-width: 14rem">
+        <Column field="price" header="金額" sortable style="min-width: 14rem">
           <template #body="{ data }">
-            {{ data.content }}
+            {{ convertComma(data.price) }}
           </template>
           <template #filter="{ filterModel }">
             <InputText
@@ -164,7 +164,6 @@
         <Column
           field="action"
           header="操作"
-          sortable
           dataType="text"
           style="min-width: 8rem"
         >
@@ -193,14 +192,19 @@
 import { defineComponent, ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { FilterMatchMode, FilterOperator } from 'primevue/api';
+import { useJob } from '@/composables/useJob';
 import { useJobCategory } from '@/composables/useJobCategory';
+import { convertComma } from '@/libs/utils';
 
 export default defineComponent({
   setup() {
     const router = useRouter();
 
+    const job = useJob();
+    const jobs = job.jobRefs.items;
+
     const jobCategory = useJobCategory();
-    const jobCategories = jobCategory.jobCategoryRefs.items;
+    const jobCategoryNms = jobCategory.jobCategoryRefs.names;
 
     // ローディングを判別するフラグ
     const loading = ref(true);
@@ -208,10 +212,11 @@ export default defineComponent({
     // 検索条件
     const condition = reactive({
       name: '',
-      content: '',
+      jobCategoryId: '',
     });
 
     const load = async () => {
+      await job.getJobs();
       await jobCategory.getJobCategories();
       loading.value = false;
     };
@@ -221,8 +226,8 @@ export default defineComponent({
     const filters = ref({
       // 全体
       global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-      // 名称
-      name: {
+      // タイトル
+      title: {
         operator: FilterOperator.AND,
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
@@ -231,13 +236,23 @@ export default defineComponent({
         operator: FilterOperator.AND,
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
       },
+      // 職種
+      jobCategory: {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+      },
+      // 金額
+      price: {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+      },
     });
 
     // 「検索」押下時の処理
     const clickSearch = () => {
-      jobCategory.getJobCategories(
+      job.getJobs(
         condition.name ? condition.name : undefined,
-        condition.content ? condition.content : undefined
+        condition.jobCategoryId ? Number(condition.jobCategoryId) : undefined
       );
     };
 
@@ -256,18 +271,20 @@ export default defineComponent({
 
     // 「削除」押下時の処理
     const clickDelete = async (id: number) => {
-      const name = jobCategories.value.find((v) => v.id === id)?.name;
+      const name = jobs.value.find((v) => v.id === id)?.title;
       if (window.confirm(`「${name}」を削除します。\nよろしいですか？`)) {
-        await jobCategory.deleteJobCategory(id);
+        await job.deleteJob(id);
         clickSearch();
       }
     };
 
     return {
-      jobCategories,
+      jobCategoryNms,
+      jobs,
       loading,
       condition,
       filters,
+      convertComma,
       clickCreate,
       clickEdit,
       clickSearch,

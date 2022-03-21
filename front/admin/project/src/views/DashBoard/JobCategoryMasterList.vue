@@ -118,7 +118,6 @@
         <Column
           field="action"
           header="操作"
-          sortable
           dataType="text"
           style="min-width: 8rem"
         >

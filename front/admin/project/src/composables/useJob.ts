@@ -17,7 +17,7 @@ type useJobType = {
   jobRefs: ToRefs<{
     items: Job[];
   }>;
-  getJob(
+  getJobs(
     title?: string,
     jobCategoryId?: number,
     content?: string,
@@ -71,7 +71,7 @@ const useJob = (): useJobType => {
    * @param attention
    * @returns
    */
-  const getJob = async (
+  const getJobs = async (
     title?: string,
     jobCategoryId?: number,
     content?: string,
@@ -221,7 +221,7 @@ const useJob = (): useJobType => {
 
   return {
     jobRefs: toRefs(state),
-    getJob: getJob,
+    getJobs: getJobs,
     findJob: findJob,
     createJob: createJob,
     updateJob: updateJob,
