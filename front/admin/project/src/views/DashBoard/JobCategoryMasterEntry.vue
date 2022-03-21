@@ -189,7 +189,7 @@ export default defineComponent({
           formRefs.inputs.name,
           formRefs.inputs.content,
           formRefs.inputs.image,
-          formRefs.inputs.sortNo
+          formRefs.inputs.sortNo ? Number(formRefs.inputs.sortNo) : null
         );
       } else {
         // 編集の場合
@@ -198,7 +198,7 @@ export default defineComponent({
           formRefs.inputs.name,
           formRefs.inputs.content,
           formRefs.inputs.image,
-          formRefs.inputs.sortNo
+          formRefs.inputs.sortNo ? Number(formRefs.inputs.sortNo) : null
         );
       }
       // 正常の場合

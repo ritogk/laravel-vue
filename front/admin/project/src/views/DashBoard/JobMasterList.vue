@@ -11,7 +11,7 @@
               type="text"
               class="form-control"
               id="inputName"
-              v-model="condition.name"
+              v-model="condition.title"
             />
           </div>
           <div class="col-md-6">
@@ -22,12 +22,12 @@
               v-model="condition.jobCategoryId"
             >
               <option value="">全て</option>
-              <!-- <option
+              <option
                 v-for="(name, index) in jobCategoryNms"
                 :key="`jobCategory${index}`"
                 v-bind:value="index"
                 v-text="name"
-              ></option> -->
+              ></option>
             </select>
           </div>
         </div>
@@ -66,7 +66,13 @@
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
         :rowsPerPageOptions="[10, 25, 50]"
         currentPageReportTemplate="{totalRecords} 件中 {first} から {last} まで表示"
-        :globalFilterFields="['name', 'content', 'sortNo']"
+        :globalFilterFields="[
+          'title',
+          'content',
+          'jobCategory',
+          'price',
+          'sortNo',
+        ]"
         responsiveLayout="scroll"
       >
         <template #header>
@@ -104,7 +110,9 @@
 
         <Column field="content" header="内容" sortable style="min-width: 14rem">
           <template #body="{ data }">
-            {{ data.content }}
+            <div class="cut-text">
+              {{ data.content }}
+            </div>
           </template>
           <template #filter="{ filterModel }">
             <InputText
@@ -211,7 +219,7 @@ export default defineComponent({
 
     // 検索条件
     const condition = reactive({
-      name: '',
+      title: '',
       jobCategoryId: '',
     });
 
@@ -251,7 +259,7 @@ export default defineComponent({
     // 「検索」押下時の処理
     const clickSearch = () => {
       job.getJobs(
-        condition.name ? condition.name : undefined,
+        condition.title ? condition.title : undefined,
         condition.jobCategoryId ? Number(condition.jobCategoryId) : undefined
       );
     };

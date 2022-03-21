@@ -24,14 +24,14 @@ type useJobCategoryType = {
     name: string,
     content: string,
     image: string,
-    sortNo: number
+    sortNo: number | null
   ): Promise<JobCategory | validaitonErrorsType>;
   updateJobCategory(
     id: number,
     name: string,
     content: string,
     image: string,
-    sortNo: number
+    sortNo: number | null
   ): Promise<JobCategory | validaitonErrorsType>;
   deleteJobCategory(id: number): Promise<JobCategory>;
 };
@@ -100,7 +100,7 @@ const useJobCategory = (): useJobCategoryType => {
     name: string,
     content: string,
     image: string,
-    sortNo: number
+    sortNo: number | null
   ): Promise<JobCategory | validaitonErrorsType> => {
     const request: JobCategoriesPostRequest = {
       requestJobCategory: {
@@ -134,7 +134,7 @@ const useJobCategory = (): useJobCategoryType => {
     name: string,
     content: string,
     image: string,
-    sortNo: number
+    sortNo: number | null
   ): Promise<JobCategory | validaitonErrorsType> => {
     const request: JobCategoriesIdPutRequest = {
       id: id,

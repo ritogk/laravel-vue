@@ -79,6 +79,7 @@ const useJob = (): useJobType => {
     attention?: boolean
   ): Promise<Array<Job>> => {
     const queryParameters: JobsGetRequest = {
+      title: title,
       jobCategoryId: jobCategoryId,
       content: content,
       price: price,
