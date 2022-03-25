@@ -23,6 +23,10 @@ module.exports = {
         semi: true,
       },
     ],
+    '@typescript-eslint/ban-ts-ignore': 'off', // 追記
+    '@typescript-eslint/camelcase': 'off', // 追記
+    '@typescript-eslint/no-explicit-any': 'off', // 追記
+    '@typescript-eslint/no-empty-function': 'off', // 追記
   },
   overrides: [
     {

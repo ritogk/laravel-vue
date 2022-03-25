@@ -46,8 +46,9 @@ const useUserAuthentication = (): useUserAuthenticationType => {
 
   // アクセストークンのリフレッシュ
   const refresh = async (): Promise<AccessToken> => {
-    const response = await authFrontApi.authFrontRefreshPost({});
-    return response;
+    return [] as AccessToken;
+    // const response = await authFrontApi.authFrontRefreshPost({});
+    // return response;
   };
 
   // ログアウト
