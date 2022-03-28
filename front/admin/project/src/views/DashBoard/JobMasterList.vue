@@ -201,6 +201,7 @@ import { defineComponent, ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { FilterMatchMode, FilterOperator } from 'primevue/api';
 import { useJob } from '@/composables/useJob';
+import { useJobCategory } from '@/composables/useJobCategory';
 import { convertComma } from '@/libs/utils';
 
 export default defineComponent({
@@ -209,6 +210,9 @@ export default defineComponent({
 
     const job = useJob();
     const jobs = job.jobRefs.items;
+
+    const jobCategory = useJobCategory();
+    const jobCategoryNms = jobCategory.jobCategoryRefs.names;
 
     // ローディングを判別するフラグ
     const loading = ref(true);
@@ -222,6 +226,7 @@ export default defineComponent({
     const load = async () => {
       await job.getJobs();
       loading.value = false;
+      await jobCategory.getJobCategories();
     };
     load();
 
@@ -286,6 +291,7 @@ export default defineComponent({
       loading,
       condition,
       filters,
+      jobCategoryNms,
       convertComma,
       clickCreate,
       clickEdit,

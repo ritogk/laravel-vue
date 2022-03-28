@@ -289,7 +289,7 @@ export default defineComponent({
      * 読み込み処理
      */
     const load = async () => {
-      jobCategory.getJobCategories();
+      await jobCategory.getJobCategories();
       // 編集モードの場合にマスタから値を取得する
       if (isEditMode) {
         const job = await findJob(id);
