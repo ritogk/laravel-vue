@@ -39,6 +39,7 @@ class Kernel extends HttpKernel
         'api' => [
             \App\Http\Middleware\EncryptCookies::class,
             \App\Http\Middleware\JwtAuth\AddAuthorizationHeader::class,
+            \App\Http\Middleware\JwtAuth\RefreshToken::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,

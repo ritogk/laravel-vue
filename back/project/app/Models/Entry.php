@@ -32,6 +32,7 @@ use DateTimeInterface;
  * @method static \Illuminate\Database\Query\Builder|Entry withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Entry withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \App\Models\Job $job
  */
 class Entry extends Model
 {

@@ -10,9 +10,8 @@ class AddAuthorizationHeader
 {
     /**
      * jwt-authでマルチ認証を可能にするためのmiddleware
-     *
-     * セキュリティ的な観点からjwtはhttponlyのcoockieで管理したい。
-     * jwt-authはcoockieでマルチ認証を考慮して作らていない。
+     * jwt-authはcoockieでマルチ認証を考慮して作らていないため、指定のクッキーを無理やり
+     * coockieでjwtを送信しなければこのmiddlewareは不要だけどjwtはセキュリティ的な観点からhttponly属性のcoockieで管理したい。
      *
      *
      * @param  \Illuminate\Http\Request  $request
@@ -28,7 +27,9 @@ class AddAuthorizationHeader
         } else if (in_array('auth:admin', $current_route_middlewares)) {
             $jwt = $request->cookie(Consts::coockie_nm_dict['ADMIN_JWT']);
         }
-        $request->headers->set('Authorization', 'Bearer ' . $jwt);
+        if ($jwt) {
+            $request->headers->set('Authorization', 'Bearer ' . $jwt);
+        }
         return $next($request);;
     }
 }

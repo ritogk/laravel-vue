@@ -1,3 +1,49 @@
+// class MyStorage {
+//   // the promise returned from sync function
+//   static syncPromise = null;
+//   // set item with the key
+//   static setItem(key: string, value: string): string {
+//     // ここで api側にトークンを送ってhttponly属性が付与されたトークンを返す
+//     localStorage.setItem(key, value);
+//     return value;
+//   }
+//   // get item with the key
+//   static getItem(key: string): string {
+//     debugger;
+//     let a: any = [];
+//     while (a != []) {
+//       if (a == []) {
+//         useJobCategory()
+//           .getJobCategory()
+//           .then((args) => {
+//             a = args;
+//           });
+//       }
+//     }
+
+//     debugger;
+//     return localStorage.getItem(key) ?? '';
+//   }
+//   // remove item with the key
+//   static removeItem(key: string): void {
+//     // 削除用APIを呼び出す。
+//     localStorage.removeItem(key);
+//   }
+//   // clear out the storage
+//   static clear(): void {
+//     // トークン全削除
+//     return;
+//   }
+//   // // If the storage operations are async(i.e AsyncStorage)
+//   // // Then you need to sync those items into the memory in this method
+//   // static sync(): Promise<void> {
+//   //   if (!MyStorage.syncPromise) {
+//   //     MyStorage.syncPromise = new Promise((res, rej) => {});
+//   //   }
+//   //   return MyStorage.syncPromise;
+//   // }
+// }
+
 const config = {
   Auth: {
     region: process.env.VUE_APP_COGNITO_AWS_REGION,
@@ -11,6 +57,7 @@ const config = {
       redirectSignOut: process.env.VUE_APP_COGNITO_AWS_SIGN_OUT_URL,
       responseType: 'code',
     },
+    //storage: MyStorage,
   },
 };
 
