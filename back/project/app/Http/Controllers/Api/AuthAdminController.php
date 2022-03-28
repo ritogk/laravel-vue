@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use \Cookie;
+use App\Libs\Consts;
 // request
 use App\Http\Requests\Auth\Admin\LoginRequest;
 // openapi
@@ -33,7 +34,7 @@ class AuthAdminController extends Controller
 
         $result = $this->respondWithToken($token);
         $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
-        $cookie = cookie('token', $response_model->accessToken, $response_model->expiresIn);
+        $cookie = cookie(Consts::coockie_nm_dict['ADMIN_JWT'], $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
             Response::HTTP_CREATED
@@ -64,7 +65,7 @@ class AuthAdminController extends Controller
         return response()->json(
             ['message' => 'Successfully logged out'],
             Response::HTTP_NO_CONTENT
-        )->cookie(Cookie::forget('token'));
+        )->cookie(Cookie::forget(Consts::coockie_nm_dict['ADMIN_JWT']));
     }
 
     /**
@@ -76,7 +77,7 @@ class AuthAdminController extends Controller
     {
         $result = $this->respondWithToken(auth('admin')->refresh());
         $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
-        $cookie = cookie('token', $response_model->accessToken, $response_model->expiresIn);
+        $cookie = cookie(Consts::coockie_nm_dict['ADMIN_JWT'], $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
             Response::HTTP_CREATED

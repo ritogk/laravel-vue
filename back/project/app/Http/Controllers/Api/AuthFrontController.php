@@ -12,6 +12,8 @@ use App\Http\Requests\Auth\Front\LoginRequest;
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
 
+use App\Libs\Consts;
+
 class AuthFrontController extends Controller
 {
     /**
@@ -32,7 +34,7 @@ class AuthFrontController extends Controller
         }
         $result = $this->respondWithToken($token);
         $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
-        $cookie = cookie('token', $response_model->accessToken, $response_model->expiresIn);
+        $cookie = cookie(Consts::coockie_nm_dict['USER_JWT'], $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
             $response_model,
             Response::HTTP_CREATED
@@ -63,7 +65,7 @@ class AuthFrontController extends Controller
         return response()->json(
             ['message' => 'Successfully logged out'],
             Response::HTTP_NO_CONTENT
-        )->cookie(Cookie::forget('token'));
+        )->cookie(Cookie::forget(Consts::coockie_nm_dict['USER_JWT']));
     }
 
     /**
@@ -75,7 +77,7 @@ class AuthFrontController extends Controller
     {
         $result = $this->respondWithToken(auth('user')->refresh());
         $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
-        $cookie = cookie('token', $response_model->accessToken, $response_model->expiresIn);
+        $cookie = cookie(Consts::coockie_nm_dict['USER_JWT'], $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
             $response_model,
             Response::HTTP_CREATED
