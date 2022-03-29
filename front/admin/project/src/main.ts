@@ -27,3 +27,8 @@ app.component('Column', Column);
 app.component('ColumnGroup', ColumnGroup);
 app.component('InputText', InputText);
 app.component('InputNumber', InputNumber);
+
+// multi-select
+import Multiselect from '@vueform/multiselect';
+import './assets/multiselect.scss';
+app.component('Multiselect', Multiselect);

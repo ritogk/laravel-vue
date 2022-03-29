@@ -16,22 +16,18 @@
         <!-- 入力(職種) -->
         <div class="mb-3">
           <label for="inputJobCategoryId" class="form-label">職種</label>
-          <select
-            class="form-select"
+          <Multiselect
+            v-model="formInputs.jobCategoryId"
             v-bind:class="[formErrors.jobCategoryId !== '' ? 'is-invalid' : '']"
             id="inputJobCategoryId"
             aria-describedby="inputJobCategoryIdFeedback"
             aria-label="Default select example"
-            v-model="formInputs.jobCategoryId"
-          >
-            <option value=""></option>
-            <option
-              v-for="(name, index) in jobCategoryNms"
-              :key="`jobCategory${index}`"
-              v-bind:value="index"
-              v-text="name"
-            ></option>
-          </select>
+            :options="jobCategoryNms"
+            placeholder=""
+            :filterReslts="true"
+            :minChars="1"
+            :searchable="true"
+          ></Multiselect>
           <div
             id="inputJobCategoryIdFeedback"
             class="invalid-feedback"
