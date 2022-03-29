@@ -1,6 +1,6 @@
 import { InjectionKey, reactive, ToRefs, toRefs } from 'vue';
-import { apiConfig } from '@/libs/config';
-import { validaitonErrorsType } from '@/libs/type';
+import { apiConfig } from '@/libs/openApi';
+import { validaitonErrorsType } from '@/libs/validation';
 import {
   Admin,
   AuthAdminApi,

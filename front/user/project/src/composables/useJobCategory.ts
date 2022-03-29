@@ -1,5 +1,5 @@
 import { reactive, ToRefs, toRefs } from 'vue';
-import { apiConfig } from '@/libs/config';
+import { apiConfig } from '@/libs/openApi';
 import { JobCategorieApi, JobCategory } from '@/open_api';
 
 // メイン関数のtype
