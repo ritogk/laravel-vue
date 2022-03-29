@@ -6,4 +6,5 @@ export * from './EntryApi';
 export * from './FileApi';
 export * from './JobApi';
 export * from './JobCategorieApi';
+export * from './OpenapiGeneratorApi';
 export * from './UserApi';
