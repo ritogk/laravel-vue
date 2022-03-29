@@ -7,7 +7,15 @@
         <!-- 入力(職種) -->
         <div class="mb-3">
           <label for="inputJobCategpryOd" class="form-label fs-6">職種</label>
-          <select
+          <Multiselect
+            v-model="condition.jobCategoryId"
+            :options="jobCategoryNms"
+            placeholder=""
+            :filterReslts="true"
+            :minChars="1"
+            :searchable="true"
+          ></Multiselect>
+          <!-- <select
             class="form-select"
             aria-label="Default select example"
             v-model="condition.jobCategoryId"
@@ -19,7 +27,7 @@
               v-bind:value="index"
               v-text="name"
             ></option>
-          </select>
+          </select> -->
         </div>
         <!-- 入力(仕事内容) -->
         <div class="mb-3">
