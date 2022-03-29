@@ -42,9 +42,6 @@
               >新規登録</a
             >
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">管理画面</a>
-          </li>
         </ul>
       </div>
     </div>
