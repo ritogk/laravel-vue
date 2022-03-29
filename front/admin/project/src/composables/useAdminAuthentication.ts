@@ -1,6 +1,6 @@
 import { InjectionKey, reactive, ToRefs, toRefs } from 'vue';
-import { apiConfig } from '@/libs/config';
-import { validaitonErrorsType } from '@/libs/type';
+import { apiConfig } from '@/libs/openApi';
+import { validaitonErrorsType } from '@/libs/validation';
 import {
   Admin,
   AuthAdminApi,
@@ -51,36 +51,19 @@ const useAdminAuthentication = (): useAdminAuthenticationType => {
 
   // アクセストークンのリフレッシュ
   const refresh = async (): Promise<AccessToken> => {
-    const response = await authAdminApi.authAdminRefreshPost({});
-    return response;
+    return await authAdminApi.authAdminRefreshPost({});
   };
 
   // ログアウト
   const logout = async (): Promise<void> => {
-    try {
-      await authAdminApi.authAdminLogoutPost({});
-      // eslint-disable-next-line
-    } catch (err: any) {
-      if (err.status !== 401) return;
-      // リフレッシュトークン更新
-      await refresh();
-      state.user = await authAdminApi.authAdminMeGet();
-    }
+    await authAdminApi.authAdminLogoutPost({});
     state.isLogin = false;
     state.user = {} as Admin;
   };
 
   // ログイン済のユーザー情報を取得
   const getMe = async (): Promise<void> => {
-    try {
-      state.user = await authAdminApi.authAdminMeGet();
-      // eslint-disable-next-line
-    } catch (err: any) {
-      if (err.status !== 401) return;
-      // リフレッシュトークン更新
-      await refresh();
-      state.user = await authAdminApi.authAdminMeGet();
-    }
+    state.user = await authAdminApi.authAdminMeGet();
     state.isLogin = true;
   };
 

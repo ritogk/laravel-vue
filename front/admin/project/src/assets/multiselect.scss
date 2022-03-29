@@ -1,0 +1,6 @@
+@import '~@vueform/multiselect/themes/default.css';
+
+/* validaitonエラー時の外観を変更 */
+.multiselect.is-invalid {
+  border-color: #dc3545;
+}

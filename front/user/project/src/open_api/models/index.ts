@@ -11,6 +11,7 @@ export * from './QueryJobCategoryList';
 export * from './QueryJobList';
 export * from './QueryUserList';
 export * from './RequestEntry';
+export * from './RequestFile';
 export * from './RequestJob';
 export * from './RequestJobCategory';
 export * from './RequestLogin';

@@ -1,5 +1,5 @@
 import { InjectionKey } from 'vue';
-import { apiConfig } from '@/libs/config';
+import { apiConfig } from '@/libs/openApi';
 import { validaitonErrorsType } from '@/libs/type';
 import { User, UserApi, UsersPostRequest } from '@/open_api';
 

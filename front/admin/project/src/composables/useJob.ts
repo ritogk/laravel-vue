@@ -1,5 +1,5 @@
 import { InjectionKey, reactive, ToRefs, toRefs } from 'vue';
-import { apiConfig } from '@/libs/config';
+import { apiConfig } from '@/libs/openApi';
 import {
   JobApi,
   Job,

@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
      */
     public function unauthenticated($request, AuthenticationException $exception)
     {
-        return response()->json(['message' => $exception->getMessage()], 401);
+        return response()->json(['errors' => ['general' => [$exception->getMessage()]]], 401);
 
         // ガードを見て処理を切り替える事も可能
         // // 管理画面

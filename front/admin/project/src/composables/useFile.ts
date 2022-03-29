@@ -1,4 +1,4 @@
-import { apiConfig } from '@/libs/config';
+import { apiConfig } from '@/libs/openApi';
 import { FileApi, FilePath, FilesPostRequest } from '@/open_api';
 
 // メイン関数のtype

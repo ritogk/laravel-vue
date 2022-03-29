@@ -16,19 +16,14 @@
           </div>
           <div class="col-md-6">
             <label for="inputContent" class="form-label">職種</label>
-            <select
-              class="form-select"
-              aria-label="Default select example"
+            <Multiselect
               v-model="condition.jobCategoryId"
-            >
-              <option value="">全て</option>
-              <option
-                v-for="(name, index) in jobCategoryNms"
-                :key="`jobCategory${index}`"
-                v-bind:value="index"
-                v-text="name"
-              ></option>
-            </select>
+              :options="jobCategoryNms"
+              placeholder=""
+              :filterReslts="true"
+              :minChars="1"
+              :searchable="true"
+            ></Multiselect>
           </div>
         </div>
       </div>
@@ -201,6 +196,7 @@ import { defineComponent, ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { FilterMatchMode, FilterOperator } from 'primevue/api';
 import { useJob } from '@/composables/useJob';
+import { useJobCategory } from '@/composables/useJobCategory';
 import { convertComma } from '@/libs/utils';
 
 export default defineComponent({
@@ -209,6 +205,9 @@ export default defineComponent({
 
     const job = useJob();
     const jobs = job.jobRefs.items;
+
+    const jobCategory = useJobCategory();
+    const jobCategoryNms = jobCategory.jobCategoryRefs.names;
 
     // ローディングを判別するフラグ
     const loading = ref(true);
@@ -222,6 +221,7 @@ export default defineComponent({
     const load = async () => {
       await job.getJobs();
       loading.value = false;
+      await jobCategory.getJobCategories();
     };
     load();
 
@@ -286,6 +286,7 @@ export default defineComponent({
       loading,
       condition,
       filters,
+      jobCategoryNms,
       convertComma,
       clickCreate,
       clickEdit,

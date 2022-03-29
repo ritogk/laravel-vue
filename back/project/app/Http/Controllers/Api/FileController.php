@@ -29,7 +29,7 @@ class FileController extends Controller
             $requestBody->getFile()
         );
         return response()->json(
-            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\File::class, $result),
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\FilePath::class, $result),
             Response::HTTP_CREATED
         );
     }

@@ -4,7 +4,7 @@ info:
   description: OpenAPI Tutorial by halhorn
   version: 0.0.0
 servers:
-  - url: http://localhost:80/api
+  - url: http://localhost:80/api/v1
     description: 開発用
 paths:
   /auth/admin/me:
@@ -525,6 +525,27 @@ paths:
       requestBody:
         content:
           multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/requestFile"
+      responses:
+        "201":
+          description: ファイルパス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/filePath"
+
+  /openapi-generator:
+    post:
+      tags:
+        - "openapi-generator"
+      summary: multipart/form-dataだとリクエストボディの型が生成されないので型を生成するためだけのAPI
+      description: 未使用
+      security:
+        - bearerAdmin: []
+      requestBody:
+        content:
+          application/json:
             schema:
               $ref: "#/components/schemas/requestFile"
       responses:

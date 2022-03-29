@@ -1,5 +1,5 @@
 import { InjectionKey, reactive, ToRefs, toRefs } from 'vue';
-import { apiConfig } from '@/libs/config';
+import { apiConfig } from '@/libs/openApi';
 import { EntryApi, ResponseJobEntry, EntriesGetRequest } from '@/open_api';
 
 // メイン関数のtype
