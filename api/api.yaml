@@ -540,7 +540,7 @@ paths:
       tags:
         - "openapi-generator"
       summary: multipart/form-dataだとリクエストボディの型が生成されないので型を生成するためだけのAPI
-      description:
+      description: 未使用
       security:
         - bearerAdmin: []
       requestBody:
