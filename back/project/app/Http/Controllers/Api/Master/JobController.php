@@ -36,7 +36,7 @@ class JobController extends Controller
         $result = $action(
             $parameters->getTitle(),
             $parameters->getContent(),
-            $parameters->getAttention() === "true",
+            OpenAPIUtility::castBoolean($parameters->getAttention()),
             $parameters->getJobCategoryId(),
             $parameters->getPrice(),
             $parameters->getWelfare(),

@@ -50,7 +50,5 @@ class EntryController extends Controller
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\Entry::class, $result),
             Response::HTTP_CREATED
         );
-
-        return $action($request);
     }
 }
