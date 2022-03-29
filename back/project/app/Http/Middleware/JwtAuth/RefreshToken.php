@@ -37,9 +37,25 @@ class RefreshToken extends BaseMiddleware
             // Invalid token
         }
 
+        // アクセストークンの有効期限が切れていない場合は目的のAPIをそのまま実行
+        if ($newToken == null) {
+            return $next($request);
+        }
+
+        // リフレッシュしたトークンをAuthorizationヘッダーに付与して目的のAPIを実行
         if ($newToken) {
             $request->headers->set('Authorization', 'Bearer ' . $newToken);
         }
-        return $next($request);
+        $response = $next($request);
+
+        // リフレッシュしたトークンをset-cookieに入れてクライアント側に返す
+        $current_route_middlewares = $request->route()->computedMiddleware;
+        if (in_array('auth:user', $current_route_middlewares)) {
+            $cookie = cookie(Consts::coockie_nm_dict['USER_JWT'], $newToken, auth('user')->factory()->getTTL() * 60);
+        } else if (in_array('auth:admin', $current_route_middlewares)) {
+            $cookie = cookie(Consts::coockie_nm_dict['ADMIN_JWT'], $newToken, auth('admin')->factory()->getTTL() * 60);
+        }
+        $response->withCookie($cookie);
+        return $response;
     }
 }

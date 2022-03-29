@@ -30,6 +30,7 @@ class AddAuthorizationHeader
         if ($jwt) {
             $request->headers->set('Authorization', 'Bearer ' . $jwt);
         }
+
         return $next($request);;
     }
 }
