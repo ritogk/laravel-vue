@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use \Cookie;
-use App\Libs\Consts;
 // request
-use App\Http\Requests\Auth\Admin\LoginRequest;
+use App\Http\Requests\Auth\Front\LoginRequest;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
 
-class AuthAdminController extends Controller
+use App\Libs\Consts;
+
+class AuthFrontController extends Controller
 {
     /**
      * login
@@ -25,18 +26,17 @@ class AuthAdminController extends Controller
     {
         $requestBody = new OpenAPI\Model\RequestLogin($request->all());
         $request_all = ['email' => $requestBody->getEmail(), 'password' => $requestBody->getPassword()];
-        if (!$token = auth('admin')->attempt($request_all)) {
+        if (!$token = auth('user')->attempt($request_all)) {
             return response()->json(
                 ['errors' => ['message' => ['認証に失敗しました。']]],
                 Response::HTTP_UNAUTHORIZED
             );
         }
-
         $result = $this->respondWithToken($token);
         $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
-        $cookie = cookie(Consts::coockie_nm_dict['ADMIN_JWT'], $response_model->accessToken, $response_model->expiresIn);
+        $cookie = cookie(Consts::coockie_nm_dict['USER_JWT'], $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
-            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
+            $response_model,
             Response::HTTP_CREATED
         )->cookie($cookie);
     }
@@ -49,7 +49,7 @@ class AuthAdminController extends Controller
     public function me(): JsonResponse
     {
         return response()->json(
-            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\Admin::class, auth('admin')->user()->toArray()),
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, auth('user')->user()->toArray()),
             Response::HTTP_OK
         );
     }
@@ -61,11 +61,11 @@ class AuthAdminController extends Controller
      */
     public function logout(): JsonResponse
     {
-        auth('admin')->logout();
+        auth('user')->logout();
         return response()->json(
             ['message' => 'Successfully logged out'],
             Response::HTTP_NO_CONTENT
-        )->cookie(Cookie::forget(Consts::coockie_nm_dict['ADMIN_JWT']));
+        )->cookie(Cookie::forget(Consts::coockie_nm_dict['USER_JWT']));
     }
 
     /**
@@ -75,11 +75,11 @@ class AuthAdminController extends Controller
      */
     public function refresh(): JsonResponse
     {
-        $result = $this->respondWithToken(auth('admin')->refresh());
+        $result = $this->respondWithToken(auth('user')->refresh());
         $response_model = OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result);
-        $cookie = cookie(Consts::coockie_nm_dict['ADMIN_JWT'], $response_model->accessToken, $response_model->expiresIn);
+        $cookie = cookie(Consts::coockie_nm_dict['USER_JWT'], $response_model->accessToken, $response_model->expiresIn);
         return response()->json(
-            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AccessToken::class, $result),
+            $response_model,
             Response::HTTP_CREATED
         )->cookie($cookie);
     }
@@ -97,7 +97,7 @@ class AuthAdminController extends Controller
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('admin')->factory()->getTTL() * 60
+            'expires_in' => auth('user')->factory()->getTTL() * 60
         ];
     }
 }

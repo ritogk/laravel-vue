@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Master;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
@@ -50,7 +50,5 @@ class EntryController extends Controller
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\Entry::class, $result),
             Response::HTTP_CREATED
         );
-
-        return $action($request);
     }
 }

@@ -3,9 +3,10 @@
 namespace App\UseCases\Master\JobCategory;
 
 use App\Models\JobCategory;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-class CreateAction{
+class CreateAction
+{
     /**
      * Undocumented function
      *
@@ -23,6 +24,11 @@ class CreateAction{
             'image' => $image,
             'sort_no' => $sort_no,
         ];
-        return JobCategory::create($create)->toArray();
+        $item = JobCategory::create($create)->toArray();
+        // ファイルのurlをセット
+        if (!empty($item) && array_key_exists('image', $item)) {
+            $item['image_url'] = config('filesystems.base_url') . Storage::url($item['image']);
+        }
+        return $item;
     }
 }

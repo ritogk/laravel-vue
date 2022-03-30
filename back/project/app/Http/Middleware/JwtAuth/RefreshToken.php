@@ -18,20 +18,23 @@ class RefreshToken extends BaseMiddleware
      *
      * @param Request $request
      * @param Closure $next
-     * @return void
+     * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
-        $newToken = null;
+        $newToken = '';
+        $token = null;
         try {
             $token = JWTAuth::parseToken();
             $token->authenticate();
         } catch (TokenExpiredException $e) {
-            // Token expired: try refresh
-            try {
-                $newToken = $token->refresh();
-            } catch (JWTException $e) {
-                // Refresh failed (refresh expired)
+            if ($token != null) {
+                // Token expired: try refresh
+                try {
+                    $newToken = $token->refresh();
+                } catch (JWTException $e) {
+                    // Refresh failed (refresh expired)
+                }
             }
         } catch (JWTException $e) {
             // Invalid token
@@ -43,12 +46,13 @@ class RefreshToken extends BaseMiddleware
         }
 
         // リフレッシュしたトークンをAuthorizationヘッダーに付与して目的のAPIを実行
-        if ($newToken) {
+        if ($newToken !== '') {
             $request->headers->set('Authorization', 'Bearer ' . $newToken);
         }
         $response = $next($request);
 
         // リフレッシュしたトークンをset-cookieに入れてクライアント側に返す
+        $cookie = null;
         $current_route_middlewares = $request->route()->computedMiddleware;
         if (in_array('auth:user', $current_route_middlewares)) {
             $cookie = cookie(Consts::coockie_nm_dict['USER_JWT'], $newToken, auth('user')->factory()->getTTL() * 60);

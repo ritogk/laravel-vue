@@ -25,7 +25,7 @@ class ListAction
             return $query->where('title', 'like', "%$title%");
         })->when(isset($content), function ($query) use ($content) {
             return $query->where('content', 'like', "%$content%");
-        })->when($attention, function ($query) use ($attention) {
+        })->when(isset($attention), function ($query) use ($attention) {
             return $query->where('attention', $attention);
         })->when(isset($job_category_id), function ($query) use ($job_category_id) {
             return $query->where('job_category_id', $job_category_id);

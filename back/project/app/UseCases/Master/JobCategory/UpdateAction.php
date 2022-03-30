@@ -3,7 +3,7 @@
 namespace App\UseCases\Master\JobCategory;
 
 use App\Models\JobCategory;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UpdateAction
 {
@@ -26,6 +26,11 @@ class UpdateAction
             'sort_no' => $sort_no,
         ];
         JobCategory::where('id', $id)->update($update);
-        return JobCategory::where('id', $id)->first()->toArray();
+        $item = JobCategory::where('id', $id)->first()->toArray();
+        // ファイルのurlをセット
+        if (!empty($item) && array_key_exists('image', $item)) {
+            $item['image_url'] = config('filesystems.base_url') . Storage::url($item['image']);
+        }
+        return $item;
     }
 }

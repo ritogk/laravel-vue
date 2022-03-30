@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Libs;
 
 use Illuminate\Support\Facades\Schema;
@@ -7,7 +8,8 @@ use Illuminate\Support\Facades\Schema;
 //
 // よく使われる関数を書く
 //
-class Utility {
+class Utility
+{
     /**
      * テーブルの空カラムデータ取得
      *
@@ -15,20 +17,20 @@ class Utility {
      * @param  integer $num 数
      * @return array
      */
-    public static function getEmptyTableColumns($table_nm, $num) :array
+    public static function getEmptyTableColumns($table_nm, $num): array
     {
         $columns = Schema::getColumnListing($table_nm);
         $emptyData = array();
-        foreach($columns as $column){
+        foreach ($columns as $column) {
             $emptyData[$column] = "";
         }
 
         $rtnArray = array();
-        if($num > 1){
-            for($i = 0; $i < $num; $i++){
+        if ($num > 1) {
+            for ($i = 0; $i < $num; $i++) {
                 $rtnArray[] = $emptyData;
             }
-        }else{
+        } else {
             $rtnArray = $emptyData;
         }
         return $rtnArray;

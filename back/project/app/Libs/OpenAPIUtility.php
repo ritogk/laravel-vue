@@ -25,7 +25,7 @@ class OpenAPIUtility
      * 「連想配列」を「OpenApiModel形式のcontainer」に変換
      *
      * @param string $model_path モデルクラスのパス
-     * @param array $items 変換元の一覧
+     * @param array $dictionary 変換元の辞書
      * @return object
      */
     static function dicstionaryToModelContainer(string $model_path, array $dictionary): object
@@ -54,5 +54,30 @@ class OpenAPIUtility
             }
         }
         return $results;
+    }
+
+    /**
+     * boolean型への変換処理を行います。
+     *
+     * @param mixed $target
+     * @return bool
+     */
+    static function castBoolean($target): bool
+    {
+        if (gettype($target) == "boolean") {
+            return $target;
+        }
+        return $target === 'true';
+    }
+
+    /**
+     * modelの値オブジェクトを辞書型へ変換を行う。
+     *
+     * @param object $value
+     * @return array
+     */
+    static function convertDict(object $value): array
+    {
+        return json_decode(json_encode($value), true);
     }
 }
