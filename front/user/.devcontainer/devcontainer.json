@@ -26,7 +26,8 @@
     "dbaeumer.vscode-eslint",
     "MS-CEINTL.vscode-language-pack-ja",
     "esbenp.prettier-vscode",
-    "octref.vetur"
+    "octref.vetur",
+    "pkief.material-icon-theme"
   ]
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
