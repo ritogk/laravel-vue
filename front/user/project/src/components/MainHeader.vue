@@ -16,6 +16,7 @@
       <div class="collapse navbar-collapse text-end" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
+            <!-- ログアウト-->
             <a
               class="nav-link active"
               aria-current="page"
@@ -25,14 +26,22 @@
               >ログアウト</a
             >
           </li>
+          <!-- ログイン済のユーザーの氏名-->
           <li class="nav-item">
-            <a class="nav-link" href="#" v-text="loginUser.name"></a>
+            <a
+              class="nav-link"
+              href="#"
+              v-text="loginUser.name"
+              v-show="isLogin"
+            ></a>
           </li>
+          <!-- ログイン -->
           <li class="nav-item">
             <a class="nav-link" href="#" @click="clickLogin" v-show="!isLogin"
               >ログイン</a
             >
           </li>
+          <!-- 新規登録 -->
           <li class="nav-item">
             <a
               class="nav-link"

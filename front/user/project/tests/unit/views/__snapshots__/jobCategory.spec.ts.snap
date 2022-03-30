@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`職種選択画面で正しい内容が表示されているか スナップショットとの差分を確認する 1`] = `
+<div
+  class="card border-primary mb-3"
+>
+  <div
+    class="card-header bg-primary text-white"
+  >
+    職種
+  </div>
+  <div
+    class="card-body"
+  >
+    <h6
+      class="card-subtitle mb-2 text-muted"
+    >
+       ご希望の職種を選択して下さい。 
+    </h6>
+    <div
+      class="d-flex flex-wrap mb-3"
+    >
+      <transition-stub
+        data-v-2964abc9=""
+      >
+        <div
+          class="velmld-overlay"
+          data-v-2964abc9=""
+          style="background-color: rgba(255, 255, 255, 0.9); display: none;"
+        >
+          <div
+            class="velmld-spinner"
+            data-v-2964abc9=""
+          >
+            
+            <svg
+              data-v-2964abc9=""
+              data-v-2964abc9-s=""
+              enable-background="new 0 0 40 40"
+              height="50px"
+              id="loader-1"
+              version="1.1"
+              viewBox="0 0 40 40"
+              width="50px"
+              x="0px"
+              xml:space="preserve"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              y="0px"
+            >
+              <path
+                d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+      s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+      c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"
+                fill="#000"
+                opacity="0.2"
+              />
+              <path
+                d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+      C22.32,8.481,24.301,9.057,26.013,10.047z"
+                fill="#000"
+              >
+                <animatetransform
+                  attributeName="transform"
+                  attributeType="xml"
+                  dur="0.6s"
+                  from="0 20 20"
+                  repeatCount="indefinite"
+                  to="360 20 20"
+                  type="rotate"
+                />
+              </path>
+            </svg>
+            
+            <!---->
+          </div>
+        </div>
+      </transition-stub>
+      
+      <div
+        category="[object Object]"
+        class="m-2"
+        style=""
+      >
+        <div>
+          <div
+            class="card text-white"
+          >
+            <img
+              class="card-img category-card"
+              src="http://storage/image/path/xxxx.jpg"
+              style="max-width: 20rem; height: 200px; filter: brightness(0.65);"
+            />
+            <div
+              class="card-img-overlay"
+            >
+              <h4
+                class="card-title"
+              >
+                公務員
+              </h4>
+              <p
+                class="card-text"
+              >
+                <span>
+                  役所、消防署、官僚、国税専門官
+                </span>
+                <a
+                  class="stretched-link"
+                  href="#"
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        category="[object Object]"
+        class="m-2"
+        style=""
+      >
+        <div>
+          <div
+            class="card text-white"
+          >
+            <img
+              class="card-img category-card"
+              src="http://storage/image/path/xxxx.jpg"
+              style="max-width: 20rem; height: 200px; filter: brightness(0.65);"
+            />
+            <div
+              class="card-img-overlay"
+            >
+              <h4
+                class="card-title"
+              >
+                営業
+              </h4>
+              <p
+                class="card-text"
+              >
+                <span>
+                  コンサルティングフォーム、専門事務所
+                </span>
+                <a
+                  class="stretched-link"
+                  href="#"
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+`;

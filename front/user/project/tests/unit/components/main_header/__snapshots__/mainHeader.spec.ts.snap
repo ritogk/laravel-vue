@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ログイン済状態での「MainHeader.vue」コンポーネントのテスト スナップショットとの差分を確認する 1`] = `
+<nav
+  class="navbar navbar-expand-lg navbar-dark bg-primary"
+>
+  <div
+    class="container-fluid"
+  >
+    <a
+      class="navbar-brand"
+      href="#"
+    >
+      求人検索
+    </a>
+    <button
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      class="navbar-toggler"
+      data-bs-target="#navbarNav"
+      data-bs-toggle="collapse"
+      type="button"
+    >
+      <span
+        class="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      class="collapse navbar-collapse text-end"
+      id="navbarNav"
+    >
+      <ul
+        class="navbar-nav ms-auto"
+      >
+        <li
+          class="nav-item"
+        >
+          <!-- ログアウト-->
+          <a
+            aria-current="page"
+            class="nav-link active"
+            href="#"
+          >
+            ログアウト
+          </a>
+        </li>
+        <!-- ログイン済のユーザーの氏名-->
+        <li
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            href="#"
+          >
+            山田太郎
+          </a>
+        </li>
+        <!-- ログイン -->
+        <li
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            href="#"
+            style="display: none;"
+          >
+            ログイン
+          </a>
+        </li>
+        <!-- 新規登録 -->
+        <li
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            href="#"
+            style="display: none;"
+          >
+            新規登録
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+`;
+
+exports[`未ログイン状態での「MainHeader.vue」コンポーネントのテスト スナップショットとの差分を確認する 1`] = `
+<nav
+  class="navbar navbar-expand-lg navbar-dark bg-primary"
+>
+  <div
+    class="container-fluid"
+  >
+    <a
+      class="navbar-brand"
+      href="#"
+    >
+      求人検索
+    </a>
+    <button
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      class="navbar-toggler"
+      data-bs-target="#navbarNav"
+      data-bs-toggle="collapse"
+      type="button"
+    >
+      <span
+        class="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      class="collapse navbar-collapse text-end"
+      id="navbarNav"
+    >
+      <ul
+        class="navbar-nav ms-auto"
+      >
+        <li
+          class="nav-item"
+        >
+          <!-- ログアウト-->
+          <a
+            aria-current="page"
+            class="nav-link active"
+            href="#"
+            style="display: none;"
+          >
+            ログアウト
+          </a>
+        </li>
+        <!-- ログイン済のユーザーの氏名-->
+        <li
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            href="#"
+            style="display: none;"
+          />
+        </li>
+        <!-- ログイン -->
+        <li
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            href="#"
+          >
+            ログイン
+          </a>
+        </li>
+        <!-- 新規登録 -->
+        <li
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            href="#"
+          >
+            新規登録
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+`;
