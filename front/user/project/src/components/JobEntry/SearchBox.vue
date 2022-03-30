@@ -15,19 +15,6 @@
             :minChars="1"
             :searchable="true"
           ></Multiselect>
-          <!-- <select
-            class="form-select"
-            aria-label="Default select example"
-            v-model="condition.jobCategoryId"
-          >
-            <option value="">全て</option>
-            <option
-              v-for="(name, index) in jobCategoryNms"
-              :key="`jobCategory${index}`"
-              v-bind:value="index"
-              v-text="name"
-            ></option>
-          </select> -->
         </div>
         <!-- 入力(仕事内容) -->
         <div class="mb-3">
@@ -110,7 +97,7 @@ export default defineComponent({
         condition.jobCategoryId ? condition.jobCategoryId : undefined,
         condition.content ? condition.content : undefined,
         condition.price ? Number(condition.price) : undefined,
-        condition.attention
+        condition.attention ? true : undefined
       );
     };
 
