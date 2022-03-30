@@ -46,6 +46,25 @@ services:
     networks:
       - b_lvs
     restart: always
+  test_db:
+    image: mysql:5.7
+    container_name: b_lvs_test_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: "Asia/Tokyo"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./docker/test_db/data:/var/lib/mysql
+      - ./docker/test_db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/test_db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 53307:3306
+    networks:
+      - b_lvs
+    restart: always
 
 networks:
   b_lvs:

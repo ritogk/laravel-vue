@@ -69,4 +69,15 @@ class OpenAPIUtility
         }
         return $target === 'true';
     }
+
+    /**
+     * modelの値オブジェクトを辞書型へ変換を行う。
+     *
+     * @param object $value
+     * @return array
+     */
+    static function convertDict(object $value): array
+    {
+        return json_decode(json_encode($value), true);
+    }
 }
