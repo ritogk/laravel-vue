@@ -7,19 +7,14 @@
         <div class="row g-3 mb-3">
           <div class="col-md-6">
             <label for="inputJobCategory" class="form-label">職種</label>
-            <select
-              class="form-select"
-              aria-label="Default select example"
+            <Multiselect
               v-model="condition.jobCategoryId"
-            >
-              <option value="">全て</option>
-              <option
-                v-for="(name, index) in jobCategoryNms"
-                :key="`jobCategory${index}`"
-                v-bind:value="index"
-                v-text="name"
-              ></option>
-            </select>
+              :options="jobCategoryNms"
+              placeholder=""
+              :filterReslts="true"
+              :minChars="1"
+              :searchable="true"
+            ></Multiselect>
           </div>
         </div>
         <div class="row g-3">

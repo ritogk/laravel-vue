@@ -57,15 +57,18 @@ class OpenAPIUtility
     }
 
     /**
-     * boolean型への変換処理を行います。
+     * クエリパラメーター(boolean型)の変換処理を行います。
      *
      * @param mixed $target
-     * @return bool
+     * @return bool|null
      */
-    static function castBoolean($target): bool
+    static function castBoolean($target)
     {
         if (gettype($target) == "boolean") {
             return $target;
+        }
+        if ($target == null) {
+            return null;
         }
         return $target === 'true';
     }

@@ -145,7 +145,7 @@ import {
 
 export default defineComponent({
   setup() {
-    const { login } = inject(
+    const { login, getMe } = inject(
       userAuthenticationKey
     ) as useUserAuthenticationType;
 
@@ -189,6 +189,7 @@ export default defineComponent({
       if (!('errors' in response)) {
         // ログイン
         await login(formRefs.inputs.email, formRefs.inputs.password);
+        await getMe();
         router.push('/');
         return;
       }
