@@ -35,7 +35,7 @@ export interface OpenapiGeneratorPostRequest {
  */
 export interface OpenapiGeneratorApiInterface {
     /**
-     * null
+     * 未使用
      * @summary multipart/form-dataだとリクエストボディの型が生成されないので型を生成するためだけのAPI
      * @param {RequestFile} [requestFile] 
      * @param {*} [options] Override http request option.
@@ -45,7 +45,7 @@ export interface OpenapiGeneratorApiInterface {
     openapiGeneratorPostRaw(requestParameters: OpenapiGeneratorPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FilePath>>;
 
     /**
-     * null
+     * 未使用
      * multipart/form-dataだとリクエストボディの型が生成されないので型を生成するためだけのAPI
      */
     openapiGeneratorPost(requestParameters: OpenapiGeneratorPostRequest, initOverrides?: RequestInit): Promise<FilePath>;
@@ -58,7 +58,7 @@ export interface OpenapiGeneratorApiInterface {
 export class OpenapiGeneratorApi extends runtime.BaseAPI implements OpenapiGeneratorApiInterface {
 
     /**
-     * null
+     * 未使用
      * multipart/form-dataだとリクエストボディの型が生成されないので型を生成するためだけのAPI
      */
     async openapiGeneratorPostRaw(requestParameters: OpenapiGeneratorPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FilePath>> {
@@ -88,7 +88,7 @@ export class OpenapiGeneratorApi extends runtime.BaseAPI implements OpenapiGener
     }
 
     /**
-     * null
+     * 未使用
      * multipart/form-dataだとリクエストボディの型が生成されないので型を生成するためだけのAPI
      */
     async openapiGeneratorPost(requestParameters: OpenapiGeneratorPostRequest, initOverrides?: RequestInit): Promise<FilePath> {

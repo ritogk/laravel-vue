@@ -4,13 +4,13 @@ info:
   description: OpenAPI Tutorial by halhorn
   version: 0.0.0
 servers:
-  - url: http://localhost:80/api
+  - url: http://localhost:80/api/v1
     description: 開発用
 paths:
   /auth/admin/me:
     get:
       tags:
-        - "認証 管理者"
+        - "authAdmin"
       summary: 自身の詳細
       description: 詳細内容
       security:
@@ -25,7 +25,7 @@ paths:
   /auth/admin/login:
     post:
       tags:
-        - "認証 管理者"
+        - "authAdmin"
       summary: ログイン
       description: 詳細内容
       requestBody:
@@ -43,7 +43,7 @@ paths:
   /auth/admin/refresh:
     post:
       tags:
-        - "認証 管理者"
+        - "authAdmin"
       summary: リフレッシュトークン認証
       description: 詳細内容
       parameters:
@@ -66,7 +66,7 @@ paths:
   /auth/admin/logout:
     post:
       tags:
-        - "認証 管理者"
+        - "authAdmin"
       summary: ログアウト
       description: 詳細内容
       security:
@@ -74,11 +74,11 @@ paths:
       responses:
         "204":
           description: jwt
-  
+
   /auth/front/me:
     get:
       tags:
-        - "認証 会員"
+        - "authFront"
       summary: 自身の詳細
       description: 詳細内容
       security:
@@ -93,7 +93,7 @@ paths:
   /auth/front/login:
     post:
       tags:
-        - "認証 会員"
+        - "authFront"
       summary: ログイン
       description: 詳細内容
       requestBody:
@@ -111,7 +111,7 @@ paths:
   /auth/front/refresh:
     post:
       tags:
-        - "認証 会員"
+        - "authFront"
       summary: リフレッシュトークン認証
       description: 詳細内容
       parameters:
@@ -134,7 +134,7 @@ paths:
   /auth/front/logout:
     post:
       tags:
-        - "認証 会員"
+        - "authFront"
       summary: ログアウト
       description: 会員
       security:
@@ -146,7 +146,7 @@ paths:
   /job_categories/{id}:
     get:
       tags:
-        - "職種"
+        - "jobCategorie"
       summary: 1件取得
       description: 詳細内容
       parameters:
@@ -164,7 +164,7 @@ paths:
                 $ref: "#/components/schemas/jobCategory"
     put:
       tags:
-        - "職種"
+        - "jobCategorie"
       summary: 更新
       description: 詳細内容
       security:
@@ -189,7 +189,7 @@ paths:
                 $ref: "#/components/schemas/jobCategory"
     delete:
       tags:
-        - "職種"
+        - "jobCategorie"
       summary: 削除
       description: 詳細内容
       security:
@@ -210,17 +210,22 @@ paths:
   /job_categories:
     get:
       tags:
-        - "職種"
+        - "jobCategorie"
       summary: 一覧取得
       description: 詳細内容
       parameters:
         - in: query
-          name: values
+          name: name
           schema:
-            type: object
-            $ref: "#/components/schemas/queryJobCategoryList"
-          style: form
-          explode: true
+            type: string
+          description: 名称
+          required: false
+        - in: query
+          name: content
+          schema:
+            type: string
+          description: 内容
+          required: false
       responses:
         "200":
           description: 職種一覧
@@ -232,7 +237,7 @@ paths:
                   $ref: "#/components/schemas/jobCategory"
     post:
       tags:
-        - "職種"
+        - "jobCategorie"
       summary: 職種 追加
       description: 詳細内容
       security:
@@ -249,12 +254,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/jobCategory"
-  
 
   /jobs/{id}:
     get:
       tags:
-        - "仕事"
+        - "job"
       summary: 1件取得
       description: 詳細内容
       parameters:
@@ -272,7 +276,7 @@ paths:
                 $ref: "#/components/schemas/job"
     put:
       tags:
-        - "仕事"
+        - "job"
       summary: 更新
       description: 詳細内容
       security:
@@ -287,7 +291,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/requestJobCategory"
+              $ref: "#/components/schemas/requestJob"
       responses:
         "200":
           description: 仕事
@@ -297,7 +301,7 @@ paths:
                 $ref: "#/components/schemas/job"
     delete:
       tags:
-        - "仕事"
+        - "job"
       summary: 削除
       description: 詳細内容
       security:
@@ -318,17 +322,52 @@ paths:
   /jobs:
     get:
       tags:
-        - "仕事"
+        - "job"
       summary: 一覧取得
       description: 詳細内容
       parameters:
         - in: query
-          name: values
+          name: title
           schema:
-            type: object
-            $ref: "#/components/schemas/queryJobList"
-          style: form
-          explode: true
+            type: string
+          description: タイトル
+          required: false
+        - in: query
+          name: content
+          schema:
+            type: string
+          description: 内容
+          required: false
+        - in: query
+          name: attention
+          schema:
+            type: boolean
+          description: 注目の求人
+          required: false
+        - in: query
+          name: jobCategoryId
+          schema:
+            type: integer
+          description: 職種id
+          required: false
+        - in: query
+          name: price
+          schema:
+            type: integer
+          description: 金額
+          required: false
+        - in: query
+          name: welfare
+          schema:
+            type: string
+          description: 福利厚生
+          required: false
+        - in: query
+          name: holiday
+          schema:
+            type: string
+          description: 休日
+          required: false
       responses:
         "200":
           description: 仕事一覧
@@ -340,7 +379,7 @@ paths:
                   $ref: "#/components/schemas/job"
     post:
       tags:
-        - "仕事"
+        - "job"
       summary: 仕事 追加
       description: 詳細内容
       security:
@@ -360,17 +399,34 @@ paths:
   /entries:
     get:
       tags:
-        - "応募"
+        - "entry"
       summary: 一覧取得
       description: 詳細内容
       parameters:
         - in: query
-          name: values
+          name: jobId
           schema:
-            type: object
-            $ref: "#/components/schemas/queryEntryList"
-          style: form
-          explode: true
+            type: integer
+          description: 仕事id
+          required: false
+        - in: query
+          name: jobCategoryId
+          schema:
+            type: integer
+          description: 仕事カテゴリid
+          required: false
+        - in: query
+          name: userName
+          schema:
+            type: string
+          description: ユーザー名
+          required: false
+        - in: query
+          name: selfPr
+          schema:
+            type: string
+          description: 自己PR
+          required: false
       responses:
         "200":
           description: 応募一覧
@@ -379,10 +435,10 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/entry"
+                  $ref: "#/components/schemas/responseJobEntry"
     post:
       tags:
-        - "応募"
+        - "entry"
       summary: 応募 追加
       description: 詳細内容
       security:
@@ -404,17 +460,34 @@ paths:
       security:
         - bearerAdmin: []
       tags:
-        - "会員"
+        - "user"
       summary: 一覧取得
       description: 詳細内容
       parameters:
         - in: query
-          name: values
+          name: name
           schema:
-            type: object
-            $ref: "#/components/schemas/queryUserList"
-          style: form
-          explode: true
+            type: string
+          description: 氏名
+          required: false
+        - in: query
+          name: email
+          schema:
+            type: string
+          description: メールアドレス
+          required: false
+        - in: query
+          name: selfPr
+          schema:
+            type: string
+          description: 自己PR
+          required: false
+        - in: query
+          name: tel
+          schema:
+            type: string
+          description: 電話番号
+          required: false
       responses:
         "200":
           description: 会員一覧
@@ -426,7 +499,7 @@ paths:
                   $ref: "#/components/schemas/user"
     post:
       tags:
-        - "会員"
+        - "user"
       summary: 会員 追加
       description: 詳細内容
       requestBody:
@@ -444,9 +517,30 @@ paths:
   /files:
     post:
       tags:
-        - "ファイル"
+        - "file"
       summary: ファイル 追加
       description: 詳細内容
+      security:
+        - bearerAdmin: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/requestFile"
+      responses:
+        "201":
+          description: ファイルパス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/filePath"
+
+  /openapi-generator:
+    post:
+      tags:
+        - "openapi-generator"
+      summary: multipart/form-dataだとリクエストボディの型が生成されないので型を生成するためだけのAPI
+      description: 未使用
       security:
         - bearerAdmin: []
       requestBody:
@@ -460,7 +554,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/file"
+                $ref: "#/components/schemas/filePath"
 
 components:
   securitySchemes:
@@ -518,6 +612,12 @@ components:
         jobCategoryId:
           type: integer
           description: 仕事カテゴリid
+        userName:
+          type: string
+          description: ユーザー名
+        selfPr:
+          type: string
+          description: 自己PR
     queryUserList:
       description: クエリパラメータ 会員一覧
       type: object
@@ -546,9 +646,13 @@ components:
           description: 内容
         image:
           type: string
+          description: 画像の内部識別子
+        imageUrl:
+          type: string
           description: 画像URL
         sortNo:
           type: integer
+          nullable: true
           description: 並び順
         updatedAt:
           type: string
@@ -559,7 +663,6 @@ components:
         - content
         - image
         - sortNo
-        - updatedAt
     requestJob:
       description: リクエスト 仕事登録
       type: object
@@ -575,9 +678,11 @@ components:
           description: 注目の求人
         jobCategoryId:
           type: integer
+          nullable: true
           description: 職種id
         price:
           type: integer
+          nullable: true
           description: 金額
         welfare:
           type: string
@@ -587,9 +692,13 @@ components:
           description: 休日
         image:
           type: string
+          description: 画像の内部識別子
+        imageUrl:
+          type: string
           description: 画像URL
         sortNo:
           type: integer
+          nullable: true
           description: 並び順
         updatedAt:
           type: string
@@ -612,7 +721,7 @@ components:
           description: 仕事id
         userId:
           type: integer
-          description: 会員id
+          description: ユーザーid
       required:
         - jobId
         - jobCategoryId
@@ -668,6 +777,26 @@ components:
       required:
         - email
         - password
+    responseJobEntry:
+      description: レスポンス 仕事応募内容
+      type: object
+      properties:
+        entryId:
+          type: integer
+          description: エントリーid
+        entryDate:
+          type: string
+          format: date
+          description: エントリー日時
+        user:
+          $ref: "#/components/schemas/user"
+          description: ユーザー情報
+        job:
+          $ref: "#/components/schemas/job"
+          description: 仕事情報
+      required:
+        - jobId
+        - jobCategoryId
     jobCategory:
       description: 職種
       type: object
@@ -683,6 +812,9 @@ components:
           description: 内容
         image:
           type: string
+          description: 画像の内部識別子
+        imageUrl:
+          type: string
           description: 画像URL
         sortNo:
           type: integer
@@ -695,6 +827,13 @@ components:
           type: string
           format: date
           description: 更新日時
+      required:
+        - id
+        - name
+        - content
+        - image
+        - imageUrl
+        - sortNo
     job:
       description: 仕事
       type: object
@@ -714,6 +853,9 @@ components:
         jobCategoryId:
           type: integer
           description: 職種id
+        jobCategory:
+          $ref: "#/components/schemas/jobCategory"
+          description: 職種
         price:
           type: integer
           description: 金額
@@ -724,6 +866,9 @@ components:
           type: string
           description: 休日
         image:
+          type: string
+          description: 画像の内部識別子
+        imageUrl:
           type: string
           description: 画像URL
         sortNo:
@@ -737,6 +882,16 @@ components:
           type: string
           format: date
           description: 更新日時
+      required:
+        - id
+        - title
+        - content
+        - attention
+        - jobCategoryId
+        - price
+        - image
+        - imageUrl
+        - sortNo
     entry:
       description: 応募
       type: object
@@ -763,9 +918,6 @@ components:
         email:
           type: string
           description: メールアドレス
-        password:
-          type: string
-          description: パスワード
         selfPr:
           type: string
           description: 自己PR
@@ -780,16 +932,25 @@ components:
           type: string
           format: date
           description: 作成日時
-    file:
+      required:
+        - id
+        - name
+        - email
+        - selfPr
+        - tel
+    filePath:
       description: ファイルパス
       type: object
       properties:
         storagePath:
           type: string
-          description: ストレージパス 
+          description: ストレージパス
         url:
           type: string
           description: フルパス
+      required:
+        - storagePath
+        - url
     admin:
       description: 管理者
       type: object
