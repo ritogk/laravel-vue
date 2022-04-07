@@ -45,7 +45,7 @@ class ListTest extends TestCase
         $response1_model->setName($job_category1->name);
         $response1_model->setContent($job_category1->content);
         $response1_model->setImage($job_category1->image);
-        $response1_model->setImageUrl(config('filesystems.base_url') . Storage::url($job_category1->image));
+        $response1_model->setImageUrl(Storage::url($job_category1->image));
         $response1_model->setSortNo($job_category1->sort_no);
         $response1_body = OpenAPIUtility::convertDict($response1_model);
 
@@ -53,7 +53,7 @@ class ListTest extends TestCase
         $response2_model->setName($job_category2->name);
         $response2_model->setContent($job_category2->content);
         $response2_model->setImage($job_category2->image);
-        $response2_model->setImageUrl(config('filesystems.base_url') . Storage::url($job_category2->image));
+        $response2_model->setImageUrl(Storage::url($job_category2->image));
         $response2_model->setSortNo($job_category2->sort_no);
         $response2_body = OpenAPIUtility::convertDict($response2_model);
 
@@ -61,7 +61,7 @@ class ListTest extends TestCase
         $response3_model->setName($job_category3->name);
         $response3_model->setContent($job_category3->content);
         $response3_model->setImage($job_category3->image);
-        $response3_model->setImageUrl(config('filesystems.base_url') . Storage::url($job_category3->image));
+        $response3_model->setImageUrl(Storage::url($job_category3->image));
         $response3_model->setSortNo($job_category3->sort_no);
         $response3_body = OpenAPIUtility::convertDict($response3_model);
 

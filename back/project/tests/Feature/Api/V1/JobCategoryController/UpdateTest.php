@@ -58,7 +58,7 @@ class UpdateTest extends TestCase
         $response_model->setName($request_model->getName());
         $response_model->setContent($request_model->getContent());
         $response_model->setImage($request_model->getImage());
-        $response_model->setImageUrl(config('filesystems.base_url') . Storage::url($request_model->getImage()));
+        $response_model->setImageUrl(Storage::url($request_model->getImage()));
         $response_model->setSortNo($request_model->getSortNo());
         $response_body = OpenAPIUtility::convertDict($response_model);
 

@@ -20,7 +20,7 @@ class FindAction
             ->toArray();
         // ファイルのurlをセット
         if (!empty($item) && array_key_exists('image', $item)) {
-            $item['image_url'] = config('filesystems.base_url') . Storage::url($item['image']);
+            $item['image_url'] = Storage::url($item['image']);
         }
 
         return $item;

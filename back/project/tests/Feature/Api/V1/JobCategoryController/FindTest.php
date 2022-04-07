@@ -44,7 +44,7 @@ class FindTest extends TestCase
         $response_model->setName($job_category->name);
         $response_model->setContent($job_category->content);
         $response_model->setImage($job_category->image);
-        $response_model->setImageUrl(config('filesystems.base_url') . Storage::url($job_category->image));
+        $response_model->setImageUrl(Storage::url($job_category->image));
         $response_model->setSortNo($job_category->sort_no);
         $response_body = OpenAPIUtility::convertDict($response_model);
 
