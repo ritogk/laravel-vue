@@ -51,7 +51,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL') . '/storage',
+            'url' => env('FILESYSTEM_BASE_URL') . '/storage',
             'visibility' => 'public',
         ],
 
@@ -61,7 +61,7 @@ return [
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_CLOUD_FRONT_DMAIN') ? 'https://' . env('AWS_CLOUD_FRONT_DMAIN') : env('AWS_URL'),
+            'url' => 'https://' . env('AWS_CLOUD_FRONT_DMAIN'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
