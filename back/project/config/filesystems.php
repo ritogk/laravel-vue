@@ -61,7 +61,7 @@ return [
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
-            'url' => env('FILESYSTEM_BASE_URL'),
+            'url' => 'https://' . env('AWS_CLOUD_FRONT_DMAIN'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
