@@ -51,7 +51,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('FILESYSTEM_BASE_URL') . '/storage',
+            'url' => env('FILESYSTEM_PUBLIC_BASE_URL') . '/storage',
             'visibility' => 'public',
         ],
 
@@ -81,9 +81,4 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
-
-    /**
-     * ファイルシステムのベースURLc
-     */
-    'base_url' => env('FILESYSTEM_BASE_URL'),
 ];
