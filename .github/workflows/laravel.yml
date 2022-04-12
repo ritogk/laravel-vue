@@ -8,7 +8,6 @@ on:
 jobs:
   laravel-test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: docker-setup
@@ -25,3 +24,17 @@ jobs:
         run: |
           docker-compose exec -T php php vendor/bin/phpstan analyse app --memory-limit=1G
           docker-compose exec -T php php artisan test
+
+  vue-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker-setup
+        working-directory: ./front/user
+        run: |
+          working-directory: ./front/user
+          sleep 10
+      - name: vue-test
+        working-directory: ./back
+        run: |
+          npm run test:unit
