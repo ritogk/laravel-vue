@@ -15,10 +15,10 @@ jobs:
         working-directory: ./back
         run: |
           docker-compose up -d
+          sleep 10
       - name: laravel-setup
         working-directory: ./back
         run: |
-          sleep 20
           docker-compose exec -T php sh ./setup.sh
       - name: laravel-test
         working-directory: ./back
