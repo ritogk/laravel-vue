@@ -11,12 +11,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: compose-run
+      - name: docker-setup
         working-directory: ./back
         run: |
           docker-compose up -d
-      - name: laravel setup
+      - name: laravel-setup
         working-directory: ./back
         run: |
           sleep 20
           docker-compose exec -T php sh ./setup.sh
+      - name: laravel-test
+        working-directory: ./back
+        run: |
+          docker-compose exec -T php sh php vendor/bin/phpstan analyse app --memory-limit=1G
+          docker-compose exec -T php sh php artisan test
