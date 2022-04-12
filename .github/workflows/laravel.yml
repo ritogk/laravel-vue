@@ -23,6 +23,6 @@ jobs:
           aws ssm start-session --target i-071fcff583cdee6b7
           aws ssm send-command \
           --document-name "AWS-RunShellScript" \
-          --parameters 'commands=["mkdir aaaaa"]' \
+          --parameters 'commands=["su ec2-user -c 'cd ~/laravel-vue;git pull’"]' \
           --targets "Key=instanceids,Values=i-071fcff583cdee6b7" \
-          --comment "mkdir aaaaa"
+          --comment "git pull"
