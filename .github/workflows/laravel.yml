@@ -12,11 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: compose-run
-        working-directory: ./functions
+        working-directory: ./back
         run: |
           docker-compose up -d
       - name: laravel setup
-        working-directory: ./functions
         run: |
-          sleep 20
-          setup.sh
+          sleep 10
+          docker-compose exec -T php ./setup.sh
