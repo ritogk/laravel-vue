@@ -21,3 +21,4 @@ jobs:
         run: |
           aws ssm start-session --target i-071fcff583cdee6b7
           ls
+          whoami
