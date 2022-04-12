@@ -17,5 +17,5 @@ jobs:
           docker-compose up -d
       - name: laravel setup
         run: |
-          sleep 10
+          sleep 0
           docker exec -it b_lvs_php sh ./setup.sh
