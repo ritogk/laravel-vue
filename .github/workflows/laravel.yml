@@ -34,7 +34,12 @@ jobs:
         run: |
           docker-compose up -d
           sleep 10
-      - name: vue-test
-        working-directory: ./back
+      - name: vue-setup
+        working-directory: ./front/user
         run: |
+          docker-compose exec -T vue sh ./setup.sh
+      - name: vue-test
+        working-directory: ./front/user
+        run: |
+          docker-compose exec -T vue npm run test:unit
           npm run test:unit
