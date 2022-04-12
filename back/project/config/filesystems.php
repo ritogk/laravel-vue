@@ -51,7 +51,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('FILESYSTEM_BASE_URL') . '/storage',
+            'url' => env('FILESYSTEM_PUBLIC_BASE_URL') . '/storage',
             'visibility' => 'public',
         ],
 
@@ -61,7 +61,7 @@ return [
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
-            'url' => 'https://' . env('AWS_CLOUD_FRONT_DMAIN'),
+            'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
@@ -81,9 +81,4 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
-
-    /**
-     * ファイルシステムのベースURLc
-     */
-    'base_url' => env('FILESYSTEM_BASE_URL'),
 ];
