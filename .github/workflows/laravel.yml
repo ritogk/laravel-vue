@@ -19,11 +19,19 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
           
-      - name: Install Dependencies
+      - name: docker-setup
         working-directory: ./front/user
-        run: ls
-        
+        run: |
+          docker-compose up -d
+          sleep 10
+          
+      - name: vue-setup
+        working-directory: ./front/user
+        run: |
+          docker-compose exec -T vue sh ./setup.sh
+          docker-compose exec -T vue npm run build
+          
       - name: s3 test
-        working-directory: ./front/user
+        working-directory: ./front/user/project
         run: |
           ls
