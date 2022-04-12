@@ -6,53 +6,18 @@ on:
       - main
 
 jobs:
-  laravel:
+  aws:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: docker-setup
-        working-directory: ./back
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+      - name: ec2 test
         run: |
-          docker-compose up -d
-          sleep 10
-      - name: laravel-setup
-        working-directory: ./back
-        run: |
-          docker-compose exec -T php sh ./setup.sh
-      - name: laravel-test
-        working-directory: ./back
-        run: |
-          docker-compose exec -T php php vendor/bin/phpstan analyse app --memory-limit=1G
-          docker-compose exec -T php php artisan test
-
-  vue-user:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: docker-setup
-        working-directory: ./front/user
-        run: |
-          docker-compose up -d
-          sleep 10
-      - name: vue-setup
-        working-directory: ./front/user
-        run: |
-          docker-compose exec -T vue sh ./setup.sh
-      - name: vue-test
-        working-directory: ./front/user
-        run: |
-          docker-compose exec -T vue npm run test:unit
-          
-  vue-admin:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: docker-setup
-        working-directory: ./front/admin
-        run: |
-          docker-compose up -d
-          sleep 10
-      - name: vue-setup
-        working-directory: ./front/admin
-        run: |
-          docker-compose exec -T vue sh ./setup.sh
+          aws ssm start-session --target i-071fcff583cdee6b7
+          ls
