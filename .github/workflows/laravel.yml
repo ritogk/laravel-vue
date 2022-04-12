@@ -42,4 +42,3 @@ jobs:
         working-directory: ./front/user
         run: |
           docker-compose exec -T vue npm run test:unit
-          npm run test:unit
