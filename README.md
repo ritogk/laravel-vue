@@ -1,6 +1,6 @@
 # laravel + spa + aws のポートフォリオ
 
-## 概要aaccdd
+## 概要aaccddee
 
 求人検索サービスです。<br>
 求人の追加、求人への応募が行えます。
