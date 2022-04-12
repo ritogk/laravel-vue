@@ -154,6 +154,7 @@ vscodeからRemoteContainer経由でコンテナを起動
 ```
 chmod +x setup.sh
 ./setup.sh
+php artisan migrate:refresh --seed
 .vim .env
 # 「LOG_SLACK_WEBHOOK_URL」にwebhook urlを書き込む
 ```
