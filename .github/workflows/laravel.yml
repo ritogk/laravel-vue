@@ -16,6 +16,7 @@ jobs:
         run: |
           docker-compose up -d
       - name: laravel setup
+        working-directory: ./back
         run: |
           sleep 20
           docker-compose exec -T php sh ./setup.sh
