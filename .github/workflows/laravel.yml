@@ -32,7 +32,7 @@ jobs:
       - name: docker-setup
         working-directory: ./front/user
         run: |
-          working-directory: ./front/user
+          docker-compose up -d
           sleep 10
       - name: vue-test
         working-directory: ./back
