@@ -21,5 +21,8 @@ jobs:
         shell : sh
         run: |
           aws ssm start-session --target i-071fcff583cdee6b7
-          ls
-          whoami
+          aws ssm send-command \
+          --document-name "AWS-RunShellScript" \
+          --parameters 'commands=["mkdir aaaaa"]' \
+          --targets "Key=instanceids,Values=i-071fcff583cdee6b7" \
+          --comment "mkdir aaaaa"
