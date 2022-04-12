@@ -25,7 +25,7 @@ jobs:
           docker-compose exec -T php php vendor/bin/phpstan analyse app --memory-limit=1G
           docker-compose exec -T php php artisan test
 
-  vue-test:
+  vue-user-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -40,5 +40,23 @@ jobs:
           docker-compose exec -T vue sh ./setup.sh
       - name: vue-test
         working-directory: ./front/user
+        run: |
+          docker-compose exec -T vue npm run test:unit
+          
+  vue-admin-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker-setup
+        working-directory: ./front/admin
+        run: |
+          docker-compose up -d
+          sleep 10
+      - name: vue-setup
+        working-directory: ./front/admin
+        run: |
+          docker-compose exec -T vue sh ./setup.sh
+      - name: vue-test
+        working-directory: ./front/admin
         run: |
           docker-compose exec -T vue npm run test:unit
