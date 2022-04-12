@@ -18,4 +18,4 @@ jobs:
       - name: laravel setup
         run: |
           sleep 20
-          docker-compose exec -T php ./setup.sh
+          docker-compose exec -T php sh ./setup.sh
