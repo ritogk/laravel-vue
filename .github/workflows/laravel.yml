@@ -23,5 +23,5 @@ jobs:
       - name: laravel-test
         working-directory: ./back
         run: |
-          docker-compose exec -T php sh php vendor/bin/phpstan analyse app --memory-limit=1G
-          docker-compose exec -T php sh php artisan test
+          docker-compose exec -T php php vendor/bin/phpstan analyse app --memory-limit=1G
+          docker-compose exec -T php php artisan test
