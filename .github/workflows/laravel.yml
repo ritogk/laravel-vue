@@ -1,37 +1,109 @@
-name: Laravel
+name: cicd
 
 on:
   push:
     branches:
       - main
 
-jobs:     
+jobs:
+  # apiのテスト
+  test-back:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker-setup
+        working-directory: ./back
+        run: |
+          docker-compose up -d
+          sleep 10
+      - name: laravel-setup
+        working-directory: ./back
+        run: |
+          docker-compose exec -T php sh ./setup.sh
+      - name: laravel-test
+        working-directory: ./back
+        run: |
+          docker-compose exec -T php php vendor/bin/phpstan analyse app --memory-limit=1G
+          docker-compose exec -T php php artisan test
+  # front(ユーザー側)のテスト
+  test-front-user:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker-setup
+        working-directory: ./front/user
+        run: |
+          docker-compose up -d
+          sleep 10
+      - name: vue-setup
+        working-directory: ./front/user
+        run: |
+          docker-compose exec -T vue sh ./setup.sh
+      - name: vue-test
+        working-directory: ./front/user
+        run: |
+          docker-compose exec -T vue npm run test:unit
+          
+  # front(管理側)のテスト  
+  test-front-admin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker-setup
+        working-directory: ./front/admin
+        run: |
+          docker-compose up -d
+          sleep 10
+      - name: vue-setup
+        working-directory: ./front/admin
+        run: |
+          docker-compose exec -T vue sh ./setup.sh
+  
+  # デプロイ
   deploy:
+    needs: [test-back, test-front-user, test-front-admin]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-          
-      - name: docker-setup
+      # apiの更新
+      - name: ec2のソースコードを更新します。
+        env:
+          AWS_EC2_INSTANCE: ${{ secrets.AWS_EC2_INSTANCE }}
+        shell : sh
+        run: |
+          aws ssm send-command \
+          --document-name "AWS-RunShellScript" \
+          --parameters "commands=['sudo su ec2-user -c \'cd ~/laravel-vue;git pull\'']" \
+          --targets "Key=instanceids,Values=${AWS_EC2_INSTANCE}" \
+          --comment "git pull"
+      # ユーザー画面の更新
+      - name: docker-setup-front-user
         working-directory: ./front/user
         run: |
           docker-compose up -d
           sleep 10
-          
-      - name: vue-setup
-        working-directory: ./front/user
-        run: |
           docker-compose exec -T vue sh ./setup.sh
           docker-compose exec -T vue npm run build
-          
-      - name: s3 test
+      - name: ユーザー側のバンドルファイルをs3へアップロードを行う。
         working-directory: ./front/user/project/dist
         run: |
           aws s3 cp ./ s3://portfolio-backet-spa-user-private --recursive
+      # 管理画面の更新
+      - name: docker-setup-admin-user
+        working-directory: ./front/admin
+        run: |
+          docker-compose up -d
+          sleep 10
+          docker-compose exec -T vue sh ./setup.sh
+          docker-compose exec -T vue npm run build
+      - name: ユーザー側のバンドルファイルをs3へアップロードを行う。
+        working-directory: ./front/admin/project/dist
+        run: |
+          aws s3 cp ./ s3://portfolio-backet-spa-admin-private --recursive
