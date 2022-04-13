@@ -32,6 +32,6 @@ jobs:
           docker-compose exec -T vue npm run build
           
       - name: s3 test
-        working-directory: ./front/user/project
+        working-directory: ./front/user/project/dist
         run: |
           ls
