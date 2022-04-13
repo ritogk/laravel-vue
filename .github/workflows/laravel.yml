@@ -34,4 +34,4 @@ jobs:
       - name: s3 test
         working-directory: ./front/user/project/dist
         run: |
-          aws s3 cp --recursive --region ap-northeast-1 build s3://portfolio-backet-spa-user-private
+          aws s3 cp ./ s3://portfolio-backet-spa-user-private --recursive
