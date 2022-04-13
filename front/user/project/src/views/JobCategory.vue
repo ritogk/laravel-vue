@@ -3,7 +3,7 @@
     <div class="card-header bg-primary text-white">職種</div>
     <div class="card-body">
       <h6 class="card-subtitle mb-2 text-muted">
-        ご希望の職種を選択して下さい。(ci_test)
+        ご希望の職種を選択して下さい。
       </h6>
       <div class="d-flex flex-wrap mb-3">
         <VueElementLoading :active="loading" spinner="ring" size="50" />
