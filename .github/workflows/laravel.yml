@@ -94,7 +94,7 @@ jobs:
       - name: ユーザー側のバンドルファイルをs3へアップロードを行う。
         working-directory: ./front/user/project/dist
         run: |
-          aws s3 cp ./ s3://portfolio-backet-spa-user-private --recursive
+          aws s3 cp ./ s3://portfolio-bucket-user --recursive
       # 管理画面の更新
       - name: docker-setup-admin-user
         working-directory: ./front/admin
@@ -106,5 +106,5 @@ jobs:
       - name: ユーザー側のバンドルファイルをs3へアップロードを行う。
         working-directory: ./front/admin/project/dist
         run: |
-          aws s3 cp ./ s3://portfolio-backet-spa-admin-private --recursive
+          aws s3 cp ./ s3://portfolio-bucket-admin --recursive
 
