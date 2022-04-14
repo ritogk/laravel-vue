@@ -1,11 +1,11 @@
 # laravel + vue + aws のポートフォリオ
 
 ## 概要
+現状のスキルを保証するためのポートフォリオです。
 
-求人検索サービスです。<br>
+## サービス
+求人検索サービスです。  
 求人の追加、求人への応募が行えます。
-
-## URL
 
 ### ユーザー画面
 https://user.ritogk5.net/  
@@ -75,7 +75,6 @@ basic認証のウィンドウが表示された場合→(ユーザー名:root, �
 - vue 3系
 - bootstrap 5系
 - typescript 
-- jest
 
 ### バックエンド
 
@@ -85,8 +84,6 @@ basic認証のウィンドウが表示された場合→(ユーザー名:root, �
 - docker-compose
 - nginx
 - mysql
-- larastan
-- PHPUnit
 
 ### 開発環境
 
@@ -99,6 +96,9 @@ basic認証のウィンドウが表示された場合→(ユーザー名:root, �
 ### CI/CD
 
 - GithubActions
+- jest
+- larastan
+- PHPUnit
 
 ### 本番環境(AWS)
 
