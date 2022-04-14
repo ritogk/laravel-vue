@@ -110,6 +110,7 @@ basic認証のウィンドウが表示された場合→(ユーザー名:root, �
 - Aurora
 - S3
 - CloudFront
+- Lambda
 
 ![aws構成図](https://user-images.githubusercontent.com/72111956/163324921-0af30b0b-3fef-44c9-bffb-a75ac2b40e76.png)
 
@@ -159,15 +160,26 @@ localhostでapiを呼び出すとset-cookieが上手く動かないのでhosts�
 ```
 
 #### 開発 便利コマンド
-
+##### laravel
 ```
 ■Tableモデル、aliasとかを変更したら実行する。コードの補完してくれるファイルを自動生成してくれる。
 php artisan ide-helper:model
 php artisan ide-helper:generate
 
-■laravelのキャッシュ等をまとめてクリア
+■キャッシュ等をまとめてクリア
 ./clear.sh
 
-■laravelのtest
+■test実行
 ./test.sh
+```
+
+#### OpenAPI Generator
+```
+■openapi定義からlaravel用のインターフェースを作成する。
+cd laravel-vue/api
+./generator_php.sh
+
+■openapi定義からtypescript用のインターフェースを作成する。
+cd laravel-vue/api
+./generator_ts.sh
 ```
