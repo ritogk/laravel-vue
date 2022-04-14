@@ -118,7 +118,7 @@ https://portfolio-rito.net/<br>
 - SQS
 - SES
 
-![aws構成図](https://user-images.githubusercontent.com/72111956/130606812-6b3fc365-8e19-44bf-897a-d06a5b8b7ec7.png)
+![aws構成図](https://user-images.githubusercontent.com/72111956/163324921-0af30b0b-3fef-44c9-bffb-a75ac2b40e76.png)
 
 ## 工夫した点
 
