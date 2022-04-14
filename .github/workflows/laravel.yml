@@ -20,6 +20,7 @@ jobs:
         working-directory: ./back
         run: |
           docker-compose exec -T php sh ./setup.sh
+          docker-compose exec -T php php artisan migrate:refresh
       - name: laravel-test
         working-directory: ./back
         run: |
