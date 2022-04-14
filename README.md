@@ -3,7 +3,7 @@
 ## 概要
 現状のスキルを保証するためのポートフォリオです。
 
-## サービス
+## なにこれ
 求人検索サービスです。  
 求人の追加、求人への応募が行えます。
 
@@ -122,41 +122,53 @@ ci/cd でテスト、デプロイを自動化した事<br>
 
 ## 開発環境構築
 
-#### wsl
-
+#### git
 ```
-git clone git@github.com:ritogk/laravel-spa.git
-cd laravel-spa
-code .
+git clone git@github.com:ritogk/laravel-vue.git
 ```
 
-#### windows ホスト
-
+#### api
 ```
-vscodeからRemoteContainer経由でコンテナを起動
-※なぜかエラーが出る。wsl側からdocker-compose downして再度繋ぎ直すとなぜか動く。
+cd laravel-vue/back
+docker-compose up -d
+docker-compose exec -T php sh ./setup.sh
+docker-compose exec -T php php artisan migrate:refresh --seed
 ```
 
-#### php コンテナ
-
+#### vue(ユーザー画面)
 ```
-chmod +x setup.sh
-./setup.sh
-php artisan migrate:refresh --seed
-.vim .env
-# 「LOG_SLACK_WEBHOOK_URL」にwebhook urlを書き込む
+cd laravel-vue/front/user
+docker-compose up -d
+docker-compose exec -T vue sh ./setup.sh
+docker-compose exec -T vue npm run serve
+```
+
+#### vue(管理画面)
+```
+cd laravel-vue/admin/user
+docker-compose up -d
+docker-compose exec -T vue sh ./setup.sh
+docker-compose exec -T vue npm run serve
+```
+
+####  フォワーディング
+localhostでapiを呼び出すとset-cookieが上手く動かないのでhosts等でフォワーディングする事。
+#### C:\Windows\System32\drivers\etc\hosts
+```
+127.0.0.1 front.test.com
+172.20.193.203 server.test.com　※172.20.193.203 == wslのipアドレス
 ```
 
 #### 開発 便利コマンド
 
 ```
-■Tableモデル、aliasとかを変更したら実行。コード補完してくれるファイルを自動生成してくれる。
+■Tableモデル、aliasとかを変更したら実行する。コードの補完してくれるファイルを自動生成してくれる。
 php artisan ide-helper:model
 php artisan ide-helper:generate
-■キャッシュ等をクリア
+
+■laravelのキャッシュ等をまとめてクリア
 ./clear.sh
+
+■laravelのtest
+./test.sh
 ```
-
-## 職務経歴書
-
-https://github.com/homing-job/laravel-spa/blob/main/resume.md
