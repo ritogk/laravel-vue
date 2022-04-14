@@ -82,6 +82,7 @@ basic認証のウィンドウが表示された場合→(ユーザー名:root, �
 - docker-compose
 - nginx
 - mysql
+- openapi 3.0.0
 
 ### 開発環境
 
