@@ -12,61 +12,55 @@ https://portfolio-rito.net/<br>
 
 |                                                 ログイン(会員)　                                                  |                                                     会員登録                                                      |
 | :---------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/72111956/128485140-f79f1455-1c1d-40f0-815c-1a14431821a2.png"> | <img src="https://user-images.githubusercontent.com/72111956/128484253-74ea0ff4-58dd-4de8-813a-d13bd3c83a74.png"> |
+| <img src="https://user-images.githubusercontent.com/72111956/163326286-0a71bee8-94d7-4190-b7c1-fa7013e3a98e.PNG"> | <img src="https://user-images.githubusercontent.com/72111956/163326306-5f40b9a9-0ffe-475d-a6b8-5186f642d459.PNG"> |
 
 <br>
 
 |                                                    職種選択　                                                     |     |
 | :---------------------------------------------------------------------------------------------------------------: | :-: |
-| <img src="https://user-images.githubusercontent.com/72111956/128484272-acff4141-c1ca-442a-9e7a-cc6bde9c1402.png"> |     |
+| <img src="https://user-images.githubusercontent.com/72111956/163326301-9755e279-2e1a-4b81-9534-6fec19443737.PNG"> |     |
 
 <br>
 
 |                                                    仕事一覧　                                                     |                                                     仕事詳細                                                      |
 | :---------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/72111956/128484261-4b470a56-a841-4821-84ec-223fa16040f3.png"> | <img src="https://user-images.githubusercontent.com/72111956/128484855-6db556c5-9e55-411b-9216-38d152b93f2c.png"> |
+| <img src="https://user-images.githubusercontent.com/72111956/163326297-6d5a1867-6e04-44d2-ba40-c33dee62b29b.PNG"> | <img src="https://user-images.githubusercontent.com/72111956/163326291-55007948-f81f-4b4a-93c7-6dbceb9b24e6.PNG"> |
 
 <br>
 
 |                                                ログイン(管理者)　                                                 |                                                     管理画面                                                      |
 | :---------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/72111956/128485143-120a0c14-0239-44b7-acb8-8160f09dc440.png"> | <img src="https://user-images.githubusercontent.com/72111956/120468483-3dae8100-c3dc-11eb-85fb-c2f95b207100.PNG"> |
+| <img src="https://user-images.githubusercontent.com/72111956/163326342-f1dbd732-afd9-44d4-9bee-b9104fab79c8.PNG"> | <img src="https://user-images.githubusercontent.com/72111956/163326730-b180a0b7-320e-42d2-a702-1d70786d2340.png"> |
 
 <br>
 
 |                                                    選考一覧　                                                     |     |
 | :---------------------------------------------------------------------------------------------------------------: | :-: |
-| <img src="https://user-images.githubusercontent.com/72111956/120408952-f77d0180-c38a-11eb-933e-57bd51f473cb.png"> |     |
-
-<br>
-
-|                                                  メルマガ配信　                                                   |     |
-| :---------------------------------------------------------------------------------------------------------------: | :-: |
-| <img src="https://user-images.githubusercontent.com/72111956/130606373-bc742ed1-71d4-4886-95d7-2d3ad82c9921.png"> |     |
+| <img src="https://user-images.githubusercontent.com/72111956/163326340-2565e805-35f5-409f-893b-0f41c99016b9.PNG"> |     |
 
 <br>
 
 |                                                職種マスタ(一覧)　                                                 |                                                 職種マスタ(新規)                                                  |
 | :---------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/72111956/120468478-3c7d5400-c3dc-11eb-9c07-8234287aff5c.PNG"> | <img src="https://user-images.githubusercontent.com/72111956/120468492-4010db00-c3dc-11eb-9903-a13d70a2b7b5.PNG"> |
+| <img src="https://user-images.githubusercontent.com/72111956/163326333-7db5e432-bd60-424a-a675-8c8a76816252.PNG"> | <img src="https://user-images.githubusercontent.com/72111956/163326337-29628c32-ad84-4f5f-b344-5e9876e9d2c2.PNG"> |
 
 <br>
 
 |                                                職種マスタ(編集)　                                                 |     |
 | :---------------------------------------------------------------------------------------------------------------: | :-: |
-| <img src="https://user-images.githubusercontent.com/72111956/120468484-3dae8100-c3dc-11eb-93b1-2c0ec5d40d6b.png"> |     |
+| <img src="https://user-images.githubusercontent.com/72111956/163326338-3a8d2aef-8d36-4c3a-9d8d-7557fbd02a97.PNG"> |     |
 
 <br>
 
 |                                                仕事マスタ(一覧)　                                                 |                                                 仕事マスタ(新規)                                                  |
 | :---------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/72111956/120408942-f51aa780-c38a-11eb-8593-6bf999d57296.png"> | <img src="https://user-images.githubusercontent.com/72111956/120408950-f64bd480-c38a-11eb-9f7f-be43865d30c0.png"> |
+| <img src="https://user-images.githubusercontent.com/72111956/163326327-9b5533e1-3cac-43db-a8e2-3bb3f5dc731d.PNG"> | <img src="https://user-images.githubusercontent.com/72111956/163326330-b1e8fb1c-ca9b-428a-90c4-cf2984082536.PNG"> |
 
 <br>
 
 |                                                仕事マスタ(編集)　                                                 |     |
 | :---------------------------------------------------------------------------------------------------------------: | :-: |
-| <img src="https://user-images.githubusercontent.com/72111956/120408951-f6e46b00-c38a-11eb-851d-6d733c503f70.png"> |     |
+| <img src="https://user-images.githubusercontent.com/72111956/163326983-098bd8bd-72be-44ab-8d24-dd8b5a2063f0.PNG"> |     |
 
 <br>
 
