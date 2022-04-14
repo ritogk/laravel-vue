@@ -62,3 +62,12 @@ Route::group(['prefix' => 'users'], function () {
 Route::group(['prefix' => 'files'], function () {
     Route::post('/', [Controllers\Api\V1\FileController::class, 'upload'])->middleware(['auth:admin']);
 });
+
+
+// ロードバランサーのヘルスチェック用
+Route::get('/helth-check', function () {
+    return response()->json(
+        [],
+        200
+    );
+});
