@@ -15,7 +15,7 @@ exports[`職種選択画面で正しい内容が表示されているか スナ�
     <h6
       class="card-subtitle mb-2 text-muted"
     >
-       ご希望の職種を選択して下さい。aaaa 
+       ご希望の職種を選択して下さい。 
     </h6>
     <div
       class="d-flex flex-wrap mb-3"

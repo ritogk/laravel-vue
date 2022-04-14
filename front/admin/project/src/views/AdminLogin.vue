@@ -1,7 +1,7 @@
 <template>
   <div class="container py-4">
     <div class="card w-75 mx-auto border-primary">
-      <div class="card-header bg-primary text-white">ログインaaa</div>
+      <div class="card-header bg-primary text-white">ログイン</div>
       <div class="card-body">
         <!-- 汎用エラーメッセージ -->
         <div class="mb-3">
