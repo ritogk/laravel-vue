@@ -107,3 +107,4 @@ jobs:
         working-directory: ./front/admin/project/dist
         run: |
           aws s3 cp ./ s3://portfolio-backet-spa-admin-private --recursive
+
