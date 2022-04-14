@@ -1,14 +1,19 @@
-# laravel + spa + aws のポートフォリオ
+# laravel + vue + aws のポートフォリオ
 
-## 概要aaccddee
+## 概要
 
 求人検索サービスです。<br>
 求人の追加、求人への応募が行えます。
 
 ## URL
 
-https://portfolio-rito.net/<br>
-※現在停止しています。
+### ユーザー画面
+https://user.ritogk5.net/  
+### 管理画面
+https://admin.ritogk5.net/  
+basic認証のウィンドウが表示された場合は以下を入力して下さい  
+id:root, pass:P@ssw0rd
+
 
 |                                                 ログイン(会員)　                                                  |                                                     会員登録                                                      |
 | :---------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------: |
@@ -68,25 +73,26 @@ https://portfolio-rito.net/<br>
 
 ### フロントエンド
 
-- vue 2.6.12
-- vue-router 3.4.9
-- vuex 3.6.2
-- bootstrap-vue 2.19.x
-- typescript 4.2.4
+- vue 3系
+- bootstrap 5系
+- typescript 
+- jest
 
 ### バックエンド
 
 - php 7.4
-- laravel 8.4.0
-- docker 20.10.4
-- docker-compose 1.11.2
-- nginx 8.3.0
-- mysql 8.0.20
+- laravel 8.55.0
+- docker
+- docker-compose
+- nginx
+- mysql
+- larastan
+- PHPUnit
 
 ### 開発環境
 
 - vscode
-- eslint
+- vscode remote container
 - github
 - windows
 - wsl2
@@ -94,37 +100,26 @@ https://portfolio-rito.net/<br>
 ### CI/CD
 
 - GithubActions
-- larastan 0.7.x
-- PHPUnit 9.3.3
-- laravel Dusk 6.9
 
 ### 本番環境(AWS)
 
 - VPC
+- Route53
+- CertificateManager
+- IAM
 - EC2
 - ALB
-- RDS
-- ElastiCache
+- Aurora
 - S3
 - CloudFront
-- Route53
-- ACM
-- SQS
-- SES
 
 ![aws構成図](https://user-images.githubusercontent.com/72111956/163324921-0af30b0b-3fef-44c9-bffb-a75ac2b40e76.png)
 
 ## 工夫した点
-
-バックエンドとフロントエンドを api と vue で切り離した設計<br>
-クリーンアーキテクチャ設計<br>
-フロントエンド側を spa で作成<br>
-一般会員と管理者のマルチログイン機能<br>
-typescript, 静的チェック, テストコード等を使用して品質向上<br>
-コンテナはローカル環境と本番環境で同じものを使用<br>
+openapiから生成したコードを最大限利用した設計<br>
+ステートレスでスケールアップしやすい設計<br>
 ci/cd でテスト、デプロイを自動化<br>
-セキュリティを意識した aws 構成<br>
-高可用でスケール可能な aws 構成<br>
+管理画面用のvueファイルをbasic認証で保護した事<br>
 
 ## 開発環境構築
 
