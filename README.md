@@ -124,7 +124,7 @@ ci/cd でテスト、デプロイを自動化した事<br>
 
 #### git
 ```
-git clone git@github.com:ritogk/laravel-vue.git
+git clone -b dev git@github.com:ritogk/laravel-vue.git
 ```
 
 #### api
