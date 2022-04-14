@@ -11,8 +11,7 @@
 https://user.ritogk5.net/  
 ### 管理画面
 https://admin.ritogk5.net/  
-basic認証のウィンドウが表示された場合は以下を入力して下さい  
-id:root, pass:P@ssw0rd
+basic認証のウィンドウが表示された場合→(ユーザー名:root, パスワード:P@ssw0rd)
 
 
 |                                                 ログイン(会員)　                                                  |                                                     会員登録                                                      |
@@ -116,9 +115,9 @@ id:root, pass:P@ssw0rd
 ![aws構成図](https://user-images.githubusercontent.com/72111956/163324921-0af30b0b-3fef-44c9-bffb-a75ac2b40e76.png)
 
 ## 工夫した点
-openapiから生成したコードを最大限利用した設計<br>
+openapiから生成したコードを最大限利用した事<br>
 ステートレスでスケールアップしやすい設計<br>
-ci/cd でテスト、デプロイを自動化<br>
+ci/cd でテスト、デプロイを自動化した事<br>
 管理画面用のvueファイルをbasic認証で保護した事<br>
 
 ## 開発環境構築
