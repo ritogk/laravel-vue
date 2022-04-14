@@ -26,7 +26,7 @@ jobs:
         run: |
           docker-compose exec -T php php vendor/bin/phpstan analyse app --memory-limit=1G
           docker-compose exec -T php php artisan test
-  # front(ユーザー側)のテスト
+  # ユーザー画面のテスト
   test-front-user:
     runs-on: ubuntu-latest
     steps:
@@ -45,7 +45,7 @@ jobs:
         run: |
           docker-compose exec -T vue npm run test:unit
           
-  # front(管理側)のテスト  
+  # 管理画面のテスト  
   test-front-admin:
     runs-on: ubuntu-latest
     steps:
@@ -74,7 +74,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       # apiの更新
-      - name: ec2(subnet-a)のソースコードを更新します。
+      - name: ec2(subnet-a)上のソースコードを更新します。
         env:
           AWS_EC2_INSTANCE_A: ${{ secrets.AWS_EC2_INSTANCE_A }}
         shell : sh
@@ -84,7 +84,7 @@ jobs:
           --parameters "commands=['sudo su ec2-user -c \'cd ~/laravel-vue;git pull\'']" \
           --targets "Key=instanceids,Values=${AWS_EC2_INSTANCE_A}" \
           --comment "git pull"
-      - name: ec2(subnet-c)のソースコードを更新します。
+      - name: ec2(subnet-c)上のソースコードを更新します。
         env:
           AWS_EC2_INSTANCE_C: ${{ secrets.AWS_EC2_INSTANCE_C }}
         shell : sh
@@ -102,7 +102,7 @@ jobs:
           sleep 10
           docker-compose exec -T vue sh ./setup.sh
           docker-compose exec -T vue npm run build
-      - name: ユーザー側のバンドルファイルをs3へアップロードを行う。
+      - name: ユーザー画面のvueファイルをs3へアップロードを行います。
         working-directory: ./front/user/project/dist
         run: |
           aws s3 cp ./ s3://portfolio-bucket-user --recursive
@@ -114,7 +114,7 @@ jobs:
           sleep 10
           docker-compose exec -T vue sh ./setup.sh
           docker-compose exec -T vue npm run build
-      - name: ユーザー側のバンドルファイルをs3へアップロードを行う。
+      - name: 管理画面のvueファイルをs3へアップロードを行います。
         working-directory: ./front/admin/project/dist
         run: |
           aws s3 cp ./ s3://portfolio-bucket-admin --recursive
