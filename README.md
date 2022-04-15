@@ -120,7 +120,7 @@ openapiから生成したコードを最大限利用した事<br>
 ci/cd でテスト、デプロイを自動化した事<br>
 管理画面用のvueファイルをbasic認証で保護した事<br>
 
-## ポートフォリオを作った時に書いた記事
+## ポートフォリオを作った時に気になった事を書いた記事
 [OpenAPI generatorとlaravelの組み合わせでインターフェースをいい感じに守る](https://zenn.dev/homing/articles/44303eb7be83e3)  
 [spaで作った管理画面を安全に公開してみた。](https://zenn.dev/homing/articles/4a0f36ec6c1e65)  
 [OpenAPI generator(type-script-fetch)で生成されたコードでcoockieが送信されない問題](https://zenn.dev/homing/articles/bd5a63b8c048cd)  
