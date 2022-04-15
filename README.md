@@ -121,10 +121,10 @@ ci/cd でテスト、デプロイを自動化した事<br>
 管理画面用のvueファイルをbasic認証で保護した事<br>
 
 ## ポートフォリオを作った時に書いた記事
-[OpenAPI generatorとlaravelの組み合わせでインターフェースをいい感じに守る](https://zenn.dev/articles/44303eb7be83e3/edit)
-[spaで作った管理画面を安全に公開してみた。](https://zenn.dev/articles/4a0f36ec6c1e65/edit)
-[OpenAPI generator(type-script-fetch)で生成されたコードでcoockieが送信されない問題](https://zenn.dev/articles/bd5a63b8c048cd/edit)
-[tymon/jwt-authで安全にマルチ認証を実装する。](https://zenn.dev/articles/c15eeb6b1fc68f/edit)
+[OpenAPI generatorとlaravelの組み合わせでインターフェースをいい感じに守る](https://zenn.dev/articles/44303eb7be83e3/edit)  
+[spaで作った管理画面を安全に公開してみた。](https://zenn.dev/articles/4a0f36ec6c1e65/edit)  
+[OpenAPI generator(type-script-fetch)で生成されたコードでcoockieが送信されない問題](https://zenn.dev/articles/bd5a63b8c048cd/edit)  
+[tymon/jwt-authで安全にマルチ認証を実装する。](https://zenn.dev/articles/c15eeb6b1fc68f/edit)  
 
 ## 開発環境構築
 
